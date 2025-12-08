@@ -13,7 +13,10 @@ export default function Sort() {
   }, []);
 
   return (
-    <main className="min-h-screen flex bg-gray-50">
+    <main className="min-h-screen w-full flex bg-[#0d1117] text-gray-200 relative overflow-hidden">
+      {/* star subtle cosmic bg */}
+      <div className="absolute inset-0 opacity-30 bg-[url('/stars.png')] bg-cover bg-center pointer-events-none"></div>
+
       {showIntro && <IntroModal close={() => setShowIntro(false)} />}
       <Sidebar />
       <BarsVisualizer />
