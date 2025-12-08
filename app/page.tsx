@@ -1,153 +1,211 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { motion } from "framer-motion";
 import Image from "next/image";
-// Assuming you have lucide-react or similar icons installed
-import { BarChart2, Clock, Zap, Layers } from 'lucide-react'; 
+import { useRouter } from "next/navigation";
+import { ArrowRight } from "lucide-react";
 
-// Helper component for cleaner code and reusable styles
-const FeatureCard = ({ icon, title, description }) => (
-  <div className="flex flex-col items-start p-6 bg-white rounded-xl shadow-lg border border-gray-100 transition-shadow duration-300 hover:shadow-xl hover:shadow-blue-100">
-    <div className="text-blue-600 mb-3">{icon}</div>
-    <h3 className="text-xl font-bold text-gray-900">{title}</h3>
-    <p className="text-sm text-gray-600 mt-2">{description}</p>
-  </div>
-);
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 
 export default function Landing() {
   const router = useRouter();
 
   return (
-    // Base: High-contrast light theme
-    <main className="min-h-screen bg-white flex flex-col items-center justify-start text-gray-900 relative overflow-hidden">
-      
-      {/* 1. Header/Navigation Bar (New Structure Element) */}
-      <header className="fixed top-0 left-0 right-0 z-20 bg-white/90 backdrop-blur-sm shadow-md py-4 px-6 md:px-12">
-        <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <div className="flex items-center">
-            <Image
-              src="/assets/sortviz.png" 
-              alt="SortViz Logo"
-              width={32}
-              height={32}
-              className="rounded-md shadow-sm mr-2"
-            />
-            <h2 className="text-xl font-extrabold text-gray-900 tracking-tight">
-              SortViz
-            </h2>
-          </div>
-          <nav className="hidden sm:flex space-x-6 text-sm font-medium text-gray-600">
-            <a href="#" className="hover:text-blue-600 transition">Features</a>
-            <a href="#" className="hover:text-blue-600 transition">Algorithms</a>
-            <a href="#" className="hover:text-blue-600 transition">Documentation</a>
+    <main className="bg-brand-bg-dark text-brand-text-primary font-sans antialiased">
+
+      {/* CONTAINER */}
+      <div className="container mx-auto px-6 lg:px-8">
+
+        {/* HEADER */}
+        <header className="py-6 flex justify-between items-center">
+          <a className="text-2xl font-serif-display italic text-white" href="#">
+            SortStory
+          </a>
+
+          <nav className="hidden md:flex items-center space-x-6">
+            <a className="text-brand-text-secondary hover:text-brand-text-primary transition-colors" href="#features">
+              Features
+            </a>
+            <a className="text-brand-text-secondary hover:text-brand-text-primary transition-colors" href="#algorithms">
+              Algorithms
+            </a>
+            <a className="text-brand-text-secondary hover:text-brand-text-primary transition-colors" href="#">
+              About
+            </a>
           </nav>
-        </div>
-      </header>
-      
-      {/* 2. Main Content Wrapper */}
-      <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center max-w-7xl w-full pt-32 pb-16 px-6 md:px-12">
+        </header>
 
-        {/* LEFT COLUMN (COL 1-7): PRIMARY CONTENT & CTA */}
-        <div className="lg:col-span-7 text-left order-2 lg:order-1">
-          
-          {/* Tagline */}
-          <p className="text-sm font-semibold text-blue-600 uppercase tracking-widest mb-2 flex items-center">
-             <Zap size={16} className="mr-2"/> Engineering Clarity
-          </p>
-
-          {/* PRIMARY HEADLINE */}
-          <h1 className="text-5xl sm:text-7xl font-extrabold tracking-tight mt-3 leading-tight text-gray-900">
-            Master the Mechanics of <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">
-              Sorting Algorithms.
-            </span>
+        {/* HERO SECTION */}
+        <section className="text-center py-20 lg:py-32">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white">
+            SortStory: Visualize Algorithms, Master Concepts
           </h1>
 
-          {/* DESCRIPTION */}
-          <p className="mt-6 text-lg text-gray-700 max-w-xl font-normal">
-            SortViz provides a high-fidelity environment to **observe, measure, and step-through** the complexity of 17+ core data structure algorithms.
+          <p className="mt-6 text-lg md:text-xl text-brand-text-secondary max-w-3xl mx-auto">
+            An interactive playground to see sorting algorithms in action. Understand complex data
+            structures through intuitive, step-by-step visualizations.
           </p>
 
-          {/* CTA BUTTON */}
-          <button
-            onClick={() => router.push("/sort")}
-            className="mt-10 w-full sm:w-auto bg-gray-900 text-white font-bold text-xl px-12 py-4 rounded-lg shadow-xl transition-all duration-300 transform 
-                       hover:bg-blue-600 hover:shadow-blue-400/50 active:scale-95 focus:outline-none focus:ring-4 focus:ring-blue-500/50"
-          >
-            Start Visualizing for Free →
-          </button>
-          
-        </div>
+          {/* CTA BTN */}
+          <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <Button
+              size="lg"
+              className="w-full sm:w-auto text-black bg-brand-purple hover:bg-purple-500 font-semibold rounded-md py-3 px-8 text-lg flex items-center gap-2"
+              onClick={() => router.push("/sort")}
+            >
+              Get Started
+              <ArrowRight className="h-5 w-5" />
+            </Button>
+          </div>
 
-        {/* RIGHT COLUMN (COL 8-12): VISUAL HERO (Simulated Fixed Position) */}
-        <div className="lg:col-span-5 relative w-full h-[350px] md:h-[500px] order-1 lg:order-2">
-          {/* This block is styled to look like a high-quality product mockup */}
-          <div className="absolute inset-0 bg-gray-100 rounded-2xl shadow-[0_20px_60px_-10px_rgba(40,40,60,0.3)] border border-gray-200 flex flex-col overflow-hidden transform lg:scale-105 transition-transform duration-500">
-            
-            {/* Mock Header/Controls */}
-            <div className="flex justify-between items-center h-12 px-4 bg-gray-200 border-b border-gray-300">
-              <span className="text-xs font-semibold text-gray-700">Algorithm: QuickSort</span>
-              <div className="flex space-x-2">
-                 <button className="text-sm text-gray-500 hover:text-blue-600">Pause</button>
-                 <button className="text-sm text-gray-500 hover:text-blue-600">Speed</button>
-              </div>
-            </div>
-
-            {/* Simulated Bar Chart Visualization Area */}
-            <div className="flex items-end h-full px-6 pt-6 pb-6 space-x-1.5 bg-white">
-              {[...Array(25)].map((_, i) => (
-                <div 
+          {/* BAR CHART PREVIEW */}
+          <div className="mt-16 bg-brand-bg-light p-6 rounded-xl shadow-lg max-w-5xl mx-auto border border-brand-border">
+            <div className="flex items-end justify-center gap-2 h-64">
+              {[
+                100, 95, 90, 85, 80, 75, 70, 65, 60, 55,
+                50, 45, 40, 35, 30, 25, 20, 15, 10, 5,
+              ].map((h, i) => (
+                <div
                   key={i}
-                  // Calculate height based on index (simulates a visualization in progress)
-                  style={{ height: `${(i / 25) * 85 + 10}%` }} // Slightly sorted
-                  className={`w-1 rounded-t-sm transition-all duration-300 
-                              ${i > 18 ? 'bg-green-500' : (i % 5 === 0 ? 'bg-red-500' : 'bg-blue-500')}`}
+                  className={`
+                    w-5 rounded-t 
+                    ${i < 5 ? "bg-brand-green"
+                      : i === 5 ? "bg-brand-yellow"
+                      : i === 6 ? "bg-brand-purple"
+                      : "bg-brand-gray"
+                    }
+                  `}
+                  style={{ height: `${h}%` }}
                 ></div>
               ))}
             </div>
-            
-            <div className="bg-gray-100 p-3 text-xs text-gray-600 font-mono border-t border-gray-200">
-                O(N log N) | Status: Comparing | Iteration: 45
+          </div>
+        </section>
+
+        {/* FEATURES SECTION */}
+        <section className="py-20 lg:py-24" id="features">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-white">
+              Why SortStory?
+            </h2>
+            <p className="mt-4 text-lg text-brand-text-secondary">
+              Everything you need to demystify sorting algorithms.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <FeatureCard
+              title="Interactive Visualizations"
+              description="Watch algorithms sort data in real-time. Pause, resume, and step through each comparison and swap."
+              iconPath="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z M12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"
+            />
+
+            <FeatureCard
+              title="Detailed Explanations"
+              description="Clear descriptions, pseudocode, and complexity breakdowns for every algorithm."
+              iconPath="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"
+              iconExtra="<polyline points='14 2 14 8 20 8'></polyline>"
+            />
+
+            <FeatureCard
+              title="Customizable Inputs"
+              description="Control dataset size and speed. Test algorithms on various data arrangements."
+              iconPath="M3 3h7v7H3z M14 3h7v7h-7z M3 14h7v7H3z M14 14h7v7h-7z"
+            />
+          </div>
+        </section>
+
+        {/* ALGORITHMS SECTION */}
+        <section className="py-20 lg:py-24 text-center" id="algorithms">
+          <h2 className="text-3xl md:text-4xl font-bold text-white">
+            Explore a Variety of Algorithms
+          </h2>
+
+          <p className="mt-4 text-lg text-brand-text-secondary max-w-2xl mx-auto">
+            From the simplest to the more complex, dive in and see how they differ.
+          </p>
+
+          <div className="mt-12 flex flex-wrap justify-center gap-3 md:gap-4">
+            {[
+              "Bubble Sort",
+              "Selection Sort",
+              "Insertion Sort",
+              "Merge Sort",
+              "Quick Sort",
+              "Heap Sort",
+              "and more...",
+            ].map((alg, i) => (
+              <span
+                key={i}
+                className="bg-brand-bg-light text-brand-text-primary text-sm font-medium px-4 py-2 rounded-full border border-brand-border"
+              >
+                {alg}
+              </span>
+            ))}
+          </div>
+        </section>
+
+        {/* FOOTER */}
+        <footer className="py-8 mt-16 border-t border-brand-border">
+          <div className="flex flex-col sm:flex-row justify-between items-center text-center sm:text-left">
+            <p className="text-brand-text-secondary text-sm">
+              © {new Date().getFullYear()} SortStory. All rights reserved.
+            </p>
+
+            <div className="flex space-x-6 mt-4 sm:mt-0">
+              {["About Us", "Contact", "Privacy Policy"].map((link, i) => (
+                <a
+                  key={i}
+                  href="#"
+                  className="text-sm text-brand-text-secondary hover:text-brand-text-primary transition-colors"
+                >
+                  {link}
+                </a>
+              ))}
             </div>
           </div>
-        </div>
+        </footer>
 
       </div>
-
-      {/* 3. Features Section (Below the Fold) */}
-      <div className="max-w-7xl w-full py-20 px-6 md:px-12">
-        <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-12 text-gray-900">
-            Engineered for Deep Learning
-        </h2>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <FeatureCard 
-              icon={<BarChart2 size={30} />} 
-              title="Metric Comparison" 
-              description="Side-by-side analysis of O(N) complexity, swaps, and time."
-            />
-            <FeatureCard 
-              icon={<Clock size={30} />} 
-              title="Time Travel Debugging" 
-              description="Step forward or backward through the sorting process instantly."
-            />
-            <FeatureCard 
-              icon={<Database size={30} />} 
-              title="Custom Data Sets" 
-              description="Upload your own arrays to test edge cases and performance."
-            />
-            <FeatureCard 
-              icon={<Layers size={30} />} 
-              title="Category Breakdown" 
-              description="Filter algorithms by stability, memory use, and type (e.g., Merge, Insertion)."
-            />
-        </div>
-      </div>
-      
-      {/* FOOTER - Minimalist and professional */}
-      <footer className="w-full mt-10 py-6 text-sm text-gray-500 text-center border-t border-gray-100">
-        © {new Date().getFullYear()} SortViz · Built by Adnan Shafiq Mangaonkar
-      </footer>
     </main>
+  );
+}
+
+/* ------------------------ FEATURE CARD COMPONENT ------------------------ */
+
+function FeatureCard({
+  title,
+  description,
+  iconPath,
+  iconExtra,
+}: {
+  title: string;
+  description: string;
+  iconPath: string;
+  iconExtra?: string;
+}) {
+  return (
+    <Card className="bg-brand-bg-light p-8 rounded-xl shadow-lg border border-brand-border">
+      <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-brand-bg-dark mb-5">
+        <svg
+          className="text-brand-purple"
+          width="28"
+          height="28"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          dangerouslySetInnerHTML={{
+            __html: `<path d="${iconPath}" />${iconExtra ?? ""}`,
+          }}
+        />
+      </div>
+
+      <h3 className="text-xl font-semibold text-brand-text-primary">{title}</h3>
+      <p className="mt-2 text-brand-text-secondary">{description}</p>
+    </Card>
   );
 }
