@@ -1,5 +1,5 @@
 "use client";
-import { wait, pauseCheck, isStopped, swap } from "./core";
+import { wait, pauseCheck, isStopped, swap } from "../lib/core";
 
 export async function stoogeSortWrapper() {
   const ele = document.querySelectorAll(".bar");

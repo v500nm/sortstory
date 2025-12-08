@@ -1,5 +1,5 @@
 "use client";
-import { wait, pauseCheck, isStopped } from "./core";
+import { wait, pauseCheck, isStopped } from "../lib/core";
 
 export async function shellSort() {
   const ele = document.querySelectorAll(".bar");

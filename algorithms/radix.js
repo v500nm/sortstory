@@ -1,5 +1,5 @@
 "use client";
-import { wait } from "./core";
+import { wait } from "../lib/core";
 
 export async function radixSort() {
   const ele = document.querySelectorAll(".bar");
