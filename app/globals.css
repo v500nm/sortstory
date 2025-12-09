@@ -1,87 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
 @import "tailwindcss";
 
-@plugin "tailwindcss-animate";
-
-@custom-variant dark (&:is(.dark *));
-
-/* Import a Serif font for the header */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
-
-/* -----------------------------------------------------
-   RAW CSS Resets
------------------------------------------------------ */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: ui-sans-serif, system-ui, sans-serif;
-}
-
-/* Custom Serif Class */
-.font-serif-display {
-  font-family: 'Playfair Display', serif;
-}
-
-/* Sorting Bars */
-.bar {
-  background: var(--primary); /* Purple */
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 4px 4px 0 0;
-  transition: height 0.2s ease;
-}
-
-/* -----------------------------------------------------
-   Theme Configuration (Mapped to your Design)
------------------------------------------------------ */
-:root {
-  --radius: 0.75rem; /* rounded-xl */
-
-  /* Brand Dark: #1C1E26 */
-  --background: #1C1E26; 
-  /* Brand Light: #2A2D3A */
-  --foreground: #E0E0E0; 
-
-  /* Cards uses Brand Light */
-  --card: #2A2D3A;
-  --card-foreground: #E0E0E0;
-
-  --popover: #2A2D3A;
-  --popover-foreground: #E0E0E0;
-
-  /* Brand Purple: #A78BFA */
-  --primary: #8b5cf6; 
-  --primary-foreground: #ffffff;
-
-  /* Brand Gray/Border: #3F3F46 */
-  --secondary: #3F3F46;
-  --secondary-foreground: #E0E0E0;
-
-  --muted: #3F3F46;
-  --muted-foreground: #A0A0B0;
-
-  --accent: #3F3F46;
-  --accent-foreground: #E0E0E0;
-
-  /* Red/Destructive */
-  --destructive: #ef4444;
-  --destructive-foreground: #ffffff;
-
-  --border: #3F3F46;
-  --input: #1C1E26; /* Darker input bg */
-  --ring: #A78BFA;
-  
-  /* Custom Status Colors */
+@theme {
+  /* Custom Colors */
+  --color-brand-bg-dark: #1C1E26;
+  --color-brand-bg-light: #2A2D3A;
+  --color-brand-text-primary: #E0E0E0;
+  --color-brand-text-secondary: #A0A0B0;
+  --color-brand-purple: #A78BFA;
   --color-brand-yellow: #FACC15;
   --color-brand-green: #4ADE80;
+  --color-brand-gray: #A0A0B0;
+  --color-brand-border: #3F3F46;
+
+  /* Custom Font Families */
+  --font-serif-display: Georgia, 'Times New Roman', serif;
+  --font-sans: Inter, Arial, Helvetica, sans-serif;
 }
 
-/* Helper classes for bar states */
-.bar-active { background-color: var(--primary) !important; }
-.bar-comparing { background-color: var(--color-brand-yellow) !important; }
-.bar-sorted { background-color: var(--color-brand-green) !important; }
-.bar-pivot { background-color: #ef4444 !important; }
+@layer base {
+  body {
+    background-color: var(--color-brand-bg-dark);
+    color: var(--color-brand-text-primary);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Custom styles for range inputs */
+  input[type="range"].range-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 6px;
+    background: #A78BFA;
+    border-radius: 3px;
+    outline: none;
+  }
+
+  input[type="range"].range-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    background: #E0E0E0;
+    cursor: pointer;
+    border-radius: 50%;
+    border: 2px solid #1C1E26;
+    box-shadow: 0 0 2px rgba(0,0,0,0.5);
+  }
+
+  input[type="range"].range-slider::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    background: #E0E0E0;
+    cursor: pointer;
+    border-radius: 50%;
+    border: 2px solid #1C1E26;
+    box-shadow: 0 0 2px rgba(0,0,0,0.5);
+  }
+}
