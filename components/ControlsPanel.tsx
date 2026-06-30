@@ -1,4 +1,5 @@
 "use client";
+import type { EngineStatus } from "@/lib/types";
 
 interface ControlsPanelProps {
   selectedAlgo: string;
@@ -8,11 +9,18 @@ interface ControlsPanelProps {
   speed: number;
   setSpeed: (speed: number) => void;
   onRun: () => void;
+  onPause: () => void;
+  onResume: () => void;
+  onStop: () => void;
   onShuffle: () => void;
-  isRunning: boolean;
+  status: EngineStatus;
+  compareMode: boolean;
+  setCompareMode: (mode: boolean) => void;
+  selectedAlgoB?: string;
+  setSelectedAlgoB?: (algo: string) => void;
 }
 
-const algorithms = [
+export const algorithms = [
   { value: "bubbleSort", label: "Bubble Sort" },
   { value: "selectionSort", label: "Selection Sort" },
   { value: "insertionSort", label: "Insertion Sort" },
@@ -31,84 +39,84 @@ const algorithms = [
   { value: "bogoSort", label: "Bogo Sort" },
 ];
 
-const algorithmInfo: Record<string, { description: string; time: string; space: string }> = {
+export const algorithmInfo: Record<string, { description: string; time: string; space: string }> = {
   bubbleSort: {
-    description: "Bubble Sort: Compares adjacent elements and swaps them if in wrong order.",
+    description: "Compares adjacent elements and swaps them if in wrong order. Simple but O(n²).",
     time: "O(n²)",
     space: "O(1)",
   },
   selectionSort: {
-    description: "Selection Sort: Finds minimum element and places it at the beginning.",
+    description: "Finds the minimum element and places it at the beginning each pass.",
     time: "O(n²)",
     space: "O(1)",
   },
   insertionSort: {
-    description: "Insertion Sort: Builds sorted array one item at a time by inserting elements.",
+    description: "Builds sorted array one item at a time by inserting into correct position.",
     time: "O(n²)",
     space: "O(1)",
   },
   mergeSortWrapper: {
-    description: "Merge Sort: Divides array in half, sorts each half, then merges them.",
+    description: "Divides array in half, sorts each half, then merges. Guaranteed O(n log n).",
     time: "O(n log n)",
     space: "O(n)",
   },
   quickSortWrapper: {
-    description: "Quick Sort: Divides array using pivot and recursively sorts partitions.",
+    description: "Partitions array around a pivot and recursively sorts partitions.",
     time: "O(n log n)",
     space: "O(log n)",
   },
   heapSort: {
-    description: "Heap Sort: Converts array to heap structure and extracts elements in order.",
+    description: "Converts array to max-heap, then extracts max elements in order.",
     time: "O(n log n)",
     space: "O(1)",
   },
   shellSort: {
-    description: "Shell Sort: Generalized insertion sort that allows exchanges of far items.",
+    description: "Generalized insertion sort using decreasing gap sequences.",
     time: "O(n log n)",
     space: "O(1)",
   },
   cocktailSort: {
-    description: "Cocktail Sort: Bidirectional bubble sort that traverses in both directions.",
+    description: "Bidirectional bubble sort that traverses in both directions alternately.",
     time: "O(n²)",
     space: "O(1)",
   },
   combSort: {
-    description: "Comb Sort: Improved bubble sort that eliminates small values at end.",
+    description: "Improved bubble sort using a shrinking gap to eliminate small values.",
     time: "O(n²/2ᵖ)",
     space: "O(1)",
   },
   gnomeSort: {
-    description: "Gnome Sort: Similar to insertion sort but moving element to proper place.",
+    description: "Moves elements to proper place by swapping backward, then advances forward.",
     time: "O(n²)",
     space: "O(1)",
   },
   oddEvenSort: {
-    description: "Odd-Even Sort: Compares all odd/even indexed pairs of adjacent elements.",
+    description: "Alternates between comparing odd-indexed and even-indexed adjacent pairs.",
     time: "O(n²)",
     space: "O(1)",
   },
   pancakeSort: {
-    description: "Pancake Sort: Sorts by flipping prefix of array to move elements.",
+    description: "Sorts by repeatedly flipping prefixes to move max elements into place.",
     time: "O(n²)",
     space: "O(1)",
   },
   bitonicSortWrapper: {
-    description: "Bitonic Sort: Parallel sorting algorithm that creates bitonic sequences.",
+    description: "Parallel algorithm that creates and merges bitonic sequences.",
     time: "O(log²n)",
     space: "O(log²n)",
   },
   radixSort: {
-    description: "Radix Sort: Non-comparative sort that groups by individual digits.",
+    description: "Non-comparative sort that groups integers by individual digits (LSD).",
     time: "O(nk)",
     space: "O(n+k)",
   },
   stoogeSortWrapper: {
-    description: "Stooge Sort: Recursive sorting with unusual divide-and-conquer approach.",
-    time: "O(n²·⁷⁰⁹)",
+    description: "Recursive sort: sort first 2/3, last 2/3, first 2/3 again. Very slow.",
+    time: "O(n².⁷⁰⁹)",
     space: "O(n)",
   },
   bogoSort: {
-    description: "Bogo Sort: Randomizes array until sorted. Extremely inefficient!",
+    description: "Randomly shuffles until sorted. Astronomically inefficient!",
     time: "O(∞)",
     space: "O(1)",
   },
@@ -122,93 +130,128 @@ export default function ControlsPanel({
   speed,
   setSpeed,
   onRun,
+  onPause,
+  onResume,
+  onStop,
   onShuffle,
-  isRunning,
+  status,
+  compareMode,
+  setCompareMode,
+  selectedAlgoB,
+  setSelectedAlgoB,
 }: ControlsPanelProps) {
   const info = algorithmInfo[selectedAlgo] || algorithmInfo.bubbleSort;
+  const isRunning = status === "running";
+  const isPaused = status === "paused";
+  const isBusy = isRunning || isPaused;
 
   return (
-    <aside className="bg-brand-bg-light p-6 rounded-xl shadow-lg space-y-6">
+    <aside className="glass-card premium-border p-6 space-y-6 relative overflow-hidden h-full">
+      {/* Header */}
       <div className="flex justify-between items-center">
         <div className="flex items-center gap-3">
-          <svg
-            className="text-brand-text-primary"
-            fill="none"
-            height="24"
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            viewBox="0 0 24 24"
-            width="24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <rect height="7" width="7" x="3" y="3"></rect>
-            <rect height="7" width="7" x="14" y="3"></rect>
-            <rect height="7" width="7" x="3" y="14"></rect>
-            <rect height="7" width="7" x="14" y="14"></rect>
-          </svg>
-          <h2 className="text-lg font-semibold">Controls</h2>
+          <div className="h-8 w-8 rounded-lg bg-[#111111] flex items-center justify-center border border-brand-border">
+            <svg fill="none" height="16" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" viewBox="0 0 24 24" width="16" className="text-white">
+              <circle cx="12" cy="12" r="3" />
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+            </svg>
+          </div>
+          <h2 className="text-lg font-semibold tracking-wide text-brand-text-primary">CONTROLS</h2>
         </div>
-        <div className="flex items-center gap-3 text-brand-text-secondary">
-          <svg
-            fill="none"
-            height="20"
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            viewBox="0 0 24 24"
-            width="20"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-          </svg>
-          <svg
-            fill="none"
-            height="20"
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            viewBox="0 0 24 24"
-            width="20"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <circle cx="12" cy="12" r="10"></circle>
-            <line x1="12" x2="12" y1="16" y2="12"></line>
-            <line x1="12" x2="12.01" y1="8" y2="8"></line>
-          </svg>
+        {/* Status indicator */}
+        <div className="flex items-center gap-2 px-2.5 py-1 rounded-md bg-[#0a0a0a] border border-brand-border">
+          <span className={`w-2 h-2 rounded-full ${
+            isRunning ? "bg-emerald-400 animate-pulse" :
+            isPaused ? "bg-amber-400 animate-pulse" :
+            status === "completed" ? "bg-emerald-400" :
+            "bg-slate-500"
+          }`} />
+          <span className="text-xs text-brand-text-secondary capitalize">{status}</span>
         </div>
       </div>
 
+      {/* Algorithm Selector */}
+      <div className="space-y-2">
+        <label className="text-sm text-brand-text-secondary font-medium" htmlFor="algorithm">
+          {compareMode ? "Algorithm A" : "Algorithm"}
+        </label>
+        <select
+          className="w-full bg-brand-bg-dark border border-brand-border rounded-lg py-2.5 px-3 text-brand-text-primary focus:ring-2 focus:ring-brand-purple/50 focus:border-brand-purple transition-all outline-none"
+          id="algorithm"
+          value={selectedAlgo}
+          onChange={(e) => {
+            setSelectedAlgo(e.target.value);
+            onShuffle();
+          }}
+          disabled={isBusy}
+        >
+          {algorithms.map((algo) => (
+            <option key={algo.value} value={algo.value}>
+              {algo.label}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      {/* Algorithm B Selector (Compare Mode) */}
+      {compareMode && setSelectedAlgoB && (
+        <div className="space-y-2">
+          <label className="text-sm text-brand-text-secondary font-medium" htmlFor="algorithm-b">
+            Algorithm B
+          </label>
+          <select
+            className="w-full bg-brand-bg-dark border border-brand-border rounded-lg py-2.5 px-3 text-brand-text-primary focus:ring-2 focus:ring-brand-purple/50 focus:border-brand-purple transition-all outline-none"
+            id="algorithm-b"
+            value={selectedAlgoB || "selectionSort"}
+            onChange={(e) => {
+              setSelectedAlgoB(e.target.value);
+              onShuffle();
+            }}
+            disabled={isBusy}
+          >
+            {algorithms.map((algo) => (
+              <option key={algo.value} value={algo.value}>
+                {algo.label}
+              </option>
+            ))}
+          </select>
+        </div>
+      )}
+
       {/* Array Size Slider */}
       <div className="space-y-2">
-        <label className="flex items-center gap-2 text-sm text-brand-text-secondary" htmlFor="array-size">
-          <span>Array Size</span>
-        </label>
-        <div className="flex items-center gap-4">
+        <div className="flex justify-between items-center">
+          <label className="text-sm text-brand-text-secondary font-medium" htmlFor="array-size">
+            Array Size
+          </label>
+          <span className="text-xs font-mono bg-brand-bg-dark px-2 py-0.5 rounded border border-brand-border text-brand-text-primary">{arraySize}</span>
+        </div>
+        <div className="flex items-center gap-3">
           <span className="text-xs text-brand-text-secondary">5</span>
           <input
             className="w-full range-slider"
             id="array-size"
-            max="30"
+            max="50"
             min="5"
             type="range"
             value={arraySize}
             onChange={(e) => setArraySize(Number(e.target.value))}
-            disabled={isRunning}
+            disabled={isBusy}
           />
-          <span className="text-xs text-brand-text-secondary">30</span>
+          <span className="text-xs text-brand-text-secondary">50</span>
         </div>
       </div>
 
       {/* Speed Slider */}
       <div className="space-y-2">
-        <label className="flex items-center gap-2 text-sm text-brand-text-secondary" htmlFor="speed">
-          <span>Speed</span>
-        </label>
+        <div className="flex justify-between items-center">
+          <label className="text-sm text-brand-text-secondary font-medium" htmlFor="speed">
+            Speed
+          </label>
+          <span className="text-xs font-mono bg-brand-bg-dark px-2 py-0.5 rounded border border-brand-border text-brand-text-primary">
+            {speed === 1 ? "Fast" : speed === 2 ? "Medium" : "Slow"}
+          </span>
+        </div>
         <div className="relative">
           <input
             className="w-full range-slider"
@@ -219,7 +262,7 @@ export default function ControlsPanel({
             value={speed}
             onChange={(e) => setSpeed(Number(e.target.value))}
           />
-          <div className="flex justify-between text-xs text-brand-text-secondary mt-1 px-1">
+          <div className="flex justify-between text-xs text-brand-text-secondary mt-1 px-0.5">
             <span>Fast</span>
             <span>Medium</span>
             <span>Slow</span>
@@ -227,99 +270,106 @@ export default function ControlsPanel({
         </div>
       </div>
 
-      {/* Algorithm Selector */}
-      <div className="space-y-2">
-        <label className="flex items-center gap-2 text-sm text-brand-text-secondary" htmlFor="algorithm">
-          <span>Algorithm</span>
+      {/* Compare Mode Toggle */}
+      <div className="flex items-center justify-between py-2 px-1">
+        <label className="text-sm text-brand-text-secondary font-medium" htmlFor="compare-toggle">
+          Compare Mode
         </label>
-        <select
-          className="w-full bg-brand-bg-dark border border-brand-border rounded-md py-2 px-3 text-brand-text-primary focus:ring-brand-purple focus:border-brand-purple"
-          id="algorithm"
-          value={selectedAlgo}
-          onChange={(e) => setSelectedAlgo(e.target.value)}
-          disabled={isRunning}
+        <button
+          id="compare-toggle"
+          onClick={() => setCompareMode(!compareMode)}
+          disabled={isBusy}
+          className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-brand-purple/50 disabled:opacity-50 ${
+            compareMode ? "bg-brand-purple" : "bg-brand-border"
+          }`}
         >
-          {algorithms.map((algo) => (
-            <option key={algo.value} value={algo.value}>
-              {algo.label}
-            </option>
-          ))}
-        </select>
+          <span
+            className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform duration-200 ${
+              compareMode ? "translate-x-6" : "translate-x-1"
+            }`}
+          />
+        </button>
       </div>
 
       {/* Action Buttons */}
-      <div className="grid grid-cols-2 gap-4 pt-2">
+      <div className="grid grid-cols-3 gap-3 pt-1">
+        {/* Shuffle */}
         <button
           onClick={onShuffle}
-          disabled={isRunning}
-          className="flex items-center justify-center gap-2 bg-transparent border border-brand-border rounded-md py-2 px-4 hover:bg-brand-border/50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          disabled={isBusy}
+          className="flex items-center justify-center gap-1.5 bg-brand-bg-dark border border-brand-border rounded-lg py-2.5 px-3 hover:bg-brand-border/70 transition-all text-sm disabled:opacity-40 disabled:cursor-not-allowed"
         >
-          <svg
-            fill="none"
-            height="16"
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            viewBox="0 0 24 24"
-            width="16"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <polyline points="16 3 21 3 21 8"></polyline>
-            <line x1="4" x2="21" y1="20" y2="3"></line>
-            <polyline points="21 16 21 21 16 21"></polyline>
-            <line x1="15" x2="21" y1="15" y2="21"></line>
-            <line x1="4" x2="9" y1="4" y2="9"></line>
+          <svg fill="none" height="14" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" width="14" xmlns="http://www.w3.org/2000/svg">
+            <polyline points="16 3 21 3 21 8" />
+            <line x1="4" x2="21" y1="20" y2="3" />
+            <polyline points="21 16 21 21 16 21" />
+            <line x1="15" x2="21" y1="15" y2="21" />
+            <line x1="4" x2="9" y1="4" y2="9" />
           </svg>
           Shuffle
         </button>
-        <button
-          onClick={onRun}
-          disabled={isRunning}
-          className="flex items-center justify-center gap-2 text-black font-semibold rounded-md py-2 px-4 transition-colors bg-brand-yellow hover:bg-yellow-400 disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          <svg
-            fill="currentColor"
-            height="16"
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="1"
-            viewBox="0 0 24 24"
-            width="16"
-            xmlns="http://www.w3.org/2000/svg"
+
+        {/* Play / Pause */}
+        {!isBusy ? (
+          <button
+            onClick={onRun}
+            className="flex items-center justify-center gap-1.5 text-black font-semibold rounded-lg py-2.5 px-3 transition-all bg-brand-yellow hover:bg-yellow-400 hover:shadow-[0_0_20px_rgba(250,204,21,0.3)]"
           >
-            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            <svg fill="currentColor" height="14" viewBox="0 0 24 24" width="14" xmlns="http://www.w3.org/2000/svg">
+              <polygon points="5 3 19 12 5 21 5 3" />
+            </svg>
+            Run
+          </button>
+        ) : isPaused ? (
+          <button
+            onClick={onResume}
+            className="flex items-center justify-center gap-1.5 text-black font-semibold rounded-lg py-2.5 px-3 transition-all bg-brand-green hover:bg-green-400 hover:shadow-[0_0_20px_rgba(74,222,128,0.3)]"
+          >
+            <svg fill="currentColor" height="14" viewBox="0 0 24 24" width="14" xmlns="http://www.w3.org/2000/svg">
+              <polygon points="5 3 19 12 5 21 5 3" />
+            </svg>
+            Resume
+          </button>
+        ) : (
+          <button
+            onClick={onPause}
+            className="flex items-center justify-center gap-1.5 text-black font-semibold rounded-lg py-2.5 px-3 transition-all bg-amber-400 hover:bg-amber-300"
+          >
+            <svg fill="currentColor" height="14" viewBox="0 0 24 24" width="14" xmlns="http://www.w3.org/2000/svg">
+              <rect x="6" y="4" width="4" height="16" />
+              <rect x="14" y="4" width="4" height="16" />
+            </svg>
+            Pause
+          </button>
+        )}
+
+        {/* Stop */}
+        <button
+          onClick={onStop}
+          disabled={!isBusy}
+          className="flex items-center justify-center gap-1.5 bg-rose-600/20 border border-rose-500/30 text-rose-400 rounded-lg py-2.5 px-3 hover:bg-rose-600/30 transition-all text-sm disabled:opacity-40 disabled:cursor-not-allowed"
+        >
+          <svg fill="currentColor" height="14" viewBox="0 0 24 24" width="14" xmlns="http://www.w3.org/2000/svg">
+            <rect x="4" y="4" width="16" height="16" rx="2" />
           </svg>
-          {isRunning ? "Running..." : "Resume"}
+          Stop
         </button>
       </div>
 
       {/* Algorithm Info Box */}
-      <div className="bg-brand-bg-dark p-4 rounded-lg space-y-2">
+      <div className="bg-brand-bg-dark p-4 rounded-lg space-y-2 border border-brand-border/50">
         <h3 className="flex items-center gap-2 text-sm font-semibold">
-          <svg
-            className="text-brand-text-secondary"
-            fill="none"
-            height="20"
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            viewBox="0 0 24 24"
-            width="20"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <circle cx="12" cy="12" r="10"></circle>
-            <line x1="12" x2="12" y1="16" y2="12"></line>
-            <line x1="12" x2="12.01" y1="8" y2="8"></line>
+          <svg className="text-brand-purple" fill="none" height="16" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="10" />
+            <line x1="12" x2="12" y1="16" y2="12" />
+            <line x1="12" x2="12.01" y1="8" y2="8" />
           </svg>
-          Algorithm Info
+          Quick Info
         </h3>
-        <p className="text-sm text-brand-text-secondary">{info.description}</p>
-        <div className="flex justify-between text-xs text-brand-text-secondary">
-          <span>Time: {info.time}</span>
-          <span>Space: {info.space}</span>
+        <p className="text-xs text-brand-text-secondary leading-relaxed">{info.description}</p>
+        <div className="flex gap-4 text-xs">
+          <span className="bg-brand-purple/10 text-brand-purple px-2 py-0.5 rounded font-mono">Time: {info.time}</span>
+          <span className="bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded font-mono">Space: {info.space}</span>
         </div>
       </div>
     </aside>

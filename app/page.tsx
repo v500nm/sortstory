@@ -1,216 +1,158 @@
 import Link from "next/link";
+import Header from "@/components/Header";
+
 export default function Home() {
   return (
-    <div className="container mx-auto px-4 lg:px-6">
-      <header className="py-4 flex justify-between items-center">
-        <Link href="#" className="text-2xl font-serif-display italic text-white">
-          SortStory
-        </Link>
-        <nav className="hidden md:flex items-center space-x-6">
-          <Link href="#features" className="text-brand-text-secondary hover:text-brand-text-primary transition-colors">
-            Features
-          </Link>
-          <Link href="#algorithms" className="text-brand-text-secondary hover:text-brand-text-primary transition-colors">
-            Algorithms
-          </Link>
-          <Link href="#" className="text-brand-text-secondary hover:text-brand-text-primary transition-colors">
-            About
-          </Link>
-        </nav>
-      </header>
+    <main className="min-h-screen w-full bg-brand-bg-dark text-brand-text-primary font-sans relative flex flex-col">
+      <Header />
 
-      <main>
-        <section className="text-center py-14 lg:py-24">
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-white">
-            SortStory: Visualize Algorithms, Master Concepts
-          </h1>
-          <p className="mt-6 text-lg md:text-xl text-brand-text-secondary max-w-2xl mx-auto">
-            An interactive playground to see sorting algorithms in action. Understand complex data structures through intuitive, step-by-step visualizations.
-          </p>
-          <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center items-center">
-
-
-<Link
-  href="/sort"
-  className="w-full sm:w-auto text-black font-semibold rounded-md py-3 px-8 transition-colors bg-brand-purple hover:bg-purple-500 text-lg flex items-center justify-center gap-2"
->
-  Get Started
-  <svg
-    className="lucide lucide-arrow-right"
-    fill="none"
-    height="20"
-    stroke="currentColor"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    strokeWidth="2.5"
-    viewBox="0 0 24 24"
-    width="20"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path d="M5 12h14"></path>
-    <path d="m12 5 7 7-7 7"></path>
-  </svg>
-</Link>
-
+      {/* Hero Section */}
+      <section className="flex-grow flex flex-col justify-center items-center text-center px-4 sm:px-6 py-20 lg:py-32 max-w-[1200px] mx-auto space-y-8">
+        <div className="space-y-4">
+          <div className="inline-flex items-center gap-2 bg-[#111111] border border-brand-border px-3 py-1 rounded-full text-xs font-medium tracking-wide text-brand-text-secondary">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+            NOW SUPPORTING PATHFINDING
           </div>
-          <div className="mt-16 bg-brand-bg-light p-6 rounded-xl shadow-lg max-w-5xl mx-auto border border-brand-border">
-            <div className="flex items-end justify-center gap-2 h-64">
-              <div className="w-5 rounded-t bg-brand-green" style={{ height: '100%' }}></div>
-              <div className="w-5 rounded-t bg-brand-green" style={{ height: '95%' }}></div>
-              <div className="w-5 rounded-t bg-brand-green" style={{ height: '90%' }}></div>
-              <div className="w-5 rounded-t bg-brand-green" style={{ height: '85%' }}></div>
-              <div className="w-5 rounded-t bg-brand-green" style={{ height: '80%' }}></div>
-              <div className="w-5 rounded-t bg-brand-yellow" style={{ height: '75%' }}></div>
-              <div className="w-5 rounded-t bg-brand-purple" style={{ height: '70%' }}></div>
-              <div className="w-5 rounded-t bg-brand-gray" style={{ height: '65%' }}></div>
-              <div className="w-5 rounded-t bg-brand-gray" style={{ height: '60%' }}></div>
-              <div className="w-5 rounded-t bg-brand-gray" style={{ height: '55%' }}></div>
-              <div className="w-5 rounded-t bg-brand-gray" style={{ height: '50%' }}></div>
-              <div className="w-5 rounded-t bg-brand-gray" style={{ height: '45%' }}></div>
-              <div className="w-5 rounded-t bg-brand-gray" style={{ height: '40%' }}></div>
-              <div className="w-5 rounded-t bg-brand-gray" style={{ height: '35%' }}></div>
-              <div className="w-5 rounded-t bg-brand-gray" style={{ height: '30%' }}></div>
-              <div className="w-5 rounded-t bg-brand-gray" style={{ height: '25%' }}></div>
-              <div className="w-5 rounded-t bg-brand-gray" style={{ height: '20%' }}></div>
-              <div className="w-5 rounded-t bg-brand-gray" style={{ height: '15%' }}></div>
-              <div className="w-5 rounded-t bg-brand-gray" style={{ height: '10%' }}></div>
-              <div className="w-5 rounded-t bg-brand-gray" style={{ height: '5%' }}></div>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-tight">
+            Master Algorithms.<br />
+            <span className="text-brand-text-secondary">Through Visual Storytelling.</span>
+          </h1>
+          <p className="mt-4 text-base sm:text-lg md:text-xl text-brand-text-secondary max-w-2xl mx-auto font-medium">
+            An interactive playground designed to demystify complex sorting processes and shortest-path navigation in real-time.
+          </p>
+        </div>
+
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center w-full sm:w-auto">
+          <Link
+            href="/sort"
+            className="w-full sm:w-auto text-black bg-white hover:bg-gray-200 font-bold tracking-wide rounded-md py-3 px-8 transition-all text-sm flex items-center justify-center gap-2"
+          >
+            EXPLORE SORTING
+            <svg fill="none" height="14" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24" width="14">
+              <path d="M4 16l4 4 4-4M8 20V4" />
+            </svg>
+          </Link>
+          <Link
+            href="/pathfinding"
+            className="w-full sm:w-auto text-white bg-[#111111] hover:bg-[#1a1a1a] border border-brand-border font-bold tracking-wide rounded-md py-3 px-8 transition-all text-sm flex items-center justify-center gap-2"
+          >
+            EXPLORE PATHFINDING
+            <svg fill="none" height="14" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24" width="14">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </Link>
+        </div>
+
+        {/* Dynamic Minimalist UI Preview Mockup */}
+        <div className="w-full max-w-4xl pt-8">
+          <div className="glass-card premium-border p-6 rounded-xl space-y-6">
+            <div className="flex items-center justify-between border-b border-brand-border/60 pb-3">
+              <div className="flex items-center gap-1.5">
+                <span className="w-2.5 h-2.5 rounded-full bg-red-500/60" />
+                <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/60" />
+                <span className="w-2.5 h-2.5 rounded-full bg-green-500/60" />
+              </div>
+              <span className="text-[11px] font-mono text-brand-text-secondary tracking-wide uppercase">Interactive Preview</span>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 h-48">
+              {/* Left Column - Mini Sort bars */}
+              <Link href="/sort" className="flex items-end justify-center gap-1 bg-black/40 rounded-lg p-4 border border-brand-border/40 h-full relative group hover:border-white/20 transition-all cursor-pointer">
+                <div className="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-black/60 opacity-0 group-hover:opacity-100 transition-all rounded-lg">
+                  <span className="text-xs font-bold tracking-wider text-white border border-white/30 px-3 py-1.5 rounded bg-black">VIEW SORTING</span>
+                </div>
+                <div className="w-3 rounded-t bg-brand-green" style={{ height: "100%" }} />
+                <div className="w-3 rounded-t bg-brand-green" style={{ height: "90%" }} />
+                <div className="w-3 rounded-t bg-brand-green" style={{ height: "80%" }} />
+                <div className="w-3 rounded-t bg-brand-green" style={{ height: "70%" }} />
+                <div className="w-3 rounded-t bg-brand-yellow" style={{ height: "60%" }} />
+                <div className="w-3 rounded-t bg-[#27272a]" style={{ height: "50%" }} />
+                <div className="w-3 rounded-t bg-[#27272a]" style={{ height: "40%" }} />
+                <div className="w-3 rounded-t bg-white" style={{ height: "30%" }} />
+                <div className="w-3 rounded-t bg-[#27272a]" style={{ height: "20%" }} />
+              </Link>
+
+              {/* Right Column - Mini Path Grid */}
+              <Link href="/pathfinding" className="flex items-center justify-center bg-black/40 rounded-lg p-4 border border-brand-border/40 h-full relative group hover:border-white/20 transition-all cursor-pointer">
+                <div className="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-black/60 opacity-0 group-hover:opacity-100 transition-all rounded-lg">
+                  <span className="text-xs font-bold tracking-wider text-white border border-white/30 px-3 py-1.5 rounded bg-black">VIEW PATHFINDING</span>
+                </div>
+                <div className="grid grid-cols-6 gap-1 w-32">
+                  {[...Array(24)].map((_, i) => {
+                    let bg = "bg-brand-bg-dark";
+                    if (i === 6) bg = "bg-brand-green"; // Start
+                    if (i === 17) bg = "bg-brand-purple"; // End
+                    if (i === 11 || i === 16 || i === 21) bg = "bg-white"; // Walls
+                    if (i >= 7 && i <= 10) bg = "bg-brand-yellow"; // Path
+                    return <div key={i} className={`w-4 h-4 border border-brand-border/30 rounded-sm ${bg}`} />;
+                  })}
+                </div>
+              </Link>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section className="py-14 lg:py-18" id="features">
-          <div className="text-center mb-8">
-            <h2 className="text-3xl md:text-4xl font-bold text-white">Why SortStory?</h2>
-            <p className="mt-4 text-lg text-brand-text-secondary">
-              Everything you need to demystify sorting algorithms.
+      {/* Feature Grid */}
+      <section className="border-t border-brand-border bg-black/20 py-20 px-4 sm:px-6">
+        <div className="max-w-[1200px] mx-auto space-y-12">
+          <div className="text-center space-y-2">
+            <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">EXPERIENCE CORE CAPABILITIES</h2>
+            <p className="text-sm text-brand-text-secondary max-w-lg mx-auto">
+              Everything built with pixel-perfect modern web layouts and high-performance algorithms.
             </p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="bg-brand-bg-light p-8 rounded-xl shadow-lg border border-brand-border">
-              <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-brand-bg-dark mb-5">
-                <svg
-                  className="text-brand-purple"
-                  fill="none"
-                  height="28"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  viewBox="0 0 24 24"
-                  width="28"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
-                  <circle cx="12" cy="12" r="3"></circle>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="glass-card premium-border p-6 space-y-4">
+              <div className="w-10 h-10 rounded-lg bg-[#111111] border border-brand-border flex items-center justify-center text-white">
+                <svg fill="none" height="18" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" viewBox="0 0 24 24" width="18">
+                  <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-brand-text-primary">Interactive Visualizations</h3>
-              <p className="mt-2 text-brand-text-secondary">
-                Watch algorithms sort data in real-time. Pause, resume, and step through the process to understand every comparison and swap.
+              <h3 className="text-base font-semibold text-white">Interactive Controls</h3>
+              <p className="text-xs text-brand-text-secondary leading-relaxed">
+                Play, pause, resume, step, or stop visualizers at any point. Instantly configure speeds and dataset sizes mid-execution.
               </p>
             </div>
-            <div className="bg-brand-bg-light p-8 rounded-xl shadow-lg border border-brand-border">
-              <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-brand-bg-dark mb-5">
-                <svg
-                  className="text-brand-purple"
-                  fill="none"
-                  height="28"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  viewBox="0 0 24 24"
-                  width="28"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path>
-                  <polyline points="14 2 14 8 20 8"></polyline>
-                  <line x1="16" x2="8" y1="13" y2="13"></line>
-                  <line x1="16" x2="8" y1="17" y2="17"></line>
-                  <line x1="10" x2="8" y1="9" y2="9"></line>
+
+            <div className="glass-card premium-border p-6 space-y-4">
+              <div className="w-10 h-10 rounded-lg bg-[#111111] border border-brand-border flex items-center justify-center text-white">
+                <svg fill="none" height="18" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" viewBox="0 0 24 24" width="18">
+                  <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l-7 4a2 2 0 0 0 2 0l7-4a2 2 0 0 0 1-1.73z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-brand-text-primary">Detailed Explanations</h3>
-              <p className="mt-2 text-brand-text-secondary">
-                Access clear, concise information about each algorithm, including its time and space complexity, and step-by-step pseudocode.
+              <h3 className="text-base font-semibold text-white">Race Comparisons</h3>
+              <p className="text-xs text-brand-text-secondary leading-relaxed">
+                Compare sorting algorithms side-by-side in "Race Mode". Determine the fastest algorithm with direct winner detection.
               </p>
             </div>
-            <div className="bg-brand-bg-light p-8 rounded-xl shadow-lg border border-brand-border md:col-span-2 lg:col-span-1">
-              <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-brand-bg-dark mb-5">
-                <svg
-                  className="text-brand-purple"
-                  fill="none"
-                  height="28"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  viewBox="0 0 24 24"
-                  width="28"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <rect height="7" width="7" x="3" y="3"></rect>
-                  <rect height="7" width="7" x="14" y="3"></rect>
-                  <rect height="7" width="7" x="3" y="14"></rect>
-                  <rect height="7" width="7" x="14" y="14"></rect>
+
+            <div className="glass-card premium-border p-6 space-y-4">
+              <div className="w-10 h-10 rounded-lg bg-[#111111] border border-brand-border flex items-center justify-center text-white">
+                <svg fill="none" height="18" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" viewBox="0 0 24 24" width="18">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-brand-text-primary">Customizable Inputs</h3>
-              <p className="mt-2 text-brand-text-secondary">
-                Control the size of the dataset and the visualization speed to tailor your learning experience. Test algorithms on different data arrangements.
+              <h3 className="text-base font-semibold text-white">Interactive Grids</h3>
+              <p className="text-xs text-brand-text-secondary leading-relaxed">
+                Create mazes and custom path routes directly by clicking and dragging obstacles, watch the shortest-path algorithm update dynamically.
               </p>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section className="py-20 lg:py-24 text-center" id="algorithms">
-          <h2 className="text-3xl md:text-4xl font-bold text-white">Explore a Variety of Algorithms</h2>
-          <p className="mt-4 text-lg text-brand-text-secondary max-w-2xl mx-auto">
-            From the simplest to the more complex, we've got you covered. Dive in and see how they differ.
-          </p>
-          <div className="mt-12 flex flex-wrap justify-center gap-3 md:gap-4">
-            <span className="bg-brand-bg-light text-brand-text-primary text-sm font-medium px-4 py-2 rounded-full border border-brand-border">
-              Bubble Sort
-            </span>
-            <span className="bg-brand-bg-light text-brand-text-primary text-sm font-medium px-4 py-2 rounded-full border border-brand-border">
-              Selection Sort
-            </span>
-            <span className="bg-brand-bg-light text-brand-text-primary text-sm font-medium px-4 py-2 rounded-full border border-brand-border">
-              Insertion Sort
-            </span>
-            <span className="bg-brand-bg-light text-brand-text-primary text-sm font-medium px-4 py-2 rounded-full border border-brand-border">
-              Merge Sort
-            </span>
-            <span className="bg-brand-bg-light text-brand-text-primary text-sm font-medium px-4 py-2 rounded-full border border-brand-border">
-              Quick Sort
-            </span>
-            <span className="bg-brand-bg-light text-brand-text-primary text-sm font-medium px-4 py-2 rounded-full border border-brand-border">
-              Heap Sort
-            </span>
-            <span className="bg-brand-bg-light text-brand-text-secondary text-sm font-medium px-4 py-2 rounded-full border border-brand-border">
-              and more...
-            </span>
-          </div>
-        </section>
-      </main>
-
-      <footer className="py-8 mt-16 border-t border-brand-border">
-        <div className="flex flex-col sm:flex-row justify-between items-center text-center sm:text-left">
-          <p className="text-brand-text-secondary text-sm">© 2024 SortStory. All rights reserved.</p>
-          <div className="flex space-x-6 mt-4 sm:mt-0">
-            <Link href="#" className="text-sm text-brand-text-secondary hover:text-brand-text-primary transition-colors">
-              About Us
-            </Link>
-            <Link href="#" className="text-sm text-brand-text-secondary hover:text-brand-text-primary transition-colors">
-              Contact
-            </Link>
-            <Link href="#" className="text-sm text-brand-text-secondary hover:text-brand-text-primary transition-colors">
-              Privacy Policy
-            </Link>
+      {/* Footer */}
+      <footer className="border-t border-brand-border py-8 px-4 sm:px-6 mt-auto">
+        <div className="max-w-[1200px] mx-auto flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-brand-text-secondary font-medium">
+          <p>© 2026 SortStory - <a href="https://adnan-mangaonkar.com" className="text-white">Adnan M.</a> All rights reserved.</p>
+          <div className="flex gap-6">
+            <Link href="/sort" className="hover:text-white transition-colors">SORTING</Link>
+            <Link href="/pathfinding" className="hover:text-white transition-colors">PATHFINDING</Link>
           </div>
         </div>
       </footer>
-    </div>
+    </main>
   );
 }

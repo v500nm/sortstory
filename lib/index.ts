@@ -1,4 +1,4 @@
-// Export all sorting algorithms
+// Export all sorting algorithms (callback-based)
 export { bubbleSort } from "../algorithms/bubble";
 export { insertionSort } from "../algorithms/insertion";
 export { mergeSortWrapper } from "../algorithms/merge";
