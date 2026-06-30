@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { sortingCodeBlocks, sortingExamples } from "@/lib/sortingCode";
 
 interface AlgoDetailsProps {
   selectedAlgo: string;
@@ -13,7 +14,7 @@ const algorithmDetails: Record<string, {
   worstCase: string;
   timeComplexity: string;
   spaceComplexity: string;
-  pseudocode: string[];
+  useCase: string;
 }> = {
   bubbleSort: {
     name: "Bubble Sort",
@@ -23,12 +24,7 @@ const algorithmDetails: Record<string, {
     worstCase: "O(n²) - When array is reverse sorted",
     timeComplexity: "O(n²)",
     spaceComplexity: "O(1)",
-    pseudocode: [
-      "for i from 0 to n-1:",
-      "  for j from 0 to n-i-1:",
-      "    if arr[j] > arr[j+1]:",
-      "      swap(arr[j], arr[j+1])"
-    ]
+    useCase: "Primarily educational. Used to introduce basic sorting mechanics. In production, it can be useful in embedded systems to verify if a list is already sorted in a single pass with minimal code size."
   },
   selectionSort: {
     name: "Selection Sort",
@@ -38,14 +34,7 @@ const algorithmDetails: Record<string, {
     worstCase: "O(n²) - For any arrangement",
     timeComplexity: "O(n²)",
     spaceComplexity: "O(1)",
-    pseudocode: [
-      "for i from 0 to n-1:",
-      "  min_idx = i",
-      "  for j from i+1 to n:",
-      "    if arr[j] < arr[min_idx]:",
-      "      min_idx = j",
-      "  swap(arr[i], arr[min_idx])"
-    ]
+    useCase: "Highly useful in systems where memory write operations are extremely expensive compared to reads (e.g., writing to EEPROM or Flash memory), because it guarantees at most O(n) swaps (memory writes)."
   },
   insertionSort: {
     name: "Insertion Sort",
@@ -55,15 +44,7 @@ const algorithmDetails: Record<string, {
     worstCase: "O(n²) - Reverse sorted",
     timeComplexity: "O(n²)",
     spaceComplexity: "O(1)",
-    pseudocode: [
-      "for i from 1 to n-1:",
-      "  key = arr[i]",
-      "  j = i - 1",
-      "  while j >= 0 and arr[j] > key:",
-      "    arr[j+1] = arr[j]",
-      "    j = j - 1",
-      "  arr[j+1] = key"
-    ]
+    useCase: "Online sorting (sorting data live as it is received). It is also used as the optimization layer in advanced hybrid algorithms (like Timsort and IntroSort) to sort small sub-arrays (usually size < 32)."
   },
   mergeSortWrapper: {
     name: "Merge Sort",
@@ -73,14 +54,7 @@ const algorithmDetails: Record<string, {
     worstCase: "O(n log n) - Reverse sorted",
     timeComplexity: "O(n log n)",
     spaceComplexity: "O(n)",
-    pseudocode: [
-      "function mergeSort(arr):",
-      "  if length(arr) <= 1: return arr",
-      "  mid = length(arr) / 2",
-      "  left = mergeSort(arr[0:mid])",
-      "  right = mergeSort(arr[mid:])",
-      "  return merge(left, right)"
-    ]
+    useCase: "External sorting (sorting datasets too massive to fit into RAM, by sorting chunks and merging them from hard drives). Commonly used in database engines and stable object sorting (like Java's Collections.sort)."
   },
   quickSortWrapper: {
     name: "Quick Sort",
@@ -90,13 +64,7 @@ const algorithmDetails: Record<string, {
     worstCase: "O(n²) - Poor pivot selection",
     timeComplexity: "O(n log n)",
     spaceComplexity: "O(log n)",
-    pseudocode: [
-      "function quickSort(arr, low, high):",
-      "  if low < high:",
-      "    pi = partition(arr, low, high)",
-      "    quickSort(arr, low, pi-1)",
-      "    quickSort(arr, pi+1, high)"
-    ]
+    useCase: "The standard default algorithm for in-memory sorting libraries (like C's qsort, Java's Arrays.sort, and V8's array sort) because of its exceptional cache locality and speed on modern CPU architectures."
   },
   heapSort: {
     name: "Heap Sort",
@@ -106,13 +74,7 @@ const algorithmDetails: Record<string, {
     worstCase: "O(n log n) - Consistent performance",
     timeComplexity: "O(n log n)",
     spaceComplexity: "O(1)",
-    pseudocode: [
-      "function heapSort(arr):",
-      "  buildMaxHeap(arr)",
-      "  for i from n-1 to 1:",
-      "    swap(arr[0], arr[i])",
-      "    heapify(arr, 0, i)"
-    ]
+    useCase: "Used in real-time and embedded systems where guaranteed worst-case execution time (O(n log n)) and strict memory limitations (O(1) auxiliary space) are required. Also used in Linux kernel sorting implementations."
   },
   shellSort: {
     name: "Shell Sort",
@@ -122,17 +84,7 @@ const algorithmDetails: Record<string, {
     worstCase: "O(n²) - Poor gap sequence",
     timeComplexity: "O(n log n)",
     spaceComplexity: "O(1)",
-    pseudocode: [
-      "gap = n / 2",
-      "while gap > 0:",
-      "  for i from gap to n:",
-      "    temp = arr[i]",
-      "    j = i",
-      "    while j >= gap and arr[j-gap] > temp:",
-      "      arr[j] = arr[j-gap]",
-      "    arr[j] = temp",
-      "  gap = gap / 2"
-    ]
+    useCase: "Embedded processors and older Unix systems where recursive stack space is restricted (preventing Merge/Quick Sort), but performance must still be much better than standard insertion/selection sort."
   },
   cocktailSort: {
     name: "Cocktail Sort",
@@ -142,15 +94,7 @@ const algorithmDetails: Record<string, {
     worstCase: "O(n²) - Reverse sorted",
     timeComplexity: "O(n²)",
     spaceComplexity: "O(1)",
-    pseudocode: [
-      "do:",
-      "  swapped = false",
-      "  for i from 0 to n-1:",
-      "    if arr[i] > arr[i+1]: swap and set swapped",
-      "  for i from n-1 to 0:",
-      "    if arr[i] > arr[i+1]: swap and set swapped",
-      "while swapped"
-    ]
+    useCase: "Useful in computer graphics and game engines when updating overlapping rendering layers or handling lists where elements are mostly sorted but minor offsets at the boundaries exist."
   },
   combSort: {
     name: "Comb Sort",
@@ -160,15 +104,7 @@ const algorithmDetails: Record<string, {
     worstCase: "O(n²) - Poor cases",
     timeComplexity: "O(n²/2ᵖ)",
     spaceComplexity: "O(1)",
-    pseudocode: [
-      "gap = n",
-      "shrink = 1.3",
-      "while gap > 1:",
-      "  gap = floor(gap / shrink)",
-      "  for i from 0 to n-gap:",
-      "    if arr[i] > arr[i+gap]:",
-      "      swap(arr[i], arr[i+gap])"
-    ]
+    useCase: "Used in lightweight data compression utilities or specialized microcontroller programs that want sorting performance close to O(n log n) without using heavy heap or recursive memory architectures."
   },
   gnomeSort: {
     name: "Gnome Sort",
@@ -178,15 +114,7 @@ const algorithmDetails: Record<string, {
     worstCase: "O(n²) - Reverse sorted",
     timeComplexity: "O(n²)",
     spaceComplexity: "O(1)",
-    pseudocode: [
-      "pos = 0",
-      "while pos < n:",
-      "  if pos == 0 or arr[pos] >= arr[pos-1]:",
-      "    pos = pos + 1",
-      "  else:",
-      "    swap(arr[pos], arr[pos-1])",
-      "    pos = pos - 1"
-    ]
+    useCase: "Used for rapid debugging or scripts where code size and ease of implementation are the primary constraints, and the dataset is tiny (less than 10-20 elements)."
   },
   oddEvenSort: {
     name: "Odd-Even Sort",
@@ -196,15 +124,7 @@ const algorithmDetails: Record<string, {
     worstCase: "O(n²) - Reverse sorted",
     timeComplexity: "O(n²)",
     spaceComplexity: "O(1)",
-    pseudocode: [
-      "sorted = false",
-      "while not sorted:",
-      "  sorted = true",
-      "  for i in odd indices:",
-      "    if arr[i] > arr[i+1]: swap and mark unsorted",
-      "  for i in even indices:",
-      "    if arr[i] > arr[i+1]: swap and mark unsorted"
-    ]
+    useCase: "Highly suited for execution on parallel processing hardware (like multi-core processors, GPUs, or FPGAs) since multiple independent index comparisons can be executed simultaneously."
   },
   pancakeSort: {
     name: "Pancake Sort",
@@ -214,13 +134,7 @@ const algorithmDetails: Record<string, {
     worstCase: "O(n²) - General case",
     timeComplexity: "O(n²)",
     spaceComplexity: "O(1)",
-    pseudocode: [
-      "for curr_size from n to 1:",
-      "  max_idx = findMax(arr, curr_size)",
-      "  if max_idx != curr_size-1:",
-      "    flip(arr, max_idx)",
-      "    flip(arr, curr_size-1)"
-    ]
+    useCase: "Used in robotics (e.g., reversing the order of stacked crates with simple rotation spatulas), and bioinformatics to model evolutionary distance between species via chromosome reversals."
   },
   bitonicSortWrapper: {
     name: "Bitonic Sort",
@@ -230,14 +144,7 @@ const algorithmDetails: Record<string, {
     worstCase: "O(log²n) - Consistent",
     timeComplexity: "O(log²n)",
     spaceComplexity: "O(log²n)",
-    pseudocode: [
-      "function bitonicSort(arr, up):",
-      "  if length(arr) > 1:",
-      "    m = length(arr) / 2",
-      "    bitonicSort(arr[0:m], 1)",
-      "    bitonicSort(arr[m:], 0)",
-      "    bitonicMerge(arr, up)"
-    ]
+    useCase: "Ideal for execution on GPUs (like CUDA kernels) and parallel hardware accelerators because the comparison network layout is completely static and independent of input data value order."
   },
   radixSort: {
     name: "Radix Sort",
@@ -247,13 +154,7 @@ const algorithmDetails: Record<string, {
     worstCase: "O(nk) - Consistent performance",
     timeComplexity: "O(nk)",
     spaceComplexity: "O(n+k)",
-    pseudocode: [
-      "for digit from LSD to MSD:",
-      "  create buckets[0-9]",
-      "  for each number in arr:",
-      "    place in bucket by digit",
-      "  collect from buckets back to arr"
-    ]
+    useCase: "Sorting large lists of integers (like telephone numbers, zip codes, or card indices) or fixed-length strings (such as transaction IDs or serial keys) where the key length (k) is small."
   },
   stoogeSortWrapper: {
     name: "Stooge Sort",
@@ -263,15 +164,7 @@ const algorithmDetails: Record<string, {
     worstCase: "O(n^2.709) - Extremely slow",
     timeComplexity: "O(n^2.709)",
     spaceComplexity: "O(n)",
-    pseudocode: [
-      "function stoogeSort(arr, i, j):",
-      "  if arr[i] > arr[j]: swap(arr[i], arr[j])",
-      "  if j - i + 1 > 2:",
-      "    t = (j - i + 1) / 3",
-      "    stoogeSort(arr, i, j-t)",
-      "    stoogeSort(arr, i+t, j)",
-      "    stoogeSort(arr, i, j-t)"
-    ]
+    useCase: "Strictly theoretical. Used to challenge students in computer science courses to solve runtime recurrence relations for unusual fraction-based recursive loops."
   },
   bogoSort: {
     name: "Bogo Sort",
@@ -281,105 +174,161 @@ const algorithmDetails: Record<string, {
     worstCase: "O(∞) - May never finish",
     timeComplexity: "O(∞)",
     spaceComplexity: "O(1)",
-    pseudocode: [
-      "while not isSorted(arr):",
-      "  shuffle(arr)",
-      "",
-      "Note: This algorithm is completely",
-      "impractical and should never be used",
-      "for actual sorting tasks!"
-    ]
+    useCase: "Used as a theoretical benchmark for the absolute worst-performing logic. It serves as a visual and academic contrast to show students why efficient algorithm design is vital."
   }
 };
 
+type LanguageType = "pseudocode" | "javascript" | "python" | "java" | "cpp" | "c";
+
+const LANGUAGE_LABELS: Record<LanguageType, string> = {
+  pseudocode: "PSEUDOCODE",
+  javascript: "JAVASCRIPT",
+  python: "PYTHON",
+  java: "JAVA",
+  cpp: "C++",
+  c: "C"
+};
+
 export default function AlgoDetails({ selectedAlgo }: AlgoDetailsProps) {
-  const [activeTab, setActiveTab] = useState<"complexity" | "pseudocode">("complexity");
+  const [activeTab, setActiveTab] = useState<"complexity" | "pseudocode" | "usecase">("complexity");
+  const [selectedLang, setSelectedLang] = useState<LanguageType>("pseudocode");
+  
   const details = algorithmDetails[selectedAlgo] || algorithmDetails.bubbleSort;
+  const exampleText = sortingExamples[selectedAlgo] || "";
+  const codeLines = sortingCodeBlocks[selectedAlgo]?.[selectedLang] || [];
 
   return (
-    <section className="bg-brand-bg-light p-6 rounded-xl shadow-lg">
+    <section className="glass-card premium-border p-6 relative overflow-hidden">
       {/* Details Panel Header */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
         <div className="flex items-center gap-3">
-          <svg
-            fill="none"
-            height="24"
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            viewBox="0 0 24 24"
-            width="24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path>
-            <polyline points="14 2 14 8 20 8"></polyline>
-            <line x1="16" x2="8" y1="13" y2="13"></line>
-            <line x1="16" x2="8" y1="17" y2="17"></line>
-            <line x1="10" x2="8" y1="9" y2="9"></line>
-          </svg>
-          <h2 className="text-lg font-semibold">Algorithm Details</h2>
+          <div className="h-6 w-6 rounded flex items-center justify-center bg-brand-border">
+            <svg fill="none" height="12" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" viewBox="0 0 24 24" width="12" className="text-white">
+              <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" x2="8" y1="13" y2="13"></line>
+              <line x1="16" x2="8" y1="17" y2="17"></line>
+              <line x1="10" x2="8" y1="9" y2="9"></line>
+            </svg>
+          </div>
+          <h2 className="text-sm font-semibold tracking-wider text-brand-text-primary uppercase">Algorithm Details</h2>
         </div>
-        <div className="flex items-center gap-1 border border-brand-border rounded-lg p-1 mt-3 sm:mt-0">
+        <div className="flex items-center gap-1 border border-brand-border rounded-lg p-1 mt-3 sm:mt-0 bg-[#0a0a0a]">
           <button
             onClick={() => setActiveTab("complexity")}
-            className={`text-sm px-3 py-1 rounded-md transition-colors ${
+            className={`text-[10px] font-bold tracking-wide px-3 py-1.5 rounded-md transition-colors ${
               activeTab === "complexity"
-                ? "bg-brand-bg-dark text-brand-text-primary"
-                : "text-brand-text-secondary hover:bg-brand-bg-dark/50"
+                ? "bg-brand-border text-white"
+                : "text-brand-text-secondary hover:text-white"
             }`}
           >
-            Time Complexity
+            COMPLEXITY
           </button>
           <button
             onClick={() => setActiveTab("pseudocode")}
-            className={`text-sm px-3 py-1 rounded-md transition-colors ${
+            className={`text-[10px] font-bold tracking-wide px-3 py-1.5 rounded-md transition-colors ${
               activeTab === "pseudocode"
-                ? "bg-brand-bg-dark text-brand-text-primary"
-                : "text-brand-text-secondary hover:bg-brand-bg-dark/50"
+                ? "bg-brand-border text-white"
+                : "text-brand-text-secondary hover:text-white"
             }`}
           >
-            Pseudocode
+            CODE IMPLEMENTATIONS
+          </button>
+          <button
+            onClick={() => setActiveTab("usecase")}
+            className={`text-[10px] font-bold tracking-wide px-3 py-1.5 rounded-md transition-colors ${
+              activeTab === "usecase"
+                ? "bg-brand-border text-white"
+                : "text-brand-text-secondary hover:text-white"
+            }`}
+          >
+            USE CASE
           </button>
         </div>
       </div>
 
       {/* Details Content */}
-      <div>
-        <h3 className="text-xl font-bold text-brand-purple mb-2">{details.name}</h3>
-        <p className="text-brand-text-secondary leading-relaxed">{details.description}</p>
+      <div className="space-y-4">
+        <div>
+          <h3 className="text-xl font-semibold text-white tracking-wide">{details.name}</h3>
+          <p className="text-brand-text-secondary text-sm leading-relaxed mt-2">{details.description}</p>
+        </div>
 
-        {activeTab === "complexity" ? (
-          <div className="mt-6 border-t border-brand-border pt-4">
-            <h4 className="font-semibold mb-3">Complexity Analysis</h4>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2 text-sm">
-              <div>
-                <span className="text-brand-text-secondary">Best: {details.bestCase}</span>
+        {activeTab === "complexity" && (
+          <div className="border-t border-brand-border pt-4">
+            <h4 className="text-xs font-bold tracking-wider text-brand-text-secondary mb-3 uppercase">Complexity Analysis</h4>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3 text-sm">
+              <div className="flex justify-between border-b border-brand-border/40 pb-2">
+                <span className="text-brand-text-secondary font-medium">Best Case</span>
+                <span className="text-white font-mono">{details.bestCase.split(" - ")[0]}</span>
               </div>
-              <div className="flex justify-between">
-                <span className="text-brand-purple font-semibold">Time Complexity</span>
-                <span className="text-brand-text-primary">{details.timeComplexity}</span>
+              <div className="flex justify-between border-b border-brand-border/40 pb-2">
+                <span className="text-brand-text-secondary font-medium">Time Complexity</span>
+                <span className="text-white font-mono font-semibold">{details.timeComplexity}</span>
               </div>
-              <div>
-                <span className="text-brand-text-secondary">Average: {details.avgCase}</span>
+              <div className="flex justify-between border-b border-brand-border/40 pb-2">
+                <span className="text-brand-text-secondary font-medium">Average Case</span>
+                <span className="text-white font-mono">{details.avgCase.split(" - ")[0]}</span>
               </div>
-              <div className="flex justify-between">
-                <span className="text-brand-purple font-semibold">Space Complexity</span>
-                <span className="text-brand-text-primary">{details.spaceComplexity}</span>
+              <div className="flex justify-between border-b border-brand-border/40 pb-2">
+                <span className="text-brand-text-secondary font-medium">Space Complexity</span>
+                <span className="text-white font-mono font-semibold">{details.spaceComplexity}</span>
               </div>
-              <div>
-                <span className="text-brand-text-secondary">Worst: {details.worstCase}</span>
+              <div className="flex justify-between border-b border-brand-border/40 pb-2 md:border-none md:pb-0">
+                <span className="text-brand-text-secondary font-medium">Worst Case</span>
+                <span className="text-white font-mono">{details.worstCase.split(" - ")[0]}</span>
               </div>
             </div>
           </div>
-        ) : (
-          <div className="mt-6 border-t border-brand-border pt-4">
-            <h4 className="font-semibold mb-3">Pseudocode</h4>
-            <div className="bg-brand-bg-dark p-4 rounded-lg font-mono text-sm text-brand-text-secondary space-y-1">
-              {details.pseudocode.map((line, index) => (
-                <div key={index}>{line}</div>
+        )}
+
+        {activeTab === "pseudocode" && (
+          <div className="border-t border-brand-border pt-4 space-y-4">
+            <div className="flex justify-between items-center">
+              <h4 className="text-xs font-bold tracking-wider text-brand-text-secondary uppercase">Code Implementations</h4>
+              {/* Language Selector pills */}
+              <div className="flex flex-wrap gap-1 bg-black/40 p-1 border border-brand-border rounded-md">
+                {(Object.keys(LANGUAGE_LABELS) as LanguageType[]).map((lang) => (
+                  <button
+                    key={lang}
+                    onClick={() => setSelectedLang(lang)}
+                    className={`text-[9px] font-bold tracking-wider px-2 py-1 rounded transition-colors ${
+                      selectedLang === lang
+                        ? "bg-[#27272a] text-white"
+                        : "text-brand-text-secondary hover:text-white"
+                    }`}
+                  >
+                    {LANGUAGE_LABELS[lang]}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="bg-[#070707] border border-brand-border/60 p-4 rounded-lg font-mono text-xs text-brand-text-secondary space-y-1.5 overflow-x-auto">
+              {codeLines.map((line, index) => (
+                <div key={index} className="whitespace-pre">{line}</div>
               ))}
             </div>
+          </div>
+        )}
+
+        {activeTab === "usecase" && (
+          <div className="border-t border-brand-border pt-4 space-y-4">
+            <div>
+              <h4 className="text-xs font-bold tracking-wider text-brand-text-secondary mb-2 uppercase">Real-World Use Case</h4>
+              <div className="bg-[#070707] border border-brand-border/60 p-4 rounded-lg text-sm text-brand-text-secondary leading-relaxed">
+                {details.useCase}
+              </div>
+            </div>
+            {exampleText && (
+              <div>
+                <h4 className="text-xs font-bold tracking-wider text-brand-text-secondary mb-2 uppercase">Concrete Example</h4>
+                <div className="bg-[#070707] border border-[#22c55e]/20 p-4 rounded-lg text-sm text-brand-text-secondary leading-relaxed border-l-2 border-l-[#22c55e]">
+                  <strong className="text-white font-medium block mb-1">Scenario:</strong>
+                  {exampleText}
+                </div>
+              </div>
+            )}
           </div>
         )}
       </div>

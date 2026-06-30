@@ -49,7 +49,7 @@ export default function BarsVisualizer({
 }: BarsVisualizerProps) {
   const maxVal = Math.max(...array, 1);
   const barCount = array.length;
-  const gap = barCount > 30 ? 2 : barCount > 20 ? 3 : 4;
+  const gap = barCount > 50 ? 1 : barCount > 30 ? 2 : barCount > 20 ? 3 : 4;
   const showValues = barCount <= 25;
 
   return (
@@ -79,14 +79,14 @@ export default function BarsVisualizer({
       {/* Bar Chart Area */}
       <div className="flex-grow relative mx-5 mb-2 mt-4">
         {/* Subtle reference lines */}
-        <div className="absolute inset-0 flex flex-col justify-between pointer-events-none opacity-[0.05]">
+        <div className="absolute inset-x-4 bottom-2 top-8 flex flex-col justify-between pointer-events-none opacity-[0.05]">
           {[...Array(5)].map((_, i) => (
             <div key={i} className="border-b border-white border-dashed" />
           ))}
         </div>
 
         <div
-          className="absolute inset-0 flex items-end justify-center"
+          className="absolute inset-x-0 sm:inset-x-4 bottom-2 top-8 flex items-end justify-center"
           style={{ gap: `${gap}px` }}
         >
           {array.map((value, index) => {
@@ -105,8 +105,8 @@ export default function BarsVisualizer({
                 style={{
                   height: `${Math.max(heightPct, 2)}%`,
                   width: `${barWidth}px`,
-                  minWidth: "4px",
-                  flexShrink: 0,
+                  minWidth: "1px",
+                  flexShrink: 1,
                   background: style.bg,
                   boxShadow: style.shadow,
                   transition: "height 0.12s cubic-bezier(0.4,0,0.2,1), background 0.15s ease",

@@ -355,23 +355,6 @@ export default function ControlsPanel({
           Stop
         </button>
       </div>
-
-      {/* Algorithm Info Box */}
-      <div className="bg-brand-bg-dark p-4 rounded-lg space-y-2 border border-brand-border/50">
-        <h3 className="flex items-center gap-2 text-sm font-semibold">
-          <svg className="text-brand-purple" fill="none" height="16" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="12" cy="12" r="10" />
-            <line x1="12" x2="12" y1="16" y2="12" />
-            <line x1="12" x2="12.01" y1="8" y2="8" />
-          </svg>
-          Quick Info
-        </h3>
-        <p className="text-xs text-brand-text-secondary leading-relaxed">{info.description}</p>
-        <div className="flex gap-4 text-xs">
-          <span className="bg-brand-purple/10 text-brand-purple px-2 py-0.5 rounded font-mono">Time: {info.time}</span>
-          <span className="bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded font-mono">Space: {info.space}</span>
-        </div>
-      </div>
     </aside>
   );
 }
