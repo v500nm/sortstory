@@ -12,6 +12,7 @@ export function useLinkedListEngine() {
   const [metrics, setMetrics] = useState<LinkedListMetrics>({ steps: 0, comparisons: 0, timeMs: 0 });
   const [speed, setSpeed] = useState<number>(2); // 1: Fast, 2: Normal, 3: Slow
   const [listSize, setListSize] = useState<number>(5);
+  const [selectedAlgorithm, setSelectedAlgorithm] = useState<string>("reverseList");
 
   const generatorRef = useRef<Generator<LinkedListStep, void, unknown> | null>(null);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
@@ -144,6 +145,8 @@ export function useLinkedListEngine() {
     setSpeed,
     listSize,
     setListSize,
+    selectedAlgorithm,
+    setSelectedAlgorithm,
     run,
     pause,
     resume,

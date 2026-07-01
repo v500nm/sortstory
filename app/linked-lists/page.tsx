@@ -18,7 +18,7 @@ export default function LinkedListsPage() {
           <div className="min-h-[500px]">
             <LinkedListVisualizer engine={engine} />
           </div>
-          <AlgoDetails selectedAlgo={engine.listType} />
+          <AlgoDetails selectedAlgo={engine.selectedAlgorithm} />
         </div>
         
         {/* Controls Area */}

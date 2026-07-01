@@ -20,16 +20,17 @@ export default function LinkedListControls({ engine }: Props) {
     setListSize,
     speed,
     setSpeed,
+    selectedAlgorithm,
+    setSelectedAlgorithm,
   } = engine;
 
   const isBusy = status === "running" || status === "paused";
-  const [selectedAlgo, setSelectedAlgo] = useState("reverseList");
   const [customInput, setCustomInput] = useState("");
 
   const handleRunClick = () => {
-    if (selectedAlgo === "reverseList") run(linkedListAlgorithms.reverseList);
-    if (selectedAlgo === "detectCycle") run(linkedListAlgorithms.detectCycle);
-    if (selectedAlgo === "findMiddle") run(linkedListAlgorithms.findMiddle);
+    if (selectedAlgorithm === "reverseList") run(linkedListAlgorithms.reverseList);
+    if (selectedAlgorithm === "detectCycle") run(linkedListAlgorithms.detectCycle);
+    if (selectedAlgorithm === "findMiddle") run(linkedListAlgorithms.findMiddle);
   };
 
   const handleInitialize = (withCycle: boolean) => {
@@ -67,9 +68,9 @@ export default function LinkedListControls({ engine }: Props) {
           ALGORITHM
         </label>
         <select
-          value={selectedAlgo}
+          value={selectedAlgorithm}
           onChange={(e) => {
-            setSelectedAlgo(e.target.value);
+            setSelectedAlgorithm(e.target.value);
             // Automatically initialize a list with cycle if cycle detection is selected
             if (e.target.value === "detectCycle") {
                handleInitialize(true);
@@ -103,7 +104,7 @@ export default function LinkedListControls({ engine }: Props) {
           value={listSize}
           onChange={(e) => {
             setListSize(Number(e.target.value));
-            handleInitialize(selectedAlgo === "detectCycle");
+            handleInitialize(selectedAlgorithm === "detectCycle");
           }}
           disabled={isBusy}
           className="w-full h-1.5 bg-brand-border rounded-lg appearance-none cursor-pointer accent-brand-purple"
