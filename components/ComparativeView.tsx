@@ -102,9 +102,9 @@ export default function ComparativeView({
           <div>
             <h2 className="text-sm font-semibold tracking-wide">RACE MODE</h2>
             <p className="text-xs font-mono text-brand-text-secondary mt-1">
-              <span className="text-white">{getAlgoLabel(algoA)}</span>
+              <span className="text-brand-accent">{getAlgoLabel(algoA)}</span>
               <span className="mx-2 text-brand-border-light">vs</span>
-              <span className="text-brand-yellow">{getAlgoLabel(algoB)}</span>
+              <span className="text-brand-accent">{getAlgoLabel(algoB)}</span>
             </p>
           </div>
         </div>

@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import Footer from "@/components/Footer";
+import SecurityWrapper from "@/components/SecurityWrapper";
 
 /* ------------------------------------------
    VIEWPORT SETTINGS
@@ -350,7 +352,12 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
-      <body>{children}</body>
+      <body className="flex flex-col min-h-screen">
+        <SecurityWrapper>
+          {children}
+          <Footer />
+        </SecurityWrapper>
+      </body>
     </html>
   );
 }

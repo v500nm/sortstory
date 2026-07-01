@@ -53,7 +53,7 @@ export default function BarsVisualizer({
   const showValues = barCount <= 25;
 
   return (
-    <section className="glass-card premium-border flex flex-col w-full h-[50vh] min-h-[350px] lg:h-[65vh] max-h-[600px] overflow-hidden">
+    <section className="card-3d flex flex-col w-full h-[50vh] min-h-[350px] lg:h-[65vh] max-h-[600px] overflow-hidden">
       <div className="p-5 pb-0 flex-shrink-0">
         <div className="flex justify-between items-center mb-1">
           <div className="flex items-center gap-2.5">
@@ -101,14 +101,15 @@ export default function BarsVisualizer({
             return (
               <div
                 key={index}
-                className="rounded-t-[2px] flex flex-col items-center justify-end relative"
+                className="element-3d rounded-t-sm flex flex-col items-center justify-end relative"
                 style={{
                   height: `${Math.max(heightPct, 2)}%`,
                   width: `${barWidth}px`,
-                  minWidth: "1px",
+                  minWidth: "4px",
                   flexShrink: 1,
                   background: style.bg,
-                  boxShadow: style.shadow,
+                  boxShadow: style.shadow !== "none" ? `${style.shadow}, inset 2px 2px 0px 0px rgba(255,255,255,0.3), inset -2px -2px 0px 0px rgba(0,0,0,0.4)` : "inset 2px 2px 0px 0px rgba(255,255,255,0.3), inset -2px -2px 0px 0px rgba(0,0,0,0.4)",
+                  borderColor: "rgba(0,0,0,0.5)",
                   transition: "height 0.12s cubic-bezier(0.4,0,0.2,1), background 0.15s ease",
                 }}
               >
@@ -175,7 +176,7 @@ function MetricChip({
         </svg>
       )}
       {label && <span className="text-brand-text-secondary uppercase">{label}</span>}
-      <span className="text-white font-semibold">
+      <span className="text-brand-accent font-semibold">
         {typeof value === "number" ? value.toLocaleString() : value}
       </span>
     </div>

@@ -9,14 +9,14 @@ interface Props {
   label?: string;
 }
 
-const NODE_COLORS: Record<string, string> = {
-  empty: "bg-brand-bg-dark",
-  wall: "bg-white",
-  start: "bg-brand-green",
-  end: "bg-brand-purple",
-  visited: "bg-brand-cyan/40",
-  path: "bg-brand-yellow",
-  frontier: "bg-amber-500/60",
+const NODE_STYLES: Record<string, string> = {
+  empty: "relative after:absolute after:inset-0 after:m-auto after:w-1 after:h-1 after:bg-white/10 after:rounded-full",
+  wall: "element-3d bg-brand-bg-medium scale-110 z-10",
+  start: "bg-brand-green rounded-full shadow-[0_0_15px_rgba(74,222,128,0.8)] scale-125 z-20",
+  end: "bg-brand-purple rounded-full shadow-[0_0_15px_rgba(168,85,247,0.8)] scale-125 z-20",
+  visited: "bg-brand-cyan/40 scale-105 z-10",
+  path: "bg-brand-yellow shadow-[0_0_15px_rgba(250,204,21,0.6)] scale-110 z-20 rounded-sm",
+  frontier: "bg-amber-500/60 scale-105 z-10 animate-pulse",
 };
 
 export default function GridVisualizer({ engine, compact, label }: Props) {
@@ -68,7 +68,7 @@ export default function GridVisualizer({ engine, compact, label }: Props) {
   }, []);
 
   return (
-    <div className="glass-card premium-border flex flex-col flex-1 relative overflow-hidden">
+    <div className="card-3d flex flex-col flex-1 relative overflow-hidden">
       {/* Header */}
       <div className="p-4 border-b border-brand-border flex justify-between items-center bg-black/20">
         <div className="flex items-center gap-2">
@@ -87,7 +87,7 @@ export default function GridVisualizer({ engine, compact, label }: Props) {
               <line x1="9" y1="21" x2="9" y2="9"></line>
             </svg>
           </div>
-          <h2 className="text-sm font-semibold tracking-wider text-white">
+          <h2 className="text-sm font-semibold tracking-wider text-brand-accent">
             {label || "MAP VISUALIZATION"}
           </h2>
         </div>
@@ -130,20 +130,18 @@ export default function GridVisualizer({ engine, compact, label }: Props) {
 
       {/* Grid */}
       <div
-        className="flex-1 overflow-auto flex items-center justify-center p-4 bg-black/40"
+        className="flex-1 overflow-auto flex items-center justify-center p-4 bg-transparent"
         onMouseLeave={handleMouseUp}
         onMouseUp={handleMouseUp}
       >
         <div
-          className="flex flex-col border border-brand-border select-none bg-brand-bg-dark"
+          className="flex flex-col select-none"
           style={{ touchAction: "none" }}
         >
           {grid.map((row, rowIdx) => (
             <div key={rowIdx} className="flex">
               {row.map((node, colIdx) => {
-                const bgColor = NODE_COLORS[node.type] || "bg-brand-bg-dark";
-                const isPath = node.type === "path";
-                const isFrontier = node.type === "frontier";
+                const styleClass = NODE_STYLES[node.type] || NODE_STYLES.empty;
 
                 const cellSize = compact
                   ? "w-4 h-4 sm:w-5 sm:h-5"
@@ -153,14 +151,7 @@ export default function GridVisualizer({ engine, compact, label }: Props) {
                   <div
                     key={`${rowIdx}-${colIdx}`}
                     id={`node-${rowIdx}-${colIdx}`}
-                    className={`${cellSize} border-[0.5px] border-brand-border/30 transition-all duration-200 ${bgColor} ${
-                      isPath ? "scale-90 rounded-sm" : ""
-                    } ${isFrontier ? "animate-pulse" : ""}`}
-                    style={
-                      isFrontier
-                        ? { boxShadow: "0 0 6px rgba(245,158,11,0.4)" }
-                        : undefined
-                    }
+                    className={`${cellSize} transition-all duration-200 ${styleClass}`}
                     onMouseDown={() => handleMouseDown(rowIdx, colIdx)}
                     onMouseEnter={() => handleMouseEnter(rowIdx, colIdx)}
                   />
@@ -233,7 +224,7 @@ function MetricBadge({
       {label && (
         <span className="text-brand-text-secondary uppercase">{label}</span>
       )}
-      <span className="text-white font-semibold">
+      <span className="text-brand-accent font-semibold">
         {typeof value === "number" ? value.toLocaleString() : value}
       </span>
     </div>

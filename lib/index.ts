@@ -15,3 +15,5 @@ export { combSort } from "../algorithms/comb";
 export { radixSort } from "../algorithms/radix";
 export { bogoSort } from "../algorithms/bogo";
 export { stoogeSortWrapper } from "../algorithms/stooge";
+export { timSort } from "../algorithms/timsort";
+export { introSort } from "../algorithms/introsort";

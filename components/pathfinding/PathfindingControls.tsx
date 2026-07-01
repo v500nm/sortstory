@@ -63,7 +63,7 @@ export default function PathfindingControls({
   };
 
   return (
-    <aside className="glass-card premium-border p-6 space-y-5 relative overflow-hidden h-full flex flex-col">
+    <aside className="card-3d p-6 space-y-5 relative overflow-hidden h-full flex flex-col">
       {/* Header */}
       <div className="flex justify-between items-center">
         <div className="flex items-center gap-3">
@@ -178,7 +178,7 @@ export default function PathfindingControls({
             <button
               onClick={() => runMaze(mazeAlgorithms.recursiveBacktracking)}
               disabled={isBusy}
-              className="py-2 px-3 bg-[#111111] hover:bg-[#1a1a1a] border border-brand-border rounded-lg text-[11px] font-semibold tracking-wide transition-colors disabled:opacity-40 disabled:cursor-not-allowed text-white"
+              className="btn-3d py-2 px-3 text-[11px] font-semibold tracking-wide text-white"
             >
               <div className="flex flex-col items-center gap-1">
                 <svg fill="none" height="14" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" width="14" className="text-brand-purple">
@@ -190,7 +190,7 @@ export default function PathfindingControls({
             <button
               onClick={() => runMaze(mazeAlgorithms.primsMaze)}
               disabled={isBusy}
-              className="py-2 px-3 bg-[#111111] hover:bg-[#1a1a1a] border border-brand-border rounded-lg text-[11px] font-semibold tracking-wide transition-colors disabled:opacity-40 disabled:cursor-not-allowed text-white"
+              className="btn-3d py-2 px-3 text-[11px] font-semibold tracking-wide text-white"
             >
               <div className="flex flex-col items-center gap-1">
                 <svg fill="none" height="14" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" width="14" className="text-brand-green">
@@ -224,7 +224,7 @@ export default function PathfindingControls({
           <button
             onClick={() => generateRandomWalls(obstacleDensity)}
             disabled={isBusy}
-            className="w-full py-2 bg-[#111111] hover:bg-[#1a1a1a] border border-brand-border rounded-lg text-xs font-semibold tracking-wide transition-colors disabled:opacity-40 disabled:cursor-not-allowed text-white"
+            className="btn-3d w-full py-2 text-xs font-semibold tracking-wide text-white"
           >
             GENERATE WALLS
           </button>
@@ -274,22 +274,23 @@ export default function PathfindingControls({
         </div>
       </div>
 
-      {/* Primary Action Buttons — Pinned to bottom */}
-      <div className="pt-4 border-t border-brand-border/50 flex-shrink-0">
-        {!isBusy ? (
+      {/* Main Actions */}
+      <div className="space-y-3 pt-4 border-t border-brand-border/50">
+        {!isBusy && !isGenerating ? (
           <button
             onClick={handleRunClick}
-            className="w-full py-3.5 bg-white text-black hover:bg-gray-200 rounded-lg text-sm font-bold tracking-wider transition-colors flex items-center justify-center gap-2"
+            disabled={isBusy}
+            className="btn-3d btn-3d-white w-full font-bold py-3 px-4 flex items-center justify-center gap-2 tracking-wide"
           >
             <svg fill="currentColor" height="14" viewBox="0 0 24 24" width="14">
               <polygon points="5 3 19 12 5 21 5 3" />
             </svg>
-            START VISUALIZATION
+            START FINDING
           </button>
         ) : isGenerating ? (
           <button
             onClick={stop}
-            className="w-full py-3.5 bg-brand-border hover:bg-brand-border-light text-white rounded-lg text-sm font-bold tracking-wider transition-colors flex items-center justify-center gap-2"
+            className="btn-3d btn-3d-rose w-full font-bold py-3 px-4 flex items-center justify-center gap-2 tracking-wide"
           >
             <svg fill="currentColor" height="14" viewBox="0 0 24 24" width="14">
               <rect x="4" y="4" width="16" height="16" rx="2" />
@@ -301,7 +302,7 @@ export default function PathfindingControls({
             {status === "running" ? (
               <button
                 onClick={pause}
-                className="flex-1 py-3.5 bg-[#111111] hover:bg-[#1a1a1a] border border-brand-border rounded-lg text-sm font-bold tracking-wider transition-colors flex items-center justify-center gap-2 text-white"
+                className="btn-3d btn-3d-yellow flex-1 font-bold py-3.5 flex items-center justify-center gap-2"
               >
                 <svg fill="currentColor" height="14" viewBox="0 0 24 24" width="14">
                   <rect x="6" y="4" width="4" height="16" />
@@ -312,7 +313,7 @@ export default function PathfindingControls({
             ) : (
               <button
                 onClick={handleResumeClick}
-                className="flex-1 py-3.5 bg-white text-black hover:bg-gray-200 rounded-lg text-sm font-bold tracking-wider transition-colors flex items-center justify-center gap-2"
+                className="btn-3d btn-3d-white flex-1 font-bold py-3.5 flex items-center justify-center gap-2"
               >
                 <svg fill="currentColor" height="14" viewBox="0 0 24 24" width="14">
                   <polygon points="5 3 19 12 5 21 5 3" />
@@ -322,7 +323,7 @@ export default function PathfindingControls({
             )}
             <button
               onClick={stop}
-              className="flex-1 py-3.5 bg-brand-border hover:bg-brand-border-light text-white rounded-lg text-sm font-bold tracking-wider transition-colors flex items-center justify-center gap-2"
+              className="btn-3d btn-3d-rose flex-1 font-bold py-3.5 flex items-center justify-center gap-2"
             >
               <svg fill="currentColor" height="14" viewBox="0 0 24 24" width="14">
                 <rect x="4" y="4" width="16" height="16" rx="2" />

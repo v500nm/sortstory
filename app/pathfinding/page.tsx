@@ -7,6 +7,7 @@ import PathfindingControls from "@/components/pathfinding/PathfindingControls";
 import PathfindingRace from "@/components/pathfinding/PathfindingRace";
 import { usePathfindingEngine } from "@/hooks/usePathfindingEngine";
 import { ALGORITHM_INFO } from "@/components/pathfinding/PathfindingControls";
+import AlgoDetails from "@/components/AlgoDetails";
 
 export default function PathfindingPage() {
   const engine = usePathfindingEngine();
@@ -60,6 +61,12 @@ export default function PathfindingPage() {
               </div>
 
               <GridVisualizer engine={engine} />
+              
+              {!raceMode && selectedAlgo && (
+                <div className="mt-6 animate-in" style={{ animationDelay: '200ms' }}>
+                  <AlgoDetails selectedAlgo={selectedAlgo} />
+                </div>
+              )}
             </div>
           </section>
         ) : (

@@ -37,6 +37,8 @@ export const algorithms = [
   { value: "radixSort", label: "Radix Sort" },
   { value: "stoogeSortWrapper", label: "Stooge Sort" },
   { value: "bogoSort", label: "Bogo Sort" },
+  { value: "timSort", label: "Tim Sort" },
+  { value: "introSort", label: "Intro Sort" },
 ];
 
 export const algorithmInfo: Record<string, { description: string; time: string; space: string }> = {
@@ -120,6 +122,16 @@ export const algorithmInfo: Record<string, { description: string; time: string; 
     time: "O(∞)",
     space: "O(1)",
   },
+  timSort: {
+    description: "Hybrid sorting algorithm derived from merge sort and insertion sort.",
+    time: "O(n log n)",
+    space: "O(n)",
+  },
+  introSort: {
+    description: "Hybrid sort that begins with quicksort and switches to heapsort to limit recursion depth.",
+    time: "O(n log n)",
+    space: "O(log n)",
+  },
 };
 
 export default function ControlsPanel({
@@ -146,7 +158,7 @@ export default function ControlsPanel({
   const isBusy = isRunning || isPaused;
 
   return (
-    <aside className="glass-card premium-border p-6 space-y-6 relative overflow-hidden h-full">
+    <aside className="card-3d p-6 space-y-6 relative overflow-hidden h-full">
       {/* Header */}
       <div className="flex justify-between items-center">
         <div className="flex items-center gap-3">
@@ -297,7 +309,7 @@ export default function ControlsPanel({
         <button
           onClick={onShuffle}
           disabled={isBusy}
-          className="flex items-center justify-center gap-1.5 bg-brand-bg-dark border border-brand-border rounded-lg py-2.5 px-3 hover:bg-brand-border/70 transition-all text-sm disabled:opacity-40 disabled:cursor-not-allowed"
+          className="btn-3d flex items-center justify-center gap-1.5 py-2.5 px-3 text-sm text-brand-text-secondary hover:text-brand-accent"
         >
           <svg fill="none" height="14" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" width="14" xmlns="http://www.w3.org/2000/svg">
             <polyline points="16 3 21 3 21 8" />
@@ -313,7 +325,7 @@ export default function ControlsPanel({
         {!isBusy ? (
           <button
             onClick={onRun}
-            className="flex items-center justify-center gap-1.5 text-black font-semibold rounded-lg py-2.5 px-3 transition-all bg-brand-yellow hover:bg-yellow-400 hover:shadow-[0_0_20px_rgba(250,204,21,0.3)]"
+            className="btn-3d btn-3d-yellow flex items-center justify-center gap-1.5 font-semibold py-2.5 px-3"
           >
             <svg fill="currentColor" height="14" viewBox="0 0 24 24" width="14" xmlns="http://www.w3.org/2000/svg">
               <polygon points="5 3 19 12 5 21 5 3" />
@@ -323,7 +335,7 @@ export default function ControlsPanel({
         ) : isPaused ? (
           <button
             onClick={onResume}
-            className="flex items-center justify-center gap-1.5 text-black font-semibold rounded-lg py-2.5 px-3 transition-all bg-brand-green hover:bg-green-400 hover:shadow-[0_0_20px_rgba(74,222,128,0.3)]"
+            className="btn-3d btn-3d-yellow flex items-center justify-center gap-1.5 font-semibold py-2.5 px-3"
           >
             <svg fill="currentColor" height="14" viewBox="0 0 24 24" width="14" xmlns="http://www.w3.org/2000/svg">
               <polygon points="5 3 19 12 5 21 5 3" />
@@ -333,7 +345,7 @@ export default function ControlsPanel({
         ) : (
           <button
             onClick={onPause}
-            className="flex items-center justify-center gap-1.5 text-black font-semibold rounded-lg py-2.5 px-3 transition-all bg-amber-400 hover:bg-amber-300"
+            className="btn-3d btn-3d-yellow flex items-center justify-center gap-1.5 font-semibold py-2.5 px-3"
           >
             <svg fill="currentColor" height="14" viewBox="0 0 24 24" width="14" xmlns="http://www.w3.org/2000/svg">
               <rect x="6" y="4" width="4" height="16" />
@@ -347,7 +359,7 @@ export default function ControlsPanel({
         <button
           onClick={onStop}
           disabled={!isBusy}
-          className="flex items-center justify-center gap-1.5 bg-rose-600/20 border border-rose-500/30 text-rose-400 rounded-lg py-2.5 px-3 hover:bg-rose-600/30 transition-all text-sm disabled:opacity-40 disabled:cursor-not-allowed"
+          className="btn-3d btn-3d-rose flex items-center justify-center gap-1.5 py-2.5 px-3 text-sm font-semibold"
         >
           <svg fill="currentColor" height="14" viewBox="0 0 24 24" width="14" xmlns="http://www.w3.org/2000/svg">
             <rect x="4" y="4" width="16" height="16" rx="2" />

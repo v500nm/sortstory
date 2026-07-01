@@ -34,7 +34,7 @@ export default function IntroModal({ close }: IntroModalProps) {
         </button>
 
         <div className="text-center mb-6">
-          <h2 className="text-3xl font-serif-display italic text-white mb-2">
+          <h2 className="text-3xl font-serif-display italic text-brand-accent mb-2">
             Welcome to Sorting Visualizer
           </h2>
           <p className="text-brand-text-secondary">
