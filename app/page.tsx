@@ -11,7 +11,7 @@ export default function Home() {
         <div className="space-y-4">
           <div className="inline-flex items-center gap-2 bg-[#111111] border border-brand-border px-3 py-1 rounded-full text-xs font-medium tracking-wide text-brand-text-secondary">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            NOW SUPPORTING PATHFINDING
+            A* VS DIJKSTRA RACE MODE
           </div>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-tight">
             Master Algorithms.<br />
@@ -136,7 +136,7 @@ export default function Home() {
               </div>
               <h3 className="text-base font-semibold text-white">Interactive Grids</h3>
               <p className="text-xs text-brand-text-secondary leading-relaxed">
-                Create mazes and custom path routes directly by clicking and dragging obstacles, watch the shortest-path algorithm update dynamically.
+                Generate mazes with Recursive Backtracking or Prim&apos;s algorithms, race Dijkstra vs A* side-by-side, and control obstacle density in real-time.
               </p>
             </div>
           </div>
