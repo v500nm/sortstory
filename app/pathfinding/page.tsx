@@ -20,12 +20,12 @@ export default function PathfindingPage() {
     <main className="min-h-screen w-full bg-brand-bg-dark text-brand-text-primary font-sans relative flex flex-col">
       <Header />
 
-      <div className="flex-1 flex flex-col max-w-[1700px] w-full mx-auto px-4 sm:px-6 py-6">
+      <div className="flex-1 flex flex-col max-w-[1500px] w-full mx-auto px-2 sm:px-2 py-2">
         {!raceMode ? (
           /* ═══ Single Algorithm Mode ═══ */
           <section className="flex flex-col lg:flex-row gap-6 flex-1 min-h-0">
             {/* Controls — Left Sidebar */}
-            <div className="w-full lg:w-[320px] xl:w-[350px] flex-shrink-0 flex flex-col animate-in">
+            <div className="w-full lg:w-[300px] xl:w-[340px] flex-shrink-0 flex flex-col animate-in">
               <PathfindingControls
                 engine={engine}
                 selectedAlgo={selectedAlgo}
@@ -38,7 +38,7 @@ export default function PathfindingPage() {
             </div>
 
             {/* Visualization Area — Main Content */}
-            <div className="flex-grow flex flex-col relative min-h-[500px] animate-in space-y-4" style={{ animationDelay: "100ms" }}>
+            <div className="flex-grow flex flex-col max-w-[1000px] relative min-h-[500px] animate-in space-y-4" style={{ animationDelay: "100ms" }}>
               {/* Algorithm Info Bar */}
               <div className="glass-card premium-border px-4 py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
                 <div className="flex items-center gap-2">
