@@ -80,7 +80,7 @@ export default function GridVisualizer({ engine, compact, label }: Props) {
               fill="none"
               stroke="currentColor"
               strokeWidth="2.5"
-              className="text-white"
+              className="text-brand-text-primary"
             >
               <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
               <line x1="3" y1="9" x2="21" y2="9"></line>

@@ -87,8 +87,8 @@ class LinkedList {
       }
     ]
   },
-  reverse: {
-    id: "reverse",
+  reverseList: {
+    id: "reverseList",
     name: "Reverse Linked List",
     description: "Reversing a linked list involves changing the direction of the 'next' pointers so that the tail becomes the new head. This is a classic algorithmic problem often solved in-place to save memory.",
     bestCase: "O(n)",
@@ -122,8 +122,8 @@ class LinkedList {
     },
     examples: []
   },
-  cycle: {
-    id: "cycle",
+  detectCycle: {
+    id: "detectCycle",
     name: "Floyd's Cycle Detection",
     description: "Floyd's Cycle-Finding Algorithm (also known as the 'Tortoise and the Hare' algorithm) uses two pointers moving at different speeds to detect if a linked list contains a loop (cycle).",
     bestCase: "O(1) - Cycle detected immediately",
@@ -151,6 +151,36 @@ class LinkedList {
     if (slow === fast) return true;
   }
   return false;
+}`
+    },
+    examples: []
+  },
+  findMiddle: {
+    id: "findMiddle",
+    name: "Find Middle Node",
+    description: "Finding the middle node of a linked list can be done efficiently using the fast and slow pointer approach (Tortoise and Hare algorithm). The slow pointer moves one step at a time, while the fast pointer moves two steps. When the fast pointer reaches the end, the slow pointer will be at the middle.",
+    bestCase: "O(n)",
+    avgCase: "O(n)",
+    worstCase: "O(n)",
+    timeComplexity: "O(n)",
+    spaceComplexity: "O(1)",
+    useCase: "Used as a subroutine in algorithms like Merge Sort for linked lists, or to check if a linked list is a palindrome.",
+    algorithmFlow: [
+      "Initialize two pointers, 'slow' and 'fast', both pointing to the head.",
+      "Traverse the list: move 'slow' by one step, and 'fast' by two steps.",
+      "Stop when 'fast' becomes null (even length) or 'fast.next' becomes null (odd length).",
+      "The 'slow' pointer is now at the middle node."
+    ],
+    codeSnippets: {
+      javascript: `function findMiddle(head) {
+  let slow = head;
+  let fast = head;
+  
+  while (fast !== null && fast.next !== null) {
+    slow = slow.next;
+    fast = fast.next.next;
+  }
+  return slow;
 }`
     },
     examples: []

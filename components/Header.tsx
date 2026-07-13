@@ -12,6 +12,7 @@ export default function Header() {
   const closeMenu = () => setIsMenuOpen(false);
 
   const navLinks = [
+    { href: "/learn", label: "Learn" },
     { href: "/sort", label: "Sorting" },
     { href: "/search", label: "Searching" },
     { href: "/pathfinding", label: "Pathfinding" },

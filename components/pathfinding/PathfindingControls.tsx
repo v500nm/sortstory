@@ -67,7 +67,7 @@ export default function PathfindingControls({
       {/* Header */}
       <div className="flex justify-between items-center">
         <div className="flex items-center gap-3">
-          <div className="h-8 w-8 rounded-lg bg-[#111111] flex items-center justify-center border border-brand-border">
+          <div className="h-8 w-8 rounded-lg bg-brand-bg-medium flex items-center justify-center border border-brand-border">
             <svg
               fill="none"
               height="16"
@@ -77,7 +77,7 @@ export default function PathfindingControls({
               strokeWidth="2.5"
               viewBox="0 0 24 24"
               width="16"
-              className="text-white"
+              className="text-brand-text-primary"
             >
               <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
             </svg>
@@ -87,7 +87,7 @@ export default function PathfindingControls({
           </h2>
         </div>
         {/* Status indicator */}
-        <div className="flex items-center gap-2 px-2.5 py-1 rounded-md bg-[#0a0a0a] border border-brand-border">
+        <div className="flex items-center gap-2 px-2.5 py-1 rounded-md bg-brand-bg-dark border border-brand-border">
           <span
             className={`w-2 h-2 rounded-full ${
               status === "running"
@@ -127,15 +127,15 @@ export default function PathfindingControls({
             ))}
           </select>
           {/* Algorithm info */}
-          <div className="p-3 bg-[#0a0a0a] border border-brand-border rounded-lg space-y-2">
+          <div className="p-3 bg-brand-bg-dark border border-brand-border rounded-lg space-y-2">
             <p className="text-xs text-brand-text-secondary leading-relaxed">
               {info.description}
             </p>
             <div className="flex items-center gap-2 font-mono text-[10px]">
-              <span className="bg-[#111111] border border-brand-border px-2 py-0.5 rounded text-brand-yellow font-semibold">
+              <span className="bg-brand-bg-medium border border-brand-border px-2 py-0.5 rounded text-brand-yellow font-semibold">
                 {info.time}
               </span>
-              <span className="bg-[#111111] border border-brand-border px-2 py-0.5 rounded text-brand-cyan font-semibold">
+              <span className="bg-brand-bg-medium border border-brand-border px-2 py-0.5 rounded text-brand-cyan font-semibold">
                 {info.space}
               </span>
             </div>
@@ -178,7 +178,7 @@ export default function PathfindingControls({
             <button
               onClick={() => runMaze(mazeAlgorithms.recursiveBacktracking)}
               disabled={isBusy}
-              className="btn-3d py-2 px-3 text-[11px] font-semibold tracking-wide text-white"
+              className="btn-3d py-2 px-3 text-[11px] font-semibold tracking-wide text-brand-text-primary"
             >
               <div className="flex flex-col items-center gap-1">
                 <svg fill="none" height="14" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" width="14" className="text-brand-purple">
@@ -190,7 +190,7 @@ export default function PathfindingControls({
             <button
               onClick={() => runMaze(mazeAlgorithms.primsMaze)}
               disabled={isBusy}
-              className="btn-3d py-2 px-3 text-[11px] font-semibold tracking-wide text-white"
+              className="btn-3d py-2 px-3 text-[11px] font-semibold tracking-wide text-brand-text-primary"
             >
               <div className="flex flex-col items-center gap-1">
                 <svg fill="none" height="14" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" width="14" className="text-brand-green">
@@ -224,7 +224,7 @@ export default function PathfindingControls({
           <button
             onClick={() => generateRandomWalls(obstacleDensity)}
             disabled={isBusy}
-            className="btn-3d w-full py-2 text-xs font-semibold tracking-wide text-white"
+            className="btn-3d w-full py-2 text-xs font-semibold tracking-wide text-brand-text-primary"
           >
             GENERATE WALLS
           </button>
@@ -259,14 +259,14 @@ export default function PathfindingControls({
             <button
               onClick={clearPath}
               disabled={isBusy}
-              className="py-2.5 px-4 bg-[#111111] hover:bg-[#1a1a1a] border border-brand-border rounded-lg text-xs font-semibold tracking-wide transition-colors disabled:opacity-50 text-white"
+              className="py-2.5 px-4 bg-brand-bg-medium hover:bg-brand-bg-light border border-brand-border rounded-lg text-xs font-semibold tracking-wide transition-colors disabled:opacity-50 text-brand-text-primary"
             >
               CLEAR PATH
             </button>
             <button
               onClick={clearBoard}
               disabled={isBusy}
-              className="py-2.5 px-4 bg-[#111111] hover:bg-[#1a1a1a] border border-brand-border rounded-lg text-xs font-semibold tracking-wide transition-colors disabled:opacity-50 text-white"
+              className="py-2.5 px-4 bg-brand-bg-medium hover:bg-brand-bg-light border border-brand-border rounded-lg text-xs font-semibold tracking-wide transition-colors disabled:opacity-50 text-brand-text-primary"
             >
               CLEAR BOARD
             </button>

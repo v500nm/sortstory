@@ -89,12 +89,12 @@ export default function Sort() {
                 return (
                   <div className="glass-card premium-border px-4 py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
                     <div className="flex items-center gap-2">
-                      <span className="font-semibold text-white uppercase tracking-wider text-[10px] bg-[#111111] px-2 py-1 rounded border border-brand-border">INFO</span>
+                      <span className="font-semibold text-brand-text-primary uppercase tracking-wider text-[10px] bg-brand-bg-medium px-2 py-1 rounded border border-brand-border">INFO</span>
                       <p className="text-brand-text-secondary font-medium">{info.description}</p>
                     </div>
                     <div className="flex items-center gap-3 font-mono">
-                      <span className="bg-[#111111] border border-brand-border px-2.5 py-1 rounded text-brand-yellow font-semibold">TIME: {info.time}</span>
-                      <span className="bg-[#111111] border border-brand-border px-2.5 py-1 rounded text-brand-cyan font-semibold">SPACE: {info.space}</span>
+                      <span className="bg-brand-bg-medium border border-brand-border px-2.5 py-1 rounded text-brand-yellow font-semibold">TIME: {info.time}</span>
+                      <span className="bg-brand-bg-medium border border-brand-border px-2.5 py-1 rounded text-brand-cyan font-semibold">SPACE: {info.space}</span>
                     </div>
                   </div>
                 );

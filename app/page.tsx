@@ -22,7 +22,7 @@ export default function Home() {
           
           <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-brand-text-primary leading-[1.1]">
             Master Computer Science <br className="hidden sm:block" />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-cyan via-brand-purple to-brand-rose">Through Visual Execution.</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-brand-cyan">Through Visual Execution.</span>
           </h1>
           
           <p className="text-base sm:text-lg md:text-xl text-brand-text-secondary font-medium leading-relaxed max-w-2xl mx-auto">
@@ -30,6 +30,12 @@ export default function Home() {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+            <Link 
+              href="/learn" 
+              className="w-full sm:w-auto px-8 py-4 bg-brand-purple text-white font-bold rounded-lg hover:opacity-90 transition-opacity tracking-wide shadow-xl"
+            >
+              Start Learning
+            </Link>
             <Link 
               href="/sort" 
               className="w-full sm:w-auto px-8 py-4 bg-brand-text-primary text-brand-bg-dark font-bold rounded-lg hover:opacity-90 transition-opacity tracking-wide shadow-xl"
@@ -55,6 +61,18 @@ export default function Home() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           
+          {/* Learn & Practice */}
+          <Link href="/learn" className="group bg-brand-bg-card border border-brand-purple rounded-2xl p-6 hover:bg-brand-bg-light transition-all flex flex-col gap-4 md:col-span-2 lg:col-span-3 relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-brand-purple/5 rounded-full blur-3xl -z-10" />
+            <div className="w-12 h-12 rounded-xl bg-brand-purple/10 border border-brand-purple/20 flex items-center justify-center text-brand-purple">
+              <svg fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" /></svg>
+            </div>
+            <div>
+              <h3 className="text-xl font-bold text-brand-text-primary mb-2 group-hover:text-brand-purple transition-colors">Learn & Practice</h3>
+              <p className="text-base text-brand-text-secondary leading-relaxed max-w-3xl">Our new dedicated curriculum module. Deep dive into step-by-step algorithms, toggle code between Python, JS, Java, and C++, and test your skills with practice problems.</p>
+            </div>
+          </Link>
+
           {/* Sorting */}
           <Link href="/sort" className="group bg-brand-bg-card border border-brand-border rounded-2xl p-6 hover:border-brand-green/50 hover:bg-brand-bg-light transition-all flex flex-col gap-4">
             <div className="w-12 h-12 rounded-xl bg-brand-green/10 border border-brand-green/20 flex items-center justify-center text-brand-green">

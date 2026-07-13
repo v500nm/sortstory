@@ -24,6 +24,7 @@ export default function Footer() {
 
         {/* Center/Right Side: Links */}
         <div className="flex flex-wrap justify-center gap-6 text-xs font-semibold tracking-wider text-brand-text-secondary uppercase">
+          <Link href="/learn" className="hover:text-brand-accent transition-colors">Learn & Practice</Link>
           <Link href="/privacy" className="hover:text-brand-accent transition-colors">Privacy Policy</Link>
         </div>
 

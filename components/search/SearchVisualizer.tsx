@@ -33,8 +33,8 @@ export default function SearchVisualizer({
       {/* Header & Target */}
       <div className="flex justify-between items-center mb-6">
         <div className="flex items-center gap-3">
-          <div className="h-10 w-10 rounded-lg bg-[#111111] flex items-center justify-center border border-brand-border shadow-inner">
-            <svg fill="none" height="20" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" width="20" className="text-white">
+          <div className="h-10 w-10 rounded-lg bg-brand-bg-medium flex items-center justify-center border border-brand-border shadow-inner">
+            <svg fill="none" height="20" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" width="20" className="text-brand-text-primary">
               <circle cx="11" cy="11" r="8"></circle>
               <line x1="21" x2="16.65" y1="21" y2="16.65"></line>
             </svg>

@@ -93,10 +93,10 @@ export default function TreeVisualizer({ engine }: Props) {
   };
 
   const getNodeColorClass = (status: TreeNode["status"], id: string) => {
-    if (activeNodeIds.includes(id) || status === "active") return "bg-brand-purple text-white shadow-[0_0_20px_rgba(129,140,248,0.5)]";
+    if (activeNodeIds.includes(id) || status === "active") return "bg-brand-purple text-brand-text-primary shadow-[0_0_20px_rgba(129,140,248,0.5)]";
     if (status === "found") return "bg-brand-cyan text-black shadow-[0_0_20px_rgba(34,211,238,0.5)]";
     if (status === "comparing") return "bg-brand-yellow text-black shadow-[0_0_20px_rgba(250,204,21,0.5)]";
-    return "bg-[#111111] text-brand-text-primary shadow-lg border border-brand-border/50";
+    return "bg-brand-bg-medium text-brand-text-primary shadow-lg border border-brand-border/50";
   };
 
   return (

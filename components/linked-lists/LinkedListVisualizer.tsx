@@ -13,8 +13,8 @@ const STATUS_COLORS: Record<NodeStatus, string> = {
   sorted: "bg-brand-green text-black shadow-[0_4px_0_0_#047857,inset_2px_2px_0_0_rgba(255,255,255,0.4)]",
   discarded: "bg-brand-bg-dark text-brand-text-secondary opacity-30",
   pointer1: "bg-brand-yellow text-black shadow-[0_4px_0_0_#b45309,inset_2px_2px_0_0_rgba(255,255,255,0.4)]", // curr / slow
-  pointer2: "bg-brand-purple text-white shadow-[0_4px_0_0_#581c87,inset_2px_2px_0_0_rgba(255,255,255,0.4)]", // prev / fast
-  cycle: "bg-brand-rose text-white shadow-[0_4px_0_0_#be123c,inset_2px_2px_0_0_rgba(255,255,255,0.4)] animate-pulse",
+  pointer2: "bg-brand-purple text-brand-text-primary shadow-[0_4px_0_0_#581c87,inset_2px_2px_0_0_rgba(255,255,255,0.4)]", // prev / fast
+  cycle: "bg-brand-rose text-brand-text-primary shadow-[0_4px_0_0_#be123c,inset_2px_2px_0_0_rgba(255,255,255,0.4)] animate-pulse",
 };
 
 export default function LinkedListVisualizer({ engine }: Props) {
@@ -66,7 +66,7 @@ export default function LinkedListVisualizer({ engine }: Props) {
       <div className="p-4 border-b border-brand-border/50 bg-black/20 flex justify-between items-center z-20">
         <div className="flex items-center gap-2">
           <div className="h-6 w-6 rounded flex items-center justify-center bg-brand-border">
-            <svg fill="none" height="12" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24" width="12" className="text-white">
+            <svg fill="none" height="12" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24" width="12" className="text-brand-text-primary">
               <circle cx="6" cy="12" r="3" />
               <circle cx="18" cy="12" r="3" />
               <line x1="9" x2="15" y1="12" y2="12" />

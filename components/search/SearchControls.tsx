@@ -66,8 +66,8 @@ export default function SearchControls({
       {/* Header */}
       <div className="flex justify-between items-center">
         <div className="flex items-center gap-3">
-          <div className="h-8 w-8 rounded-lg bg-[#111111] flex items-center justify-center border border-brand-border">
-            <svg fill="none" height="16" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" viewBox="0 0 24 24" width="16" className="text-white">
+          <div className="h-8 w-8 rounded-lg bg-brand-bg-medium flex items-center justify-center border border-brand-border">
+            <svg fill="none" height="16" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" viewBox="0 0 24 24" width="16" className="text-brand-text-primary">
               <circle cx="11" cy="11" r="8"></circle>
               <line x1="21" x2="16.65" y1="21" y2="16.65"></line>
             </svg>
@@ -77,7 +77,7 @@ export default function SearchControls({
           </h2>
         </div>
         {/* Status indicator */}
-        <div className="flex items-center gap-2 px-2.5 py-1 rounded-md bg-[#0a0a0a] border border-brand-border">
+        <div className="flex items-center gap-2 px-2.5 py-1 rounded-md bg-brand-bg-dark border border-brand-border">
           <span
             className={`w-2 h-2 rounded-full ${
               status === "running"
@@ -119,15 +119,15 @@ export default function SearchControls({
             ))}
           </select>
           {/* Algorithm info */}
-          <div className="p-3 bg-[#0a0a0a] border border-brand-border rounded-lg space-y-2">
+          <div className="p-3 bg-brand-bg-dark border border-brand-border rounded-lg space-y-2">
             <p className="text-xs text-brand-text-secondary leading-relaxed">
               {info.description}
             </p>
             <div className="flex items-center gap-2 font-mono text-[10px]">
-              <span className="bg-[#111111] border border-brand-border px-2 py-0.5 rounded text-brand-yellow font-semibold">
+              <span className="bg-brand-bg-medium border border-brand-border px-2 py-0.5 rounded text-brand-yellow font-semibold">
                 {info.time}
               </span>
-              <span className="bg-[#111111] border border-brand-border px-2 py-0.5 rounded text-brand-cyan font-semibold">
+              <span className="bg-brand-bg-medium border border-brand-border px-2 py-0.5 rounded text-brand-cyan font-semibold">
                 {info.space}
               </span>
             </div>
@@ -141,7 +141,7 @@ export default function SearchControls({
             <label className="text-xs font-semibold tracking-wide text-brand-text-secondary">
               ARRAY SIZE
             </label>
-            <span className="text-xs font-mono bg-[#111111] px-2 py-0.5 rounded border border-brand-border text-white">
+            <span className="text-xs font-mono bg-brand-bg-medium px-2 py-0.5 rounded border border-brand-border text-brand-text-primary">
               {arraySize}
             </span>
           </div>
@@ -198,7 +198,7 @@ export default function SearchControls({
             <label className="text-xs font-semibold tracking-wide text-brand-text-secondary">
               SPEED
             </label>
-            <span className="text-xs font-mono text-brand-text-primary bg-[#111111] px-2 py-0.5 rounded border border-brand-border">
+            <span className="text-xs font-mono text-brand-text-primary bg-brand-bg-medium px-2 py-0.5 rounded border border-brand-border">
               {speed === 1 ? "Fast" : speed === 2 ? "Normal" : "Slow"}
             </span>
           </div>
@@ -296,7 +296,7 @@ export default function SearchControls({
           <button
             onClick={() => initialize(arraySize, selectedAlgo === "binarySearch" || raceMode)}
             disabled={isBusy}
-            className="btn-3d text-white font-medium py-2.5 px-4 flex items-center justify-center gap-2 text-sm"
+            className="btn-3d text-brand-text-primary font-medium py-2.5 px-4 flex items-center justify-center gap-2 text-sm"
           >
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" height="14" width="14" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M21 2v6h-6"></path>

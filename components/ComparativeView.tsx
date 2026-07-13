@@ -94,8 +94,8 @@ export default function ComparativeView({
       {/* Compare Controls */}
       <div className="flex items-center justify-between glass-card premium-border p-4">
         <div className="flex items-center gap-3">
-          <div className="h-8 w-8 rounded-lg bg-[#111111] border border-brand-border flex items-center justify-center">
-            <svg fill="none" height="16" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" viewBox="0 0 24 24" width="16" className="text-white">
+          <div className="h-8 w-8 rounded-lg bg-brand-bg-medium border border-brand-border flex items-center justify-center">
+            <svg fill="none" height="16" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" viewBox="0 0 24 24" width="16" className="text-brand-text-primary">
               <path d="M18 20V10" /><path d="M12 20V4" /><path d="M6 20v-6" />
             </svg>
           </div>
@@ -113,7 +113,7 @@ export default function ComparativeView({
           <button
             onClick={handleShuffle}
             disabled={isBusy}
-            className="flex items-center gap-1.5 bg-[#171717] border border-brand-border rounded-md py-2 px-4 hover:bg-[#27272a] transition-all text-xs font-semibold tracking-wide disabled:opacity-40 disabled:cursor-not-allowed text-white"
+            className="flex items-center gap-1.5 bg-brand-bg-card border border-brand-border rounded-md py-2 px-4 hover:bg-brand-bg-medium transition-all text-xs font-semibold tracking-wide disabled:opacity-40 disabled:cursor-not-allowed text-brand-text-primary"
           >
             <svg fill="none" height="12" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" viewBox="0 0 24 24" width="12">
               <polyline points="16 3 21 3 21 8" />
@@ -137,7 +137,7 @@ export default function ComparativeView({
           ) : (
             <button
               onClick={handleStop}
-              className="flex items-center gap-1.5 bg-brand-border text-white font-bold tracking-wide rounded-md py-2 px-5 hover:bg-brand-border-light transition-all text-xs"
+              className="flex items-center gap-1.5 bg-brand-border text-brand-text-primary font-bold tracking-wide rounded-md py-2 px-5 hover:bg-brand-border-light transition-all text-xs"
             >
               <svg fill="currentColor" height="12" viewBox="0 0 24 24" width="12">
                 <rect x="4" y="4" width="16" height="16" rx="2" />

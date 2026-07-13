@@ -76,7 +76,7 @@ export default function AutomataControls({ golEngine, kmeansEngine, selectedModu
           <label className="text-xs font-semibold tracking-wide text-brand-text-secondary">
             SIMULATION TYPE
           </label>
-          <div className="grid grid-cols-2 gap-2 bg-[#111111] p-1 rounded-lg border border-brand-border">
+          <div className="grid grid-cols-2 gap-2 bg-brand-bg-medium p-1 rounded-lg border border-brand-border">
             <button 
               onClick={() => { if(!isBusy) setSelectedModule("gol"); }}
               className={`py-1.5 text-xs font-semibold rounded-md transition-all ${isGol ? 'bg-brand-purple text-brand-accent shadow-md' : 'text-brand-text-secondary hover:text-brand-accent'}`}
@@ -101,7 +101,7 @@ export default function AutomataControls({ golEngine, kmeansEngine, selectedModu
             <button
               onClick={handleGenerate}
               disabled={isBusy}
-              className="flex-1 py-2 bg-brand-bg-dark hover:bg-[#1a1a1a] border border-brand-border rounded-lg text-xs font-semibold tracking-wide transition-colors text-white"
+              className="flex-1 py-2 bg-brand-bg-dark hover:bg-brand-bg-light border border-brand-border rounded-lg text-xs font-semibold tracking-wide transition-colors text-brand-text-primary"
             >
               {isGol ? "RANDOMIZE" : "GENERATE POINTS"}
             </button>
@@ -123,7 +123,7 @@ export default function AutomataControls({ golEngine, kmeansEngine, selectedModu
             <label className="text-xs font-semibold tracking-wide text-brand-text-secondary">
               SPEED
             </label>
-            <span className="text-xs font-mono text-brand-text-primary bg-[#111111] px-2 py-0.5 rounded border border-brand-border">
+            <span className="text-xs font-mono text-brand-text-primary bg-brand-bg-medium px-2 py-0.5 rounded border border-brand-border">
               {(isGol ? golSpeed : kmSpeed) === 1 ? "Slow" : (isGol ? golSpeed : kmSpeed) === 2 ? "Normal" : "Fast"}
             </span>
           </div>

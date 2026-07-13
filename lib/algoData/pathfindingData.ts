@@ -55,8 +55,8 @@ const shortestTimes = dijkstra(routerNetwork, "RouterA");`
       }
     ]
   },
-  astar: {
-    id: "astar",
+  aStar: {
+    id: "aStar",
     name: "A* Search",
     description: "A* is a 'smart' pathfinding algorithm. It is an extension of Dijkstra's algorithm that uses a heuristic function to guide its search towards the target. By prioritizing nodes that seem closer to the goal (using distance estimates like Manhattan or Euclidean distance), A* explores significantly fewer nodes than Dijkstra while still guaranteeing the shortest path.",
     bestCase: "O(E) - When the heuristic perfectly guides to the target without exploring wrong paths",
