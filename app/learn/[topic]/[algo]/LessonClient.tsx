@@ -27,30 +27,30 @@ export default function LessonClient({ lessons, topic, algo }: Props) {
   ];
 
   return (
-    <div className="flex w-full h-full">
+    <div className="flex flex-col md:flex-row w-full h-full overflow-hidden">
       {/* Sidebar Navigation */}
-      <aside className="w-72 bg-brand-bg-medium border-r border-brand-border flex flex-col overflow-y-auto shrink-0">
-        <div className="p-6 border-b border-brand-border sticky top-0 bg-brand-bg-medium z-10">
-          <h2 className="text-xs font-bold tracking-wider text-brand-text-secondary uppercase mb-1">
+      <aside className="w-full md:w-72 bg-brand-bg-medium border-b md:border-b-0 md:border-r border-brand-border flex flex-col shrink-0">
+        <div className="p-3 md:p-6 border-b border-brand-border bg-brand-bg-medium z-10">
+          <h2 className="text-[10px] md:text-xs font-bold tracking-wider text-brand-text-secondary uppercase mb-0.5 md:mb-1">
             {topic.replace('-', ' ')}
           </h2>
-          <h3 className="text-lg font-black text-brand-text-primary capitalize">
+          <h3 className="text-sm md:text-lg font-black text-brand-text-primary capitalize">
             {algo.replace('-', ' ')}
           </h3>
         </div>
 
-        <nav className="p-4 space-y-1">
+        <nav className="p-2 md:p-4 flex flex-row md:flex-col overflow-x-auto md:overflow-y-auto space-x-2 md:space-x-0 md:space-y-1 custom-scrollbar">
           {lessons.map(lesson => (
             <button
               key={lesson.id}
               onClick={() => setActiveLessonId(lesson.id)}
-              className={`w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-all ${
+              className={`shrink-0 md:w-full text-left px-3 py-2 md:px-4 md:py-3 rounded-lg text-xs md:text-sm font-medium transition-all ${
                 activeLessonId === lesson.id
                   ? 'bg-brand-purple/10 text-brand-purple border border-brand-purple/30'
                   : 'text-brand-text-secondary hover:bg-brand-bg-light hover:text-brand-text-primary border border-transparent'
               }`}
             >
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2 md:gap-3">
                 <span className={`w-1.5 h-1.5 rounded-full ${activeLessonId === lesson.id ? 'bg-brand-purple' : 'bg-brand-border-light'}`} />
                 {lesson.title}
               </div>
