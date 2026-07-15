@@ -14,6 +14,7 @@ export interface AlgorithmDetailsData {
     python?: string;
     java?: string;
     cpp?: string;
+    c?: string;
   };
   examples: {
     title: string;

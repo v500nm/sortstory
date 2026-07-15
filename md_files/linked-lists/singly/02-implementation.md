@@ -1,43 +1,44 @@
 ---
-title: Implementing Singly
+title: Implementing Singly Linked List
 order: 2
 type: lesson
 ---
 
 # Multi-Language Implementation
 
-Below you can toggle the implementation of **Singly** in various programming languages.
+Below you can find implementations of **Singly Linked List** in various programming languages.
 
-## Code
-
+## JavaScript
 ```javascript
-// JavaScript implementation of Singly
-function executeAlgorithm() {
-  console.log("Running Singly...");
+// JavaScript implementation
+function solve() {
+  console.log("Running Singly Linked List...");
 }
 ```
 
+## Python
 ```python
-# Python implementation of Singly
-def execute_algorithm():
-    print("Running Singly...")
+# Python implementation
+def solve():
+    print("Running Singly Linked List...")
 ```
 
+## Java
 ```java
-// Java implementation of Singly
-public class Algorithm {
-    public static void executeAlgorithm() {
-        System.out.println("Running Singly...");
+// Java implementation
+public class Solver {
+    public static void solve() {
+        System.out.println("Running Singly Linked List...");
     }
 }
 ```
 
+## C++
 ```cpp
-// C++ implementation of Singly
+// C++ implementation
 #include <iostream>
 using namespace std;
-
-void executeAlgorithm() {
-    cout << "Running Singly..." << endl;
+void solve() {
+    cout << "Running Singly Linked List..." << endl;
 }
 ```

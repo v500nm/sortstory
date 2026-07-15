@@ -36,6 +36,77 @@ export const graphData: Record<string, AlgorithmDetailsData> = {
       }
     }
   }
+}`,
+      python: `from collections import deque
+
+def bfs(graph, start):
+    visited = set([start])
+    queue = deque([start])
+    while queue:
+        node = queue.popleft()
+        print(node)
+        for neighbor in graph[node]:
+            if neighbor not in visited:
+                visited.add(neighbor)
+                queue.append(neighbor)`,
+      java: `import java.util.*;
+
+void bfs(Map<Integer, List<Integer>> graph, int start) {
+    Set<Integer> visited = new HashSet<>();
+    Queue<Integer> queue = new LinkedList<>();
+    
+    visited.add(start);
+    queue.add(start);
+    
+    while (!queue.isEmpty()) {
+        int node = queue.poll();
+        System.out.print(node + " ");
+        for (int neighbor : graph.getOrDefault(node, new ArrayList<>())) {
+            if (!visited.contains(neighbor)) {
+                visited.add(neighbor);
+                queue.add(neighbor);
+            }
+        }
+    }
+}`,
+      cpp: `#include <queue>
+#include <vector>
+#include <unordered_set>
+
+void bfs(vector<vector<int>>& adj, int start) {
+    unordered_set<int> visited;
+    queue<int> q;
+    
+    visited.insert(start);
+    q.push(start);
+    
+    while (!q.empty()) {
+        int node = q.front();
+        q.pop();
+        cout << node << " ";
+        for (int neighbor : adj[node]) {
+            if (visited.find(neighbor) == visited.end()) {
+                visited.insert(neighbor);
+                q.push(neighbor);
+            }
+        }
+    }
+}`,
+      c: `void bfs(int adj[MAX][MAX], int V, int start) {
+    int visited[MAX] = {0};
+    int queue[MAX], front = 0, rear = 0;
+    visited[start] = 1;
+    queue[rear++] = start;
+    while (front < rear) {
+        int curr = queue[front++];
+        printf("%d ", curr);
+        for (int i = 0; i < V; i++) {
+            if (adj[curr][i] && !visited[i]) {
+                visited[i] = 1;
+                queue[rear++] = i;
+            }
+        }
+    }
 }`
     },
     examples: []
@@ -67,6 +138,50 @@ export const graphData: Record<string, AlgorithmDetailsData> = {
       dfs(graph, neighbor, visited);
     }
   }
+}`,
+      python: `def dfs(graph, start, visited=None):
+    if visited is None:
+        visited = set()
+    visited.add(start)
+    print(start)
+    for neighbor in graph[start]:
+        if neighbor not in visited:
+            dfs(graph, neighbor, visited)`,
+      java: `import java.util.*;
+
+void dfs(Map<Integer, List<Integer>> graph, int start, Set<Integer> visited) {
+    visited.add(start);
+    System.out.print(start + " ");
+    for (int neighbor : graph.getOrDefault(start, new ArrayList<>())) {
+        if (!visited.contains(neighbor)) {
+            dfs(graph, neighbor, visited);
+        }
+    }
+}`,
+      cpp: `#include <vector>
+#include <unordered_set>
+
+void dfs(vector<vector<int>>& adj, int curr, unordered_set<int>& visited) {
+    visited.insert(curr);
+    cout << curr << " ";
+    for (int neighbor : adj[curr]) {
+        if (visited.find(neighbor) == visited.end()) {
+            dfs(adj, neighbor, visited);
+        }
+    }
+}`,
+      c: `void dfsRec(int adj[MAX][MAX], int V, int curr, int visited[]) {
+    visited[curr] = 1;
+    printf("%d ", curr);
+    for (int i = 0; i < V; i++) {
+        if (adj[curr][i] && !visited[i]) {
+            dfsRec(adj, V, i, visited);
+        }
+    }
+}
+void dfs(int adj[MAX][MAX], int V, int start) {
+    int visited[MAX] = {0};
+    dfsRec(adj, V, start, visited);
 }`
     },
     examples: []

@@ -1,43 +1,44 @@
 ---
-title: Implementing In Order
+title: Implementing In-Order Traversal
 order: 2
 type: lesson
 ---
 
 # Multi-Language Implementation
 
-Below you can toggle the implementation of **In Order** in various programming languages.
+Below you can find implementations of **In-Order Traversal** in various programming languages.
 
-## Code
-
+## JavaScript
 ```javascript
-// JavaScript implementation of In Order
-function executeAlgorithm() {
-  console.log("Running In Order...");
+// JavaScript implementation
+function solve() {
+  console.log("Running In-Order Traversal...");
 }
 ```
 
+## Python
 ```python
-# Python implementation of In Order
-def execute_algorithm():
-    print("Running In Order...")
+# Python implementation
+def solve():
+    print("Running In-Order Traversal...")
 ```
 
+## Java
 ```java
-// Java implementation of In Order
-public class Algorithm {
-    public static void executeAlgorithm() {
-        System.out.println("Running In Order...");
+// Java implementation
+public class Solver {
+    public static void solve() {
+        System.out.println("Running In-Order Traversal...");
     }
 }
 ```
 
+## C++
 ```cpp
-// C++ implementation of In Order
+// C++ implementation
 #include <iostream>
 using namespace std;
-
-void executeAlgorithm() {
-    cout << "Running In Order..." << endl;
+void solve() {
+    cout << "Running In-Order Traversal..." << endl;
 }
 ```

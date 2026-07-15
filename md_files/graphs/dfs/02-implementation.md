@@ -1,43 +1,44 @@
 ---
-title: Implementing DFS
+title: Implementing Depth-First Search (DFS)
 order: 2
 type: lesson
 ---
 
 # Multi-Language Implementation
 
-Below you can toggle the implementation of **DFS** in various programming languages.
+Below you can find implementations of **Depth-First Search (DFS)** in various programming languages.
 
-## Code
-
+## JavaScript
 ```javascript
-// JavaScript implementation of DFS
-function executeAlgorithm() {
-  console.log("Running DFS...");
+// JavaScript implementation
+function solve() {
+  console.log("Running Depth-First Search (DFS)...");
 }
 ```
 
+## Python
 ```python
-# Python implementation of DFS
-def execute_algorithm():
-    print("Running DFS...")
+# Python implementation
+def solve():
+    print("Running Depth-First Search (DFS)...")
 ```
 
+## Java
 ```java
-// Java implementation of DFS
-public class Algorithm {
-    public static void executeAlgorithm() {
-        System.out.println("Running DFS...");
+// Java implementation
+public class Solver {
+    public static void solve() {
+        System.out.println("Running Depth-First Search (DFS)...");
     }
 }
 ```
 
+## C++
 ```cpp
-// C++ implementation of DFS
+// C++ implementation
 #include <iostream>
 using namespace std;
-
-void executeAlgorithm() {
-    cout << "Running DFS..." << endl;
+void solve() {
+    cout << "Running Depth-First Search (DFS)..." << endl;
 }
 ```

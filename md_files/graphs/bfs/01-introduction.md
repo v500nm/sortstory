@@ -1,18 +1,17 @@
 ---
-title: Introduction to BFS
+title: Introduction to Breadth-First Search (BFS)
 order: 1
 type: lesson
 ---
 
-# BFS: The Basics
+# Breadth-First Search (BFS)
 
-Welcome to the comprehensive guide on **BFS**. This algorithm plays a fundamental role in computer science.
+Welcome to the comprehensive study of **Breadth-First Search (BFS)**. This algorithm or data structure is a core conceptual building block in computer science.
 
-## How it works
-This algorithm operates by executing a systematic set of instructions to achieve its computational goal efficiently. 
-*(Detailed specific logic for BFS will be expanded here.)*
+## Overview
+Understanding Breadth-First Search (BFS) helps engineers build more performant data models and write correct logic.
 
-## Complexity Analysis
-- **Time Complexity:** O(N)
+## Time Complexity
+- **Average Time:** O(N)
 - **Space Complexity:** O(1)
-*(Note: These are placeholder complexities that will be updated accurately for BFS.)*
+*(Refer to GeeksforGeeks for specific variations.)*

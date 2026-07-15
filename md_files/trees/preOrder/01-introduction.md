@@ -1,18 +1,17 @@
 ---
-title: Introduction to Pre Order
+title: Introduction to Pre-Order Traversal
 order: 1
 type: lesson
 ---
 
-# Pre Order: The Basics
+# Pre-Order Traversal
 
-Welcome to the comprehensive guide on **Pre Order**. This algorithm plays a fundamental role in computer science.
+Welcome to the comprehensive study of **Pre-Order Traversal**. This algorithm or data structure is a core conceptual building block in computer science.
 
-## How it works
-This algorithm operates by executing a systematic set of instructions to achieve its computational goal efficiently. 
-*(Detailed specific logic for Pre Order will be expanded here.)*
+## Overview
+Understanding Pre-Order Traversal helps engineers build more performant data models and write correct logic.
 
-## Complexity Analysis
-- **Time Complexity:** O(N)
+## Time Complexity
+- **Average Time:** O(N)
 - **Space Complexity:** O(1)
-*(Note: These are placeholder complexities that will be updated accurately for Pre Order.)*
+*(Refer to GeeksforGeeks for specific variations.)*

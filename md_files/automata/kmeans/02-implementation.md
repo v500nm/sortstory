@@ -1,43 +1,44 @@
 ---
-title: Implementing K-Means
+title: Implementing K-Means Clustering
 order: 2
 type: lesson
 ---
 
 # Multi-Language Implementation
 
-Below you can toggle the implementation of **K-Means** in various programming languages.
+Below you can find implementations of **K-Means Clustering** in various programming languages.
 
-## Code
-
+## JavaScript
 ```javascript
-// JavaScript implementation of K-Means
-function executeAlgorithm() {
-  console.log("Running K-Means...");
+// JavaScript implementation
+function solve() {
+  console.log("Running K-Means Clustering...");
 }
 ```
 
+## Python
 ```python
-# Python implementation of K-Means
-def execute_algorithm():
-    print("Running K-Means...")
+# Python implementation
+def solve():
+    print("Running K-Means Clustering...")
 ```
 
+## Java
 ```java
-// Java implementation of K-Means
-public class Algorithm {
-    public static void executeAlgorithm() {
-        System.out.println("Running K-Means...");
+// Java implementation
+public class Solver {
+    public static void solve() {
+        System.out.println("Running K-Means Clustering...");
     }
 }
 ```
 
+## C++
 ```cpp
-// C++ implementation of K-Means
+// C++ implementation
 #include <iostream>
 using namespace std;
-
-void executeAlgorithm() {
-    cout << "Running K-Means..." << endl;
+void solve() {
+    cout << "Running K-Means Clustering..." << endl;
 }
 ```

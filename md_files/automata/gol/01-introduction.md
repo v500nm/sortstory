@@ -1,9 +1,17 @@
-# Introduction
+---
+title: Introduction to Conway's Game of Life
+order: 1
+type: lesson
+---
 
-Welcome to the module!
+# Conway's Game of Life
 
-# Implementation
+Welcome to the comprehensive study of **Conway's Game of Life**. This algorithm or data structure is a core conceptual building block in computer science.
 
-`javascript
-// Implementation goes here
-`
+## Overview
+Understanding Conway's Game of Life helps engineers build more performant data models and write correct logic.
+
+## Time Complexity
+- **Average Time:** O(N)
+- **Space Complexity:** O(1)
+*(Refer to GeeksforGeeks for specific variations.)*

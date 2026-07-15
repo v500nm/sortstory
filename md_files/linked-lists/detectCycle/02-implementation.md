@@ -1,43 +1,44 @@
 ---
-title: Implementing Detect Cycle
+title: Implementing Detect Cycle (Floyd's algorithm)
 order: 2
 type: lesson
 ---
 
 # Multi-Language Implementation
 
-Below you can toggle the implementation of **Detect Cycle** in various programming languages.
+Below you can find implementations of **Detect Cycle (Floyd's algorithm)** in various programming languages.
 
-## Code
-
+## JavaScript
 ```javascript
-// JavaScript implementation of Detect Cycle
-function executeAlgorithm() {
-  console.log("Running Detect Cycle...");
+// JavaScript implementation
+function solve() {
+  console.log("Running Detect Cycle (Floyd's algorithm)...");
 }
 ```
 
+## Python
 ```python
-# Python implementation of Detect Cycle
-def execute_algorithm():
-    print("Running Detect Cycle...")
+# Python implementation
+def solve():
+    print("Running Detect Cycle (Floyd's algorithm)...")
 ```
 
+## Java
 ```java
-// Java implementation of Detect Cycle
-public class Algorithm {
-    public static void executeAlgorithm() {
-        System.out.println("Running Detect Cycle...");
+// Java implementation
+public class Solver {
+    public static void solve() {
+        System.out.println("Running Detect Cycle (Floyd's algorithm)...");
     }
 }
 ```
 
+## C++
 ```cpp
-// C++ implementation of Detect Cycle
+// C++ implementation
 #include <iostream>
 using namespace std;
-
-void executeAlgorithm() {
-    cout << "Running Detect Cycle..." << endl;
+void solve() {
+    cout << "Running Detect Cycle (Floyd's algorithm)..." << endl;
 }
 ```

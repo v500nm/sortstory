@@ -4,15 +4,27 @@ order: 1
 type: lesson
 ---
 
-# Shell Sort: The Basics
+# Shell Sort (GeeksforGeeks Reference)
 
-Welcome to the comprehensive guide on **Shell Sort**. This algorithm plays a fundamental role in computer science.
+Shell Sort is an in-place comparison sort. It is a generalization of insertion sort that allows the exchange of far apart elements.
 
-## How it works
-This algorithm operates by executing a systematic set of instructions to achieve its computational goal efficiently. 
-*(Detailed specific logic for Shell Sort will be expanded here.)*
+## Algorithmic Steps
+Here is the step-by-step logic tracing **Shell Sort**:
+- Initialize gap value h = n / 2.
+- Perform a gapped insertion sort for this gap size.
+- Reduce the gap size (e.g., divide by 2).
+- Repeat steps 2-3 until gap is 0.
 
-## Complexity Analysis
-- **Time Complexity:** O(N)
-- **Space Complexity:** O(1)
-*(Note: These are placeholder complexities that will be updated accurately for Shell Sort.)*
+## Complexity Breakdown
+The computational complexity profile of **Shell Sort** is as follows:
+
+| Case | Complexity |
+| :--- | :--- |
+| **Best Case Time** | `O(N log N)` |
+| **Average Case Time** | `O(N^(1.5))` |
+| **Worst Case Time** | `O(N²)` |
+| **Space Complexity** | `O(1)` |
+
+## Practical Applications
+- Found in standard systems architecture and embedded systems.
+- Utilized in various software database engines for index generation.

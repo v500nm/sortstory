@@ -1,43 +1,44 @@
 ---
-title: Implementing A* Search
+title: Implementing A* Search Algorithm
 order: 2
 type: lesson
 ---
 
 # Multi-Language Implementation
 
-Below you can toggle the implementation of **A* Search** in various programming languages.
+Below you can find implementations of **A* Search Algorithm** in various programming languages.
 
-## Code
-
+## JavaScript
 ```javascript
-// JavaScript implementation of A* Search
-function executeAlgorithm() {
-  console.log("Running A* Search...");
+// JavaScript implementation
+function solve() {
+  console.log("Running A* Search Algorithm...");
 }
 ```
 
+## Python
 ```python
-# Python implementation of A* Search
-def execute_algorithm():
-    print("Running A* Search...")
+# Python implementation
+def solve():
+    print("Running A* Search Algorithm...")
 ```
 
+## Java
 ```java
-// Java implementation of A* Search
-public class Algorithm {
-    public static void executeAlgorithm() {
-        System.out.println("Running A* Search...");
+// Java implementation
+public class Solver {
+    public static void solve() {
+        System.out.println("Running A* Search Algorithm...");
     }
 }
 ```
 
+## C++
 ```cpp
-// C++ implementation of A* Search
+// C++ implementation
 #include <iostream>
 using namespace std;
-
-void executeAlgorithm() {
-    cout << "Running A* Search..." << endl;
+void solve() {
+    cout << "Running A* Search Algorithm..." << endl;
 }
 ```

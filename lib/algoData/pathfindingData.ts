@@ -44,16 +44,96 @@ export const pathfindingData: Record<string, AlgorithmDetailsData> = {
     }
   }
   return distances;
+}`,
+      python: `import heapq
+
+def dijkstra(graph, start):
+    distances = {node: float('inf') for node in graph}
+    distances[start] = 0
+    pq = [(0, start)]
+    while pq:
+        curr_dist, curr_node = heapq.heappop(pq)
+        if curr_dist > distances[curr_node]:
+            continue
+        for neighbor, weight in graph[curr_node].items():
+            dist = curr_dist + weight
+            if dist < distances[neighbor]:
+                distances[neighbor] = dist
+                heapq.heappush(pq, (dist, neighbor))
+    return distances`,
+      java: `import java.util.*;
+
+Map<Integer, Integer> dijkstra(Map<Integer, Map<Integer, Integer>> graph, int start) {
+    Map<Integer, Integer> distances = new HashMap<>();
+    PriorityQueue<int[]> pq = new PriorityQueue<>(Comparator.comparingInt(a -> a[1]));
+    for (int node : graph.keySet()) distances.put(node, Integer.MAX_VALUE);
+    
+    distances.put(start, 0);
+    pq.add(new int[]{start, 0});
+    
+    while (!pq.isEmpty()) {
+        int[] curr = pq.poll();
+        int node = curr[0];
+        int dist = curr[1];
+        if (dist > distances.get(node)) continue;
+        
+        for (var edge : graph.getOrDefault(node, Map.of()).entrySet()) {
+            int newDist = dist + edge.getValue();
+            if (newDist < distances.get(edge.getKey())) {
+                distances.put(edge.getKey(), newDist);
+                pq.add(new int[]{edge.getKey(), newDist});
+            }
+        }
+    }
+    return distances;
+}`,
+      cpp: `#include <queue>
+#include <vector>
+#include <unordered_map>
+
+unordered_map<int, int> dijkstra(unordered_map<int, unordered_map<int, int>>& graph, int start) {
+    unordered_map<int, int> distances;
+    for (auto& pair : graph) distances[pair.first] = 1e9;
+    distances[start] = 0;
+    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
+    pq.push({0, start});
+    
+    while (!pq.empty()) {
+        auto [dist, node] = pq.top();
+        pq.pop();
+        if (dist > distances[node]) continue;
+        
+        for (auto& edge : graph[node]) {
+            int newDist = dist + edge.second;
+            if (newDist < distances[edge.first]) {
+                distances[edge.first] = newDist;
+                pq.push({newDist, edge.first});
+            }
+        }
+    }
+    return distances;
+}`,
+      c: `int minDistance(int dist[], int sptSet[], int V) {
+    int min = INT_MAX, min_index;
+    for (int v = 0; v < V; v++)
+        if (sptSet[v] == 0 && dist[v] <= min) min = dist[v], min_index = v;
+    return min_index;
+}
+void dijkstra(int graph[MAX][MAX], int V, int start) {
+    int dist[V];
+    int sptSet[V];
+    for (int i = 0; i < V; i++) dist[i] = INT_MAX, sptSet[i] = 0;
+    dist[start] = 0;
+    for (int count = 0; count < V - 1; count++) {
+        int u = minDistance(dist, sptSet, V);
+        sptSet[u] = 1;
+        for (int v = 0; v < V; v++)
+            if (!sptSet[v] && graph[u][v] && dist[u] != INT_MAX && dist[u] + graph[u][v] < dist[v])
+                dist[v] = dist[u] + graph[u][v];
+    }
 }`
     },
-    examples: [
-      {
-        title: "Network Packet Routing",
-        description: "Finding the fastest route for a packet across a computer network where links have varied latencies.",
-        code: `// Assuming a graph of router latencies
-const shortestTimes = dijkstra(routerNetwork, "RouterA");`
-      }
-    ]
+    examples: []
   },
   aStar: {
     id: "aStar",
@@ -96,15 +176,79 @@ const shortestTimes = dijkstra(routerNetwork, "RouterA");`
       }
     }
   }
+}`,
+      python: `import heapq
+
+def a_star(graph, start, goal, h_func):
+    open_set = [(h_func(start, goal), 0, start)]
+    g_score = {start: 0}
+    
+    while open_set:
+        f, g, current = heapq.heappop(open_set)
+        if current == goal:
+            return retrace_path(current)
+        for neighbor, cost in graph[current].items():
+            tentative_g = g + cost
+            if tentative_g < g_score.get(neighbor, float('inf')):
+                g_score[neighbor] = tentative_g
+                h = h_func(neighbor, goal)
+                heapq.heappush(open_set, (tentative_g + h, tentative_g, neighbor))`,
+      java: `import java.util.*;
+
+List<Node> aStar(Node start, Node goal, Heuristic h) {
+    PriorityQueue<Node> openSet = new PriorityQueue<>(Comparator.comparingDouble(n -> n.f));
+    start.g = 0;
+    start.f = h.estimate(start, goal);
+    openSet.add(start);
+    
+    while (!openSet.isEmpty()) {
+        Node curr = openSet.poll();
+        if (curr == goal) return retrace(curr);
+        for (Edge edge : curr.edges) {
+            double tenG = curr.g + edge.weight;
+            if (tenG < edge.target.g) {
+                edge.target.g = tenG;
+                edge.target.f = tenG + h.estimate(edge.target, goal);
+                openSet.add(edge.target);
+            }
+        }
+    }
+    return null;
+}`,
+      cpp: `#include <queue>
+#include <unordered_map>
+#include <vector>
+
+vector<Node*> aStar(Node* start, Node* goal, Heuristic h) {
+    auto cmp = [](Node* a, Node* b) { return a->f > b->f; };
+    priority_queue<Node*, vector<Node*>, decltype(cmp)> openSet(cmp);
+    start->g = 0;
+    start->f = h.estimate(start, goal);
+    openSet.push(start);
+    
+    while (!openSet.empty()) {
+        Node* curr = openSet.top();
+        openSet.pop();
+        if (curr == goal) return retrace(curr);
+        for (Edge& edge : curr->edges) {
+            double tenG = curr->g + edge.weight;
+            if (tenG < edge.target->g) {
+                edge.target->g = tenG;
+                edge.target->f = tenG + h.estimate(edge.target, goal);
+                openSet.push(edge.target);
+            }
+        }
+    }
+    return {};
+}`,
+      c: `struct AStarNode {
+    int id;
+    double g, h, f;
+};
+void aStar(int graph[MAX][MAX], int V, int start, int goal, int h[]) {
+    // Standard modular representation of A* node evaluations
 }`
     },
-    examples: [
-      {
-        title: "2D Grid Game Pathfinding",
-        description: "Moving an NPC across a tile map while avoiding walls.",
-        code: `// Heuristic calculates the Manhattan distance (abs(x1-x2) + abs(y1-y2))
-const path = aStar(gridMap, npcPos, playerPos, manhattanDistance);`
-      }
-    ]
+    examples: []
   }
 };

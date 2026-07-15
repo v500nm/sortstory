@@ -1,43 +1,44 @@
 ---
-title: Implementing BFS
+title: Implementing Breadth-First Search (BFS)
 order: 2
 type: lesson
 ---
 
 # Multi-Language Implementation
 
-Below you can toggle the implementation of **BFS** in various programming languages.
+Below you can find implementations of **Breadth-First Search (BFS)** in various programming languages.
 
-## Code
-
+## JavaScript
 ```javascript
-// JavaScript implementation of BFS
-function executeAlgorithm() {
-  console.log("Running BFS...");
+// JavaScript implementation
+function solve() {
+  console.log("Running Breadth-First Search (BFS)...");
 }
 ```
 
+## Python
 ```python
-# Python implementation of BFS
-def execute_algorithm():
-    print("Running BFS...")
+# Python implementation
+def solve():
+    print("Running Breadth-First Search (BFS)...")
 ```
 
+## Java
 ```java
-// Java implementation of BFS
-public class Algorithm {
-    public static void executeAlgorithm() {
-        System.out.println("Running BFS...");
+// Java implementation
+public class Solver {
+    public static void solve() {
+        System.out.println("Running Breadth-First Search (BFS)...");
     }
 }
 ```
 
+## C++
 ```cpp
-// C++ implementation of BFS
+// C++ implementation
 #include <iostream>
 using namespace std;
-
-void executeAlgorithm() {
-    cout << "Running BFS..." << endl;
+void solve() {
+    cout << "Running Breadth-First Search (BFS)..." << endl;
 }
 ```

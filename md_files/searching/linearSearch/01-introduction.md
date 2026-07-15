@@ -4,15 +4,29 @@ order: 1
 type: lesson
 ---
 
-# Linear Search: The Basics
+# Linear Search (GeeksforGeeks Reference)
 
-Welcome to the comprehensive guide on **Linear Search**. This algorithm plays a fundamental role in computer science.
+Linear Search sequentially checks each element in the collection until a match is found or the end is reached. It does not require sorted data.
 
-## How it works
-This algorithm operates by executing a systematic set of instructions to achieve its computational goal efficiently. 
-*(Detailed specific logic for Linear Search will be expanded here.)*
+## Algorithmic Steps
+Here is the step-by-step logic tracing **Linear Search**:
+- Start from the leftmost element of the array.
+- Compare the search target value with the current element.
+- If target matches, return the current index.
+- If target does not match, move to the next element.
+- Repeat steps 2-4 until target is found or array bounds are exceeded.
+- If the end of array is reached without finding target, return -1.
 
-## Complexity Analysis
-- **Time Complexity:** O(N)
-- **Space Complexity:** O(1)
-*(Note: These are placeholder complexities that will be updated accurately for Linear Search.)*
+## Complexity Breakdown
+The computational complexity profile of **Linear Search** is as follows:
+
+| Case | Complexity |
+| :--- | :--- |
+| **Best Case Time** | `O(1)` |
+| **Average Case Time** | `O(N)` |
+| **Worst Case Time** | `O(N)` |
+| **Space Complexity** | `O(1)` |
+
+## Practical Applications
+- Found in standard systems architecture and embedded systems.
+- Utilized in various software database engines for index generation.

@@ -4,15 +4,30 @@ order: 1
 type: lesson
 ---
 
-# Binary Search: The Basics
+# Binary Search (GeeksforGeeks Reference)
 
-Welcome to the comprehensive guide on **Binary Search**. This algorithm plays a fundamental role in computer science.
+Binary Search is a highly efficient search algorithm that works by repeatedly dividing the search interval in half. The array must be sorted.
 
-## How it works
-This algorithm operates by executing a systematic set of instructions to achieve its computational goal efficiently. 
-*(Detailed specific logic for Binary Search will be expanded here.)*
+## Algorithmic Steps
+Here is the step-by-step logic tracing **Binary Search**:
+- Ensure the array is sorted.
+- Calculate the middle index: mid = left + (right - left) / 2.
+- Compare target with middle element.
+- If target equals middle element, return mid.
+- If target is smaller, adjust right pointer to mid - 1.
+- If target is larger, adjust left pointer to mid + 1.
+- Repeat steps 2-6 until pointers cross. Return -1 if target is not found.
 
-## Complexity Analysis
-- **Time Complexity:** O(N)
-- **Space Complexity:** O(1)
-*(Note: These are placeholder complexities that will be updated accurately for Binary Search.)*
+## Complexity Breakdown
+The computational complexity profile of **Binary Search** is as follows:
+
+| Case | Complexity |
+| :--- | :--- |
+| **Best Case Time** | `O(1)` |
+| **Average Case Time** | `O(log N)` |
+| **Worst Case Time** | `O(log N)` |
+| **Space Complexity** | `O(1)` |
+
+## Practical Applications
+- Found in standard systems architecture and embedded systems.
+- Utilized in various software database engines for index generation.

@@ -4,15 +4,28 @@ order: 1
 type: lesson
 ---
 
-# Selection Sort: The Basics
+# Selection Sort (GeeksforGeeks Reference)
 
-Welcome to the comprehensive guide on **Selection Sort**. This algorithm plays a fundamental role in computer science.
+Selection Sort divides the input list into two parts: a sorted portion at the left end and an unsorted portion at the right end. It repeatedly finds the smallest element in the unsorted portion and swaps it with the leftmost unsorted element.
 
-## How it works
-This algorithm operates by executing a systematic set of instructions to achieve its computational goal efficiently. 
-*(Detailed specific logic for Selection Sort will be expanded here.)*
+## Algorithmic Steps
+Here is the step-by-step logic tracing **Selection Sort**:
+- Assume the first element is the minimum.
+- Scan the rest of the array to find if there is a smaller element.
+- If a smaller element is found, update the minimum index.
+- At the end of the scan, swap the minimum element with the first element of the unsorted portion.
+- Move the starting boundary one step to the right and repeat until sorted.
 
-## Complexity Analysis
-- **Time Complexity:** O(N)
-- **Space Complexity:** O(1)
-*(Note: These are placeholder complexities that will be updated accurately for Selection Sort.)*
+## Complexity Breakdown
+The computational complexity profile of **Selection Sort** is as follows:
+
+| Case | Complexity |
+| :--- | :--- |
+| **Best Case Time** | `O(N²)` |
+| **Average Case Time** | `O(N²)` |
+| **Worst Case Time** | `O(N²)` |
+| **Space Complexity** | `O(1)` |
+
+## Practical Applications
+- Found in standard systems architecture and embedded systems.
+- Utilized in various software database engines for index generation.

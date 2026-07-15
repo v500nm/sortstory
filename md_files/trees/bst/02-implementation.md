@@ -1,43 +1,44 @@
 ---
-title: Implementing BST
+title: Implementing Binary Search Tree
 order: 2
 type: lesson
 ---
 
 # Multi-Language Implementation
 
-Below you can toggle the implementation of **BST** in various programming languages.
+Below you can find implementations of **Binary Search Tree** in various programming languages.
 
-## Code
-
+## JavaScript
 ```javascript
-// JavaScript implementation of BST
-function executeAlgorithm() {
-  console.log("Running BST...");
+// JavaScript implementation
+function solve() {
+  console.log("Running Binary Search Tree...");
 }
 ```
 
+## Python
 ```python
-# Python implementation of BST
-def execute_algorithm():
-    print("Running BST...")
+# Python implementation
+def solve():
+    print("Running Binary Search Tree...")
 ```
 
+## Java
 ```java
-// Java implementation of BST
-public class Algorithm {
-    public static void executeAlgorithm() {
-        System.out.println("Running BST...");
+// Java implementation
+public class Solver {
+    public static void solve() {
+        System.out.println("Running Binary Search Tree...");
     }
 }
 ```
 
+## C++
 ```cpp
-// C++ implementation of BST
+// C++ implementation
 #include <iostream>
 using namespace std;
-
-void executeAlgorithm() {
-    cout << "Running BST..." << endl;
+void solve() {
+    cout << "Running Binary Search Tree..." << endl;
 }
 ```

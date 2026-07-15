@@ -1,43 +1,44 @@
 ---
-title: Implementing Reverse List
+title: Implementing Reverse Linked List
 order: 2
 type: lesson
 ---
 
 # Multi-Language Implementation
 
-Below you can toggle the implementation of **Reverse List** in various programming languages.
+Below you can find implementations of **Reverse Linked List** in various programming languages.
 
-## Code
-
+## JavaScript
 ```javascript
-// JavaScript implementation of Reverse List
-function executeAlgorithm() {
-  console.log("Running Reverse List...");
+// JavaScript implementation
+function solve() {
+  console.log("Running Reverse Linked List...");
 }
 ```
 
+## Python
 ```python
-# Python implementation of Reverse List
-def execute_algorithm():
-    print("Running Reverse List...")
+# Python implementation
+def solve():
+    print("Running Reverse Linked List...")
 ```
 
+## Java
 ```java
-// Java implementation of Reverse List
-public class Algorithm {
-    public static void executeAlgorithm() {
-        System.out.println("Running Reverse List...");
+// Java implementation
+public class Solver {
+    public static void solve() {
+        System.out.println("Running Reverse Linked List...");
     }
 }
 ```
 
+## C++
 ```cpp
-// C++ implementation of Reverse List
+// C++ implementation
 #include <iostream>
 using namespace std;
-
-void executeAlgorithm() {
-    cout << "Running Reverse List..." << endl;
+void solve() {
+    cout << "Running Reverse Linked List..." << endl;
 }
 ```

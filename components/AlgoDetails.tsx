@@ -9,13 +9,14 @@ interface AlgoDetailsProps {
 
 
 
-type LanguageType = "javascript" | "python" | "java" | "cpp";
+type LanguageType = "javascript" | "python" | "java" | "cpp" | "c";
 
 const LANGUAGE_LABELS: Record<LanguageType, string> = {
   javascript: "JAVASCRIPT",
   python: "PYTHON",
   java: "JAVA",
-  cpp: "C++"
+  cpp: "C++",
+  c: "C"
 };
 
 export default function AlgoDetails({ selectedAlgo }: AlgoDetailsProps) {

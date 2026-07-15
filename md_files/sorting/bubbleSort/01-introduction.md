@@ -4,25 +4,29 @@ order: 1
 type: lesson
 ---
 
-# Bubble Sort: The Basics
+# Bubble Sort (GeeksforGeeks Reference)
 
-Bubble sort is often the first sorting algorithm taught in computer science classes. It's conceptually simple but highly inefficient for large datasets.
+Bubble Sort is a comparison-based sorting algorithm that repeatedly steps through the list, compares adjacent elements, and swaps them if they are in the wrong order.
 
-## How it works
-The algorithm repeatedly steps through the list, compares adjacent elements, and swaps them if they are in the wrong order. The pass through the list is repeated until the list is sorted. 
+## Algorithmic Steps
+Here is the step-by-step logic tracing **Bubble Sort**:
+- Start at the first element (index 0).
+- Compare it to the next element (index 1).
+- If the first is greater than the second, swap them.
+- Move to the next pair (index 1 and 2) and repeat.
+- Continue to the end of the array. The largest element will 'bubble' to the last position.
+- Repeat the entire process n-1 times for the remaining unsorted portion.
 
-It gets its name because smaller elements "bubble" to the top of the list (or larger elements bubble to the end, depending on the implementation).
+## Complexity Breakdown
+The computational complexity profile of **Bubble Sort** is as follows:
 
-### Visualizing the process
-Imagine you have an array: `[5, 3, 8, 4, 2]`
+| Case | Complexity |
+| :--- | :--- |
+| **Best Case Time** | `O(N)` |
+| **Average Case Time** | `O(N²)` |
+| **Worst Case Time** | `O(N²)` |
+| **Space Complexity** | `O(1)` |
 
-1. Compare 5 and 3. Since 5 > 3, swap them. `[3, 5, 8, 4, 2]`
-2. Compare 5 and 8. Since 5 < 8, do nothing. `[3, 5, 8, 4, 2]`
-3. Compare 8 and 4. Since 8 > 4, swap them. `[3, 5, 4, 8, 2]`
-4. Compare 8 and 2. Since 8 > 2, swap them. `[3, 5, 4, 2, 8]`
-
-After one full pass, the largest element (8) is guaranteed to be at the end of the array. The algorithm then repeats the process for the remaining elements until the array is fully sorted.
-
-## Complexity
-- **Time Complexity:** O(n²) in average and worst cases. O(n) in best case (if the array is already sorted and optimized).
-- **Space Complexity:** O(1) as it sorts in-place.
+## Practical Applications
+- Found in standard systems architecture and embedded systems.
+- Utilized in various software database engines for index generation.

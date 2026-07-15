@@ -1,43 +1,44 @@
 ---
-title: Implementing Doubly
+title: Implementing Doubly Linked List
 order: 2
 type: lesson
 ---
 
 # Multi-Language Implementation
 
-Below you can toggle the implementation of **Doubly** in various programming languages.
+Below you can find implementations of **Doubly Linked List** in various programming languages.
 
-## Code
-
+## JavaScript
 ```javascript
-// JavaScript implementation of Doubly
-function executeAlgorithm() {
-  console.log("Running Doubly...");
+// JavaScript implementation
+function solve() {
+  console.log("Running Doubly Linked List...");
 }
 ```
 
+## Python
 ```python
-# Python implementation of Doubly
-def execute_algorithm():
-    print("Running Doubly...")
+# Python implementation
+def solve():
+    print("Running Doubly Linked List...")
 ```
 
+## Java
 ```java
-// Java implementation of Doubly
-public class Algorithm {
-    public static void executeAlgorithm() {
-        System.out.println("Running Doubly...");
+// Java implementation
+public class Solver {
+    public static void solve() {
+        System.out.println("Running Doubly Linked List...");
     }
 }
 ```
 
+## C++
 ```cpp
-// C++ implementation of Doubly
+// C++ implementation
 #include <iostream>
 using namespace std;
-
-void executeAlgorithm() {
-    cout << "Running Doubly..." << endl;
+void solve() {
+    cout << "Running Doubly Linked List..." << endl;
 }
 ```

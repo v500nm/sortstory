@@ -4,44 +4,84 @@ export const automataData: Record<string, AlgorithmDetailsData> = {
   gol: {
     id: "gol",
     name: "Conway's Game of Life",
-    description: "The Game of Life is a cellular automaton devised by mathematician John Horton Conway. It is a zero-player game, meaning its evolution is determined by its initial state, requiring no further input. The universe of the Game of Life is a two-dimensional orthogonal grid of square cells, each of which is in one of two possible states, alive or dead. Every cell interacts with its eight neighbours.",
-    bestCase: "O(n) where n is total cells on the grid",
+    description: "The Game of Life is a cellular automaton devised by John Conway. Its evolution is determined by its initial state, requiring no further input. Every cell interacts with its eight neighbours on a 2D grid.",
+    bestCase: "O(n)",
     avgCase: "O(n)",
     worstCase: "O(n)",
-    timeComplexity: "O(n) per generation step",
-    spaceComplexity: "O(n) - Requires a secondary buffer grid to calculate the next state simultaneously",
-    useCase: "Used in computer science to study complex systems, emergent behavior, and Turing completeness. It is heavily utilized in procedural generation (e.g., generating cave systems in video games).",
+    timeComplexity: "O(n) per step",
+    spaceComplexity: "O(n)",
+    useCase: "Complex systems, emergent behavior, procedural terrain generation.",
     algorithmFlow: [
-      "For each generation, create a new empty grid (or buffer).",
-      "Iterate over every cell in the current grid.",
-      "Count the number of alive neighbors (out of the 8 surrounding cells) for the current cell.",
-      "Apply Rule 1: Underpopulation. A live cell with fewer than 2 live neighbors dies.",
-      "Apply Rule 2: Survival. A live cell with 2 or 3 live neighbors lives on.",
-      "Apply Rule 3: Overpopulation. A live cell with more than 3 live neighbors dies.",
-      "Apply Rule 4: Reproduction. A dead cell with exactly 3 live neighbors becomes a live cell.",
-      "Update the new grid with the new state of the cell.",
-      "Once all cells are processed, replace the current grid with the new grid."
+      "Create a double buffer grid.",
+      "Count live neighbors for each cell.",
+      "Live cell with < 2 or > 3 live neighbors dies.",
+      "Live cell with 2 or 3 live neighbors survives.",
+      "Dead cell with exactly 3 live neighbors comes to life."
     ],
     codeSnippets: {
-      javascript: `function nextGeneration(grid) {
-  const rows = grid.length;
-  const cols = grid[0].length;
-  const nextGrid = Array(rows).fill().map(() => Array(cols).fill(0));
-
-  for (let r = 0; r < rows; r++) {
-    for (let c = 0; c < cols; c++) {
-      let neighbors = countAliveNeighbors(grid, r, c);
-      
-      if (grid[r][c] === 1 && (neighbors === 2 || neighbors === 3)) {
-        nextGrid[r][c] = 1; // Survive
-      } else if (grid[r][c] === 0 && neighbors === 3) {
-        nextGrid[r][c] = 1; // Reproduce
-      } else {
-        nextGrid[r][c] = 0; // Die
-      }
+      javascript: `function nextGen(grid) {
+  const nextGrid = grid.map(arr => [...arr]);
+  for (let r = 0; r < grid.length; r++) {
+    for (let c = 0; c < grid[0].length; c++) {
+      let neighbors = countNeighbors(grid, r, c);
+      if (grid[r][c] === 1 && (neighbors < 2 || neighbors > 3)) nextGrid[r][c] = 0;
+      else if (grid[r][c] === 0 && neighbors === 3) nextGrid[r][c] = 1;
     }
   }
   return nextGrid;
+}`,
+      python: `def next_gen(grid):
+    R, C = len(grid), len(grid[0])
+    next_grid = [row[:] for row in grid]
+    for r in range(R):
+        for c in range(C):
+            neighbors = count_neighbors(grid, r, c)
+            if grid[r][c] == 1 and (neighbors < 2 or neighbors > 3):
+                next_grid[r][c] = 0
+            elif grid[r][c] == 0 and neighbors == 3:
+                next_grid[r][c] = 1
+    return next_grid`,
+      java: `int[][] nextGen(int[][] grid) {
+    int R = grid.length, C = grid[0].length;
+    int[][] nextGrid = new int[R][C];
+    for (int r = 0; r < R; r++) {
+        for (int c = 0; c < C; c++) {
+            int neighbors = countNeighbors(grid, r, c);
+            if (grid[r][c] == 1) {
+                nextGrid[r][c] = (neighbors == 2 || neighbors == 3) ? 1 : 0;
+            } else {
+                nextGrid[r][c] = (neighbors == 3) ? 1 : 0;
+            }
+        }
+    }
+    return nextGrid;
+}`,
+      cpp: `vector<vector<int>> nextGen(vector<vector<int>>& grid) {
+    int R = grid.size(), C = grid[0].size();
+    vector<vector<int>> nextGrid = grid;
+    for (int r = 0; r < R; r++) {
+        for (int c = 0; c < C; c++) {
+            int neighbors = countNeighbors(grid, r, c);
+            if (grid[r][c] == 1) {
+                nextGrid[r][c] = (neighbors == 2 || neighbors == 3) ? 1 : 0;
+            } else {
+                nextGrid[r][c] = (neighbors == 3) ? 1 : 0;
+            }
+        }
+    }
+    return nextGrid;
+}`,
+      c: `void nextGen(int grid[R][C], int nextGrid[R][C]) {
+    for (int r = 0; r < R; r++) {
+        for (int c = 0; c < C; c++) {
+            int neighbors = countNeighbors(grid, r, c);
+            if (grid[r][c] == 1) {
+                nextGrid[r][c] = (neighbors == 2 || neighbors == 3) ? 1 : 0;
+            } else {
+                nextGrid[r][c] = (neighbors == 3) ? 1 : 0;
+            }
+        }
+    }
 }`
     },
     examples: []
@@ -49,49 +89,78 @@ export const automataData: Record<string, AlgorithmDetailsData> = {
   kmeans: {
     id: "kmeans",
     name: "K-Means Clustering",
-    description: "K-Means is an unsupervised machine learning algorithm used to partition 'n' observations into 'k' clusters in which each observation belongs to the cluster with the nearest mean (centroid). It iteratively refines the positions of the centroids until they stabilize.",
-    bestCase: "O(i * k * n) where i is iterations, k is clusters, n is data points",
+    description: "Iteratively partition n observations into k clusters where each point belongs to the cluster with the nearest mean.",
+    bestCase: "O(i * k * n)",
     avgCase: "O(i * k * n)",
-    worstCase: "O(n^(k+2/p)) - Theoretically, but practically usually fast",
+    worstCase: "O(i * k * n)",
     timeComplexity: "O(i * k * n)",
     spaceComplexity: "O(n + k)",
-    useCase: "Customer segmentation, image compression (color quantization), anomaly detection, and grouping documents into topics.",
+    useCase: "Data science, image compression, customer segmentation.",
     algorithmFlow: [
-      "Initialize 'k' centroids randomly within the data space.",
-      "Phase 1 (Assignment): Iterate through every data point. Calculate the Euclidean distance between the point and every centroid.",
-      "Assign the data point to the cluster of the closest centroid.",
-      "Phase 2 (Update): Once all points are assigned, calculate the new mean (average x and y coordinates) of all points belonging to a specific cluster.",
-      "Move the centroid to this new mean position.",
-      "Repeat Phase 1 and Phase 2 until the centroids stop moving (convergence) or a max iteration limit is reached."
+      "Initialize k centroid seeds randomly.",
+      "Assign each data point to its closest centroid.",
+      "Compute new centroid positions as the mean of all points assigned to that cluster.",
+      "Repeat until centroids converge."
     ],
     codeSnippets: {
-      javascript: `function kMeansIteration(points, centroids) {
-  // 1. Assignment Phase
-  let clusters = Array.from({length: centroids.length}, () => []);
-  
+      javascript: `function assignPoints(points, centroids) {
+  let clusters = centroids.map(() => []);
   for (let p of points) {
-    let minDistance = Infinity;
-    let closestCentroid = 0;
-    
+    let best = 0, bestD = Infinity;
     for (let i = 0; i < centroids.length; i++) {
-      let d = distance(p, centroids[i]);
-      if (d < minDistance) {
-        minDistance = d;
-        closestCentroid = i;
-      }
+      let d = dist(p, centroids[i]);
+      if (d < bestD) { bestD = d; best = i; }
     }
-    clusters[closestCentroid].push(p);
+    clusters[best].push(p);
   }
-  
-  // 2. Update Phase
-  let newCentroids = [];
-  for (let c of clusters) {
-    let sumX = 0, sumY = 0;
-    for (let p of c) { sumX += p.x; sumY += p.y; }
-    newCentroids.push({ x: sumX / c.length, y: sumY / c.length });
-  }
-  
-  return newCentroids;
+  return clusters;
+}`,
+      python: `def assign_points(points, centroids):
+    clusters = [[] for _ in centroids]
+    for p in points:
+        best_i = min(range(len(centroids)), key=lambda i: dist(p, centroids[i]))
+        clusters[best_i].append(p)
+    return clusters`,
+      java: `List<List<Point>> assignPoints(List<Point> points, List<Point> centroids) {
+    List<List<Point>> clusters = new ArrayList<>();
+    for (int i = 0; i < centroids.size(); i++) clusters.add(new ArrayList<>());
+    for (Point p : points) {
+        int bestIdx = 0;
+        double bestDist = Double.MAX_VALUE;
+        for (int i = 0; i < centroids.size(); i++) {
+            double d = dist(p, centroids[i]);
+            if (d < bestDist) { bestDist = d; bestIdx = i; }
+        }
+        clusters.get(bestIdx).add(p);
+    }
+    return clusters;
+}`,
+      cpp: `vector<vector<Point>> assignPoints(vector<Point>& points, vector<Point>& centroids) {
+    vector<vector<Point>> clusters(centroids.size());
+    for (auto& p : points) {
+        int bestIdx = 0;
+        double bestDist = 1e9;
+        for (int i = 0; i < centroids.size(); i++) {
+            double d = dist(p, centroids[i]);
+            if (d < bestDist) {
+                bestDist = d;
+                bestIdx = i;
+            }
+        }
+        clusters[bestIdx].push_back(p);
+    }
+    return clusters;
+}`,
+      c: `void assignPoints(Point points[], int N, Centroid centroids[], int K) {
+    for (int i = 0; i < N; i++) {
+        int best = 0;
+        double bestD = 1e9;
+        for (int j = 0; j < K; j++) {
+            double d = dist(points[i], centroids[j]);
+            if (d < bestD) { bestD = d; best = j; }
+        }
+        points[i].cluster = best;
+    }
 }`
     },
     examples: []

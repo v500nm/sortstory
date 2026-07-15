@@ -1,43 +1,44 @@
 ---
-title: Implementing Post Order
+title: Implementing Post-Order Traversal
 order: 2
 type: lesson
 ---
 
 # Multi-Language Implementation
 
-Below you can toggle the implementation of **Post Order** in various programming languages.
+Below you can find implementations of **Post-Order Traversal** in various programming languages.
 
-## Code
-
+## JavaScript
 ```javascript
-// JavaScript implementation of Post Order
-function executeAlgorithm() {
-  console.log("Running Post Order...");
+// JavaScript implementation
+function solve() {
+  console.log("Running Post-Order Traversal...");
 }
 ```
 
+## Python
 ```python
-# Python implementation of Post Order
-def execute_algorithm():
-    print("Running Post Order...")
+# Python implementation
+def solve():
+    print("Running Post-Order Traversal...")
 ```
 
+## Java
 ```java
-// Java implementation of Post Order
-public class Algorithm {
-    public static void executeAlgorithm() {
-        System.out.println("Running Post Order...");
+// Java implementation
+public class Solver {
+    public static void solve() {
+        System.out.println("Running Post-Order Traversal...");
     }
 }
 ```
 
+## C++
 ```cpp
-// C++ implementation of Post Order
+// C++ implementation
 #include <iostream>
 using namespace std;
-
-void executeAlgorithm() {
-    cout << "Running Post Order..." << endl;
+void solve() {
+    cout << "Running Post-Order Traversal..." << endl;
 }
 ```

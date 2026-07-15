@@ -1,43 +1,44 @@
 ---
-title: Implementing Dijkstra
+title: Implementing Dijkstra's Algorithm
 order: 2
 type: lesson
 ---
 
 # Multi-Language Implementation
 
-Below you can toggle the implementation of **Dijkstra** in various programming languages.
+Below you can find implementations of **Dijkstra's Algorithm** in various programming languages.
 
-## Code
-
+## JavaScript
 ```javascript
-// JavaScript implementation of Dijkstra
-function executeAlgorithm() {
-  console.log("Running Dijkstra...");
+// JavaScript implementation
+function solve() {
+  console.log("Running Dijkstra's Algorithm...");
 }
 ```
 
+## Python
 ```python
-# Python implementation of Dijkstra
-def execute_algorithm():
-    print("Running Dijkstra...")
+# Python implementation
+def solve():
+    print("Running Dijkstra's Algorithm...")
 ```
 
+## Java
 ```java
-// Java implementation of Dijkstra
-public class Algorithm {
-    public static void executeAlgorithm() {
-        System.out.println("Running Dijkstra...");
+// Java implementation
+public class Solver {
+    public static void solve() {
+        System.out.println("Running Dijkstra's Algorithm...");
     }
 }
 ```
 
+## C++
 ```cpp
-// C++ implementation of Dijkstra
+// C++ implementation
 #include <iostream>
 using namespace std;
-
-void executeAlgorithm() {
-    cout << "Running Dijkstra..." << endl;
+void solve() {
+    cout << "Running Dijkstra's Algorithm..." << endl;
 }
 ```

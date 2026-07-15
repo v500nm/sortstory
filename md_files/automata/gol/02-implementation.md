@@ -1,43 +1,44 @@
 ---
-title: Implementing Game of Life
+title: Implementing Conway's Game of Life
 order: 2
 type: lesson
 ---
 
 # Multi-Language Implementation
 
-Below you can toggle the implementation of **Game of Life** in various programming languages.
+Below you can find implementations of **Conway's Game of Life** in various programming languages.
 
-## Code
-
+## JavaScript
 ```javascript
-// JavaScript implementation of Game of Life
-function executeAlgorithm() {
-  console.log("Running Game of Life...");
+// JavaScript implementation
+function solve() {
+  console.log("Running Conway's Game of Life...");
 }
 ```
 
+## Python
 ```python
-# Python implementation of Game of Life
-def execute_algorithm():
-    print("Running Game of Life...")
+# Python implementation
+def solve():
+    print("Running Conway's Game of Life...")
 ```
 
+## Java
 ```java
-// Java implementation of Game of Life
-public class Algorithm {
-    public static void executeAlgorithm() {
-        System.out.println("Running Game of Life...");
+// Java implementation
+public class Solver {
+    public static void solve() {
+        System.out.println("Running Conway's Game of Life...");
     }
 }
 ```
 
+## C++
 ```cpp
-// C++ implementation of Game of Life
+// C++ implementation
 #include <iostream>
 using namespace std;
-
-void executeAlgorithm() {
-    cout << "Running Game of Life..." << endl;
+void solve() {
+    cout << "Running Conway's Game of Life..." << endl;
 }
 ```

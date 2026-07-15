@@ -1,43 +1,44 @@
 ---
-title: Implementing Pre Order
+title: Implementing Pre-Order Traversal
 order: 2
 type: lesson
 ---
 
 # Multi-Language Implementation
 
-Below you can toggle the implementation of **Pre Order** in various programming languages.
+Below you can find implementations of **Pre-Order Traversal** in various programming languages.
 
-## Code
-
+## JavaScript
 ```javascript
-// JavaScript implementation of Pre Order
-function executeAlgorithm() {
-  console.log("Running Pre Order...");
+// JavaScript implementation
+function solve() {
+  console.log("Running Pre-Order Traversal...");
 }
 ```
 
+## Python
 ```python
-# Python implementation of Pre Order
-def execute_algorithm():
-    print("Running Pre Order...")
+# Python implementation
+def solve():
+    print("Running Pre-Order Traversal...")
 ```
 
+## Java
 ```java
-// Java implementation of Pre Order
-public class Algorithm {
-    public static void executeAlgorithm() {
-        System.out.println("Running Pre Order...");
+// Java implementation
+public class Solver {
+    public static void solve() {
+        System.out.println("Running Pre-Order Traversal...");
     }
 }
 ```
 
+## C++
 ```cpp
-// C++ implementation of Pre Order
+// C++ implementation
 #include <iostream>
 using namespace std;
-
-void executeAlgorithm() {
-    cout << "Running Pre Order..." << endl;
+void solve() {
+    cout << "Running Pre-Order Traversal..." << endl;
 }
 ```

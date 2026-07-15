@@ -18,7 +18,19 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
         remarkPlugins={[remarkGfm]}
         components={{
           h1: ({ children }) => <h1 className="text-3xl font-bold text-brand-text-primary mb-4 mt-8">{children}</h1>,
-          h2: ({ children }) => <h2 className="text-2xl font-bold text-brand-text-primary mb-3 mt-6 border-b border-brand-border pb-2">{children}</h2>,
+          h2: ({ children }) => {
+            const text = React.Children.toArray(children).join('').trim().toLowerCase();
+            const languages = ['javascript', 'python', 'java', 'cpp', 'c', 'c++'];
+            const normalizedText = text === 'c++' ? 'cpp' : text;
+            
+            if (languages.includes(normalizedText)) {
+              const currentLang = language;
+              if (normalizedText !== currentLang) {
+                return null;
+              }
+            }
+            return <h2 className="text-2xl font-bold text-brand-text-primary mb-3 mt-6 border-b border-brand-border pb-2">{children}</h2>;
+          },
           h3: ({ children }) => <h3 className="text-xl font-bold text-brand-text-primary mb-2 mt-4">{children}</h3>,
           p: ({ children }) => <p className="leading-relaxed mb-4">{children}</p>,
           ul: ({ children }) => <ul className="list-disc list-inside space-y-2 mb-4 ml-4">{children}</ul>,

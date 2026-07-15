@@ -4,40 +4,57 @@ order: 2
 type: lesson
 ---
 
-# Multi-Language Implementation
+# Code Implementations
 
-Below you can toggle the implementation of **Linear Search** in various programming languages.
+Here is the exact implementation of **Linear Search** in multiple programming languages.
 
-## Code
-
+## JavaScript
 ```javascript
-// JavaScript implementation of Linear Search
-function executeAlgorithm() {
-  console.log("Running Linear Search...");
+function linearSearch(arr, target) {
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] === target) return i;
+  }
+  return -1;
 }
 ```
 
+## Python
 ```python
-# Python implementation of Linear Search
-def execute_algorithm():
-    print("Running Linear Search...")
+def linear_search(arr, target):
+    for i in range(len(arr)):
+        if arr[i] == target:
+            return i
+    return -1
 ```
 
+## Java
 ```java
-// Java implementation of Linear Search
-public class Algorithm {
-    public static void executeAlgorithm() {
-        System.out.println("Running Linear Search...");
+public class LinearSearch {
+    public static int search(int[] arr, int target) {
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == target) return i;
+        }
+        return -1;
     }
 }
 ```
 
+## C++
 ```cpp
-// C++ implementation of Linear Search
-#include <iostream>
-using namespace std;
+int linearSearch(int arr[], int n, int target) {
+    for (int i = 0; i < n; i++) {
+        if (arr[i] == target) return i;
+    }
+    return -1;
+}
+```
 
-void executeAlgorithm() {
-    cout << "Running Linear Search..." << endl;
+## C
+```c
+int linearSearch(int arr[], int n, int target) {
+    for (int i = 0; i < n; i++) {
+        if (arr[i] == target) return i;
+    }
+    return -1;
 }
 ```

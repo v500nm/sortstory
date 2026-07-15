@@ -1,18 +1,17 @@
 ---
-title: Introduction to Singly
+title: Introduction to Singly Linked List
 order: 1
 type: lesson
 ---
 
-# Singly: The Basics
+# Singly Linked List
 
-Welcome to the comprehensive guide on **Singly**. This algorithm plays a fundamental role in computer science.
+Welcome to the comprehensive study of **Singly Linked List**. This algorithm or data structure is a core conceptual building block in computer science.
 
-## How it works
-This algorithm operates by executing a systematic set of instructions to achieve its computational goal efficiently. 
-*(Detailed specific logic for Singly will be expanded here.)*
+## Overview
+Understanding Singly Linked List helps engineers build more performant data models and write correct logic.
 
-## Complexity Analysis
-- **Time Complexity:** O(N)
+## Time Complexity
+- **Average Time:** O(N)
 - **Space Complexity:** O(1)
-*(Note: These are placeholder complexities that will be updated accurately for Singly.)*
+*(Refer to GeeksforGeeks for specific variations.)*

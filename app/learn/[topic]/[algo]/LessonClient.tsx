@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { LessonData } from '@/lib/markdown';
 import MarkdownRenderer from '@/components/learn/MarkdownRenderer';
 import { useLanguage, ProgrammingLanguage } from '@/components/learn/LanguageContext';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface Props {
   lessons: LessonData[];
@@ -85,12 +86,25 @@ export default function LessonClient({ lessons, topic, algo }: Props) {
           </div>
 
           {/* Markdown Content */}
-          <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-            <MarkdownRenderer content={activeLesson.content} />
-          </div>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeLessonId}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <MarkdownRenderer content={activeLesson.content} />
+            </motion.div>
+          </AnimatePresence>
           
           {/* Bottom Navigation */}
-          <div className="mt-16 pt-8 border-t border-brand-border flex justify-between">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3, duration: 0.5 }}
+            className="mt-16 pt-8 border-t border-brand-border flex justify-between"
+          >
             {(() => {
               const currentIndex = lessons.findIndex(l => l.id === activeLessonId);
               const prev = lessons[currentIndex - 1];
@@ -101,7 +115,7 @@ export default function LessonClient({ lessons, topic, algo }: Props) {
                   {prev ? (
                     <button 
                       onClick={() => setActiveLessonId(prev.id)}
-                      className="text-brand-text-secondary hover:text-brand-text-primary text-sm flex items-center gap-2"
+                      className="text-brand-text-secondary hover:text-brand-text-primary text-sm flex items-center gap-2 transition-colors"
                     >
                       ← Previous: {prev.title}
                     </button>
@@ -119,7 +133,7 @@ export default function LessonClient({ lessons, topic, algo }: Props) {
                 </>
               );
             })()}
-          </div>
+          </motion.div>
         </div>
       </main>
     </div>
