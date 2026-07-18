@@ -1,0 +1,25 @@
+# SortStory
+
+SortStory is a highly performant, interactive algorithm visualizer and learning platform developed by Adnan Shafiq Mangaonkar (v500nm). It bridges the gap between abstract algorithmic concepts and memory state execution, focusing on real-time visualization of Data Structures and Algorithms (DSA).
+
+## Technology Stack
+- **Framework:** Next.js 15 (React 19)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS
+- **Core Engine:** Custom Hooks, RequestAnimationFrame for highly optimized visual rendering
+
+## Key Features & Modules
+- **Sorting Visualizer:** 16 sorting algorithms including Quick Sort, Merge Sort, Heap Sort, Radix Sort, and more. Features an Algorithm Race Mode for side-by-side performance comparisons.
+- **Pathfinding Visualizer:** Dijkstra's Algorithm and A* Search. Generate complex mazes using Recursive Backtracking and Prim's algorithm, control obstacle density, and race shortest-path algorithms.
+- **Graph Algorithms:** Traverse networks using Breadth-First Search (BFS) and Depth-First Search (DFS).
+- **Trees (BST):** Binary Search Trees with Pre-Order, In-Order, and Post-Order traversal animations.
+- **Linked Lists:** Singly and Doubly Linked Lists visualizer, including list reversals and Floyd's cycle detection.
+- **Automata & ML:** Conway's Game of Life and K-Means Clustering visualization.
+- **Search Algorithms:** Visualizing search operations.
+
+## Links
+- **Homepage:** https://sortstory.adnan-mangaonkar.com
+- **Creator Website:** https://adnan-mangaonkar.com
+- **LinkedIn:** https://www.linkedin.com/in/adnan-mangaonkar-523351167/
+- **GitHub:** https://github.com/v500nm/sortstory
+- **Twitter:** https://x.com/V350NM
