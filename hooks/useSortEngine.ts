@@ -218,6 +218,21 @@ export function useSortEngine(initialSize: number = 15) {
         colorsRef.current = Array(arrayRef.current.length).fill("sorted");
         flushColorsToState();
         setStatus("completed");
+        
+        // Fire telemetry asynchronously
+        import('@/lib/telemetry').then(({ sendSortStoryTelemetry }) => {
+          sendSortStoryTelemetry({
+            sessionId: typeof window !== 'undefined' ? (sessionStorage.getItem('sessionId') || Math.random().toString(36).substring(7)) : 'unknown',
+            algorithmSlug: algorithmFn.name || 'unknown-sort',
+            eventType: 'completed',
+            executionTimeMs: Math.round(performance.now() - startTimeRef.current),
+            metadata: { arraySize: arrayRef.current.length, ...metricsRef.current }
+          });
+          // Ensure session ID is saved
+          if (typeof window !== 'undefined' && !sessionStorage.getItem('sessionId')) {
+            sessionStorage.setItem('sessionId', Math.random().toString(36).substring(7));
+          }
+        }).catch(err => console.warn('Telemetry error:', err));
       } else {
         setStatus("idle");
       }
