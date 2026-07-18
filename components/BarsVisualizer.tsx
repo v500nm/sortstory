@@ -58,7 +58,7 @@ export default function BarsVisualizer({
         <div className="flex justify-between items-center mb-1">
           <div className="flex items-center gap-2.5">
             <div className="h-6 w-6 rounded flex items-center justify-center bg-brand-border">
-              <svg fill="none" height="12" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" viewBox="0 0 24 24" width="12" className="text-white">
+              <svg fill="none" height="12" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" viewBox="0 0 24 24" width="12" className="text-brand-text-primary">
                 <path d="M18 20V10" /><path d="M12 20V4" /><path d="M6 20v-6" />
               </svg>
             </div>

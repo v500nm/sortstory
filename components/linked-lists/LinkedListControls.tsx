@@ -49,7 +49,7 @@ export default function LinkedListControls({ engine }: Props) {
         <h2 className="text-lg font-semibold tracking-wide text-brand-text-primary uppercase">
           Operations
         </h2>
-        <div className="flex items-center gap-2 px-2.5 py-1 rounded-md bg-[#0a0a0a] border border-brand-border">
+        <div className="flex items-center gap-2 px-2.5 py-1 rounded-md bg-brand-bg-dark border border-brand-border">
           <span
             className={`w-2 h-2 rounded-full ${
               status === "running" ? "bg-brand-green animate-pulse" :
@@ -93,7 +93,7 @@ export default function LinkedListControls({ engine }: Props) {
           <label className="text-xs font-semibold tracking-wide text-brand-text-secondary">
             LIST SIZE
           </label>
-          <span className="text-xs font-mono bg-[#111111] px-2 py-0.5 rounded border border-brand-border text-white">
+          <span className="text-xs font-mono bg-brand-bg-medium px-2 py-0.5 rounded border border-brand-border text-brand-text-primary">
             {listSize}
           </span>
         </div>
@@ -117,7 +117,7 @@ export default function LinkedListControls({ engine }: Props) {
           <label className="text-xs font-semibold tracking-wide text-brand-text-secondary">
             SPEED
           </label>
-          <span className="text-xs font-mono text-brand-text-primary bg-[#111111] px-2 py-0.5 rounded border border-brand-border">
+          <span className="text-xs font-mono text-brand-text-primary bg-brand-bg-medium px-2 py-0.5 rounded border border-brand-border">
             {speed === 1 ? "Fast" : speed === 2 ? "Normal" : "Slow"}
           </span>
         </div>
@@ -151,14 +151,14 @@ export default function LinkedListControls({ engine }: Props) {
         <button
           onClick={() => handleInitialize(false)}
           disabled={isBusy}
-          className="btn-3d py-2 px-3 text-[11px] font-semibold tracking-wide text-white"
+          className="btn-3d py-2 px-3 text-[11px] font-semibold tracking-wide text-brand-text-primary"
         >
           NEW LIST
         </button>
         <button
           onClick={() => handleInitialize(true)}
           disabled={isBusy}
-          className="btn-3d py-2 px-3 text-[11px] font-semibold tracking-wide text-white"
+          className="btn-3d py-2 px-3 text-[11px] font-semibold tracking-wide text-brand-text-primary"
         >
           NEW (WITH CYCLE)
         </button>

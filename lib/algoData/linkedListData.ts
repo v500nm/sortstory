@@ -43,15 +43,73 @@ class LinkedList {
     }
     current.next = newNode;
   }
+}`,
+      python: `class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class LinkedList:
+    def __init__(self):
+        self.head = None
+    
+    def append(self, data):
+        new_node = Node(data)
+        if not self.head:
+            self.head = new_node
+            return
+        curr = self.head
+        while curr.next:
+            curr = curr.next
+        curr.next = new_node`,
+      java: `class Node {
+    int data;
+    Node next;
+    Node(int data) { this.data = data; this.next = null; }
+}
+
+class LinkedList {
+    Node head;
+    void append(int data) {
+        Node newNode = new Node(data);
+        if (head == null) { head = newNode; return; }
+        Node curr = head;
+        while (curr.next != null) curr = curr.next;
+        curr.next = newNode;
+    }
+}`,
+      cpp: `struct Node {
+    int data;
+    Node* next;
+    Node(int val) : data(val), next(nullptr) {}
+};
+
+class LinkedList {
+public:
+    Node* head = nullptr;
+    void append(int data) {
+        Node* newNode = new Node(data);
+        if (!head) { head = newNode; return; }
+        Node* curr = head;
+        while (curr->next) curr = curr->next;
+        curr->next = newNode;
+    }
+};`,
+      c: `struct Node {
+    int data;
+    struct Node* next;
+};
+void append(struct Node** head_ref, int new_data) {
+    struct Node* new_node = (struct Node*)malloc(sizeof(struct Node));
+    new_node->data  = new_data;
+    new_node->next = NULL;
+    if (*head_ref == NULL) { *head_ref = new_node; return; }
+    struct Node* last = *head_ref;
+    while (last->next != NULL) last = last->next;
+    last->next = new_node;
 }`
     },
-    examples: [
-      {
-        title: "Browser History (Simple)",
-        description: "Storing a sequence of visited URLs where you only need to go back sequentially.",
-        code: `historyList.append("google.com");\nhistoryList.append("github.com");`
-      }
-    ]
+    examples: []
   },
   doubly: {
     id: "doubly",
@@ -77,18 +135,50 @@ class LinkedList {
     this.next = null;
     this.prev = null;
   }
+}
+
+class DoublyLinkedList {
+  constructor() {
+    this.head = null;
+    this.tail = null;
+  }
+}`,
+      python: `class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+        self.prev = None`,
+      java: `class Node {
+    int data;
+    Node next, prev;
+    Node(int data) { this.data = data; }
+}`,
+      cpp: `struct Node {
+    int data;
+    Node* next;
+    Node* prev;
+    Node(int val) : data(val), next(nullptr), prev(nullptr) {}
+};`,
+      c: `struct Node {
+    int data;
+    struct Node* next;
+    struct Node* prev;
+};
+void append(struct Node** head_ref, int new_data) {
+    struct Node* new_node = (struct Node*)malloc(sizeof(struct Node));
+    new_node->data = new_data;
+    new_node->next = NULL;
+    if (*head_ref == NULL) { new_node->prev = NULL; *head_ref = new_node; return; }
+    struct Node* last = *head_ref;
+    while (last->next != NULL) last = last->next;
+    last->next = new_node;
+    new_node->prev = last;
 }`
     },
-    examples: [
-      {
-        title: "Music Player Queue",
-        description: "Navigating tracks in both directions.",
-        code: `currentTrack = currentTrack.prev; // Go back\ncurrentTrack = currentTrack.next; // Skip`
-      }
-    ]
+    examples: []
   },
-  reverse: {
-    id: "reverse",
+  reverseList: {
+    id: "reverseList",
     name: "Reverse Linked List",
     description: "Reversing a linked list involves changing the direction of the 'next' pointers so that the tail becomes the new head. This is a classic algorithmic problem often solved in-place to save memory.",
     bestCase: "O(n)",
@@ -99,58 +189,193 @@ class LinkedList {
     useCase: "Used when the order of data needs to be inverted without allocating a new array, such as reversing a sequence of big-data records or operations.",
     algorithmFlow: [
       "Initialize three pointers: 'prev' as null, 'current' as head, and 'next' as null.",
-      "Iterate through the list while 'current' is not null.",
-      "Store the next node: next = current.next",
-      "Reverse the link: current.next = prev",
-      "Move the 'prev' pointer forward: prev = current",
-      "Move the 'current' pointer forward: current = next",
-      "Once the loop ends, update the head to the 'prev' pointer."
+      "Iterate through the linked list.",
+      "During iteration, store the next node: next = current.next.",
+      "Reverse current node's pointer: current.next = prev.",
+      "Move prev and current one step forward: prev = current, current = next.",
+      "After the loop, update head pointer to 'prev'."
     ],
     codeSnippets: {
-      javascript: `function reverseList(head) {
+      javascript: `function reverse(head) {
   let prev = null;
   let current = head;
-  
-  while (current !== null) {
-    let nextNode = current.next;
+  while (current) {
+    let next = current.next;
     current.next = prev;
     prev = current;
-    current = nextNode;
+    current = next;
   }
   return prev;
+}`,
+      python: `def reverse(head):
+    prev = None
+    curr = head
+    while curr:
+        nxt = curr.next
+        curr.next = prev
+        prev = curr
+        curr = nxt
+    return prev`,
+      java: `Node reverse(Node head) {
+    Node prev = null;
+    Node curr = head;
+    while (curr != null) {
+        Node next = curr.next;
+        curr.next = prev;
+        prev = curr;
+        curr = next;
+    }
+    return prev;
+}`,
+      cpp: `Node* reverse(Node* head) {
+    Node* prev = nullptr;
+    Node* curr = head;
+    while (curr) {
+        Node* next = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = next;
+    }
+    return prev;
+}`,
+      c: `struct Node* reverse(struct Node* head) {
+    struct Node* prev = NULL;
+    struct Node* curr = head;
+    struct Node* next = NULL;
+    while (curr != NULL) {
+        next = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = next;
+    }
+    return prev;
 }`
     },
     examples: []
   },
-  cycle: {
-    id: "cycle",
-    name: "Floyd's Cycle Detection",
-    description: "Floyd's Cycle-Finding Algorithm (also known as the 'Tortoise and the Hare' algorithm) uses two pointers moving at different speeds to detect if a linked list contains a loop (cycle).",
-    bestCase: "O(1) - Cycle detected immediately",
+  detectCycle: {
+    id: "detectCycle",
+    name: "Detect Cycle (Floyd's Algorithm)",
+    description: "Floyd's Cycle-Finding Algorithm (often called the tortoise and the hare) is a pointer algorithm that uses two pointers moving at different speeds to detect a cycle in a sequence.",
+    bestCase: "O(1) - Loop at head",
     avgCase: "O(n)",
     worstCase: "O(n)",
     timeComplexity: "O(n)",
     spaceComplexity: "O(1)",
-    useCase: "Detecting infinite loops in memory references, validating cyclic graphs, or detecting deadlocks in operating systems.",
+    useCase: "Ensuring database record links or compiler ASTs do not have self-referencing infinite loops.",
     algorithmFlow: [
-      "Initialize two pointers, 'slow' and 'fast', both pointing to the head of the list.",
-      "Move 'slow' one step at a time (slow = slow.next).",
-      "Move 'fast' two steps at a time (fast = fast.next.next).",
-      "If there is a cycle, the 'fast' pointer will eventually lap the 'slow' pointer and they will meet.",
-      "If 'fast' reaches the end of the list (null), then there is no cycle."
+      "Initialize two pointers 'slow' and 'fast' at the head of the list.",
+      "Move 'slow' by one node: slow = slow.next.",
+      "Move 'fast' by two nodes: fast = fast.next.next.",
+      "If the pointers meet at the same node, a cycle exists (return true).",
+      "If 'fast' or 'fast.next' becomes null, the list has an end and no cycle exists (return false)."
     ],
     codeSnippets: {
       javascript: `function hasCycle(head) {
   let slow = head;
   let fast = head;
-  
-  while (fast !== null && fast.next !== null) {
+  while (fast && fast.next) {
     slow = slow.next;
     fast = fast.next.next;
-    
     if (slow === fast) return true;
   }
   return false;
+}`,
+      python: `def has_cycle(head):
+    slow = fast = head
+    while fast and fast.next:
+        slow = slow.next
+        fast = fast.next.next
+        if slow == fast:
+            return True
+    return False`,
+      java: `boolean hasCycle(Node head) {
+    Node slow = head, fast = head;
+    while (fast != null && fast.next != null) {
+        slow = slow.next;
+        fast = fast.next.next;
+        if (slow == fast) return true;
+    }
+    return false;
+}`,
+      cpp: `bool hasCycle(Node* head) {
+    Node* slow = head;
+    Node* fast = head;
+    while (fast && fast->next) {
+        slow = slow->next;
+        fast = fast->next->next;
+        if (slow == fast) return true;
+    }
+    return false;
+}`,
+      c: `int detectLoop(struct Node* head) {
+    struct Node *slow = head, *fast = head;
+    while (fast && fast->next) {
+        slow = slow->next;
+        fast = fast->next->next;
+        if (slow == fast) return 1;
+    }
+    return 0;
+}`
+    },
+    examples: []
+  },
+  findMiddle: {
+    id: "findMiddle",
+    name: "Find Middle Node",
+    description: "Finds the middle node of a linked list in a single pass using a fast and slow pointer. The slow pointer moves by 1 node, while the fast pointer moves by 2 nodes. When the fast pointer reaches the end, the slow pointer is at the middle.",
+    bestCase: "O(n)",
+    avgCase: "O(n)",
+    worstCase: "O(n)",
+    timeComplexity: "O(n)",
+    spaceComplexity: "O(1)",
+    useCase: "Prerequisite for algorithms like Merge Sort on Linked Lists or checking if a list is a palindrome.",
+    algorithmFlow: [
+      "Initialize 'slow' and 'fast' pointers at the head node.",
+      "While fast and fast.next are not null, advance slow by 1 node and fast by 2 nodes.",
+      "When the loop terminates, slow points directly to the middle node."
+    ],
+    codeSnippets: {
+      javascript: `function getMiddle(head) {
+  let slow = head;
+  let fast = head;
+  while (fast && fast.next) {
+    slow = slow.next;
+    fast = fast.next.next;
+  }
+  return slow;
+}`,
+      python: `def get_middle(head):
+    slow = fast = head
+    while fast and fast.next:
+        slow = slow.next
+        fast = fast.next.next
+    return slow`,
+      java: `Node getMiddle(Node head) {
+    Node slow = head, fast = head;
+    while (fast != null && fast.next != null) {
+        slow = slow.next;
+        fast = fast.next.next;
+    }
+    return slow;
+}`,
+      cpp: `Node* getMiddle(Node* head) {
+    Node* slow = head;
+    Node* fast = head;
+    while (fast && fast->next) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+    return slow;
+}`,
+      c: `struct Node* getMiddle(struct Node* head) {
+    struct Node* slow = head;
+    struct Node* fast = head;
+    while (fast != NULL && fast->next != NULL) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+    return slow;
 }`
     },
     examples: []

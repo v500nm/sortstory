@@ -24,7 +24,7 @@ export default function GameOfLifeVisualizer({ engine }: Props) {
         {grid.map((row, y) => (
           <div key={`row-${y}`} className="flex gap-[2px]">
             {row.map((cell, x) => {
-              let bg = "bg-[#1a1a1a]"; // dead
+              let bg = "bg-brand-bg-light"; // dead
               if (cell.isAlive) {
                 if (cell.isNewlyBorn) bg = "bg-brand-cyan shadow-[0_0_10px_rgba(34,211,238,0.8)]";
                 else bg = "bg-brand-purple shadow-[0_0_10px_rgba(129,140,248,0.6)]";

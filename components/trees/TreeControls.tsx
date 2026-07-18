@@ -133,7 +133,7 @@ export default function TreeControls({ engine, selectedAlgo, setSelectedAlgo }: 
           <button
             onClick={handleGenerate}
             disabled={isBusy}
-            className="w-full mt-2 py-2 bg-brand-bg-dark hover:bg-[#1a1a1a] border border-brand-border rounded-lg text-xs font-semibold tracking-wide transition-colors text-brand-accent"
+            className="w-full mt-2 py-2 bg-brand-bg-dark hover:bg-brand-bg-light border border-brand-border rounded-lg text-xs font-semibold tracking-wide transition-colors text-brand-accent"
           >
             GENERATE TREE
           </button>
@@ -145,7 +145,7 @@ export default function TreeControls({ engine, selectedAlgo, setSelectedAlgo }: 
             <label className="text-xs font-semibold tracking-wide text-brand-text-secondary">
               SPEED
             </label>
-            <span className="text-xs font-mono text-brand-text-primary bg-[#111111] px-2 py-0.5 rounded border border-brand-border">
+            <span className="text-xs font-mono text-brand-text-primary bg-brand-bg-medium px-2 py-0.5 rounded border border-brand-border">
               {speed === 1 ? "Slow" : speed === 2 ? "Normal" : "Fast"}
             </span>
           </div>

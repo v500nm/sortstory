@@ -36,6 +36,77 @@ function insert(root, value) {
     root.right = insert(root.right, value);
   }
   return root;
+}`,
+      python: `class Node:
+    def __init__(self, key):
+        self.left = None
+        self.right = None
+        self.val = key
+
+def insert(root, key):
+    if root is None:
+        return Node(key)
+    if key < root.val:
+        root.left = insert(root.left, key)
+    elif key > root.val:
+        root.right = insert(root.right, key)
+    return root`,
+      java: `class Node {
+    int key;
+    Node left, right;
+    public Node(int item) {
+        key = item;
+        left = right = null;
+    }
+}
+
+class BinarySearchTree {
+    Node insertRec(Node root, int key) {
+        if (root == null) {
+            root = new Node(key);
+            return root;
+        }
+        if (key < root.key)
+            root.left = insertRec(root.left, key);
+        else if (key > root.key)
+            root.right = insertRec(root.right, key);
+        return root;
+    }
+}`,
+      cpp: `struct Node {
+    int key;
+    Node *left, *right;
+    Node(int item) {
+        key = item;
+        left = right = NULL;
+    }
+};
+
+Node* insert(Node* node, int key) {
+    if (node == NULL) return new Node(key);
+    if (key < node->key)
+        node->left = insert(node->left, key);
+    else if (key > node->key)
+        node->right = insert(node->right, key);
+    return node;
+}`,
+      c: `struct Node {
+    int data;
+    struct Node *left, *right;
+};
+
+struct Node* newNode(int item) {
+    struct Node* temp = (struct Node*)malloc(sizeof(struct Node));
+    temp->data = item;
+    temp->left = temp->right = NULL;
+    return temp;
+}
+
+struct Node* insert(struct Node* node, int key) {
+    if (node == NULL) return newNode(key);
+    if (key < node->data) node->left = insert(node->left, key);
+    else if (key > node->data) node->right = insert(node->right, key);
+    return node;
 }`
     },
     examples: []
@@ -63,6 +134,30 @@ function insert(root, value) {
     preOrder(node.left);     // Left
     preOrder(node.right);    // Right
   }
+}`,
+      python: `def pre_order(node):
+    if node:
+        print(node.val)
+        pre_order(node.left)
+        pre_order(node.right)`,
+      java: `void preOrder(Node node) {
+    if (node == null) return;
+    System.out.print(node.key + " ");
+    preOrder(node.left);
+    preOrder(node.right);
+}`,
+      cpp: `void preOrder(Node* node) {
+    if (node == NULL) return;
+    cout << node->key << " ";
+    preOrder(node->left);
+    preOrder(node->right);
+}`,
+      c: `void preOrder(struct Node* root) {
+    if (root != NULL) {
+        printf("%d ", root->data);
+        preOrder(root->left);
+        preOrder(root->right);
+    }
 }`
     },
     examples: []
@@ -90,6 +185,30 @@ function insert(root, value) {
     console.log(node.value); // Visit
     inOrder(node.right);     // Right
   }
+}`,
+      python: `def in_order(node):
+    if node:
+        in_order(node.left)
+        print(node.val)
+        in_order(node.right)`,
+      java: `void inOrder(Node node) {
+    if (node == null) return;
+    inOrder(node.left);
+    System.out.print(node.key + " ");
+    inOrder(node.right);
+}`,
+      cpp: `void inOrder(Node* node) {
+    if (node == NULL) return;
+    inOrder(node->left);
+    cout << node->key << " ";
+    inOrder(node->right);
+}`,
+      c: `void inOrder(struct Node* root) {
+    if (root != NULL) {
+        inOrder(root->left);
+        printf("%d ", root->data);
+        inOrder(root->right);
+    }
 }`
     },
     examples: []
@@ -117,6 +236,30 @@ function insert(root, value) {
     postOrder(node.right);   // Right
     console.log(node.value); // Visit
   }
+}`,
+      python: `def post_order(node):
+    if node:
+        post_order(node.left)
+        post_order(node.right)
+        print(node.val)`,
+      java: `void postOrder(Node node) {
+    if (node == null) return;
+    postOrder(node.left);
+    postOrder(node.right);
+    System.out.print(node.key + " ");
+}`,
+      cpp: `void postOrder(Node* node) {
+    if (node == NULL) return;
+    postOrder(node->left);
+    postOrder(node->right);
+    cout << node->key << " ";
+}`,
+      c: `void postOrder(struct Node* root) {
+    if (root != NULL) {
+        postOrder(root->left);
+        postOrder(root->right);
+        printf("%d ", root->data);
+    }
 }`
     },
     examples: []

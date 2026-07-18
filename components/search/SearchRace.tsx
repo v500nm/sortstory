@@ -79,7 +79,7 @@ export default function SearchRace({
               engineLinear.initialize(arraySize, true);
             }}
             disabled={engineLinear.status === "running"}
-            className="bg-[#111111] hover:bg-zinc-800 text-white border border-brand-border px-4 py-2 rounded-md text-sm font-medium transition-colors"
+            className="bg-brand-bg-medium hover:bg-brand-bg-light text-brand-text-primary border border-brand-border px-4 py-2 rounded-md text-sm font-medium transition-colors"
           >
             Shuffle Data
           </button>

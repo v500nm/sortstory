@@ -1,51 +1,42 @@
-import type { Metadata } from "next";
+import type { Metadata } from 'next';
+
+const BASE_URL = 'https://sortstory.adnan-mangaonkar.com';
 
 export const metadata: Metadata = {
-  title: "Graph Algorithms Visualizer — SortStory",
+  title: 'Graph Algorithm Visualizer — BFS & DFS Traversal Animation',
   description:
-    "Traverse custom networks using Breadth-First Search (BFS) and Depth-First Search (DFS). Understand topological exploration and state tracking. Free online DSA learning tool.",
+    'Interactive graph algorithm visualizer. Build custom networks, then watch Breadth-First Search (BFS) and Depth-First Search (DFS) traverse nodes in real-time. Understand topological exploration, visited states, and adjacency tracking.',
   keywords: [
-    "graph visualizer",
-    "graph algorithms visualizer",
-    "BFS visualizer",
-    "DFS visualizer",
-    "breadth-first search visualizer",
-    "depth-first search visualizer",
-    "graph traversal",
-    "topological exploration",
-    "DSA visualizer",
+    'graph visualizer',
+    'BFS visualizer',
+    'DFS visualizer',
+    'breadth first search animation',
+    'depth first search animation',
+    'graph traversal visualizer',
+    'graph algorithm tool',
+    'adjacency list visualizer',
+    'network traversal animation',
+    'DSA graph tool',
   ],
   openGraph: {
-    title: "Graph Algorithms Visualizer — SortStory",
+    title: 'Graph Algorithm Visualizer — BFS & DFS | SortStory',
     description:
-      "Visualize Breadth-First and Depth-First Search algorithms on custom networks.",
-    url: "https://sortstory.adnan-mangaonkar.com/graphs",
-    type: "website",
-    images: [
-      {
-        url: "/assets/sortviz.png",
-        width: 1200,
-        height: 630,
-        alt: "SortStory Graphs Visualizer",
-      },
-    ],
+      'Build custom graphs and watch BFS and DFS traverse nodes in real-time. Interactive graph algorithm tool.',
+    url: `${BASE_URL}/graphs`,
+    type: 'website',
+    images: [{ url: '/assets/sortviz.png', width: 1200, height: 630, alt: 'SortStory Graph Algorithm Visualizer' }],
   },
   twitter: {
-    card: "summary_large_image",
-    title: "Graph Algorithms Visualizer — SortStory",
-    description:
-      "Visualize BFS and DFS graph traversals step-by-step.",
-    images: ["/assets/sortviz.png"],
+    card: 'summary_large_image',
+    title: 'Graph Visualizer — BFS & DFS | SortStory',
+    description: 'Build networks, run BFS and DFS, watch node exploration animated step-by-step.',
+    images: ['/assets/sortviz.png'],
   },
   alternates: {
-    canonical: "https://sortstory.adnan-mangaonkar.com/graphs",
+    canonical: `${BASE_URL}/graphs`,
   },
 };
 
-export default function GraphsLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function GraphsLayout({ children }: { children: React.ReactNode }) {
   return <>{children}</>;
 }

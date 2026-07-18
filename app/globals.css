@@ -39,7 +39,7 @@
     --color-brand-bg-card: #ffffff;
     
     --color-brand-text-primary: #0f172a; /* Slate 900 */
-    --color-brand-text-secondary: #475569; /* Slate 600 */
+    --color-brand-text-secondary: #334155; /* Slate 700 (Better contrast) */
     
     --color-brand-accent: #0f172a;
     --color-brand-border: #cbd5e1; /* Slate 300 */
@@ -244,5 +244,17 @@
   @keyframes slideUpFade {
     0% { opacity: 0; transform: translateY(12px); }
     100% { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Scroll reveal animation classes */
+  .reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+  }
+  .reveal-on-scroll.revealed {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

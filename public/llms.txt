@@ -17,6 +17,13 @@ SortStory is a highly performant, interactive algorithm visualizer and learning 
 - **Automata & ML:** Conway's Game of Life and K-Means Clustering visualization.
 - **Search Algorithms:** Visualizing search operations.
 
+## The Adnan Mangaonkar Digital Ecosystem
+
+SortStory is part of a larger digital network built by Adnan Mangaonkar:
+1. **SortStory (This Site):** A free interactive Data Structures and Algorithms (DSA) visualization platform. (https://sortstory.adnan-mangaonkar.com)
+2. **Adnan OS:** An interactive, operating-system-styled personal portfolio highlighting frontend mastery. (https://adnan-mangaonkar.com)
+3. **Business Consulting Portfolio:** A sleek, dark-mode agency site focused on scalable enterprise software, case studies, and corporate consulting. (https://business.adnan-mangaonkar.com)
+
 ## Links
 - **Homepage:** https://sortstory.adnan-mangaonkar.com
 - **Creator Website:** https://adnan-mangaonkar.com

@@ -122,7 +122,7 @@ export default function PathfindingRace({ speed, obstacleDensity }: PathfindingR
       {/* Race Controls Bar */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between glass-card premium-border p-4 gap-3">
         <div className="flex items-center gap-3">
-          <div className="h-8 w-8 rounded-lg bg-[#111111] border border-brand-border flex items-center justify-center">
+          <div className="h-8 w-8 rounded-lg bg-brand-bg-medium border border-brand-border flex items-center justify-center">
             <svg
               fill="none"
               height="16"
@@ -132,7 +132,7 @@ export default function PathfindingRace({ speed, obstacleDensity }: PathfindingR
               strokeWidth="2.5"
               viewBox="0 0 24 24"
               width="16"
-              className="text-white"
+              className="text-brand-text-primary"
             >
               <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
             </svg>
@@ -152,7 +152,7 @@ export default function PathfindingRace({ speed, obstacleDensity }: PathfindingR
           <button
             onClick={() => handleMaze(mazeAlgorithms.recursiveBacktracking)}
             disabled={isBusy}
-            className="flex items-center gap-1.5 bg-[#171717] border border-brand-border rounded-md py-2 px-3 hover:bg-[#27272a] transition-all text-[11px] font-semibold tracking-wide disabled:opacity-40 disabled:cursor-not-allowed text-white"
+            className="flex items-center gap-1.5 bg-brand-bg-card border border-brand-border rounded-md py-2 px-3 hover:bg-brand-bg-medium transition-all text-[11px] font-semibold tracking-wide disabled:opacity-40 disabled:cursor-not-allowed text-brand-text-primary"
           >
             <svg fill="none" height="10" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" width="10" className="text-brand-purple">
               <path d="M3 3h18v18H3zM9 3v6M15 9v6" />
@@ -162,21 +162,21 @@ export default function PathfindingRace({ speed, obstacleDensity }: PathfindingR
           <button
             onClick={handleRandomWalls}
             disabled={isBusy}
-            className="flex items-center gap-1.5 bg-[#171717] border border-brand-border rounded-md py-2 px-3 hover:bg-[#27272a] transition-all text-[11px] font-semibold tracking-wide disabled:opacity-40 disabled:cursor-not-allowed text-white"
+            className="flex items-center gap-1.5 bg-brand-bg-card border border-brand-border rounded-md py-2 px-3 hover:bg-brand-bg-medium transition-all text-[11px] font-semibold tracking-wide disabled:opacity-40 disabled:cursor-not-allowed text-brand-text-primary"
           >
             WALLS {Math.round(obstacleDensity * 100)}%
           </button>
           <button
             onClick={handleClearPath}
             disabled={isBusy}
-            className="flex items-center gap-1.5 bg-[#171717] border border-brand-border rounded-md py-2 px-3 hover:bg-[#27272a] transition-all text-[11px] font-semibold tracking-wide disabled:opacity-40 disabled:cursor-not-allowed text-white"
+            className="flex items-center gap-1.5 bg-brand-bg-card border border-brand-border rounded-md py-2 px-3 hover:bg-brand-bg-medium transition-all text-[11px] font-semibold tracking-wide disabled:opacity-40 disabled:cursor-not-allowed text-brand-text-primary"
           >
             CLEAR PATH
           </button>
           <button
             onClick={handleClearBoard}
             disabled={isBusy}
-            className="flex items-center gap-1.5 bg-[#171717] border border-brand-border rounded-md py-2 px-3 hover:bg-[#27272a] transition-all text-[11px] font-semibold tracking-wide disabled:opacity-40 disabled:cursor-not-allowed text-white"
+            className="flex items-center gap-1.5 bg-brand-bg-card border border-brand-border rounded-md py-2 px-3 hover:bg-brand-bg-medium transition-all text-[11px] font-semibold tracking-wide disabled:opacity-40 disabled:cursor-not-allowed text-brand-text-primary"
           >
             CLEAR ALL
           </button>
@@ -200,7 +200,7 @@ export default function PathfindingRace({ speed, obstacleDensity }: PathfindingR
           ) : (
             <button
               onClick={handleStop}
-              className="flex items-center gap-1.5 bg-brand-border text-white font-bold tracking-wide rounded-md py-2 px-5 hover:bg-brand-border-light transition-all text-xs"
+              className="flex items-center gap-1.5 bg-brand-border text-brand-text-primary font-bold tracking-wide rounded-md py-2 px-5 hover:bg-brand-border-light transition-all text-xs"
             >
               <svg
                 fill="currentColor"

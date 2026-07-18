@@ -12,6 +12,7 @@ export default function Header() {
   const closeMenu = () => setIsMenuOpen(false);
 
   const navLinks = [
+    { href: "/learn", label: "Learn" },
     { href: "/sort", label: "Sorting" },
     { href: "/search", label: "Searching" },
     { href: "/pathfinding", label: "Pathfinding" },
@@ -65,7 +66,7 @@ export default function Header() {
             <a 
               href="https://adnan-mangaonkar.com" 
               target="_blank" 
-              rel="noopener noreferrer"
+              rel="author noopener noreferrer"
               className="text-[10px] font-bold tracking-widest uppercase text-brand-text-secondary hover:text-brand-purple transition-colors flex items-center gap-1.5"
               title="Adnan Mangaonkar"
             >
@@ -127,7 +128,7 @@ export default function Header() {
               <a 
                 href="https://adnan-mangaonkar.com" 
                 target="_blank" 
-                rel="noopener noreferrer"
+                rel="author noopener noreferrer"
                 className="text-xs font-bold tracking-widest uppercase text-brand-text-secondary hover:text-brand-purple transition-colors flex items-center gap-2"
               >
                 <span className="w-5 h-5 rounded-full bg-brand-bg-card border border-brand-border flex items-center justify-center text-brand-accent shadow-sm">
