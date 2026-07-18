@@ -1,5 +1,3 @@
-// Core utility functions — pure helpers only (no global mutable state)
-
 export const generateRandomArray = (size: number): number[] => {
   return Array.from({ length: size }, () => Math.floor(Math.random() * 95) + 5);
 };
