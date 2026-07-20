@@ -4,6 +4,7 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
+import HeroAnimation from "@/components/HeroAnimation";
 
 const MotionLink = motion.create(Link);
 
@@ -42,70 +43,72 @@ export default function Home() {
       <Header />
 
       {/* Hero Section */}
-      <section className="flex-grow flex flex-col justify-center items-start text-left px-4 sm:px-8 py-10 lg:py-24 max-w-[1200px] mx-auto relative z-10 w-full">
+      <section className="flex-grow flex items-center justify-center px-4 sm:px-8 py-12 lg:py-16 max-w-[1400px] mx-auto relative z-10 w-full">
         
         {/* Glow Effects */}
-        <div className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-brand-purple/5 blur-[120px] rounded-full -z-10 pointer-events-none" />
-        <div className="absolute top-1/2 right-1/4 translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-brand-cyan/5 blur-[100px] rounded-full -z-10 pointer-events-none" />
+        <div className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-brand-border/10 blur-[120px] rounded-full -z-10 pointer-events-none" />
 
-        <motion.div 
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="space-y-8 max-w-3xl w-full"
-        >
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center w-full">
           <motion.div 
-            variants={itemVariants}
-            className="inline-flex items-center gap-2 bg-brand-bg-card border border-brand-purple/30 shadow-[0_0_20px_rgba(129,140,248,0.15)] px-4 py-2 rounded-full text-xs font-bold tracking-widest text-brand-purple uppercase"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="space-y-6 max-w-2xl w-full"
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-brand-cyan animate-pulse" />
-            Advanced Algorithmic Execution Engine
-          </motion.div>
-          
-          <motion.h1 
-            variants={itemVariants}
-            className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-brand-text-primary leading-[1.1]"
-          >
-            Master Computer Science <br className="hidden sm:block" />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-brand-cyan">Through Visual Execution.</span>
-          </motion.h1>
-          
-          <motion.p 
-            variants={itemVariants}
-            className="text-base sm:text-lg md:text-xl text-brand-text-secondary font-medium leading-relaxed max-w-2xl"
-          >
-            SortStory bridges the gap between abstract code and memory state. Explore, execute, and analyze over 20+ Data Structures and Algorithms with high-performance, real-time visualization.
-          </motion.p>
+            <motion.div 
+              variants={itemVariants}
+              className="inline-flex items-center gap-2 bg-brand-bg-card border border-brand-border px-4 py-2 rounded-full text-xs font-bold tracking-widest text-brand-text-secondary uppercase shadow-sm"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-brand-text-primary" />
+              High-Performance Engine
+            </motion.div>
+            
+            <motion.h1 
+              variants={itemVariants}
+              className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-brand-text-primary leading-[1.1]"
+            >
+              Master Computer Science.
+            </motion.h1>
+            
+            <motion.p 
+              variants={itemVariants}
+              className="text-base sm:text-lg md:text-xl text-brand-text-secondary font-medium leading-relaxed max-w-xl"
+            >
+              SortStory bridges the gap between abstract code and memory state. Explore, execute, and analyze over 20+ Data Structures and Algorithms with high-performance, real-time visualization.
+            </motion.p>
 
-          <motion.div 
-            variants={itemVariants}
-            className="flex flex-col sm:flex-row items-start justify-start gap-4 pt-6"
-          >
-            <Link 
-              href="/learn" 
-              className="group relative w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-brand-purple via-indigo-500 to-brand-cyan text-white font-bold rounded-xl transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_30px_rgba(129,140,248,0.5)] active:scale-[0.98] flex items-center justify-center gap-2 border border-brand-purple/30"
+            <motion.div 
+              variants={itemVariants}
+              className="flex flex-col sm:flex-row items-start justify-start gap-4 pt-6"
             >
-              <svg fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5 group-hover:animate-bounce"><path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" /></svg>
-              <span>Start Learning</span>
-            </Link>
-            
-            <Link 
-              href="/sort" 
-              className="group relative w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-brand-green to-emerald-500 text-black font-extrabold rounded-xl transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_30px_rgba(52,211,153,0.5)] active:scale-[0.98] flex items-center justify-center gap-2 border border-brand-green/30"
-            >
-              <svg fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5 group-hover:rotate-12 transition-transform"><path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg>
-              <span>Start Executing</span>
-            </Link>
-            
-            <a 
-              href="#modules" 
-              className="w-full sm:w-auto px-8 py-4 bg-brand-bg-card/45 backdrop-blur-md border border-brand-border text-brand-text-primary font-bold rounded-xl transition-all duration-300 hover:bg-brand-bg-light hover:border-brand-text-secondary active:scale-[0.98] flex items-center justify-center gap-2 shadow-lg"
-            >
-              <svg fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5"><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
-              <span>Explore Modules</span>
-            </a>
+              <Link 
+                href="/learn" 
+                className="group relative w-full sm:w-auto px-8 py-4 bg-brand-text-primary text-brand-bg-dark font-bold rounded-xl transition-all duration-300 hover:scale-[1.02] hover:bg-brand-text-secondary active:scale-[0.98] flex items-center justify-center gap-2"
+              >
+                <svg fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5 group-hover:translate-x-1 transition-transform"><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
+                <span>Start Learning</span>
+              </Link>
+              
+              <Link 
+                href="/sort" 
+                className="group relative w-full sm:w-auto px-8 py-4 bg-brand-bg-card border border-brand-border text-brand-text-primary font-bold rounded-xl transition-all duration-300 hover:bg-brand-bg-light hover:border-brand-text-secondary active:scale-[0.98] flex items-center justify-center gap-2 shadow-sm"
+              >
+                <svg fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5"><path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg>
+                <span>Start Executing</span>
+              </Link>
+            </motion.div>
           </motion.div>
-        </motion.div>
+
+          {/* Right Side Animation */}
+          <motion.div 
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="w-full h-full hidden lg:block"
+          >
+            <HeroAnimation />
+          </motion.div>
+        </div>
       </section>
 
       {/* Depth & Features Section (Bento Grid) */}

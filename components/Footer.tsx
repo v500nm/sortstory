@@ -32,8 +32,9 @@ const visualizerLinks = [
 
 const resourceLinks = [
   { href: "/learn", label: "Learn & Practice" },
+  { href: "/terms-and-conditions", label: "Terms & Conditions" },
   { href: "/privacy", label: "Privacy Policy" },
-  { href: "/sitemap.xml", label: "Sitemap" },
+  { href: "/visual-sitemap", label: "Sitemap" },
 ];
 
 const connectLinks = [
