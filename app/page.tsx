@@ -42,17 +42,17 @@ export default function Home() {
       <Header />
 
       {/* Hero Section */}
-      <section className="flex-grow flex flex-col justify-center items-center text-center px-4 sm:px-4 py-10 lg:py-16 max-w-[1200px] mx-auto relative z-10">
+      <section className="flex-grow flex flex-col justify-center items-start text-left px-4 sm:px-8 py-10 lg:py-24 max-w-[1200px] mx-auto relative z-10 w-full">
         
         {/* Glow Effects */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-brand-purple/5 blur-[120px] rounded-full -z-10 pointer-events-none" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-brand-cyan/5 blur-[100px] rounded-full -z-10 pointer-events-none" />
+        <div className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-brand-purple/5 blur-[120px] rounded-full -z-10 pointer-events-none" />
+        <div className="absolute top-1/2 right-1/4 translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-brand-cyan/5 blur-[100px] rounded-full -z-10 pointer-events-none" />
 
         <motion.div 
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="space-y-8 max-w-4xl mx-auto"
+          className="space-y-8 max-w-3xl w-full"
         >
           <motion.div 
             variants={itemVariants}
@@ -72,14 +72,14 @@ export default function Home() {
           
           <motion.p 
             variants={itemVariants}
-            className="text-base sm:text-lg md:text-xl text-brand-text-secondary font-medium leading-relaxed max-w-2xl mx-auto"
+            className="text-base sm:text-lg md:text-xl text-brand-text-secondary font-medium leading-relaxed max-w-2xl"
           >
             SortStory bridges the gap between abstract code and memory state. Explore, execute, and analyze over 20+ Data Structures and Algorithms with high-performance, real-time visualization.
           </motion.p>
 
           <motion.div 
             variants={itemVariants}
-            className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-6"
+            className="flex flex-col sm:flex-row items-start justify-start gap-4 pt-6"
           >
             <Link 
               href="/learn" 
@@ -109,13 +109,13 @@ export default function Home() {
       </section>
 
       {/* Depth & Features Section (Bento Grid) */}
-      <section id="modules" className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 py-20 relative z-10">
+      <section id="modules" className="w-full max-w-[1400px] mx-auto px-4 sm:px-8 py-20 relative z-10">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="mb-12 text-center md:text-left"
+          className="mb-12 text-left"
         >
           <h2 className="text-2xl md:text-3xl font-black tracking-tight text-brand-text-primary">Comprehensive DSA Modules</h2>
           <p className="text-brand-text-secondary mt-2 font-medium max-w-2xl">Dive deep into complexities, execution flows, and real-world implementations across 6 distinct computational domains.</p>
@@ -254,23 +254,23 @@ export default function Home() {
       </section>
 
       {/* Feature Depth Breakdown */}
-      <section className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 py-20 border-t border-brand-border/40 relative z-10">
+      <section className="w-full max-w-[1400px] mx-auto px-4 sm:px-8 py-20 border-t border-brand-border/40 relative z-10">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-12"
+          className="grid grid-cols-1 md:grid-cols-3 gap-12 text-left"
         >
-          <div className="space-y-4">
+          <div className="space-y-4 border-l-2 border-brand-purple/30 pl-4">
             <h4 className="text-lg font-bold text-brand-text-primary">Algorithm Flows</h4>
             <p className="text-sm text-brand-text-secondary leading-relaxed">Step-by-step logic traces for every algorithm. Don't just watch the animation—read the exact sequence of logical deductions occurring under the hood.</p>
           </div>
-          <div className="space-y-4">
+          <div className="space-y-4 border-l-2 border-brand-cyan/30 pl-4">
             <h4 className="text-lg font-bold text-brand-text-primary">Multi-Language Code</h4>
             <p className="text-sm text-brand-text-secondary leading-relaxed">Every algorithm includes production-ready code implementations in JavaScript, Python, Java, and C++. Switch seamlessly to learn syntax differences.</p>
           </div>
-          <div className="space-y-4">
+          <div className="space-y-4 border-l-2 border-brand-green/30 pl-4">
             <h4 className="text-lg font-bold text-brand-text-primary">Complexity & Use Cases</h4>
             <p className="text-sm text-brand-text-secondary leading-relaxed">Complete breakdowns of Best, Average, and Worst case Time/Space complexities, paired with real-world enterprise engineering use cases.</p>
           </div>
