@@ -31,12 +31,12 @@ const cardVariants = {
 
 export default function LearnPageClient({ topics }: LearnPageClientProps) {
   return (
-    <div className="w-full max-w-[1200px] mx-auto p-8 overflow-y-auto">
+    <div className="w-full max-w-[1200px] mx-auto px-4 py-6 sm:px-6 sm:py-8 md:p-8 overflow-y-auto">
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-        className="mb-12"
+        className="mb-6 sm:mb-8 md:mb-12"
       >
         <h1 className="text-4xl font-black tracking-tight text-brand-text-primary mb-4">Learn & Practice</h1>
         <p className="text-brand-text-secondary text-lg max-w-2xl">

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Header from "@/components/Header";
+import PageHeader from "@/components/PageHeader";
 import { useSearchEngine } from "@/hooks/useSearchEngine";
 import SearchControls from "@/components/search/SearchControls";
 import SearchVisualizer from "@/components/search/SearchVisualizer";
@@ -29,7 +30,11 @@ export default function SearchPage() {
     <div className="min-h-screen bg-brand-bg-dark text-brand-text-primary flex flex-col font-sans selection:bg-brand-purple/30">
       <Header />
       
-      <main className="flex-1 p-4 md:p-6 lg:p-8 pt-24 h-screen flex flex-col max-w-[1600px] mx-auto w-full">
+      <main className="flex-1 px-4 sm:px-6 py-4 md:py-6 flex flex-col max-w-[1600px] mx-auto w-full min-h-screen">
+        <PageHeader 
+          title="Searching Visualizer" 
+          description="Compare Linear Search and Binary Search visually on randomized arrays." 
+        />
         <div className="flex flex-col lg:flex-row gap-6 h-full min-h-0">
           
           {/* Controls Sidebar */}
