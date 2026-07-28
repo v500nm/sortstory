@@ -44,7 +44,7 @@ export default function HeroSection() {
             {/* DeepDive Editorial Style Typography */}
             <motion.h1 
               variants={itemVariants}
-              className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black font-serif tracking-tighter leading-none"
+              className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black font-serif tracking-tighter leading-none"
             >
               Master DSA Through <span className="italic text-brand-purple block mt-2">Visual Execution.</span>
             </motion.h1>
@@ -65,6 +65,13 @@ export default function HeroSection() {
                 className="group relative w-full sm:w-auto px-8 py-4 bg-brand-text-primary text-brand-bg-dark font-extrabold text-base rounded-full transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-3 shadow-md"
               >
                 <span>Initialize SortContext</span>
+                <svg fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5 group-hover:translate-x-1 transition-transform"><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
+              </Link>
+              <Link 
+                href="/sort" 
+                className="group relative w-full sm:w-auto px-8 py-4 bg-transparent border border-brand-border text-brand-text-primary font-bold text-base rounded-full transition-all duration-300 hover:bg-black/5 dark:hover:bg-white/5 active:scale-[0.98] flex items-center justify-center gap-3"
+              >
+                <span>Explore Sorting</span>
                 <svg fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5 group-hover:translate-x-1 transition-transform"><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
               </Link>
             </motion.div>

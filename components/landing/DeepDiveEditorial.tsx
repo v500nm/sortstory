@@ -20,7 +20,7 @@ export default function DeepDiveEditorial() {
           className="mb-12 md:mb-20 text-center md:text-left border-b-2 md:border-b-4 border-brand-border pb-6 md:pb-8"
         >
           <h4 className="text-xs md:text-sm font-bold tracking-[0.2em] uppercase text-brand-text-secondary mb-2 md:mb-4">Engineering Architecture</h4>
-          <h2 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black font-serif leading-none tracking-tighter">
+          <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black font-serif leading-none tracking-tighter">
             Escaping the <br className="hidden sm:block"/> <span className="italic text-brand-purple">Event Loop.</span>
           </h2>
         </motion.header>

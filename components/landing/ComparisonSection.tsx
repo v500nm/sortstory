@@ -50,7 +50,7 @@ export default function ComparisonSection() {
       
       <div className="mb-12 md:mb-16 text-center md:text-left border-b-2 md:border-b-4 border-brand-border pb-6 md:pb-8">
         <h4 className="text-xs md:text-sm font-bold tracking-[0.2em] uppercase text-brand-text-secondary mb-2 md:mb-4">Performance Metrics</h4>
-        <h2 className="text-4xl md:text-6xl font-black font-serif tracking-tighter">Complexity <span className="italic text-brand-yellow">Matrix.</span></h2>
+        <h2 className="text-3xl md:text-5xl font-black font-serif tracking-tighter">Complexity <span className="italic text-brand-yellow">Matrix.</span></h2>
         <p className="text-lg md:text-xl font-serif text-brand-text-secondary mt-4 leading-relaxed font-light">Real-world performance estimates for N=1,000 elements.</p>
       </div>
 

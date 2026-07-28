@@ -27,7 +27,7 @@ export default function AlgorithmsBento() {
     <section id="modules" className="w-full max-w-[1400px] mx-auto px-4 sm:px-8 py-16 md:py-24 relative z-10">
       <div className="mb-12 max-w-3xl">
         <h4 className="text-xs md:text-sm font-bold tracking-[0.2em] uppercase text-brand-text-secondary mb-4">Architecture Modules</h4>
-        <h2 className="text-4xl md:text-6xl font-black font-serif tracking-tighter mb-4">Comprehensive <span className="italic text-brand-purple">Domains.</span></h2>
+        <h2 className="text-3xl md:text-5xl font-black font-serif tracking-tighter mb-4">Comprehensive <span className="italic text-brand-purple">Domains.</span></h2>
         <p className="text-lg md:text-xl text-brand-text-secondary font-medium font-serif font-light">
           A minimalist interface hiding a highly complex engine. Dive into precise implementations across 6 computational domains.
         </p>

@@ -35,7 +35,7 @@ export default function TimelineSection() {
       
       <div className="mb-12 md:mb-20 max-w-3xl">
         <h4 className="text-xs md:text-sm font-bold tracking-[0.2em] uppercase text-brand-text-secondary mb-4">Micro-Architecture</h4>
-        <h2 className="text-4xl md:text-6xl font-black font-serif tracking-tighter">Execution <span className="italic text-brand-cyan">Lifecycle.</span></h2>
+        <h2 className="text-3xl md:text-5xl font-black font-serif tracking-tighter">Execution <span className="italic text-brand-cyan">Lifecycle.</span></h2>
         <p className="text-lg md:text-xl font-serif text-brand-text-secondary mt-4 leading-relaxed font-light">
           Deep dive into a single parallel comparison event inside Bitonic Sort.
         </p>

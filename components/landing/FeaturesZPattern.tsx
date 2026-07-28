@@ -11,7 +11,7 @@ export default function FeaturesZPattern() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-center">
           <div className="lg:col-span-6 space-y-6 md:space-y-8">
             <h4 className="text-xs md:text-sm font-bold tracking-[0.2em] uppercase text-brand-text-secondary">Parallel Execution</h4>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-black font-serif leading-none tracking-tighter">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-serif leading-none tracking-tighter">
               Yielding Execution <span className="italic text-brand-cyan">Contexts.</span>
             </h2>
             <p className="text-lg md:text-xl font-serif leading-relaxed font-light text-brand-text-secondary">
@@ -78,7 +78,7 @@ export default function FeaturesZPattern() {
 
           <div className="lg:col-span-6 space-y-6 md:space-y-8 order-1 lg:order-2">
             <h4 className="text-xs md:text-sm font-bold tracking-[0.2em] uppercase text-brand-text-secondary">Adjacency Mathematics</h4>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-black font-serif leading-none tracking-tighter">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-serif leading-none tracking-tighter">
               Heuristic Graph <span className="italic text-brand-purple">Engines.</span>
             </h2>
             <p className="text-lg md:text-xl font-serif leading-relaxed font-light text-brand-text-secondary">
