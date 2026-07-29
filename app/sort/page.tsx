@@ -6,6 +6,7 @@ import AlgoDetails from "@/components/AlgoDetails";
 import IntroModal from "@/components/IntroModal";
 import ComparativeView from "@/components/ComparativeView";
 import Header from "@/components/Header";
+import PageHeader from "@/components/PageHeader";
 import { useSortEngine } from "@/hooks/useSortEngine";
 import * as sorts from "@/lib/index";
 import type { SortAlgorithmFn } from "@/lib/types";
@@ -57,7 +58,11 @@ export default function Sort() {
 
       <Header />
 
-      <div className="max-w-[1700px] mx-auto px-4 sm:px-6 py-6 space-y-6">
+      <div className="max-w-[1700px] mx-auto px-4 sm:px-6 py-4 md:py-6 space-y-4 md:space-y-6">
+        <PageHeader 
+          title="Sorting Visualizer" 
+          description="Visualize and compare 16 sorting algorithms in real-time, side-by-side or individually." 
+        />
         {!compareMode ? (
           /* ═══ Single Mode ═══ */
           <section className="flex flex-col lg:flex-row gap-6">

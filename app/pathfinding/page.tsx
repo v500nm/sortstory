@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Header from "@/components/Header";
+import PageHeader from "@/components/PageHeader";
 import GridVisualizer from "@/components/pathfinding/GridVisualizer";
 import PathfindingControls from "@/components/pathfinding/PathfindingControls";
 import PathfindingRace from "@/components/pathfinding/PathfindingRace";
@@ -21,7 +22,11 @@ export default function PathfindingPage() {
     <main className="min-h-screen w-full bg-brand-bg-dark text-brand-text-primary font-sans relative flex flex-col">
       <Header />
 
-      <div className="flex-1 flex flex-col max-w-[1500px] w-full mx-auto px-2 sm:px-2 py-2">
+      <div className="flex-1 flex flex-col max-w-[1500px] w-full mx-auto px-4 sm:px-6 py-4 md:py-6">
+        <PageHeader 
+          title="Pathfinding & Maze Visualizer" 
+          description="Race Dijkstra vs A* and visualize dynamic maze generation on a grid." 
+        />
         {!raceMode ? (
           /* ═══ Single Algorithm Mode ═══ */
           <section className="flex flex-col lg:flex-row gap-6 flex-1 min-h-0">

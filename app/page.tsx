@@ -1,283 +1,51 @@
 "use client";
 
-import Link from "next/link";
 import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import { motion } from "framer-motion";
-
-const MotionLink = motion.create(Link);
+import HeroSection from "@/components/landing/HeroSection";
+import FeaturesZPattern from "@/components/landing/FeaturesZPattern";
+import AlgorithmsBento from "@/components/landing/AlgorithmsBento";
+import TimelineSection from "@/components/landing/TimelineSection";
+import ComparisonSection from "@/components/landing/ComparisonSection";
+import DeepDiveEditorial from "@/components/landing/DeepDiveEditorial";
+import InteractiveNavigation from "@/components/landing/InteractiveNavigation";
+import PortfolioGrid from "@/components/landing/PortfolioGrid";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 export default function Home() {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.12,
-        delayChildren: 0.1
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 15 },
-    visible: { 
-      opacity: 1, 
-      y: 0,
-      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const } 
-    }
-  };
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 25 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const }
-    }
-  };
+  const { scrollYProgress } = useScroll();
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
 
   return (
-    <main className="min-h-screen w-full bg-brand-bg-dark text-brand-text-primary font-sans relative flex flex-col overflow-x-hidden transition-colors duration-300">
+    <main className="min-h-screen w-full font-sans relative flex flex-col overflow-x-hidden text-brand-text-primary selection:bg-brand-purple/30">
+      
+      {/* Unified Hybrid Background Canvas */}
+      <div className="fixed inset-0 w-full h-full -z-50 pointer-events-none bg-brand-bg-dark">
+         {/* Subtle ambient gradients that slowly move based on scroll */}
+         <motion.div 
+           style={{ y: backgroundY }}
+           className="absolute inset-0 opacity-20 dark:opacity-30 mix-blend-screen"
+         >
+           <div className="absolute top-[10%] left-[10%] w-[500px] h-[500px] bg-brand-cyan/10 blur-[120px] rounded-full" />
+           <div className="absolute top-[40%] right-[10%] w-[600px] h-[600px] bg-brand-purple/10 blur-[150px] rounded-full" />
+           <div className="absolute bottom-[20%] left-[30%] w-[800px] h-[800px] bg-brand-yellow/5 blur-[120px] rounded-full" />
+         </motion.div>
+         {/* Grid overlay for texture */}
+         <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center opacity-[0.03] dark:opacity-5 mix-blend-overlay" />
+      </div>
+
       <Header />
 
-      {/* Hero Section */}
-      <section className="flex-grow flex flex-col justify-center items-start text-left px-4 sm:px-8 py-10 lg:py-24 max-w-[1200px] mx-auto relative z-10 w-full">
-        
-        {/* Glow Effects */}
-        <div className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-brand-purple/5 blur-[120px] rounded-full -z-10 pointer-events-none" />
-        <div className="absolute top-1/2 right-1/4 translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-brand-cyan/5 blur-[100px] rounded-full -z-10 pointer-events-none" />
+      <div className="flex flex-col w-full relative z-10">
+        <HeroSection />
+        <FeaturesZPattern />
+        <AlgorithmsBento />
+        <InteractiveNavigation />
+        <TimelineSection />
+        <ComparisonSection />
+        <DeepDiveEditorial />
+        <PortfolioGrid />
+      </div>
 
-        <motion.div 
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="space-y-8 max-w-3xl w-full"
-        >
-          <motion.div 
-            variants={itemVariants}
-            className="inline-flex items-center gap-2 bg-brand-bg-card border border-brand-purple/30 shadow-[0_0_20px_rgba(129,140,248,0.15)] px-4 py-2 rounded-full text-xs font-bold tracking-widest text-brand-purple uppercase"
-          >
-            <span className="w-1.5 h-1.5 rounded-full bg-brand-cyan animate-pulse" />
-            Advanced Algorithmic Execution Engine
-          </motion.div>
-          
-          <motion.h1 
-            variants={itemVariants}
-            className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-brand-text-primary leading-[1.1]"
-          >
-            Master Computer Science <br className="hidden sm:block" />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-brand-cyan">Through Visual Execution.</span>
-          </motion.h1>
-          
-          <motion.p 
-            variants={itemVariants}
-            className="text-base sm:text-lg md:text-xl text-brand-text-secondary font-medium leading-relaxed max-w-2xl"
-          >
-            SortStory bridges the gap between abstract code and memory state. Explore, execute, and analyze over 20+ Data Structures and Algorithms with high-performance, real-time visualization.
-          </motion.p>
-
-          <motion.div 
-            variants={itemVariants}
-            className="flex flex-col sm:flex-row items-start justify-start gap-4 pt-6"
-          >
-            <Link 
-              href="/learn" 
-              className="group relative w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-brand-purple via-indigo-500 to-brand-cyan text-white font-bold rounded-xl transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_30px_rgba(129,140,248,0.5)] active:scale-[0.98] flex items-center justify-center gap-2 border border-brand-purple/30"
-            >
-              <svg fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5 group-hover:animate-bounce"><path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" /></svg>
-              <span>Start Learning</span>
-            </Link>
-            
-            <Link 
-              href="/sort" 
-              className="group relative w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-brand-green to-emerald-500 text-black font-extrabold rounded-xl transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_30px_rgba(52,211,153,0.5)] active:scale-[0.98] flex items-center justify-center gap-2 border border-brand-green/30"
-            >
-              <svg fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5 group-hover:rotate-12 transition-transform"><path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg>
-              <span>Start Executing</span>
-            </Link>
-            
-            <a 
-              href="#modules" 
-              className="w-full sm:w-auto px-8 py-4 bg-brand-bg-card/45 backdrop-blur-md border border-brand-border text-brand-text-primary font-bold rounded-xl transition-all duration-300 hover:bg-brand-bg-light hover:border-brand-text-secondary active:scale-[0.98] flex items-center justify-center gap-2 shadow-lg"
-            >
-              <svg fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5"><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
-              <span>Explore Modules</span>
-            </a>
-          </motion.div>
-        </motion.div>
-      </section>
-
-      {/* Depth & Features Section (Bento Grid) */}
-      <section id="modules" className="w-full max-w-[1400px] mx-auto px-4 sm:px-8 py-20 relative z-10">
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="mb-12 text-left"
-        >
-          <h2 className="text-2xl md:text-3xl font-black tracking-tight text-brand-text-primary">Comprehensive DSA Modules</h2>
-          <p className="text-brand-text-secondary mt-2 font-medium max-w-2xl">Dive deep into complexities, execution flows, and real-world implementations across 6 distinct computational domains.</p>
-        </motion.div>
-
-        <motion.div 
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-        >
-          
-          {/* Learn & Practice */}
-          <MotionLink 
-            variants={cardVariants}
-            whileHover={{ y: -6, transition: { duration: 0.2 } }}
-            href="/learn" 
-            className="group bg-brand-bg-card border border-brand-purple rounded-2xl p-6 hover:bg-brand-bg-light transition-colors flex flex-col gap-4 md:col-span-2 lg:col-span-3 relative overflow-hidden"
-          >
-            <div className="absolute top-0 right-0 w-64 h-64 bg-brand-purple/5 rounded-full blur-3xl -z-10" />
-            <div className="w-12 h-12 rounded-xl bg-brand-purple/10 border border-brand-purple/20 flex items-center justify-center text-brand-purple">
-              <svg fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" /></svg>
-            </div>
-            <div>
-              <h3 className="text-xl font-bold text-brand-text-primary mb-2 group-hover:text-brand-purple transition-colors">Learn & Practice</h3>
-              <p className="text-base text-brand-text-secondary leading-relaxed max-w-3xl">Our new dedicated curriculum module. Deep dive into step-by-step algorithms, toggle code between Python, JS, Java, and C++, and test your skills with practice problems.</p>
-            </div>
-          </MotionLink>
-
-          {/* Sorting */}
-          <MotionLink 
-            variants={cardVariants}
-            whileHover={{ y: -6, transition: { duration: 0.2 } }}
-            href="/sort" 
-            className="group bg-brand-bg-card border border-brand-border rounded-2xl p-6 hover:border-brand-green/50 hover:bg-brand-bg-light transition-colors flex flex-col gap-4"
-          >
-            <div className="w-12 h-12 rounded-xl bg-brand-green/10 border border-brand-green/20 flex items-center justify-center text-brand-green">
-              <svg fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M3 4.5h14.25M3 9h9.75M3 13.5h5.25m5.25-.75L17.25 9m0 0L21 12.75M17.25 9v12" /></svg>
-            </div>
-            <div>
-              <h3 className="text-lg font-bold text-brand-text-primary mb-1 group-hover:text-brand-green transition-colors">Sorting Algorithms</h3>
-              <p className="text-sm text-brand-text-secondary leading-relaxed">Visualize 10+ sorting algorithms including Quick, Merge, Heap, and Radix Sort. Compare their performance in real-time races.</p>
-            </div>
-            <div className="mt-auto pt-4 flex gap-2">
-              <span className="text-[10px] font-mono bg-brand-bg-dark px-2 py-1 rounded text-brand-text-secondary border border-brand-border">16 Algorithms</span>
-              <span className="text-[10px] font-mono bg-brand-bg-dark px-2 py-1 rounded text-brand-text-secondary border border-brand-border">O(n log n)</span>
-            </div>
-          </MotionLink>
-
-          {/* Pathfinding */}
-          <MotionLink 
-            variants={cardVariants}
-            whileHover={{ y: -6, transition: { duration: 0.2 } }}
-            href="/pathfinding" 
-            className="group bg-brand-bg-card border border-brand-border rounded-2xl p-6 hover:border-brand-cyan/50 hover:bg-brand-bg-light transition-colors flex flex-col gap-4"
-          >
-            <div className="w-12 h-12 rounded-xl bg-brand-cyan/10 border border-brand-cyan/20 flex items-center justify-center text-brand-cyan">
-              <svg fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z" /></svg>
-            </div>
-            <div>
-              <h3 className="text-lg font-bold text-brand-text-primary mb-1 group-hover:text-brand-cyan transition-colors">Pathfinding</h3>
-              <p className="text-sm text-brand-text-secondary leading-relaxed">Navigate dynamic grids with obstacles using Dijkstra's and A* Search. Understand heuristic optimizations and shortest-path guarantees.</p>
-            </div>
-            <div className="mt-auto pt-4 flex gap-2">
-              <span className="text-[10px] font-mono bg-brand-bg-dark px-2 py-1 rounded text-brand-text-secondary border border-brand-border">Dijkstra</span>
-              <span className="text-[10px] font-mono bg-brand-bg-dark px-2 py-1 rounded text-brand-text-secondary border border-brand-border">A* Search</span>
-            </div>
-          </MotionLink>
-
-          {/* Linked Lists */}
-          <MotionLink 
-            variants={cardVariants}
-            whileHover={{ y: -6, transition: { duration: 0.2 } }}
-            href="/linked-lists" 
-            className="group bg-brand-bg-card border border-brand-border rounded-2xl p-6 hover:border-brand-rose/50 hover:bg-brand-bg-light transition-colors flex flex-col gap-4"
-          >
-            <div className="w-12 h-12 rounded-xl bg-brand-rose/10 border border-brand-rose/20 flex items-center justify-center text-brand-rose">
-              <svg fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244" /></svg>
-            </div>
-            <div>
-              <h3 className="text-lg font-bold text-brand-text-primary mb-1 group-hover:text-brand-rose transition-colors">Linked Lists</h3>
-              <p className="text-sm text-brand-text-secondary leading-relaxed">Visualize Singly and Doubly Linked Lists. Watch pointers update in real-time as you reverse the list or detect cycles using Floyd's algorithm.</p>
-            </div>
-          </MotionLink>
-
-          {/* Graphs */}
-          <MotionLink 
-            variants={cardVariants}
-            whileHover={{ y: -6, transition: { duration: 0.2 } }}
-            href="/graphs" 
-            className="group bg-brand-bg-card border border-brand-border rounded-2xl p-6 hover:border-brand-purple/50 hover:bg-brand-bg-light transition-colors flex flex-col gap-4"
-          >
-            <div className="w-12 h-12 rounded-xl bg-brand-purple/10 border border-brand-purple/20 flex items-center justify-center text-brand-purple">
-              <svg fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M10.5 6a7.5 7.5 0 107.5 7.5h-7.5V6z" /><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 10.5H21A7.5 7.5 0 0013.5 3v7.5z" /></svg>
-            </div>
-            <div>
-              <h3 className="text-lg font-bold text-brand-text-primary mb-1 group-hover:text-brand-purple transition-colors">Graphs</h3>
-              <p className="text-sm text-brand-text-secondary leading-relaxed">Traverse custom networks using Breadth-First and Depth-First Search. Understand topological exploration and state tracking.</p>
-            </div>
-          </MotionLink>
-
-          {/* Automata & ML */}
-          <MotionLink 
-            variants={cardVariants}
-            whileHover={{ y: -6, transition: { duration: 0.2 } }}
-            href="/automata" 
-            className="group bg-brand-bg-card border border-brand-border rounded-2xl p-6 hover:border-yellow-400/50 hover:bg-brand-bg-light transition-colors flex flex-col gap-4"
-          >
-            <div className="w-12 h-12 rounded-xl bg-yellow-400/10 border border-yellow-400/20 flex items-center justify-center text-yellow-400">
-              <svg fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg>
-            </div>
-            <div>
-              <h3 className="text-lg font-bold text-brand-text-primary mb-1 group-hover:text-yellow-400 transition-colors">Automata & ML</h3>
-              <p className="text-sm text-brand-text-secondary leading-relaxed">Explore Cellular Automata via Conway's Game of Life, and visualize iterative Machine Learning with K-Means Clustering.</p>
-            </div>
-          </MotionLink>
-
-          {/* Trees */}
-          <MotionLink 
-            variants={cardVariants}
-            whileHover={{ y: -6, transition: { duration: 0.2 } }}
-            href="/trees" 
-            className="group bg-brand-bg-card border border-brand-border rounded-2xl p-6 hover:border-orange-400/50 hover:bg-brand-bg-light transition-colors flex flex-col gap-4"
-          >
-            <div className="w-12 h-12 rounded-xl bg-orange-400/10 border border-orange-400/20 flex items-center justify-center text-orange-400">
-              <svg fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z" /></svg>
-            </div>
-            <div>
-              <h3 className="text-lg font-bold text-brand-text-primary mb-1 group-hover:text-orange-400 transition-colors">Trees (BST)</h3>
-              <p className="text-sm text-brand-text-secondary leading-relaxed">Interact with Binary Search Trees. Insert nodes, search for values, and run Pre-Order, In-Order, and Post-Order traversals to see how hierarchical data memory is accessed.</p>
-            </div>
-          </MotionLink>
-
-        </motion.div>
-      </section>
-
-      {/* Feature Depth Breakdown */}
-      <section className="w-full max-w-[1400px] mx-auto px-4 sm:px-8 py-20 border-t border-brand-border/40 relative z-10">
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-12 text-left"
-        >
-          <div className="space-y-4 border-l-2 border-brand-purple/30 pl-4">
-            <h4 className="text-lg font-bold text-brand-text-primary">Algorithm Flows</h4>
-            <p className="text-sm text-brand-text-secondary leading-relaxed">Step-by-step logic traces for every algorithm. Don't just watch the animation—read the exact sequence of logical deductions occurring under the hood.</p>
-          </div>
-          <div className="space-y-4 border-l-2 border-brand-cyan/30 pl-4">
-            <h4 className="text-lg font-bold text-brand-text-primary">Multi-Language Code</h4>
-            <p className="text-sm text-brand-text-secondary leading-relaxed">Every algorithm includes production-ready code implementations in JavaScript, Python, Java, and C++. Switch seamlessly to learn syntax differences.</p>
-          </div>
-          <div className="space-y-4 border-l-2 border-brand-green/30 pl-4">
-            <h4 className="text-lg font-bold text-brand-text-primary">Complexity & Use Cases</h4>
-            <p className="text-sm text-brand-text-secondary leading-relaxed">Complete breakdowns of Best, Average, and Worst case Time/Space complexities, paired with real-world enterprise engineering use cases.</p>
-          </div>
-        </motion.div>
-      </section>
-
-      {/* <Footer /> */}
     </main>
   );
 }

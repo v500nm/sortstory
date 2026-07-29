@@ -24,12 +24,12 @@ export default function Header() {
 
   return (
     <header className="border-b border-brand-border bg-brand-bg-dark/80 backdrop-blur-xl sticky top-0 z-40">
-      <div className="max-w-[1700px] mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
-        <Link href="/" className="text-xl font-semibold tracking-tight text-brand-accent hover:opacity-80 transition-opacity flex items-center gap-2">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-brand-accent">
+      <div className="max-w-[1700px] mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
+        <Link href="/" className="text-2xl font-black font-serif tracking-tight text-brand-text-primary hover:text-brand-accent transition-colors flex items-center gap-2">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-brand-purple">
             <path d="M4 16l4 4 4-4M8 20V4M20 8l-4-4-4 4M16 4v16"/>
           </svg>
-          SortStory
+          <span className="italic">Sort</span>Story
         </Link>
         
         {/* Desktop Navigation */}
@@ -38,7 +38,7 @@ export default function Header() {
             <Link 
               key={link.href}
               href={link.href} 
-              className={`text-sm font-medium transition-colors ${pathname === link.href ? 'text-brand-accent' : 'text-brand-text-secondary hover:text-brand-accent'}`}
+              className={`text-sm font-bold uppercase tracking-wider transition-colors ${pathname === link.href ? 'text-brand-text-primary' : 'text-brand-text-secondary hover:text-brand-text-primary'}`}
             >
               {link.label}
             </Link>

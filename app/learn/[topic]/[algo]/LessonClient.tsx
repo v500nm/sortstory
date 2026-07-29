@@ -61,7 +61,7 @@ export default function LessonClient({ lessons, topic, algo }: Props) {
 
       {/* Main Content Area */}
       <main className="flex-1 overflow-y-auto bg-brand-bg-dark">
-        <div className="max-w-4xl mx-auto p-8 lg:p-12">
+        <div className="max-w-4xl mx-auto px-4 py-6 sm:p-8 lg:p-12">
           {/* Language Toggle Header */}
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 pb-4 border-b border-brand-border">
             <h1 className="text-sm font-bold uppercase tracking-widest text-brand-text-secondary mb-4 sm:mb-0">

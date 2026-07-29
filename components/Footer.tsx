@@ -32,8 +32,9 @@ const visualizerLinks = [
 
 const resourceLinks = [
   { href: "/learn", label: "Learn & Practice" },
+  { href: "/terms-and-conditions", label: "Terms & Conditions" },
   { href: "/privacy", label: "Privacy Policy" },
-  { href: "/sitemap.xml", label: "Sitemap" },
+  { href: "/visual-sitemap", label: "Sitemap" },
 ];
 
 const connectLinks = [
@@ -59,11 +60,11 @@ export default function Footer() {
 
           {/* Brand Column */}
           <motion.div variants={itemVariants} className="lg:col-span-1">
-            <Link href="/" className="inline-flex items-center gap-2 text-lg font-bold text-brand-accent hover:opacity-80 transition-opacity mb-3">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-brand-accent">
+            <Link href="/" className="inline-flex items-center gap-2 text-2xl font-black font-serif tracking-tight text-brand-text-primary hover:text-brand-accent transition-colors mb-3">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-brand-purple">
                 <path d="M4 16l4 4 4-4M8 20V4M20 8l-4-4-4 4M16 4v16"/>
               </svg>
-              SortStory
+              <span className="italic">Sort</span>Story
             </Link>
             <p className="text-xs text-brand-text-secondary leading-relaxed max-w-[220px]">
               Free interactive DSA visualization platform. Explore, execute, and analyze algorithms visually.

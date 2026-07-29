@@ -4,12 +4,12 @@
 
 @theme {
   /* Ultra-modern, premium high-contrast monochrome palette */
-  --color-brand-bg-dark: #000000;
-  --color-brand-bg-medium: #0a0a0a;
-  --color-brand-bg-light: #121212;
+  --color-brand-bg-dark: #0a0a0a; /* Off-black */
+  --color-brand-bg-medium: #111111;
+  --color-brand-bg-light: #1a1a1a;
   --color-brand-bg-card: #171717;
   
-  --color-brand-text-primary: #ffffff;
+  --color-brand-text-primary: #f4f4f5; /* Zinc 100 */
   --color-brand-text-secondary: #a1a1aa; /* Zinc 400 */
   
   /* Accents */
@@ -33,15 +33,15 @@
 
 @layer base {
   :root.light {
-    --color-brand-bg-dark: #FFFAF3; /* Custom Warm Cream */
-    --color-brand-bg-medium: #f1f5f9; /* Slate 100 */
-    --color-brand-bg-light: #e2e8f0; /* Slate 200 */
+    --color-brand-bg-dark: #fafafa; /* Clean off-white */
+    --color-brand-bg-medium: #f4f4f5; /* Zinc 100 */
+    --color-brand-bg-light: #e4e4e7; /* Zinc 200 */
     --color-brand-bg-card: #ffffff;
     
-    --color-brand-text-primary: #0f172a; /* Slate 900 */
-    --color-brand-text-secondary: #334155; /* Slate 700 (Better contrast) */
+    --color-brand-text-primary: #171717; /* High contrast almost black */
+    --color-brand-text-secondary: #52525b; /* Zinc 600 */
     
-    --color-brand-accent: #0f172a;
+    --color-brand-accent: #171717;
     --color-brand-border: #cbd5e1; /* Slate 300 */
     --color-brand-border-light: #94a3b8; /* Slate 400 */
   }
