@@ -3,6 +3,7 @@ import Script from "next/script";
 import "./globals.css";
 import Footer from "@/components/Footer";
 import SecurityWrapper from "@/components/SecurityWrapper";
+import AnalyticsBanner from "@/components/AnalyticsBanner";
 
 /* ------------------------------------------
    VIEWPORT SETTINGS
@@ -421,6 +422,7 @@ export default function RootLayout({
         <SecurityWrapper>
           {children}
           <Footer />
+          <AnalyticsBanner />
         </SecurityWrapper>
 
         {/* Google Analytics */}

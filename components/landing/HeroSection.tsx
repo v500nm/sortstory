@@ -23,9 +23,9 @@ export default function HeroSection() {
   };
 
   return (
-    <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-0 py-6 sm:py-12 lg:min-h-[90vh] lg:py-24 flex items-center justify-center overflow-hidden">
       
-      <div className="flex-grow flex items-center justify-center px-4 sm:px-8 py-12 lg:py-24 max-w-[1400px] mx-auto relative z-10 w-full">
+      <div className="flex-grow flex items-center justify-center px-4 sm:px-8 pt-2 pb-12 lg:py-24 max-w-[1400px] mx-auto relative z-10 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center w-full">
           <motion.div 
             variants={containerVariants}
@@ -35,7 +35,7 @@ export default function HeroSection() {
           >
             <motion.div 
               variants={itemVariants}
-              className="inline-flex items-center gap-2 bg-black/5 dark:bg-white/5 border border-brand-border px-4 py-2 rounded-full text-xs font-bold tracking-widest text-brand-text-secondary uppercase"
+              className="inline-flex items-center gap-2 bg-black/5 dark:bg-white/5 border border-brand-border px-4 py-2 rounded-full text-xs font-bold tracking-widest text-brand-text-secondary uppercase self-start"
             >
               <span className="w-1.5 h-1.5 rounded-full bg-brand-cyan animate-pulse" />
               Visual Algorithmic Engine
@@ -78,10 +78,10 @@ export default function HeroSection() {
           </motion.div>
 
           <motion.div 
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="w-full h-full hidden lg:flex items-center justify-center relative"
+            className="w-full h-full flex items-center justify-center relative mt-6 lg:mt-0 max-w-xl mx-auto lg:max-w-none"
           >
             {/* Asymmetric styling matching editorial style */}
             <div className="absolute inset-0 bg-brand-cyan/5 blur-3xl -z-10 rounded-full mix-blend-screen skew-x-12 translate-x-12" />

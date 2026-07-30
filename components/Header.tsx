@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Header() {
   const pathname = usePathname();
@@ -25,11 +26,13 @@ export default function Header() {
   return (
     <header className="border-b border-brand-border bg-brand-bg-dark/80 backdrop-blur-xl sticky top-0 z-40">
       <div className="max-w-[1700px] mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
-        <Link href="/" className="text-2xl font-black font-serif tracking-tight text-brand-text-primary hover:text-brand-accent transition-colors flex items-center gap-2">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-brand-purple">
-            <path d="M4 16l4 4 4-4M8 20V4M20 8l-4-4-4 4M16 4v16"/>
-          </svg>
-          <span className="italic">Sort</span>Story
+        <Link href="/" className="text-2xl font-black font-serif tracking-tight text-brand-text-primary hover:text-brand-accent transition-colors flex items-center gap-2 group">
+          <img 
+            src="/assets/favicon-32x32.png" 
+            alt="SortStory Logo" 
+            className="w-6 h-6 object-contain group-hover:rotate-12 transition-transform duration-300"
+          />
+          <span className="italic text-brand-purple">Sort</span>Story
         </Link>
         
         {/* Desktop Navigation */}
@@ -38,7 +41,7 @@ export default function Header() {
             <Link 
               key={link.href}
               href={link.href} 
-              className={`text-sm font-bold uppercase tracking-wider transition-colors ${pathname === link.href ? 'text-brand-text-primary' : 'text-brand-text-secondary hover:text-brand-text-primary'}`}
+              className={`text-xs font-bold uppercase tracking-wider transition-all duration-300 relative py-1 after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-brand-purple after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 after:origin-left ${pathname === link.href ? 'text-brand-text-primary after:scale-x-100' : 'text-brand-text-secondary hover:text-brand-text-primary'}`}
             >
               {link.label}
             </Link>
@@ -111,35 +114,54 @@ export default function Header() {
       </div>
 
       {/* Mobile Navigation Menu */}
-      {isMenuOpen && (
-        <div className="lg:hidden bg-brand-bg-dark border-b border-brand-border absolute w-full left-0 top-[full] shadow-xl">
-          <nav className="flex flex-col px-4 py-4 space-y-4">
-            {navLinks.map((link) => (
-              <Link 
-                key={link.href}
-                href={link.href} 
-                onClick={closeMenu}
-                className={`text-base font-medium transition-colors ${pathname === link.href ? 'text-brand-accent' : 'text-brand-text-secondary hover:text-brand-accent'}`}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div 
+            initial={{ opacity: 0, height: 0, y: -10 }}
+            animate={{ opacity: 1, height: "auto", y: 0 }}
+            exit={{ opacity: 0, height: 0, y: -10 }}
+            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:hidden bg-brand-bg-dark/95 backdrop-blur-xl border-b border-brand-border absolute w-full left-0 top-full shadow-2xl overflow-hidden"
+          >
+            <nav className="flex flex-col px-6 py-6 space-y-4">
+              {navLinks.map((link, idx) => (
+                <motion.div
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: idx * 0.04 }}
+                  key={link.href}
+                >
+                  <Link 
+                    href={link.href} 
+                    onClick={closeMenu}
+                    className={`text-base font-semibold tracking-wide block transition-colors py-2 border-b border-brand-border/30 ${pathname === link.href ? 'text-brand-purple' : 'text-brand-text-secondary hover:text-brand-text-primary'}`}
+                  >
+                    {link.label}
+                  </Link>
+                </motion.div>
+              ))}
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: navLinks.length * 0.04 }}
+                className="pt-4 flex items-center justify-between"
               >
-                {link.label}
-              </Link>
-            ))}
-            <div className="pt-4 border-t border-brand-border/50">
-              <a 
-                href="https://adnan-mangaonkar.com" 
-                target="_blank" 
-                rel="author noopener noreferrer"
-                className="text-xs font-bold tracking-widest uppercase text-brand-text-secondary hover:text-brand-purple transition-colors flex items-center gap-2"
-              >
-                <span className="w-5 h-5 rounded-full bg-brand-bg-card border border-brand-border flex items-center justify-center text-brand-accent shadow-sm">
-                  A
-                </span>
-                <span>Adnan Mangaonkar</span>
-              </a>
-            </div>
-          </nav>
-        </div>
-      )}
+                <a 
+                  href="https://adnan-mangaonkar.com" 
+                  target="_blank" 
+                  rel="author noopener noreferrer"
+                  className="text-xs font-bold tracking-widest uppercase text-brand-text-secondary hover:text-brand-purple transition-colors flex items-center gap-2"
+                >
+                  <span className="w-6 h-6 rounded-full bg-brand-bg-card border border-brand-border flex items-center justify-center text-brand-accent shadow-sm">
+                    A
+                  </span>
+                  <span>Adnan Mangaonkar</span>
+                </a>
+              </motion.div>
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }
