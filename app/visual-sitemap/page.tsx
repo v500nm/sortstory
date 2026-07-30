@@ -40,6 +40,7 @@ export default function Sitemap() {
           title: "Resources & Curriculum",
           children: [
             { title: "Learn & Practice", href: "/learn", desc: "Step-by-step algorithms, practice problems." },
+            { title: "FAQ", href: "/faq", desc: "Commonly asked DSA & algorithm questions." },
           ]
         },
         {
