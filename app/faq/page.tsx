@@ -234,6 +234,28 @@ const faqCategories: FAQCategory[] = [
       },
     ],
   },
+  {
+    title: "About the Creator",
+    icon: "👨‍💻",
+    items: [
+      {
+        question: "Who created SortStory?",
+        answer:
+          "SortStory was created by Adnan Shafiq Mangaonkar, a Software Developer (SDE1) passionate about Data Structures and Algorithms, React.js, and creating interactive educational tools.",
+      },
+      {
+        question: "Who is Adnan Mangaonkar?",
+        answer:
+          "Adnan Mangaonkar is a Software Developer (SDE1) specializing in front-end development, React.js, Next.js, and TypeScript. He is the creator of SortStory, an interactive algorithm visualization platform designed to help students learn DSA.",
+      },
+      {
+        question: "How can I contact Adnan Mangaonkar?",
+        answer:
+          "You can contact Adnan Mangaonkar through his personal website at adnan-mangaonkar.com, via his LinkedIn profile, or through his GitHub profile (v500nm).",
+        link: { label: "Visit Developer Website →", href: "https://adnan-mangaonkar.com" },
+      },
+    ],
+  },
 ];
 
 /* ────────── Accordion Item Component ────────── */

@@ -566,6 +566,31 @@ const jsonLd = [
           text: "An in-place sorting algorithm sorts the data using only a constant amount of extra memory O(1), modifying the original array directly. Examples include Bubble Sort, Selection Sort, Insertion Sort, Heap Sort, and Quick Sort. Merge Sort is NOT in-place as it requires O(n) auxiliary space. In-place algorithms are memory-efficient but may sacrifice stability.",
         },
       },
+      // ── Creator & Brand Questions ──
+      {
+        "@type": "Question",
+        name: "Who created SortStory?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "SortStory was created by Adnan Shafiq Mangaonkar, a Software Developer (SDE1) passionate about Data Structures and Algorithms, React.js, and creating interactive educational tools.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Who is Adnan Mangaonkar?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Adnan Mangaonkar is a Software Developer (SDE1) specializing in front-end development, React.js, Next.js, and TypeScript. He is the creator of SortStory, an interactive algorithm visualization platform designed to help students learn DSA.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "How can I contact Adnan Mangaonkar?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "You can contact Adnan Mangaonkar through his personal website at adnan-mangaonkar.com, via his LinkedIn profile, or through his GitHub profile (v500nm).",
+        },
+      }
     ],
   },
   // ItemList schema — all DSA categories
