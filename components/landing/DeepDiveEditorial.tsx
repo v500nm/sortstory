@@ -2,6 +2,26 @@
 
 import { motion } from "framer-motion";
 
+const sectionVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.1
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 25 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] as const }
+  }
+};
+
 export default function DeepDiveEditorial() {
   return (
     <section className="w-full py-16 md:py-32 px-4 sm:px-8 relative overflow-hidden text-brand-text-primary z-10">
@@ -17,6 +37,7 @@ export default function DeepDiveEditorial() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="mb-12 md:mb-20 text-center md:text-left border-b-2 md:border-b-4 border-brand-border pb-6 md:pb-8"
         >
           <h4 className="text-xs md:text-sm font-bold tracking-[0.2em] uppercase text-brand-text-secondary mb-2 md:mb-4">Engineering Architecture</h4>
@@ -24,27 +45,33 @@ export default function DeepDiveEditorial() {
             Escaping the <br className="hidden sm:block"/> <span className="italic text-brand-purple">Event Loop.</span>
           </h2>
         </motion.header>
-
+ 
         {/* F-Pattern & Asymmetric Layered Content */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-start relative">
           
           {/* Main Column (F-Pattern Left Side) */}
-          <div className="lg:col-span-7 space-y-6 md:space-y-8">
+          <motion.div 
+            variants={sectionVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            className="lg:col-span-7 space-y-6 md:space-y-8"
+          >
             <motion.p 
-              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+              variants={itemVariants}
               className="text-xl md:text-2xl font-serif leading-relaxed font-light first-letter:text-5xl md:first-letter:text-7xl first-letter:font-black first-letter:float-left first-letter:mr-3 md:first-letter:mt-1 first-letter:text-brand-cyan"
             >
               Building a real-time algorithm visualizer in React presents a profound technical challenge: algorithms are synchronous, CPU-blocking operations.
             </motion.p>
             <motion.p 
-              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+              variants={itemVariants}
               className="text-base md:text-lg text-brand-text-secondary leading-relaxed font-serif"
             >
               If you execute a standard `while(true)` loop in JavaScript to run an A* Search on a 10,000 node graph, the browser's main thread locks up. The DOM cannot paint, inputs freeze, and the visualizer becomes useless. SortStory solves this by entirely rewriting algorithms into asynchronous generator patterns.
             </motion.p>
-
+ 
             <motion.div 
-              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+              variants={itemVariants}
               className="pt-6 md:pt-8 pb-4 border-y border-brand-border/50 my-6 md:my-8"
             >
               <h3 className="text-lg md:text-xl font-bold mb-4 uppercase tracking-wider text-brand-text-primary">The Async SortContext</h3>
@@ -59,7 +86,7 @@ export default function DeepDiveEditorial() {
                 </li>
               </ul>
             </motion.div>
-          </div>
+          </motion.div>
 
           {/* Asymmetric Image/Callout Column */}
           <div className="lg:col-span-5 relative mt-8 lg:mt-0">

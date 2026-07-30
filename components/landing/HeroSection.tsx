@@ -23,9 +23,9 @@ export default function HeroSection() {
   };
 
   return (
-    <section className="relative min-h-0 py-6 sm:py-12 lg:min-h-[90vh] lg:py-24 flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-0 py-4 sm:py-8 lg:min-h-[85vh] lg:py-12 flex items-center justify-center overflow-hidden">
       
-      <div className="flex-grow flex items-center justify-center px-4 sm:px-8 pt-2 pb-12 lg:py-24 max-w-[1400px] mx-auto relative z-10 w-full">
+      <div className="flex-grow flex items-center justify-center px-4 sm:px-8 pt-2 pb-12 lg:pt-6 lg:pb-16 max-w-[1400px] mx-auto relative z-10 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center w-full">
           <motion.div 
             variants={containerVariants}
@@ -79,8 +79,12 @@ export default function HeroSection() {
 
           <motion.div 
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            animate={{ opacity: 1, y: [0, -8, 0], scale: 1 }}
+            transition={{
+              opacity: { duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] },
+              scale: { duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] },
+              y: { duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.6 }
+            }}
             className="w-full h-full flex items-center justify-center relative mt-6 lg:mt-0 max-w-xl mx-auto lg:max-w-none"
           >
             {/* Asymmetric styling matching editorial style */}

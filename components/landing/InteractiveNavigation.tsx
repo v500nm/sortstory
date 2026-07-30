@@ -45,7 +45,13 @@ export default function InteractiveNavigation() {
     <section className="relative w-full py-16 md:py-24 text-brand-text-primary overflow-hidden">
       
       {/* Sticky Tabbed Navigation Layout */}
-      <div className="sticky top-0 z-50 bg-brand-bg-dark/60 backdrop-blur-md py-3 mb-12 border-b border-brand-border/30">
+      <motion.div 
+        initial={{ opacity: 0, y: -20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-50px" }}
+        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        className="sticky top-0 z-50 bg-brand-bg-dark/60 backdrop-blur-md py-3 mb-12 border-b border-brand-border/30"
+      >
         <div className="max-w-[1000px] mx-auto px-4 flex justify-start sm:justify-center gap-2 sm:gap-6 overflow-x-auto no-scrollbar">
           {Object.keys(categories).map((key) => (
             <button
@@ -61,8 +67,8 @@ export default function InteractiveNavigation() {
             </button>
           ))}
         </div>
-      </div>
-
+      </motion.div>
+ 
       {/* Radial / Hub-and-Spoke Pattern Presentation */}
       <div className="max-w-[1000px] mx-auto px-4 min-h-[350px] flex items-center justify-center relative">
         <AnimatePresence mode="wait">

@@ -4,6 +4,10 @@ import "./globals.css";
 import Footer from "@/components/Footer";
 import SecurityWrapper from "@/components/SecurityWrapper";
 import AnalyticsBanner from "@/components/AnalyticsBanner";
+import { AuthProvider } from "@/contexts/AuthContext";
+import { LanguageProvider } from "@/contexts/LanguageContext";
+import { PostHogProvider } from "@/components/PostHogProvider";
+import SiteAnalyticsWrapper from "@/components/SiteAnalyticsWrapper";
 
 /* ------------------------------------------
    VIEWPORT SETTINGS
@@ -634,13 +638,79 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
       <body className="flex flex-col min-h-screen">
-        <SecurityWrapper>
-          {children}
-          <Footer />
-          <AnalyticsBanner />
-        </SecurityWrapper>
+        <PostHogProvider>
+          <LanguageProvider>
+            <SiteAnalyticsWrapper>
+              <AuthProvider>
+                <SecurityWrapper>
+                  {children}
+                  <Footer />
+                  <AnalyticsBanner />
+                </SecurityWrapper>
+              </AuthProvider>
+            </SiteAnalyticsWrapper>
+          </LanguageProvider>
+        </PostHogProvider>
 
-        {/* Google Analytics */}
+        {/* Google Sitelinks & SearchBox JSON-LD Structured Data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "name": "SortStory",
+              "alternateName": "SortStory Visualizer",
+              "url": "https://sortstory.adnan-mangaonkar.com",
+              "potentialAction": {
+                "@type": "SearchAction",
+                "target": "https://sortstory.adnan-mangaonkar.com/sort?q={search_term_string}",
+                "query-input": "required name=search_term_string"
+              }
+            })
+          }}
+        />
+
+        {/* SiteNavigationElement JSON-LD for Google Sitelinks Expansion */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "ItemList",
+              "itemListElement": [
+                {
+                  "@type": "SiteNavigationElement",
+                  "position": 1,
+                  "name": "DSA Learning Curriculum",
+                  "description": "Comprehensive interactive data structures and algorithms learning modules.",
+                  "url": "https://sortstory.adnan-mangaonkar.com/learn"
+                },
+                {
+                  "@type": "SiteNavigationElement",
+                  "position": 2,
+                  "name": "Sorting Algorithm Visualizer",
+                  "description": "Interactive step-by-step sorting algorithms visualizer and race comparisons.",
+                  "url": "https://sortstory.adnan-mangaonkar.com/sort"
+                },
+                {
+                  "@type": "SiteNavigationElement",
+                  "position": 3,
+                  "name": "Pathfinding Grid Visualizer",
+                  "description": "Dijkstra and A* pathfinding algorithm grid simulations.",
+                  "url": "https://sortstory.adnan-mangaonkar.com/pathfinding"
+                },
+                {
+                  "@type": "SiteNavigationElement",
+                  "position": 4,
+                  "name": "Research & Benchmark Studies",
+                  "description": "Empirical time complexity benchmarks and algorithm performance papers.",
+                  "url": "https://sortstory.adnan-mangaonkar.com/research"
+                }
+              ]
+            })
+          }}
+        />
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-QT4D4VQ0TT"
           strategy="afterInteractive"

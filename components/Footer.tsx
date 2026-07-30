@@ -50,10 +50,22 @@ const visualizerLinks = [
 ];
 
 const resourceLinks = [
-  { href: "/learn", label: "Learn & Practice" },
+  { href: "/learn", label: "DSA Learning Modules" },
+  { href: "/press", label: "Press & Publications", highlight: true },
+  { href: "/research", label: "Research & Benchmarks" },
+  { href: "/faq", label: "FAQ" },
   { href: "/terms-and-conditions", label: "Terms & Conditions" },
   { href: "/privacy", label: "Privacy Policy" },
   { href: "/visual-sitemap", label: "Sitemap" },
+];
+
+const mediaLinks = [
+  { href: "https://dev.to/v500nm/illuminating-algorithms-why-i-built-a-next-gen-dsa-visualizer-to-empower-developers-jgk", label: "DEV.to Article" },
+  { href: "https://blogadnan.hashnode.dev/sortstory-dsa-visualizers-adnan-mangaonkar", label: "Hashnode Blog" },
+  { href: "https://www.producthunt.com/products/sortstory?launch=sortstory", label: "Product Hunt Launch" },
+  { href: "https://medium.com/@adnans0307/beyond-the-whiteboard-how-sortstory-is-rewiring-algorithm-education-with-ai-and-multi-stack-8e780a9ddcad?sharedUserId=adnans0307", label: "Medium Article" },
+  { href: "https://www.reddit.com/r/sortstory/comments/1vb01y3/i_was_tired_of_failing_algorithm_interviews/", label: "Reddit Community" },
+  { href: "https://en.wikipedia.org/w/index.php?title=User:V500nm&oldid=1366858942", label: "Wikipedia Record" },
 ];
 
 const connectLinks = [
@@ -71,7 +83,7 @@ export default function Footer() {
     <footer className="w-full relative bg-transparent mt-auto z-40">
       {/* Smooth top fade to blend the content into the footer */}
       <div className="absolute inset-0 bg-gradient-to-t from-brand-bg-dark via-brand-bg-dark/95 to-transparent pointer-events-none -z-10" />
-      
+
       {/* Decorative subtle ambient lights */}
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-brand-purple/5 rounded-full blur-[120px] pointer-events-none -z-10" />
       <div className="absolute top-0 right-1/4 w-96 h-96 bg-brand-cyan/5 rounded-full blur-[120px] pointer-events-none -z-10" />
@@ -103,12 +115,20 @@ export default function Footer() {
             ))}
           </motion.div>
         </div>
-        <p className="text-xs sm:text-sm text-brand-text-secondary leading-relaxed max-w-2xl mb-12 px-2">
-          Free interactive DSA visualization platform. Explore, execute, and analyze algorithms visually. Built with asynchronous yielding engines to preserve thread performance.
-        </p>
 
+        {/* Branding Subtitle & Active Mode Badge */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-12 px-2">
+          <p className="text-xs sm:text-sm text-brand-text-secondary leading-relaxed max-w-2xl">
+            Interactive multi-stack data structures and algorithm visualizers designed for computer science students, engineering faculty, and technical interview preparation. Built with asynchronous yielding engines to preserve thread performance.
+          </p>
+          <div className="flex items-center gap-2 shrink-0">
+            <span className="px-3 py-1 bg-brand-purple/10 border border-brand-purple/30 text-brand-purple rounded-md text-[10px] font-bold tracking-wider uppercase">
+              FREE MODE ACTIVE
+            </span>
+          </div>
+        </div>
 
-        {/* 3. Unified Premium Glass Card Container */}
+        {/* 2. Unified Premium Glass Card Container */}
         <motion.div
           variants={itemVariants}
           className="bg-brand-bg-medium/30 backdrop-blur-md border border-brand-border/40 rounded-2xl p-8 sm:p-10 shadow-2xl relative overflow-hidden mb-12"
@@ -127,7 +147,7 @@ export default function Footer() {
             ))}
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 text-left">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 text-left">
             {/* Visualizers Column */}
             <div className="col-span-1">
               <h4 className="text-[11px] font-bold tracking-widest uppercase text-brand-text-secondary mb-5 pb-2 border-b border-brand-border/30">
@@ -157,10 +177,37 @@ export default function Footer() {
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="text-xs sm:text-sm text-brand-text-primary/85 hover:text-brand-cyan hover:translate-x-1 transition-all duration-200 inline-block"
+                      className={`text-xs sm:text-sm hover:translate-x-1 transition-all duration-200 inline-block ${link.highlight
+                        ? "text-brand-cyan font-bold hover:text-brand-purple"
+                        : "text-brand-text-primary/85 hover:text-brand-cyan"
+                        }`}
                     >
                       {link.label}
                     </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Featured On Column */}
+            <div className="col-span-1">
+              <h4 className="text-[11px] font-bold tracking-widest uppercase text-brand-text-secondary mb-5 pb-2 border-b border-brand-border/30">
+                Featured On
+              </h4>
+              <ul className="space-y-3">
+                {mediaLinks.map(link => (
+                  <li key={link.href}>
+                    <a
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs sm:text-sm text-brand-text-primary/85 hover:text-brand-cyan hover:translate-x-1 transition-all duration-200 inline-flex items-center gap-2 w-full"
+                    >
+                      <span className="truncate">{link.label}</span>
+                      <svg className="w-3 h-3 opacity-30 shrink-0 ml-auto" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                      </svg>
+                    </a>
                   </li>
                 ))}
               </ul>
@@ -198,7 +245,7 @@ export default function Footer() {
           className="pt-8 border-t border-brand-border/50 flex flex-col sm:flex-row justify-between items-center gap-4"
         >
           <p className="text-xs text-brand-text-secondary">
-            © 2026 SortStory. Built by{" "}
+            © 2026 SortStory. All rights reserved. Built by{" "}
             <a
               href="https://adnan-mangaonkar.com"
               target="_blank"
@@ -208,7 +255,7 @@ export default function Footer() {
               Adnan Mangaonkar
             </a>
           </p>
-          <div className="flex items-center">
+          <div className="flex items-center gap-4">
             <a
               href="https://business.adnan-mangaonkar.com"
               target="_blank"

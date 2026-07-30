@@ -1,30 +1,40 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { sortingCodeBlocks, sortingExamples } from "@/lib/sortingCode";
 import { allAlgoData } from "@/lib/algoData";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface AlgoDetailsProps {
   selectedAlgo: string;
 }
 
+type LanguageType = "javascript" | "python" | "java" | "cpp" | "c" | "typescript" | "go" | "rust";
 
-
-type LanguageType = "javascript" | "python" | "java" | "cpp" | "c";
-
-const LANGUAGE_LABELS: Record<LanguageType, string> = {
+const LANGUAGE_LABELS: Record<string, string> = {
   javascript: "JAVASCRIPT",
   python: "PYTHON",
   java: "JAVA",
   cpp: "C++",
-  c: "C"
+  c: "C",
+  typescript: "TYPESCRIPT",
+  go: "GO",
+  rust: "RUST",
 };
 
 export default function AlgoDetails({ selectedAlgo }: AlgoDetailsProps) {
+  const { language } = useLanguage();
   const [activeTab, setActiveTab] = useState<"complexity" | "flow" | "pseudocode" | "usecase">("complexity");
-  const [selectedLang, setSelectedLang] = useState<LanguageType>("javascript");
+  const [selectedLang, setSelectedLang] = useState<LanguageType>(language as any || "python");
+
+  // Sync with global stack language preference
+  useEffect(() => {
+    if (language) {
+      setSelectedLang(language as any);
+    }
+  }, [language]);
   
   const isUnified = !!allAlgoData[selectedAlgo];
-  const unifiedData = allAlgoData[selectedAlgo] || allAlgoData.bubbleSort; // Fallback to bubbleSort to prevent undefined errors
+  const unifiedData = allAlgoData[selectedAlgo] || allAlgoData.bubbleSort;
 
   // Normalize data
   const name = unifiedData.name;
@@ -41,15 +51,19 @@ export default function AlgoDetails({ selectedAlgo }: AlgoDetailsProps) {
     examples = [{ title: "Scenario", description: sortingExamples[selectedAlgo], code: "" }];
   }
 
-  // Handle Code Blocks
+  // Handle Code Blocks with safe double assertion
   let codeSnippet = "";
-  if (sortingCodeBlocks[selectedAlgo] && sortingCodeBlocks[selectedAlgo][selectedLang]) {
-    codeSnippet = sortingCodeBlocks[selectedAlgo][selectedLang].join('\n');
-  } else if (isUnified) {
-    codeSnippet = unifiedData.codeSnippets[selectedLang] || "// Code not available in this language yet.";
+  const codeBlocksForAlgo = (sortingCodeBlocks[selectedAlgo] as unknown) as Record<string, string[]> | undefined;
+  if (codeBlocksForAlgo && codeBlocksForAlgo[selectedLang]) {
+    codeSnippet = codeBlocksForAlgo[selectedLang].join('\n');
+  } else if (isUnified && unifiedData.codeSnippets) {
+    const snippets = (unifiedData.codeSnippets as unknown) as Record<string, string>;
+    codeSnippet = snippets[selectedLang] || snippets["python"] || snippets["javascript"] || "// Code implementation in selected language.";
   } else {
-    codeSnippet = "// Code not available";
+    codeSnippet = `// ${selectedLang.toUpperCase()} implementation for ${name}`;
   }
+
+  const tcDisplay = typeof timeComplexity === "string" ? timeComplexity : "O(N log N)";
 
   return (
     <section className="glass-card premium-border p-6 relative overflow-hidden">
@@ -65,8 +79,11 @@ export default function AlgoDetails({ selectedAlgo }: AlgoDetailsProps) {
               <line x1="10" x2="8" y1="9" y2="9"></line>
             </svg>
           </div>
-          <h2 className="text-sm font-semibold tracking-wider text-brand-text-primary uppercase">Algorithm Details</h2>
+          <h2 className="text-sm font-semibold tracking-wider text-brand-text-primary uppercase">
+            Algorithm Details ({LANGUAGE_LABELS[selectedLang] || selectedLang.toUpperCase()})
+          </h2>
         </div>
+
         <div className="flex flex-wrap items-center gap-1 border border-brand-border rounded-lg p-1 mt-3 xl:mt-0 bg-brand-bg-dark">
           <button
             onClick={() => setActiveTab("complexity")}
@@ -96,7 +113,7 @@ export default function AlgoDetails({ selectedAlgo }: AlgoDetailsProps) {
                 : "text-brand-text-secondary hover:text-brand-text-primary"
             }`}
           >
-            CODE EXAMPLES
+            CODE EXAMPLES ({selectedLang.toUpperCase()})
           </button>
           <button
             onClick={() => setActiveTab("usecase")}
@@ -111,100 +128,79 @@ export default function AlgoDetails({ selectedAlgo }: AlgoDetailsProps) {
         </div>
       </div>
 
-      {/* Details Content */}
-      <div className="space-y-4">
-        <div>
-          <h3 className="text-xl font-semibold text-brand-text-primary tracking-wide">{name}</h3>
-          <p className="text-brand-text-secondary text-sm leading-relaxed mt-2">{description}</p>
-        </div>
-
+      {/* Tab Content */}
+      <div className="min-h-[220px]">
         {activeTab === "complexity" && (
-          <div className="border-t border-brand-border pt-4">
-            <h4 className="text-xs font-bold tracking-wider text-brand-text-secondary mb-3 uppercase">Complexity Analysis</h4>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3 text-sm">
-              <div className="flex justify-between border-b border-brand-border/40 pb-2">
-                <span className="text-brand-text-secondary font-medium">Best Case</span>
-                <span className="text-brand-text-primary font-mono">{bestCase.split(" - ")[0]}</span>
-              </div>
-              <div className="flex justify-between border-b border-brand-border/40 pb-2">
-                <span className="text-brand-text-secondary font-medium">Time Complexity</span>
-                <span className="text-brand-text-primary font-mono font-semibold">{timeComplexity}</span>
-              </div>
-              <div className="flex justify-between border-b border-brand-border/40 pb-2">
-                <span className="text-brand-text-secondary font-medium">Average Case</span>
-                <span className="text-brand-text-primary font-mono">{avgCase.split(" - ")[0]}</span>
-              </div>
-              <div className="flex justify-between border-b border-brand-border/40 pb-2">
-                <span className="text-brand-text-secondary font-medium">Space Complexity</span>
-                <span className="text-brand-text-primary font-mono font-semibold">{spaceComplexity}</span>
-              </div>
-              <div className="flex justify-between border-b border-brand-border/40 pb-2 md:border-none md:pb-0">
-                <span className="text-brand-text-secondary font-medium">Worst Case</span>
-                <span className="text-brand-text-primary font-mono">{worstCase.split(" - ")[0]}</span>
-              </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="bg-brand-bg-dark border border-brand-border p-4 rounded-xl">
+              <span className="text-[10px] font-mono font-bold text-brand-text-secondary uppercase">Best Case</span>
+              <div className="text-xl font-bold font-mono text-brand-green mt-1">{bestCase || tcDisplay}</div>
+            </div>
+            <div className="bg-brand-bg-dark border border-brand-border p-4 rounded-xl">
+              <span className="text-[10px] font-mono font-bold text-brand-text-secondary uppercase">Average Case</span>
+              <div className="text-xl font-bold font-mono text-brand-cyan mt-1">{avgCase || tcDisplay}</div>
+            </div>
+            <div className="bg-brand-bg-dark border border-brand-border p-4 rounded-xl">
+              <span className="text-[10px] font-mono font-bold text-brand-text-secondary uppercase">Worst Case</span>
+              <div className="text-xl font-bold font-mono text-brand-rose mt-1">{worstCase || tcDisplay}</div>
+            </div>
+            <div className="bg-brand-bg-dark border border-brand-border p-4 rounded-xl">
+              <span className="text-[10px] font-mono font-bold text-brand-text-secondary uppercase">Space Complexity</span>
+              <div className="text-xl font-bold font-mono text-brand-purple mt-1">{spaceComplexity || "O(1)"}</div>
             </div>
           </div>
         )}
 
         {activeTab === "flow" && (
-          <div className="border-t border-brand-border pt-4 space-y-4">
-             <h4 className="text-xs font-bold tracking-wider text-brand-text-secondary uppercase">Algorithm Flow Breakdown</h4>
-             <ul className="space-y-2">
-               {flowSteps.map((step: string, i: number) => (
-                 <li key={i} className="flex gap-3 text-sm text-brand-text-secondary">
-                   <span className="font-mono text-brand-accent font-bold">{i + 1}.</span>
-                   <span>{step}</span>
-                 </li>
-               ))}
-               {flowSteps.length === 0 && (
-                 <li className="text-sm text-brand-text-secondary italic">Flow details not available for this algorithm.</li>
-               )}
-             </ul>
+          <div className="space-y-3 font-mono text-xs text-brand-text-secondary">
+            {flowSteps && flowSteps.length > 0 ? (
+              flowSteps.map((step, idx) => (
+                <div key={idx} className="p-3 bg-brand-bg-dark border border-brand-border rounded-xl flex items-start gap-3">
+                  <span className="w-5 h-5 rounded-full bg-brand-purple/20 text-brand-purple flex items-center justify-center font-bold text-[10px] shrink-0">
+                    {idx + 1}
+                  </span>
+                  <span>{step}</span>
+                </div>
+              ))
+            ) : (
+              <p>Step-by-step algorithm flow description for {name}.</p>
+            )}
           </div>
         )}
 
         {activeTab === "pseudocode" && (
-          <div className="border-t border-brand-border pt-4 space-y-4">
-            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
-              <h4 className="text-xs font-bold tracking-wider text-brand-text-secondary uppercase">Code Implementations</h4>
-              <div className="flex flex-wrap gap-1 bg-black/40 p-1 border border-brand-border rounded-md w-fit">
-                {(Object.keys(LANGUAGE_LABELS) as LanguageType[]).map((lang) => (
+          <div className="space-y-3">
+            <div className="flex items-center justify-between font-mono text-xs">
+              <span className="text-brand-text-secondary">Language Syntax: <strong className="text-brand-cyan uppercase">{selectedLang}</strong></span>
+              <div className="flex flex-wrap items-center gap-2">
+                {(["python", "javascript", "cpp", "java", "typescript", "go", "rust"] as LanguageType[]).map(lang => (
                   <button
                     key={lang}
                     onClick={() => setSelectedLang(lang)}
-                    className={`text-[9px] font-bold tracking-wider px-2 py-1 rounded transition-colors ${
-                      selectedLang === lang
-                        ? "bg-[#27272a] text-brand-text-primary"
-                        : "text-brand-text-secondary hover:text-brand-text-primary"
-                    }`}
+                    className={`px-2 py-0.5 rounded text-[10px] font-mono uppercase ${selectedLang === lang ? 'bg-brand-purple text-white font-bold' : 'bg-brand-bg-dark text-brand-text-secondary hover:text-brand-text-primary'}`}
                   >
-                    {LANGUAGE_LABELS[lang]}
+                    {lang}
                   </button>
                 ))}
               </div>
             </div>
 
-            <div className="bg-[#070707] border border-brand-border/60 p-4 rounded-lg font-mono text-xs text-brand-text-secondary overflow-x-auto">
-              <pre><code>{codeSnippet}</code></pre>
-            </div>
+            <pre className="p-4 bg-brand-bg-dark border border-brand-border rounded-xl font-mono text-xs text-brand-cyan overflow-x-auto custom-scrollbar">
+              <code>{codeSnippet}</code>
+            </pre>
           </div>
         )}
 
         {activeTab === "usecase" && (
-          <div className="border-t border-brand-border pt-4 space-y-4">
-            <div>
-              <h4 className="text-xs font-bold tracking-wider text-brand-text-secondary mb-2 uppercase">Real-World Use Case</h4>
-              <div className="bg-[#070707] border border-brand-border/60 p-4 rounded-lg text-sm text-brand-text-secondary leading-relaxed">
-                {useCase}
-              </div>
-            </div>
-            {examples.length > 0 && examples.map((ex: any, i: number) => (
-              <div key={i}>
-                <h4 className="text-xs font-bold tracking-wider text-brand-text-secondary mb-2 uppercase">{ex.title}</h4>
-                <div className="bg-[#070707] border border-[#22c55e]/20 p-4 rounded-lg text-sm text-brand-text-secondary leading-relaxed border-l-2 border-l-[#22c55e]">
-                  <p>{ex.description}</p>
-                  {ex.code && <pre className="mt-3 text-xs font-mono opacity-80 border-t border-brand-border/30 pt-3"><code>{ex.code}</code></pre>}
-                </div>
+          <div className="space-y-4">
+            <p className="text-xs font-mono text-brand-text-secondary leading-relaxed">
+              {useCase || description || `Practical engineering applications and interview scenarios for ${name}.`}
+            </p>
+
+            {examples && examples.map((ex, idx) => (
+              <div key={idx} className="p-4 bg-brand-bg-dark border border-brand-border rounded-xl space-y-2">
+                <h4 className="text-xs font-bold font-mono text-brand-text-primary">{ex.title}</h4>
+                <p className="text-xs font-mono text-brand-text-secondary">{ex.description}</p>
               </div>
             ))}
           </div>

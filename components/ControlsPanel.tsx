@@ -1,5 +1,6 @@
 "use client";
 import type { EngineStatus } from "@/lib/types";
+import { Analytics } from "@/lib/analytics";
 
 interface ControlsPanelProps {
   selectedAlgo: string;
@@ -324,7 +325,14 @@ export default function ControlsPanel({
         {/* Play / Pause */}
         {!isBusy ? (
           <button
-            onClick={onRun}
+            onClick={() => {
+              if (compareMode && selectedAlgoB) {
+                Analytics.trackRaceMode(selectedAlgo, selectedAlgoB, "Sorting");
+              } else {
+                Analytics.trackAlgorithmRun(selectedAlgo, "Sorting", arraySize);
+              }
+              onRun();
+            }}
             className="btn-3d btn-3d-yellow flex items-center justify-center gap-1.5 font-semibold py-2.5 px-3"
           >
             <svg fill="currentColor" height="14" viewBox="0 0 24 24" width="14" xmlns="http://www.w3.org/2000/svg">

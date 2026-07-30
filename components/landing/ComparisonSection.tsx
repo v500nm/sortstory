@@ -45,17 +45,46 @@ export default function ComparisonSection() {
     },
   ];
 
+  const textVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.1 }
+    }
+  };
+
+  const textItemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const }
+    }
+  };
+
   return (
     <section className="w-full max-w-[1200px] mx-auto px-4 sm:px-8 py-16 md:py-24 text-brand-text-primary relative z-10">
       
-      <div className="mb-12 md:mb-16 text-center md:text-left border-b-2 md:border-b-4 border-brand-border pb-6 md:pb-8">
-        <h4 className="text-xs md:text-sm font-bold tracking-[0.2em] uppercase text-brand-text-secondary mb-2 md:mb-4">Performance Metrics</h4>
-        <h2 className="text-3xl md:text-5xl font-black font-serif tracking-tighter">Complexity <span className="italic text-brand-yellow">Matrix.</span></h2>
-        <p className="text-lg md:text-xl font-serif text-brand-text-secondary mt-4 leading-relaxed font-light">Real-world performance estimates for N=1,000 elements.</p>
-      </div>
+      <motion.div 
+        variants={textVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        className="mb-12 md:mb-16 text-center md:text-left border-b-2 md:border-b-4 border-brand-border pb-6 md:pb-8"
+      >
+        <motion.h4 variants={textItemVariants} className="text-xs md:text-sm font-bold tracking-[0.2em] uppercase text-brand-text-secondary mb-2 md:mb-4">Performance Metrics</motion.h4>
+        <motion.h2 variants={textItemVariants} className="text-3xl md:text-5xl font-black font-serif tracking-tighter">Complexity <span className="italic text-brand-yellow">Matrix.</span></motion.h2>
+        <motion.p variants={textItemVariants} className="text-lg md:text-xl font-serif text-brand-text-secondary mt-4 leading-relaxed font-light">Real-world performance estimates for N=1,000 elements.</motion.p>
+      </motion.div>
 
       {/* Comparison Matrix Pattern (Table) */}
-      <div className="overflow-x-auto mb-12 rounded-xl border border-brand-border bg-brand-bg-card shadow-sm hidden md:block">
+      <motion.div 
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-50px" }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        className="overflow-x-auto mb-12 rounded-xl border border-brand-border bg-brand-bg-card shadow-sm hidden md:block"
+      >
         <table className="w-full text-left border-collapse">
           <thead>
             <tr className="bg-black/5 dark:bg-white/5 border-b border-brand-border text-brand-text-primary text-sm font-serif">
@@ -85,7 +114,7 @@ export default function ComparisonSection() {
             ))}
           </tbody>
         </table>
-      </div>
+      </motion.div>
 
       {/* Accordion Stack Layout (Deep Dive) - Useful for Mobile and extra details */}
       <div className="space-y-3 md:hidden block mb-12">
