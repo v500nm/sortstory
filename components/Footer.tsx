@@ -72,7 +72,7 @@ const connectLinks = [
   { href: "https://adnan-mangaonkar.com", label: "Adnan OS (Portfolio)", external: true, rel: "author" },
   { href: "https://business.adnan-mangaonkar.com", label: "Business Consulting", external: true },
   { href: "https://github.com/v500nm", label: "GitHub", external: true },
-  { href: "https://www.linkedin.com/in/adnan-mangaonkar-523351167/", label: "LinkedIn", external: true },
+  { href: "https://www.linkedin.com/in/adnan-mangaonkar/", label: "LinkedIn", external: true },
   { href: "https://x.com/V350NM", label: "X (Twitter)", external: true },
 ];
 

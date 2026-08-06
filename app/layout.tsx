@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import "./globals.css";
 import Footer from "@/components/Footer";
+import { PortfolioEcosystem } from "@/components/PortfolioEcosystem";
 import SecurityWrapper from "@/components/SecurityWrapper";
 import AnalyticsBanner from "@/components/AnalyticsBanner";
 import { AuthProvider } from "@/contexts/AuthContext";
@@ -297,7 +298,7 @@ const jsonLd = [
       "Algorithm Visualization",
     ],
     sameAs: [
-      "https://www.linkedin.com/in/adnan-mangaonkar-523351167/",
+      "https://www.linkedin.com/in/adnan-mangaonkar/",
       "https://github.com/v500nm",
       "https://x.com/V350NM",
       "https://adnan-mangaonkar.com",
