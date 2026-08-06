@@ -1,0 +1,68 @@
+{
+  "outDir": "public/marketing-videos",
+  "videos": [
+    {
+      "id": "sorting_bubble-sort-walkthrough",
+      "title": "Sorting Visualizer - Bubble Sort",
+      "subtitle": "Step-by-step Array Sorting & Interactive Controls",
+      "rawWebmPath": "public/auto-demos/sorting_bubble-sort-walkthrough.webm",
+      "themeColor": "#8B5CF6"
+    },
+    {
+      "id": "sorting_compare-race-mode",
+      "title": "Sorting Race Mode - Quick Sort vs Selection Sort",
+      "subtitle": "Side-by-side Dual Algorithm Comparison",
+      "rawWebmPath": "public/auto-demos/sorting_compare-race-mode.webm",
+      "themeColor": "#EC4899"
+    },
+    {
+      "id": "pathfinding_astar-grid-walkthrough",
+      "title": "Pathfinding Visualizer - A Star Search",
+      "subtitle": "Heuristic Grid Search & Dynamic Wall Placement",
+      "rawWebmPath": "public/auto-demos/pathfinding_astar-grid-walkthrough.webm",
+      "themeColor": "#10B981"
+    },
+    {
+      "id": "search_binary-search-walkthrough",
+      "title": "Searching Visualizer - Binary Search",
+      "subtitle": "Logarithmic O(log n) Searching in Sorted Arrays",
+      "rawWebmPath": "public/auto-demos/search_binary-search-walkthrough.webm",
+      "themeColor": "#F59E0B"
+    },
+    {
+      "id": "trees_dfs-traversal-walkthrough",
+      "title": "Binary Tree Visualizer - Depth First Search",
+      "subtitle": "Hierarchical Tree Data Structure Traversals",
+      "rawWebmPath": "public/auto-demos/trees_dfs-traversal-walkthrough.webm",
+      "themeColor": "#14B8A6"
+    },
+    {
+      "id": "graphs_bfs-traversal-walkthrough",
+      "title": "Graph Network Visualizer - BFS Traversal",
+      "subtitle": "Node-Edge Network Exploration & Traversal Algorithms",
+      "rawWebmPath": "public/auto-demos/graphs_bfs-traversal-walkthrough.webm",
+      "themeColor": "#3B82F6"
+    },
+    {
+      "id": "linked-lists_operations-walkthrough",
+      "title": "Linked List Visualizer - Node Insertion & Deletion",
+      "subtitle": "Dynamic Pointer Manipulation & Memory Simulation",
+      "rawWebmPath": "public/auto-demos/linked-lists_operations-walkthrough.webm",
+      "themeColor": "#F43F5E"
+    },
+    {
+      "id": "automata_game-of-life-walkthrough",
+      "title": "Cellular Automata - Conway's Game of Life",
+      "subtitle": "Zero-Player Grid Simulation & Pattern Evolution",
+      "rawWebmPath": "public/auto-demos/automata_game-of-life-walkthrough.webm",
+      "themeColor": "#8B5CF6"
+    },
+    {
+      "id": "learn_interactive-learning-walkthrough",
+      "title": "Learn & Practice Module - Code & Complexity",
+      "subtitle": "Multi-Language Implementations in Python, C++, Java, and JavaScript",
+      "rawWebmPath": "public/auto-demos/learn_interactive-learning-walkthrough.webm",
+      "themeColor": "#EC4899"
+    }
+  ]
+}
