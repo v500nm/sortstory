@@ -27,6 +27,6 @@ SortStory is part of a larger digital network built by Adnan Mangaonkar:
 ## Links
 - **Homepage:** https://sortstory.adnan-mangaonkar.com
 - **Creator Website:** https://adnan-mangaonkar.com
-- **LinkedIn:** https://www.linkedin.com/in/adnan-mangaonkar-523351167/
+- **LinkedIn:** https://www.linkedin.com/in/adnan-mangaonkar/
 - **GitHub:** https://github.com/v500nm/sortstory
 - **Twitter:** https://x.com/V350NM

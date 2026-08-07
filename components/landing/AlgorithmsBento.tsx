@@ -10,28 +10,52 @@ export default function AlgorithmsBento() {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
+      transition: { staggerChildren: 0.08, delayChildren: 0.1 }
+    }
+  };
+
+  const textContainerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
       transition: { staggerChildren: 0.1 }
     }
   };
 
-  const cardVariants = {
+  const textItemVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.5, ease: "easeOut" as const }
+      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const }
+    }
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 30, scale: 0.98 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] as const }
     }
   };
 
   return (
     <section id="modules" className="w-full max-w-[1400px] mx-auto px-4 sm:px-8 py-16 md:py-24 relative z-10">
-      <div className="mb-12 max-w-3xl">
-        <h4 className="text-xs md:text-sm font-bold tracking-[0.2em] uppercase text-brand-text-secondary mb-4">Architecture Modules</h4>
-        <h2 className="text-3xl md:text-5xl font-black font-serif tracking-tighter mb-4">Comprehensive <span className="italic text-brand-purple">Domains.</span></h2>
-        <p className="text-lg md:text-xl text-brand-text-secondary font-medium font-serif font-light">
+      <motion.div 
+        variants={textContainerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        className="mb-12 max-w-3xl"
+      >
+        <motion.h4 variants={textItemVariants} className="text-xs md:text-sm font-bold tracking-[0.2em] uppercase text-brand-text-secondary mb-4">Architecture Modules</motion.h4>
+        <motion.h2 variants={textItemVariants} className="text-3xl md:text-5xl font-black font-serif tracking-tighter mb-4">Comprehensive <span className="italic text-brand-purple">Domains.</span></motion.h2>
+        <motion.p variants={textItemVariants} className="text-lg md:text-xl text-brand-text-secondary font-medium font-serif font-light">
           A minimalist interface hiding a highly complex engine. Dive into precise implementations across 6 computational domains.
-        </p>
-      </div>
+        </motion.p>
+      </motion.div>
 
       <motion.div 
         variants={containerVariants}

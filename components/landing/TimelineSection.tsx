@@ -30,25 +30,69 @@ export default function TimelineSection() {
     }
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.15, delayChildren: 0.1 }
+    }
+  };
+
+  const textVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.1 }
+    }
+  };
+
+  const textItemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const }
+    }
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 40, scale: 0.97 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as const }
+    }
+  };
+
   return (
     <section className="relative w-full max-w-[1400px] mx-auto px-4 sm:px-8 py-16 md:py-32 z-10 text-brand-text-primary">
       
-      <div className="mb-12 md:mb-20 max-w-3xl">
-        <h4 className="text-xs md:text-sm font-bold tracking-[0.2em] uppercase text-brand-text-secondary mb-4">Micro-Architecture</h4>
-        <h2 className="text-3xl md:text-5xl font-black font-serif tracking-tighter">Execution <span className="italic text-brand-cyan">Lifecycle.</span></h2>
-        <p className="text-lg md:text-xl font-serif text-brand-text-secondary mt-4 leading-relaxed font-light">
+      <motion.div 
+        variants={textVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        className="mb-12 md:mb-20 max-w-3xl"
+      >
+        <motion.h4 variants={textItemVariants} className="text-xs md:text-sm font-bold tracking-[0.2em] uppercase text-brand-text-secondary mb-4">Micro-Architecture</motion.h4>
+        <motion.h2 variants={textItemVariants} className="text-3xl md:text-5xl font-black font-serif tracking-tighter">Execution <span className="italic text-brand-cyan">Lifecycle.</span></motion.h2>
+        <motion.p variants={textItemVariants} className="text-lg md:text-xl font-serif text-brand-text-secondary mt-4 leading-relaxed font-light">
           Deep dive into a single parallel comparison event inside Bitonic Sort.
-        </p>
-      </div>
+        </motion.p>
+      </motion.div>
 
-      {/* 2x2 Bento Box Grid replacing the 250vh scroll */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+      {/* 2x2 Bento Box Grid */}
+      <motion.div 
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-50px" }}
+        className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6"
+      >
         {steps.map((step, index) => (
           <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
+            variants={cardVariants}
             key={index} 
             className="bg-brand-bg-card border border-brand-border hover:border-brand-text-secondary transition-colors rounded-2xl p-6 md:p-10 flex flex-col justify-between shadow-sm group"
           >
@@ -65,7 +109,7 @@ export default function TimelineSection() {
             </div>
           </motion.div>
         ))}
-      </div>
+      </motion.div>
       
     </section>
   );

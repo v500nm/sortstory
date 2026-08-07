@@ -2,26 +2,72 @@
 
 import { motion } from "framer-motion";
 
+const sectionVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.1
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 25 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] as const }
+  }
+};
+
+const visualVariantsLeft = {
+  hidden: { opacity: 0, scale: 0.96, x: -30 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    x: 0,
+    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as const }
+  }
+};
+
+const visualVariantsRight = {
+  hidden: { opacity: 0, scale: 0.96, x: 30 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    x: 0,
+    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as const }
+  }
+};
+
 export default function FeaturesZPattern() {
   return (
     <section className="relative w-full py-16 md:py-24 overflow-visible z-10 text-brand-text-primary">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-8 relative space-y-24 md:space-y-32">
         
         {/* Editorial Block 1: Cocktail Sort (Text Left, Image Right) */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-center">
+        <motion.div
+          variants={sectionVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-center"
+        >
           <div className="lg:col-span-6 space-y-6 md:space-y-8">
-            <h4 className="text-xs md:text-sm font-bold tracking-[0.2em] uppercase text-brand-text-secondary">Parallel Execution</h4>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-serif leading-none tracking-tighter">
+            <motion.h4 variants={itemVariants} className="text-xs md:text-sm font-bold tracking-[0.2em] uppercase text-brand-text-secondary">Parallel Execution</motion.h4>
+            <motion.h2 variants={itemVariants} className="text-3xl sm:text-4xl md:text-5xl font-black font-serif leading-none tracking-tighter">
               Yielding Execution <span className="italic text-brand-cyan">Contexts.</span>
-            </h2>
-            <p className="text-lg md:text-xl font-serif leading-relaxed font-light text-brand-text-secondary">
+            </motion.h2>
+            <motion.p variants={itemVariants} className="text-lg md:text-xl font-serif leading-relaxed font-light text-brand-text-secondary">
               Standard JavaScript execution blocks the main thread. We built a custom `SortContext` engine using asynchronous generators. Every `await ctx.compare()` and `await ctx.swap()` yields control back to the React rendering engine, preventing browser lockup even during $O(N^2)$ backward-forward passes in Cocktail Shaker sort.
-            </p>
+            </motion.p>
           </div>
 
           <div className="lg:col-span-6 relative mt-8 lg:mt-0">
             <motion.div 
-              initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
+              variants={visualVariantsRight}
               className="relative"
             >
               <div className="absolute inset-0 bg-brand-cyan translate-x-4 translate-y-4 -z-10 rounded-lg opacity-80" />
@@ -46,13 +92,19 @@ export default function FeaturesZPattern() {
               </div>
             </motion.div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Editorial Block 2: Graph Engine (Image Left, Text Right) */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-center">
+        <motion.div
+          variants={sectionVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-center"
+        >
           <div className="lg:col-span-6 relative order-2 lg:order-1 mt-8 lg:mt-0">
             <motion.div 
-              initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
+              variants={visualVariantsLeft}
               className="relative"
             >
               <div className="absolute inset-0 bg-brand-purple translate-x-4 translate-y-4 -z-10 rounded-lg opacity-80" />
@@ -77,15 +129,15 @@ export default function FeaturesZPattern() {
           </div>
 
           <div className="lg:col-span-6 space-y-6 md:space-y-8 order-1 lg:order-2">
-            <h4 className="text-xs md:text-sm font-bold tracking-[0.2em] uppercase text-brand-text-secondary">Adjacency Mathematics</h4>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-serif leading-none tracking-tighter">
+            <motion.h4 variants={itemVariants} className="text-xs md:text-sm font-bold tracking-[0.2em] uppercase text-brand-text-secondary">Adjacency Mathematics</motion.h4>
+            <motion.h2 variants={itemVariants} className="text-3xl sm:text-4xl md:text-5xl font-black font-serif leading-none tracking-tighter">
               Heuristic Graph <span className="italic text-brand-purple">Engines.</span>
-            </h2>
-            <p className="text-lg md:text-xl font-serif leading-relaxed font-light text-brand-text-secondary">
+            </motion.h2>
+            <motion.p variants={itemVariants} className="text-lg md:text-xl font-serif leading-relaxed font-light text-brand-text-secondary">
               Our `useGraphEngine` architecture manages massive grid states efficiently. Watch pathfinding algorithms like A* Search evaluate $f(n) = g(n) + h(n)$ heuristic costs in real-time. Understand how nodes are expanded and how intelligent search space pruning guarantees shortest-path optimality without exhaustive memory consumption.
-            </p>
+            </motion.p>
           </div>
-        </div>
+        </motion.div>
 
       </div>
     </section>
