@@ -190,8 +190,7 @@ const jsonLd = [
     sameAs: [
       "https://github.com/v500nm",
       "https://x.com/V350NM",
-      "https://adnan-mangaonkar.com",
-      "https://business.adnan-mangaonkar.com"
+      "https://adnan-mangaonkar.com"
     ],
   },
   // WebApplication schema
@@ -301,8 +300,7 @@ const jsonLd = [
       "https://www.linkedin.com/in/adnan-mangaonkar/",
       "https://github.com/v500nm",
       "https://x.com/V350NM",
-      "https://adnan-mangaonkar.com",
-      "https://business.adnan-mangaonkar.com"
+      "https://adnan-mangaonkar.com"
     ],
   },
   // BreadcrumbList schema — all major routes

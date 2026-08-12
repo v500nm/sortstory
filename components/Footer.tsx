@@ -70,7 +70,7 @@ const mediaLinks = [
 
 const connectLinks = [
   { href: "https://adnan-mangaonkar.com", label: "Adnan OS (Portfolio)", external: true, rel: "author" },
-  { href: "https://business.adnan-mangaonkar.com", label: "Business Consulting", external: true },
+  { href: "https://adnan-mangaonkar.com", label: "Business Consulting", external: true },
   { href: "https://github.com/v500nm", label: "GitHub", external: true },
   { href: "https://www.linkedin.com/in/adnan-mangaonkar/", label: "LinkedIn", external: true },
   { href: "https://x.com/V350NM", label: "X (Twitter)", external: true },
@@ -220,7 +220,7 @@ export default function Footer() {
               </h4>
               <ul className="space-y-3">
                 {connectLinks.map(link => (
-                  <li key={link.href}>
+                  <li key={link.label}>
                     <a
                       href={link.href}
                       target="_blank"
@@ -257,7 +257,7 @@ export default function Footer() {
           </p>
           <div className="flex items-center gap-4">
             <a
-              href="https://business.adnan-mangaonkar.com"
+              href="https://adnan-mangaonkar.com"
               target="_blank"
               rel="noopener noreferrer author"
               className="group relative inline-flex items-center gap-2 px-4 py-1.5 text-[11px] font-bold uppercase tracking-wider text-brand-bg-dark bg-brand-cyan rounded-full overflow-hidden hover:scale-105 transition-transform duration-300 shadow-[0_0_15px_rgba(45,212,191,0.2)] hover:shadow-[0_0_20px_rgba(45,212,191,0.4)]"

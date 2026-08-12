@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { formatAlgoName } from '@/lib/utils';
 import { motion } from 'framer-motion';
+import Header from '@/components/Header';
 
 interface LearnPageClientProps {
   topics: {
@@ -31,6 +32,8 @@ const cardVariants = {
 
 export default function LearnPageClient({ topics }: LearnPageClientProps) {
   return (
+    <main className="min-h-screen w-full bg-brand-bg-dark text-brand-text-primary font-sans relative flex flex-col">
+      <Header />
     <div className="w-full max-w-[1200px] mx-auto px-4 py-6 sm:px-6 sm:py-8 md:p-8 overflow-y-auto">
       <motion.div
         initial={{ opacity: 0, y: 10 }}
@@ -38,6 +41,13 @@ export default function LearnPageClient({ topics }: LearnPageClientProps) {
         transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         className="mb-6 sm:mb-8 md:mb-12"
       >
+        <nav aria-label="Breadcrumb" className="mb-3 flex items-center gap-1.5 text-xs font-mono text-brand-text-secondary">
+          <Link href="/" className="hover:text-brand-purple transition-colors flex items-center gap-1">
+            <span>🏠</span> Home
+          </Link>
+          <span className="text-brand-border-light">/</span>
+          <span className="text-brand-purple font-bold">Learn & Practice</span>
+        </nav>
         <h1 className="text-4xl font-black tracking-tight text-brand-text-primary mb-4">Learn & Practice</h1>
         <p className="text-brand-text-secondary text-lg max-w-2xl">
           Deep dive into data structures and algorithms. Toggle between languages, study step-by-step logic, and solidify your understanding with practice problems.
@@ -51,6 +61,7 @@ export default function LearnPageClient({ topics }: LearnPageClientProps) {
           return (
             <motion.div
               key={topic}
+              id={topic}
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
@@ -94,5 +105,6 @@ export default function LearnPageClient({ topics }: LearnPageClientProps) {
         </div>
       )}
     </div>
+    </main>
   );
 }
