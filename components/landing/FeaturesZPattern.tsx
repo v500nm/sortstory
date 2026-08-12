@@ -68,24 +68,27 @@ export default function FeaturesZPattern() {
           <div className="lg:col-span-6 relative mt-8 lg:mt-0">
             <motion.div 
               variants={visualVariantsRight}
-              className="relative"
+              className="relative group"
             >
-              <div className="absolute inset-0 bg-brand-cyan translate-x-4 translate-y-4 -z-10 rounded-lg opacity-80" />
-              <div className="w-full aspect-video rounded-xl overflow-hidden border border-brand-border bg-brand-bg-card shadow-lg flex">
-                <div className="w-1/2 bg-black/5 dark:bg-white/5 p-4 border-r border-brand-border/50 font-mono text-[10px] sm:text-xs text-brand-text-secondary flex flex-col gap-1 overflow-hidden">
-                  <span className="text-brand-purple">export async function</span> <span className="text-brand-cyan">cocktail</span>(ctx) {'{'}
-                  <br/>&nbsp;&nbsp;<span className="text-brand-text-secondary">let</span> swapped = <span className="text-brand-purple">true</span>;
-                  <br/>&nbsp;&nbsp;<span className="text-brand-text-secondary">while</span> (swapped) {'{'}
-                  <br/>&nbsp;&nbsp;&nbsp;&nbsp;swapped = <span className="text-brand-purple">false</span>;
-                  <br/>&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-brand-green">// Yielding to DOM</span>
-                  <br/>&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-brand-text-secondary">for</span> (<span className="text-brand-text-secondary">let</span> i = start; i {'<'} end; i++) {'{'}
-                  <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-brand-purple">await</span> ctx.pauseCheck();
-                  <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-brand-purple">await</span> ctx.compare(i, i + 1);
+              <div className="absolute inset-0 bg-gradient-to-r from-brand-cyan to-brand-purple translate-x-3 translate-y-3 -z-10 rounded-xl opacity-60 blur-sm group-hover:opacity-100 transition-opacity" />
+              <div className="w-full aspect-video rounded-xl overflow-hidden border border-brand-border-light bg-brand-surface-1 shadow-2xl flex relative">
+                {/* LIVE badge */}
+                <div className="absolute top-2 right-2 z-20 flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-brand-bg-dark/80 backdrop-blur border border-brand-border text-[9px] font-mono font-bold text-brand-green uppercase">
+                  <span className="w-1.5 h-1.5 rounded-full bg-brand-green animate-ping" />
+                  LIVE YIELD
                 </div>
-                <div className="w-1/2 p-4 flex flex-col justify-end gap-1 relative bg-brand-bg-card">
-                  <div className="flex items-end justify-center gap-[2px] h-full pb-2 relative">
+                <div className="w-1/2 bg-black/20 p-3 border-r border-brand-border font-mono text-[10px] sm:text-xs text-brand-text-secondary flex flex-col gap-1 overflow-hidden">
+                  <div className="flex gap-2"><span className="text-brand-text-tertiary select-none">1</span><span><span className="text-brand-purple">async function</span> <span className="text-brand-cyan">cocktail</span>(ctx) {'{'}</span></div>
+                  <div className="flex gap-2"><span className="text-brand-text-tertiary select-none">2</span><span>&nbsp;&nbsp;<span className="text-brand-text-secondary">let</span> swapped = <span className="text-brand-purple">true</span>;</span></div>
+                  <div className="flex gap-2"><span className="text-brand-text-tertiary select-none">3</span><span>&nbsp;&nbsp;<span className="text-brand-text-secondary">while</span> (swapped) {'{'}</span></div>
+                  <div className="flex gap-2"><span className="text-brand-text-tertiary select-none">4</span><span>&nbsp;&nbsp;&nbsp;&nbsp;swapped = <span className="text-brand-purple">false</span>;</span></div>
+                  <div className="flex gap-2 bg-brand-purple/10 -mx-3 px-3 rounded"><span className="text-brand-purple font-bold select-none">5</span><span>&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-brand-purple">await</span> ctx.yieldDOM();</span></div>
+                  <div className="flex gap-2"><span className="text-brand-text-tertiary select-none">6</span><span>&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-brand-purple">await</span> ctx.compare(i, i+1);</span></div>
+                </div>
+                <div className="w-1/2 p-4 flex flex-col justify-end gap-1 relative bg-brand-surface-1">
+                  <div className="flex items-end justify-center gap-[3px] h-full pb-2 relative">
                     {[3, 8, 2, 9, 4, 1, 6].map((h, i) => (
-                      <div key={i} className={`w-full max-w-[12px] rounded-t-sm ${i === 3 || i === 4 ? 'bg-brand-purple animate-pulse' : 'bg-brand-cyan'}`} style={{ height: `${h * 10}%` }} />
+                      <div key={i} className={`w-full max-w-[14px] rounded-t-sm transition-all ${i === 3 || i === 4 ? 'bg-brand-purple shadow-[0_0_12px_rgba(129,140,248,0.8)] animate-pulse' : 'bg-brand-cyan/80'}`} style={{ height: `${h * 10}%` }} />
                     ))}
                   </div>
                 </div>
@@ -105,24 +108,28 @@ export default function FeaturesZPattern() {
           <div className="lg:col-span-6 relative order-2 lg:order-1 mt-8 lg:mt-0">
             <motion.div 
               variants={visualVariantsLeft}
-              className="relative"
+              className="relative group"
             >
-              <div className="absolute inset-0 bg-brand-purple translate-x-4 translate-y-4 -z-10 rounded-lg opacity-80" />
-              <div className="w-full aspect-video rounded-xl overflow-hidden border border-brand-border bg-brand-bg-card shadow-lg p-4 relative">
-                <div className="grid grid-cols-10 grid-rows-8 gap-[2px] h-full w-full opacity-60">
+              <div className="absolute inset-0 bg-gradient-to-r from-brand-purple to-brand-cyan translate-x-3 translate-y-3 -z-10 rounded-xl opacity-60 blur-sm group-hover:opacity-100 transition-opacity" />
+              <div className="w-full aspect-video rounded-xl overflow-hidden border border-brand-border-light bg-brand-surface-1 shadow-2xl p-4 relative">
+                <div className="absolute top-2 left-2 z-20 flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-brand-bg-dark/80 backdrop-blur border border-brand-border text-[9px] font-mono font-bold text-brand-cyan uppercase">
+                  <span className="w-1.5 h-1.5 rounded-full bg-brand-cyan animate-pulse" />
+                  HEURISTIC GRID
+                </div>
+                <div className="grid grid-cols-10 grid-rows-8 gap-[2px] h-full w-full opacity-70">
                   {Array.from({length: 80}).map((_, i) => {
                     const isPath = [0,1,2,12,22,23,24,34,44,45,46,56,66,67,68,78].includes(i);
                     const isVisited = !isPath && i % 3 === 0;
                     return (
-                      <div key={i} className={`rounded-[2px] relative ${isPath ? 'bg-brand-cyan shadow-[0_0_8px_rgba(34,211,238,0.5)]' : isVisited ? 'bg-brand-purple/20' : 'bg-black/5 dark:bg-white/5 border border-brand-border/50'}`}>
-                        {i === 45 && <div className="absolute inset-0 bg-brand-text-primary/20 animate-ping rounded-[2px]" />}
+                      <div key={i} className={`rounded-[2px] relative transition-colors ${isPath ? 'bg-brand-cyan shadow-[0_0_8px_rgba(34,211,238,0.6)]' : isVisited ? 'bg-brand-purple/30' : 'bg-black/10 dark:bg-white/5 border border-brand-border/40'}`}>
+                        {i === 45 && <div className="absolute inset-0 bg-brand-text-primary/40 animate-ping rounded-[2px]" />}
                       </div>
                     )
                   })}
                 </div>
-                <div className="absolute bottom-2 right-2 bg-brand-bg-card/90 backdrop-blur border border-brand-border p-2 rounded text-[10px] font-mono shadow-sm">
-                  <div><span className="text-brand-purple">f(n)</span> = g(n) + h(n)</div>
-                  <div><span className="text-brand-cyan">Cost:</span> 14.8</div>
+                <div className="absolute bottom-2 right-2 bg-brand-surface-2/90 backdrop-blur border border-brand-border-light p-2 rounded-lg text-[10px] font-mono shadow-md">
+                  <div><span className="text-brand-purple font-bold">f(n)</span> = g(n) + h(n)</div>
+                  <div><span className="text-brand-cyan font-bold">Cost:</span> 14.8</div>
                 </div>
               </div>
             </motion.div>

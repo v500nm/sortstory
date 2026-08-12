@@ -1,5 +1,5 @@
-import SortingBarsLoader from "@/components/loaders/SortingBarsLoader";
+import MixedLoaders from "@/components/loaders/MixedLoaders";
 
 export default function RootLoading() {
-  return <SortingBarsLoader />;
+  return <MixedLoaders />;
 }

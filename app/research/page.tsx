@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import { motion, AnimatePresence } from "framer-motion";
+import InitialMountLoader from "@/components/loaders/InitialMountLoader";
+import ResearchLoader from "@/components/loaders/ResearchLoader";
 
 const publications = [
   {
@@ -105,6 +107,9 @@ export default function ResearchPage() {
 
   return (
     <main className="min-h-screen w-full bg-brand-bg-dark text-brand-text-primary font-sans relative flex flex-col overflow-x-clip selection:bg-brand-purple/30">
+      <InitialMountLoader>
+        <ResearchLoader />
+      </InitialMountLoader>
 
       {/* Background ambient lighting */}
       <div className="fixed inset-0 w-full h-full -z-50 pointer-events-none">

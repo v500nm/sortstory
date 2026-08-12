@@ -60,34 +60,61 @@ export default function Header() {
   // Check if current page is in the Learn section
   const isLearnPage = pathname.startsWith("/learn");
 
-  // Hide 2nd line submenu on landing page (pathname === "/")
-  const showSecondLineSubmenu = pathname !== "/";
+  // Hide 2nd line submenu on pages with no sub-modules (Landing, Research, Press, etc.)
+  const isNoSubmenuPage = 
+    pathname === "/" ||
+    pathname.startsWith("/research") ||
+    pathname.startsWith("/press") ||
+    pathname.startsWith("/faq") ||
+    pathname.startsWith("/privacy") ||
+    pathname.startsWith("/terms") ||
+    pathname.startsWith("/admin") ||
+    pathname.startsWith("/visual-sitemap");
+
+  const showSecondLineSubmenu = !isNoSubmenuPage;
 
   return (
     <>
-      <header className="border-b border-brand-border bg-brand-bg-dark/80 backdrop-blur-xl sticky top-0 z-40">
+      <header className="border-b border-brand-border/60 bg-brand-bg-dark/80 backdrop-blur-xl sticky top-0 z-40 relative">
+        {/* Shimmering gradient top-border accent */}
+        <div className="gradient-line absolute top-0 left-0 right-0 z-50 opacity-80" />
+
         {/* Tier 1 Main Header Bar */}
         <div className="max-w-[1700px] mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between">
-          <Link href="/" className="text-2xl font-black font-serif tracking-tight text-brand-text-primary hover:text-brand-accent transition-colors flex items-center gap-2 group">
-            <img
+          <Link href="/" className="text-2xl font-black font-serif tracking-tight text-brand-text-primary hover:text-brand-accent transition-colors flex items-center gap-2.5 group">
+            <motion.img
               src="/assets/favicon-32x32.png"
               alt="SortStory Logo"
-              className="w-6 h-6 object-contain group-hover:rotate-12 transition-transform duration-300"
+              whileHover={{ rotate: 15, scale: 1.1 }}
+              transition={{ type: "spring", stiffness: 400, damping: 15 }}
+              className="w-6 h-6 object-contain"
             />
-            <span className="italic text-brand-purple">Sort</span>Story
+            <span><span className="italic text-brand-purple">Sort</span>Story</span>
           </Link>
 
           {/* Main Desktop Tier 1 Navigation */}
           <nav className="hidden lg:flex items-center gap-8">
-            {mainNavLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`text-sm font-bold uppercase tracking-wider transition-all duration-300 relative py-1 after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-brand-purple after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 after:origin-left ${pathname === link.href ? 'text-brand-text-primary after:scale-x-100' : 'text-brand-text-secondary hover:text-brand-text-primary'}`}
-              >
-                {link.label}
-              </Link>
-            ))}
+            {mainNavLinks.map((link) => {
+              const isActive = pathname === link.href;
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`text-xs font-bold uppercase tracking-widest transition-colors relative py-1.5 px-1 ${
+                    isActive ? 'text-brand-text-primary' : 'text-brand-text-secondary hover:text-brand-text-primary'
+                  }`}
+                >
+                  {link.label}
+                  {isActive && (
+                    <motion.span
+                      layoutId="headerActiveIndicator"
+                      className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-brand-purple to-brand-cyan rounded-full shadow-[0_0_8px_rgba(129,140,248,0.6)]"
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                </Link>
+              );
+            })}
 
             {isLoggedIn ? (
               <div className="flex items-center gap-3 ml-2 pl-4 border-l border-brand-border">

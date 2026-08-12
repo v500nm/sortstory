@@ -94,26 +94,28 @@ export default function DeepDiveEditorial() {
               {/* Asymmetric Layered Image Container */}
               <motion.div 
                 initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
-                className="relative"
+                className="relative group"
               >
-                <div className="absolute inset-0 bg-brand-cyan translate-x-2 translate-y-2 md:translate-x-4 md:translate-y-4 -z-10 rounded-lg opacity-80" />
-                <div className="bg-brand-bg-card border border-brand-border text-brand-text-primary p-6 md:p-8 relative rounded-lg shadow-xl">
-                   <h4 className="text-lg md:text-xl font-bold font-serif mb-4">"It's not just a UI change. The algorithms themselves have been fundamentally rewritten to be state-aware."</h4>
-                   <p className="text-xs text-brand-text-secondary font-mono">— SortStory Engineering</p>
+                <div className="absolute inset-0 bg-gradient-to-r from-brand-purple to-brand-cyan translate-x-3 translate-y-3 -z-10 rounded-2xl opacity-60 blur-sm group-hover:opacity-100 transition-opacity" />
+                <div className="bg-brand-surface-1 border border-brand-border-light text-brand-text-primary p-6 md:p-8 relative rounded-2xl shadow-2xl overflow-hidden">
+                   <div className="absolute -top-4 -left-2 text-7xl font-serif font-black text-brand-purple/20 select-none pointer-events-none">“</div>
+                   <h4 className="text-lg md:text-xl font-bold font-serif mb-4 relative z-10 leading-snug">"It's not just a UI change. The algorithms themselves have been fundamentally rewritten to be state-aware."</h4>
+                   <p className="text-xs text-brand-text-secondary font-mono font-bold">— SortStory Engineering</p>
                    
-                   <div className="mt-6 md:mt-8 border-t border-brand-border pt-4 text-[10px] md:text-xs font-mono uppercase tracking-widest text-brand-purple">
-                     [ Fig 1. Asynchronous Execution Yields ]
+                   <div className="mt-6 md:mt-8 border-t border-brand-border-light pt-4 text-[10px] md:text-xs font-mono uppercase tracking-widest text-brand-purple flex items-center justify-between">
+                     <span>[ Fig 1. Async Yields ]</span>
+                     <span className="w-2 h-2 rounded-full bg-brand-cyan animate-pulse" />
                    </div>
                 </div>
               </motion.div>
 
               <motion.div 
                 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-                className="mt-12 p-4 md:p-6 bg-black/5 dark:bg-white/5 border border-brand-border/50 rounded-lg shadow-sm font-mono text-xs md:text-sm overflow-x-auto"
+                className="mt-8 p-4 md:p-6 bg-brand-surface-1 border border-brand-border-light rounded-xl shadow-lg font-mono text-xs md:text-sm overflow-x-auto"
               >
-                <div className="text-brand-text-secondary mb-2">// Traditional vs SortStory</div>
-                <div className="line-through text-brand-rose mb-1">if (arr[i] &gt; arr[j]) swap()</div>
-                <div className="text-brand-green whitespace-nowrap">if (await ctx.compare(i, j) &gt; 0) await ctx.swap(i, j)</div>
+                <div className="text-brand-text-tertiary mb-2 uppercase text-[10px] tracking-wider font-bold">// Traditional vs SortStory</div>
+                <div className="line-through text-brand-rose/80 mb-1 flex items-center gap-2"><span className="text-brand-rose">−</span> if (arr[i] &gt; arr[j]) swap()</div>
+                <div className="text-brand-green font-bold flex items-center gap-2"><span className="text-brand-green">+</span> if (await ctx.compare(i, j) &gt; 0) await ctx.swap(i, j)</div>
               </motion.div>
             </div>
           </div>

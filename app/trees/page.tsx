@@ -6,6 +6,8 @@ import { useTreeEngine } from "@/hooks/useTreeEngine";
 import Header from "@/components/Header";
 import PageHeader from "@/components/PageHeader";
 import AlgoDetails from "@/components/AlgoDetails";
+import InitialMountLoader from "@/components/loaders/InitialMountLoader";
+import TreeLoader from "@/components/loaders/TreeLoader";
 
 export default function TreesPage() {
   const engine = useTreeEngine();
@@ -13,6 +15,9 @@ export default function TreesPage() {
 
   return (
     <main className="min-h-screen w-full bg-brand-bg-dark text-brand-text-primary font-sans relative flex flex-col">
+      <InitialMountLoader>
+        <TreeLoader />
+      </InitialMountLoader>
       <Header />
       <div className="max-w-[1700px] mx-auto w-full flex-1 px-4 sm:px-6 py-4 md:py-6 flex flex-col">
         <PageHeader 

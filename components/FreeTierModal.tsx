@@ -19,17 +19,19 @@ export default function FreeTierModal({ isOpen, onClose }: FreeTierModalProps) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="absolute inset-0 bg-black/70 backdrop-blur-md"
+            className="absolute inset-0 bg-black/75 backdrop-blur-xl"
           />
 
           {/* Modal Card */}
           <motion.div 
-            initial={{ opacity: 0, scale: 0.92, y: 20 }}
+            initial={{ opacity: 0, scale: 0.92, y: 15 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.92, y: 20 }}
-            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-            className="relative w-full max-w-lg bg-brand-bg-card border border-brand-border rounded-3xl shadow-2xl p-5 sm:p-8 max-h-[90vh] overflow-y-auto z-10"
+            exit={{ opacity: 0, scale: 0.92, y: 15 }}
+            transition={{ type: "spring", stiffness: 350, damping: 25 }}
+            className="relative w-full max-w-lg bg-brand-surface-2 border border-brand-border-light rounded-3xl shadow-2xl p-5 sm:p-8 max-h-[90vh] overflow-y-auto z-10 overflow-hidden"
           >
+            {/* Top gradient accent line */}
+            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-brand-green via-brand-cyan to-brand-purple" />
             {/* Ambient Background Glow */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-brand-green/10 rounded-full blur-[100px] pointer-events-none" />
             <div className="absolute bottom-0 left-0 w-64 h-64 bg-brand-purple/10 rounded-full blur-[100px] pointer-events-none" />

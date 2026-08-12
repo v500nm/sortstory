@@ -7,6 +7,8 @@ import { useGameOfLifeEngine, useKMeansEngine } from "@/hooks/useAutomataEngine"
 import Header from "@/components/Header";
 import PageHeader from "@/components/PageHeader";
 import AlgoDetails from "@/components/AlgoDetails";
+import InitialMountLoader from "@/components/loaders/InitialMountLoader";
+import AutomataLoader from "@/components/loaders/AutomataLoader";
 
 export default function AutomataPage() {
   const golEngine = useGameOfLifeEngine();
@@ -15,6 +17,9 @@ export default function AutomataPage() {
 
   return (
     <main className="min-h-screen w-full bg-brand-bg-dark text-brand-text-primary font-sans relative flex flex-col">
+      <InitialMountLoader>
+        <AutomataLoader />
+      </InitialMountLoader>
       <Header />
       <div className="max-w-[1700px] mx-auto w-full flex-1 px-4 sm:px-6 py-4 md:py-6 flex flex-col">
         <PageHeader 

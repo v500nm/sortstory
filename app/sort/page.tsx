@@ -11,6 +11,8 @@ import { useSortEngine } from "@/hooks/useSortEngine";
 import * as sorts from "@/lib/index";
 import type { SortAlgorithmFn } from "@/lib/types";
 import Link from "next/link";
+import InitialMountLoader from "@/components/loaders/InitialMountLoader";
+import SortingBarsLoader from "@/components/loaders/SortingBarsLoader";
 
 const sortMap: Record<string, SortAlgorithmFn> = sorts as unknown as Record<string, SortAlgorithmFn>;
 
@@ -53,7 +55,10 @@ export default function Sort() {
   }, [arraySize, engine]);
 
   return (
-    <main className="min-h-screen w-full bg-brand-bg-dark text-brand-text-primary font-sans relative">
+    <main className="min-h-screen w-full bg-brand-bg-dark text-brand-text-primary font-sans relative flex flex-col">
+      <InitialMountLoader>
+        <SortingBarsLoader />
+      </InitialMountLoader>
       {showIntro && <IntroModal close={() => setShowIntro(false)} />}
 
       <Header />

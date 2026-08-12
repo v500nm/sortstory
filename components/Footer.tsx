@@ -69,8 +69,8 @@ const mediaLinks = [
 ];
 
 const connectLinks = [
-  { href: "https://adnan-mangaonkar.com", label: "Adnan OS (Portfolio)", external: true, rel: "author" },
-  { href: "https://adnan-mangaonkar.com", label: "Business Consulting", external: true },
+  { href: "https://aos.adnan-mangaonkar.com", label: "Adnan OS Portfolio", external: true, rel: "author" },
+  { href: "https://adnan-mangaonkar.com", label: "Main Portfolio & Site", external: true },
   { href: "https://github.com/v500nm", label: "GitHub", external: true },
   { href: "https://www.linkedin.com/in/adnan-mangaonkar/", label: "LinkedIn", external: true },
   { href: "https://x.com/V350NM", label: "X (Twitter)", external: true },
@@ -95,8 +95,8 @@ export default function Footer() {
         viewport={{ once: true, margin: "-50px" }}
         className="max-w-[1700px] mx-auto px-4 sm:px-6 pt-24 pb-12"
       >
-        {/* 1. Giant Magazine Style Staggered Typography Reveal */}
-        <div className="overflow-hidden py-4 border-b border-brand-border/30 mb-8 flex justify-center">
+        {/* 1. Magazine Style Typography Reveal */}
+        <div className="overflow-hidden py-3 border-b border-brand-border/30 mb-8 flex justify-center">
           <motion.div
             variants={letterContainerVariants}
             initial="hidden"
@@ -108,7 +108,7 @@ export default function Footer() {
               <motion.span
                 key={index}
                 variants={letterVariants}
-                className="text-[11vw] sm:text-[9vw] lg:text-[7vw] font-black tracking-tighter uppercase font-serif text-transparent bg-clip-text bg-gradient-to-r from-brand-text-secondary/20 via-brand-purple/40 to-brand-cyan/40 px-0.5 sm:px-1"
+                className="text-[6vw] sm:text-[5vw] lg:text-[4vw] font-black tracking-widest uppercase font-serif text-transparent bg-clip-text bg-gradient-to-r from-brand-text-secondary/30 via-brand-purple/50 to-brand-cyan/50 px-1"
               >
                 {char}
               </motion.span>
@@ -117,12 +117,13 @@ export default function Footer() {
         </div>
 
         {/* Branding Subtitle & Active Mode Badge */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-12 px-2">
-          <p className="text-xs sm:text-sm text-brand-text-secondary leading-relaxed max-w-2xl">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-10 px-2">
+          <p className="text-xs sm:text-sm text-brand-text-secondary leading-relaxed max-w-2xl font-sans">
             Interactive multi-stack data structures and algorithm visualizers designed for computer science students, engineering faculty, and technical interview preparation. Built with asynchronous yielding engines to preserve thread performance.
           </p>
-          <div className="flex items-center gap-2 shrink-0">
-            <span className="px-3 py-1 bg-brand-purple/10 border border-brand-purple/30 text-brand-purple rounded-md text-[10px] font-bold tracking-wider uppercase">
+          <div className="flex items-center gap-3 shrink-0">
+            <span className="px-3.5 py-1.5 bg-brand-green/10 border border-brand-green/30 text-brand-green rounded-full text-[10px] font-bold font-mono tracking-wider uppercase flex items-center gap-2 shadow-[0_0_12px_rgba(52,211,153,0.15)]">
+              <span className="w-2 h-2 rounded-full bg-brand-green animate-pulse" />
               FREE MODE ACTIVE
             </span>
           </div>

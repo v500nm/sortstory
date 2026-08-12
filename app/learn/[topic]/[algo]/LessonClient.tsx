@@ -7,6 +7,8 @@ import MarkdownRenderer from '@/components/learn/MarkdownRenderer';
 import { useLanguage, ProgrammingLanguage } from '@/components/learn/LanguageContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import Header from '@/components/Header';
+import InitialMountLoader from '@/components/loaders/InitialMountLoader';
+import LearnLoader from '@/components/loaders/LearnLoader';
 
 interface Props {
   lessons: LessonData[];
@@ -33,6 +35,9 @@ export default function LessonClient({ lessons, topic, algo }: Props) {
 
   return (
     <div className="min-h-screen w-full bg-brand-bg-dark text-brand-text-primary font-sans relative flex flex-col">
+      <InitialMountLoader>
+        <LearnLoader />
+      </InitialMountLoader>
       <Header />
       <div className="flex flex-col md:flex-row w-full flex-1 overflow-hidden">
         {/* Sidebar Navigation */}

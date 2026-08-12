@@ -8,6 +8,8 @@ import SearchControls from "@/components/search/SearchControls";
 import SearchVisualizer from "@/components/search/SearchVisualizer";
 import SearchRace from "@/components/search/SearchRace";
 import AlgoDetails from "@/components/AlgoDetails";
+import InitialMountLoader from "@/components/loaders/InitialMountLoader";
+import SearchLoader from "@/components/loaders/SearchLoader";
 
 export default function SearchPage() {
   const [arraySize, setArraySize] = useState(15);
@@ -28,6 +30,9 @@ export default function SearchPage() {
 
   return (
     <div className="min-h-screen bg-brand-bg-dark text-brand-text-primary flex flex-col font-sans selection:bg-brand-purple/30">
+      <InitialMountLoader>
+        <SearchLoader />
+      </InitialMountLoader>
       <Header />
       
       <main className="flex-1 px-4 sm:px-6 py-4 md:py-6 flex flex-col max-w-[1600px] mx-auto w-full min-h-screen">

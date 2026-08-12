@@ -72,33 +72,33 @@ export default function HeroAnimation() {
   }, []);
 
   return (
-    <div className="w-full h-full min-h-[350px] lg:min-h-[450px] bg-brand-bg-card/45 backdrop-blur-md border border-brand-border rounded-2xl p-5 flex flex-col justify-between gap-4 relative shadow-[0_25px_60px_-15px_rgba(0,0,0,0.7)] overflow-hidden font-mono">
+    <div className="w-full h-full min-h-[350px] lg:min-h-[450px] bg-brand-surface-1/90 backdrop-blur-xl border border-brand-border-light rounded-2xl p-5 flex flex-col justify-between gap-4 relative shadow-2xl overflow-hidden font-mono group">
       {/* Decorative Matrix Background Effect */}
-      <div className="absolute inset-0 opacity-[0.02] bg-[radial-gradient(#818cf8_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none" />
+      <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(#818cf8_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none" />
 
       {/* Console Top bar */}
-      <div className="flex items-center justify-between border-b border-brand-border/60 pb-3 relative z-10">
+      <div className="flex items-center justify-between border-b border-brand-border-light pb-3 relative z-10">
         <div className="flex gap-1.5">
-          <div className="w-3 h-3 rounded-full bg-brand-rose/80" />
-          <div className="w-3 h-3 rounded-full bg-brand-yellow/80" />
-          <div className="w-3 h-3 rounded-full bg-brand-green/80" />
+          <div className="w-3 h-3 rounded-full bg-brand-rose/80 shadow-sm" />
+          <div className="w-3 h-3 rounded-full bg-brand-yellow/80 shadow-sm" />
+          <div className="w-3 h-3 rounded-full bg-brand-green/80 shadow-sm" />
         </div>
-        <span className="text-[10px] text-brand-text-secondary/70 tracking-widest">
+        <span className="text-[10px] text-brand-text-tertiary tracking-widest uppercase font-bold">
           sortstory://engine/bubble-sort.sh
         </span>
       </div>
 
       {/* Telemetry Console */}
-      <div className="grid grid-cols-2 gap-3 text-[11px] bg-black/20 p-3 rounded-lg border border-brand-border/40 relative z-10">
-        <div className="flex flex-col gap-1">
-          <span className="text-brand-text-secondary">ALGORITHM</span>
+      <div className="grid grid-cols-2 gap-3 text-[11px] bg-brand-bg-dark/60 p-3 rounded-xl border border-brand-border-light relative z-10 shadow-inner">
+        <div className="flex flex-col gap-0.5">
+          <span className="text-brand-text-tertiary text-[9px] uppercase font-bold">ALGORITHM</span>
           <span className="font-bold text-brand-text-primary">Bubble Sort</span>
         </div>
-        <div className="flex flex-col gap-1">
-          <span className="text-brand-text-secondary">STATUS</span>
+        <div className="flex flex-col gap-0.5">
+          <span className="text-brand-text-tertiary text-[9px] uppercase font-bold">STATUS</span>
           <span className={`font-bold transition-colors duration-300 ${
             state.phase === "SORTED" 
-              ? "text-brand-green" 
+              ? "text-brand-green shadow-[0_0_8px_rgba(52,211,153,0.5)]" 
               : state.phase === "SWAPPING" 
               ? "text-brand-yellow" 
               : "text-brand-cyan"
@@ -106,12 +106,12 @@ export default function HeroAnimation() {
             {state.phase}
           </span>
         </div>
-        <div className="flex flex-col gap-1">
-          <span className="text-brand-text-secondary">COMPARISONS</span>
+        <div className="flex flex-col gap-0.5">
+          <span className="text-brand-text-tertiary text-[9px] uppercase font-bold">COMPARISONS</span>
           <span className="font-bold text-brand-text-primary">{state.comparisons}</span>
         </div>
-        <div className="flex flex-col gap-1">
-          <span className="text-brand-text-secondary">SWAPS</span>
+        <div className="flex flex-col gap-0.5">
+          <span className="text-brand-text-tertiary text-[9px] uppercase font-bold">SWAPS</span>
           <span className="font-bold text-brand-text-primary">{state.swaps}</span>
         </div>
       </div>
@@ -124,7 +124,7 @@ export default function HeroAnimation() {
             <motion.div
               key={value}
               layout
-              transition={{ type: "spring", stiffness: 350, damping: 25 }}
+              transition={{ type: "spring", stiffness: 380, damping: 28 }}
               className={`w-full max-w-[40px] rounded-t-lg transition-all duration-300 relative group`}
               style={{ 
                 height: `${value * 10}%`,
@@ -137,7 +137,7 @@ export default function HeroAnimation() {
             >
               {/* Highlight Glow for active comparison */}
               {isComparing && (
-                <div className="absolute inset-0 bg-brand-cyan/40 blur-md rounded-t-lg -z-10 animate-pulse" />
+                <div className="absolute inset-0 bg-brand-cyan/60 blur-md rounded-t-lg -z-10 animate-pulse" />
               )}
               {/* Tooltip value */}
               <span className="absolute -top-6 left-1/2 -translate-x-1/2 text-[9px] font-bold text-brand-text-secondary opacity-0 group-hover:opacity-100 transition-opacity">

@@ -82,30 +82,40 @@ export default function TimelineSection() {
         </motion.p>
       </motion.div>
 
-      {/* 2x2 Bento Box Grid */}
+      {/* 2x2 Bento Box Grid with Stepper Feel */}
       <motion.div 
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-50px" }}
-        className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6"
+        className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8"
       >
         {steps.map((step, index) => (
           <motion.div 
             variants={cardVariants}
             key={index} 
-            className="bg-brand-bg-card border border-brand-border hover:border-brand-text-secondary transition-colors rounded-2xl p-6 md:p-10 flex flex-col justify-between shadow-sm group"
+            className="bg-brand-surface-1 border border-brand-border-light hover:border-brand-purple/50 transition-all rounded-2xl p-6 md:p-10 flex flex-col justify-between shadow-xl hover-lift group relative overflow-hidden"
           >
+            {/* Step sequence indicator */}
+            <div className="absolute top-4 right-4 text-4xl font-black font-mono text-brand-border/40 select-none group-hover:text-brand-purple/20 transition-colors">
+              0{index + 1}
+            </div>
+
             <div>
-              <div className={`inline-block bg-${step.color}/10 text-${step.color} font-mono text-[10px] md:text-xs font-bold px-2 py-1 rounded-md mb-6 border border-${step.color}/20`}>
+              <div className={`inline-block bg-${step.color}/10 text-${step.color} font-mono text-[10px] md:text-xs font-bold px-3 py-1 rounded-full mb-6 border border-${step.color}/30 shadow-sm`}>
                 Event: 0x0{index + 1}
               </div>
               <h3 className="text-2xl md:text-3xl font-bold mb-4 font-serif">{step.title}</h3>
               <p className="text-base md:text-lg text-brand-text-secondary leading-relaxed font-light">{step.desc}</p>
             </div>
 
-            <div className={`mt-8 bg-black/5 dark:bg-white/5 border border-brand-border/50 rounded-lg p-4 md:p-6 font-mono text-[10px] sm:text-xs md:text-sm text-${step.color} overflow-x-auto shadow-inner group-hover:bg-brand-bg-dark transition-colors`}>
-              <pre><code>{step.code}</code></pre>
+            <div className="mt-8 bg-black/30 border border-brand-border-light rounded-xl p-4 md:p-6 font-mono text-[10px] sm:text-xs text-brand-cyan overflow-x-auto shadow-inner group-hover:border-brand-purple/30 transition-colors">
+              {step.code.split('\n').map((line, lIdx) => (
+                <div key={lIdx} className="flex gap-3">
+                  <span className="text-brand-text-tertiary select-none w-4 text-right">{lIdx + 1}</span>
+                  <span>{line}</span>
+                </div>
+              ))}
             </div>
           </motion.div>
         ))}
