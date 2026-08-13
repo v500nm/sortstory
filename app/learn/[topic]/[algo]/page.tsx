@@ -2,6 +2,8 @@ import React from 'react';
 import type { Metadata } from 'next';
 import { getLessonsForAlgorithm } from '@/lib/markdown';
 import { formatAlgoName } from '@/lib/utils';
+import Header from '@/components/Header';
+import { LanguageProvider } from '@/components/learn/LanguageContext';
 import LessonClient from './LessonClient';
 
 const BASE_URL = 'https://sortstory.adnan-mangaonkar.com';
@@ -54,13 +56,16 @@ export default async function AlgoLearnPage({ params }: Props) {
 
   if (!lessons || lessons.length === 0) {
     return (
-      <div className="w-full flex items-center justify-center p-8">
-        <div className="glass-card p-8 text-center text-brand-text-secondary">
-          No lessons found for {topic} / {algo}.
+      <main className="min-h-screen w-full bg-brand-bg-dark text-brand-text-primary font-sans relative flex flex-col">
+        <Header />
+        <div className="w-full flex-1 flex items-center justify-center p-8">
+          <div className="glass-card p-8 text-center text-brand-text-secondary">
+            No lessons found for {topic} / {algo}.
+          </div>
         </div>
-      </div>
+      </main>
     );
   }
 
-  return <LessonClient lessons={lessons} topic={topic} algo={algo} />;
+  return <LanguageProvider><LessonClient lessons={lessons} topic={topic} algo={algo} /></LanguageProvider>;
 }

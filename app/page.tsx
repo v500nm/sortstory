@@ -10,6 +10,8 @@ import DeepDiveEditorial from "@/components/landing/DeepDiveEditorial";
 import InteractiveNavigation from "@/components/landing/InteractiveNavigation";
 import PortfolioGrid from "@/components/landing/PortfolioGrid";
 import { motion, useScroll, useTransform } from "framer-motion";
+import InitialMountLoader from "@/components/loaders/InitialMountLoader";
+import MixedLoaders from "@/components/loaders/MixedLoaders";
 
 export default function Home() {
   const { scrollYProgress } = useScroll();
@@ -17,6 +19,9 @@ export default function Home() {
 
   return (
     <main className="min-h-screen w-full font-sans relative flex flex-col overflow-x-hidden text-brand-text-primary selection:bg-brand-purple/30">
+      <InitialMountLoader>
+        <MixedLoaders />
+      </InitialMountLoader>
       
       {/* Unified Hybrid Background Canvas */}
       <div className="fixed inset-0 w-full h-full -z-50 pointer-events-none bg-brand-bg-dark">

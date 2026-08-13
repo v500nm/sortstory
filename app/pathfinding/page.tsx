@@ -9,6 +9,8 @@ import PathfindingRace from "@/components/pathfinding/PathfindingRace";
 import { usePathfindingEngine } from "@/hooks/usePathfindingEngine";
 import { ALGORITHM_INFO } from "@/components/pathfinding/PathfindingControls";
 import AlgoDetails from "@/components/AlgoDetails";
+import InitialMountLoader from "@/components/loaders/InitialMountLoader";
+import PathfindingLoader from "@/components/loaders/PathfindingLoader";
 
 export default function PathfindingPage() {
   const engine = usePathfindingEngine();
@@ -20,6 +22,9 @@ export default function PathfindingPage() {
 
   return (
     <main className="min-h-screen w-full bg-brand-bg-dark text-brand-text-primary font-sans relative flex flex-col">
+      <InitialMountLoader>
+        <PathfindingLoader />
+      </InitialMountLoader>
       <Header />
 
       <div className="flex-1 flex flex-col max-w-[1500px] w-full mx-auto px-4 sm:px-6 py-4 md:py-6">

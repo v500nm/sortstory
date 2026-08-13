@@ -180,17 +180,21 @@ export default function PlansModal({ isOpen, onClose }: PlansModalProps) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            className="absolute inset-0 bg-black/75 backdrop-blur-xl"
           />
           <motion.div 
-            initial={{ opacity: 0, scale: 0.95, y: 20 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            className="relative w-full max-w-6xl bg-brand-bg-card border border-brand-border rounded-2xl shadow-2xl p-6 sm:p-10 max-h-[90vh] overflow-y-auto custom-scrollbar"
+            initial={{ opacity: 0, scale: 0.95, y: 15 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: 15 }}
+            transition={{ type: "spring", stiffness: 350, damping: 25 }}
+            className="relative w-full max-w-6xl bg-brand-surface-2 border border-brand-border-light rounded-3xl shadow-2xl p-6 sm:p-10 max-h-[90vh] overflow-y-auto custom-scrollbar z-10"
           >
+            {/* Top gradient accent line */}
+            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-brand-purple via-brand-cyan to-brand-green rounded-t-3xl" />
+
             <button 
               onClick={onClose}
-              className="absolute top-4 right-4 text-brand-text-secondary hover:text-brand-text-primary w-8 h-8 flex items-center justify-center rounded-full hover:bg-white/5 transition-colors"
+              className="absolute top-4 right-4 text-brand-text-secondary hover:text-brand-text-primary w-8 h-8 flex items-center justify-center rounded-full hover:bg-white/10 transition-colors"
             >
               ✕
             </button>

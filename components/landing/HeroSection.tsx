@@ -1,10 +1,27 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import HeroAnimation from "@/components/HeroAnimation";
 
+const BADGE_TEXTS = [
+  "Visual Algorithmic Engine",
+  "Async Yielding Context",
+  "Thread-Safe Execution",
+  "60FPS Real-Time Repaint",
+];
+
 export default function HeroSection() {
+  const [badgeIdx, setBadgeIdx] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setBadgeIdx((prev) => (prev + 1) % BADGE_TEXTS.length);
+    }, 3000);
+    return () => clearInterval(timer);
+  }, []);
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -35,18 +52,28 @@ export default function HeroSection() {
           >
             <motion.div 
               variants={itemVariants}
-              className="inline-flex items-center gap-2 bg-black/5 dark:bg-white/5 border border-brand-border px-4 py-2 rounded-full text-xs font-bold tracking-widest text-brand-text-secondary uppercase self-start"
+              className="inline-flex items-center gap-2 bg-brand-surface-1 border border-brand-border-light px-4 py-2 rounded-full text-xs font-mono font-bold tracking-widest text-brand-text-secondary uppercase self-start shadow-sm"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-brand-cyan animate-pulse" />
-              Visual Algorithmic Engine
+              <span className="w-2 h-2 rounded-full bg-brand-cyan animate-pulse shadow-[0_0_8px_rgba(34,211,238,0.8)]" />
+              <AnimatePresence mode="wait">
+                <motion.span
+                  key={badgeIdx}
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -6 }}
+                  transition={{ duration: 0.25 }}
+                >
+                  {BADGE_TEXTS[badgeIdx]}
+                </motion.span>
+              </AnimatePresence>
             </motion.div>
             
-            {/* DeepDive Editorial Style Typography */}
+            {/* DeepDive Editorial Style Typography with Gradient Shimmer */}
             <motion.h1 
               variants={itemVariants}
               className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black font-serif tracking-tighter leading-none"
             >
-              Master DSA Through <span className="italic text-brand-purple block mt-2">Visual Execution.</span>
+              Master DSA Through <span className="italic text-gradient-shimmer block mt-2">Visual Execution.</span>
             </motion.h1>
             
             <motion.p 
@@ -62,14 +89,14 @@ export default function HeroSection() {
             >
               <Link 
                 href="/learn" 
-                className="group relative w-full sm:w-auto px-8 py-4 bg-brand-text-primary text-brand-bg-dark font-extrabold text-base rounded-full transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-3 shadow-md"
+                className="group relative w-full sm:w-auto px-8 py-4 bg-brand-text-primary text-brand-bg-dark font-extrabold text-base rounded-full transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_25px_rgba(129,140,248,0.4)] active:scale-[0.98] flex items-center justify-center gap-3 shadow-md"
               >
                 <span>Initialize SortContext</span>
                 <svg fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5 group-hover:translate-x-1 transition-transform"><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
               </Link>
               <Link 
                 href="/sort" 
-                className="group relative w-full sm:w-auto px-8 py-4 bg-transparent border border-brand-border text-brand-text-primary font-bold text-base rounded-full transition-all duration-300 hover:bg-black/5 dark:hover:bg-white/5 active:scale-[0.98] flex items-center justify-center gap-3"
+                className="group relative w-full sm:w-auto px-8 py-4 bg-brand-surface-1 border border-brand-border-light text-brand-text-primary font-bold text-base rounded-full transition-all duration-300 hover:border-brand-purple hover:bg-brand-purple/5 active:scale-[0.98] flex items-center justify-center gap-3"
               >
                 <span>Explore Sorting</span>
                 <svg fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5 group-hover:translate-x-1 transition-transform"><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>

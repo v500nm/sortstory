@@ -8,15 +8,17 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage, fontMeta, StackLanguage } from "@/contexts/LanguageContext";
 import PlansModal from "@/components/PlansModal";
 import LoginModal from "@/components/LoginModal";
+import FreeTierModal from "@/components/FreeTierModal";
 
 export default function Header() {
   const pathname = usePathname();
   const { isLoggedIn, isAdmin, logout, siteMode } = useAuth();
   const { language, setLanguage } = useLanguage();
-  
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isPlansOpen, setIsPlansOpen] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [isFreeTierOpen, setIsFreeTierOpen] = useState(false);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const closeMenu = () => setIsMenuOpen(false);
@@ -29,7 +31,7 @@ export default function Header() {
     { href: "/press", label: "Press" },
   ];
 
-  // Line 2 Floating Submenu Module Links
+  // Line 2 Floating Submenu Visualizer Module Links
   const subNavLinks = [
     { href: "/sort", label: "Sorting", icon: "📊" },
     { href: "/search", label: "Searching", icon: "🔍" },
@@ -40,49 +42,91 @@ export default function Header() {
     { href: "/automata", label: "Automata & ML", icon: "🤖" },
   ];
 
+  // Line 2 Floating Submenu Learn Links for Learn Pages
+  const learnSubNavLinks = [
+    { href: "/learn", label: "Overview", icon: "📚" },
+    { href: "/learn#searching", label: "Searching", icon: "🔍" },
+    { href: "/learn#sorting", label: "Sorting", icon: "📊" },
+    { href: "/learn#linked-lists", label: "Linked Lists", icon: "🔗" },
+    { href: "/learn#trees", label: "Trees", icon: "🌲" },
+    { href: "/learn#graphs", label: "Graphs", icon: "🕸️" },
+    { href: "/learn#pathfinding", label: "Pathfinding", icon: "🗺️" },
+    { href: "/learn#automata", label: "Automata", icon: "🤖" },
+  ];
+
   // If siteMode is free_all, plans are down and not needed
   const isFreeMode = siteMode === "free_all";
 
-  // Hide 2nd line submenu on landing page (pathname === "/")
-  const showSecondLineSubmenu = pathname !== "/";
+  // Check if current page is in the Learn section
+  const isLearnPage = pathname.startsWith("/learn");
+
+  // Hide 2nd line submenu on pages with no sub-modules (Landing, Research, Press, etc.)
+  const isNoSubmenuPage = 
+    pathname === "/" ||
+    pathname.startsWith("/research") ||
+    pathname.startsWith("/press") ||
+    pathname.startsWith("/faq") ||
+    pathname.startsWith("/privacy") ||
+    pathname.startsWith("/terms") ||
+    pathname.startsWith("/admin") ||
+    pathname.startsWith("/visual-sitemap");
+
+  const showSecondLineSubmenu = !isNoSubmenuPage;
 
   return (
     <>
-      <header className="border-b border-brand-border bg-brand-bg-dark/80 backdrop-blur-xl sticky top-0 z-40">
+      <header className="border-b border-brand-border/60 bg-brand-bg-dark/80 backdrop-blur-xl sticky top-0 z-40 relative">
+        {/* Shimmering gradient top-border accent */}
+        <div className="gradient-line absolute top-0 left-0 right-0 z-50 opacity-80" />
+
         {/* Tier 1 Main Header Bar */}
         <div className="max-w-[1700px] mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between">
-          <Link href="/" className="text-2xl font-black font-serif tracking-tight text-brand-text-primary hover:text-brand-accent transition-colors flex items-center gap-2 group">
-            <img 
-              src="/assets/favicon-32x32.png" 
-              alt="SortStory Logo" 
-              className="w-6 h-6 object-contain group-hover:rotate-12 transition-transform duration-300"
+          <Link href="/" className="text-2xl font-black font-serif tracking-tight text-brand-text-primary hover:text-brand-accent transition-colors flex items-center gap-2.5 group">
+            <motion.img
+              src="/assets/favicon-32x32.png"
+              alt="SortStory Logo"
+              whileHover={{ rotate: 15, scale: 1.1 }}
+              transition={{ type: "spring", stiffness: 400, damping: 15 }}
+              className="w-6 h-6 object-contain"
             />
-            <span className="italic text-brand-purple">Sort</span>Story
+            <span><span className="italic text-brand-purple">Sort</span>Story</span>
           </Link>
-          
+
           {/* Main Desktop Tier 1 Navigation */}
           <nav className="hidden lg:flex items-center gap-8">
-            {mainNavLinks.map((link) => (
-              <Link 
-                key={link.href}
-                href={link.href} 
-                className={`text-sm font-bold uppercase tracking-wider transition-all duration-300 relative py-1 after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-brand-purple after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 after:origin-left ${pathname === link.href ? 'text-brand-text-primary after:scale-x-100' : 'text-brand-text-secondary hover:text-brand-text-primary'}`}
-              >
-                {link.label}
-              </Link>
-            ))}
+            {mainNavLinks.map((link) => {
+              const isActive = pathname === link.href;
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`text-xs font-bold uppercase tracking-widest transition-colors relative py-1.5 px-1 ${
+                    isActive ? 'text-brand-text-primary' : 'text-brand-text-secondary hover:text-brand-text-primary'
+                  }`}
+                >
+                  {link.label}
+                  {isActive && (
+                    <motion.span
+                      layoutId="headerActiveIndicator"
+                      className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-brand-purple to-brand-cyan rounded-full shadow-[0_0_8px_rgba(129,140,248,0.6)]"
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                </Link>
+              );
+            })}
 
             {isLoggedIn ? (
               <div className="flex items-center gap-3 ml-2 pl-4 border-l border-brand-border">
                 {isAdmin && (
-                  <Link 
-                    href="/admin" 
+                  <Link
+                    href="/admin"
                     className="px-3 py-1 bg-brand-purple/20 text-brand-purple border border-brand-purple/40 rounded-full text-[11px] font-bold font-mono uppercase tracking-widest hover:bg-brand-purple hover:text-white transition-colors"
                   >
-                    ⚡ Admin Workspace
+                    Admin Workspace
                   </Link>
                 )}
-                <button 
+                <button
                   onClick={logout}
                   className="text-xs font-mono font-bold text-brand-rose hover:underline"
                 >
@@ -91,7 +135,7 @@ export default function Header() {
               </div>
             ) : (
               <div className="flex items-center gap-3 ml-2 pl-4 border-l border-brand-border">
-                <button 
+                <button
                   onClick={() => setIsLoginOpen(true)}
                   className="text-xs font-bold font-mono uppercase tracking-widest text-brand-text-secondary hover:text-brand-text-primary transition-colors"
                 >
@@ -100,7 +144,7 @@ export default function Header() {
 
                 {/* Show View Plans only if plans are active (not in Free Mode) */}
                 {!isFreeMode && (
-                  <button 
+                  <button
                     onClick={() => setIsPlansOpen(true)}
                     className="px-4 py-1.5 bg-brand-purple/10 border border-brand-purple text-brand-purple hover:bg-brand-purple hover:text-white transition-colors rounded-full text-xs font-bold font-mono uppercase tracking-widest"
                   >
@@ -109,8 +153,8 @@ export default function Header() {
                 )}
               </div>
             )}
-            
-            <button 
+
+            <button
               onClick={() => {
                 const html = document.documentElement;
                 if (html.classList.contains('light')) {
@@ -130,9 +174,9 @@ export default function Header() {
             </button>
 
             <div className="hidden sm:flex items-center ml-2 pl-4 border-l border-brand-border h-6">
-              <a 
-                href="https://adnan-mangaonkar.com" 
-                target="_blank" 
+              <a
+                href="https://adnan-mangaonkar.com"
+                target="_blank"
                 rel="author noopener noreferrer"
                 className="text-[10px] font-bold tracking-widest uppercase text-brand-text-secondary hover:text-brand-purple transition-colors flex items-center gap-1.5"
                 title="Adnan Mangaonkar"
@@ -148,14 +192,14 @@ export default function Header() {
           {/* Mobile Menu Button */}
           <div className="lg:hidden flex items-center gap-2">
             {!isLoggedIn && !isFreeMode && (
-              <button 
+              <button
                 onClick={() => setIsPlansOpen(true)}
-                className="px-3 py-1 bg-brand-purple/10 border border-brand-purple text-brand-purple hover:bg-brand-purple hover:text-white transition-colors rounded-full text-[10px] font-bold font-mono uppercase tracking-widest mr-2"
+                className="px-3 py-1 bg-brand-purple/10 border border-brand-purple text-brand-purple hover:bg-brand-purple hover:text-white transition-colors rounded-full text-[10px] font-bold font-mono uppercase tracking-widest mr-1"
               >
                 Plans
               </button>
             )}
-            
+
             <button onClick={toggleMenu} className="p-2 text-brand-text-secondary hover:text-brand-accent">
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 {isMenuOpen ? (
@@ -172,30 +216,51 @@ export default function Header() {
         {showSecondLineSubmenu && (
           <div className="bg-brand-bg-card/50 border-t border-brand-border/40 py-2 px-4 sm:px-6 overflow-x-auto">
             <div className="max-w-[1700px] mx-auto flex items-center justify-between gap-6 text-xs font-mono">
-              {/* Left Side: Module Links */}
+              {/* Left Side: Contextual Submenu (LEARN MENU on Learn Pages vs MODULES on Visualizer Pages) */}
               <div className="flex items-center gap-6 shrink-0">
-                <span className="text-brand-purple font-bold flex items-center gap-1.5 shrink-0">
-                  <span className="w-1.5 h-1.5 rounded-full bg-brand-cyan animate-pulse" />
-                  MODULES:
-                </span>
-                {subNavLinks.map((sub) => (
-                  <Link 
-                    key={sub.href}
-                    href={sub.href}
-                    className={`transition-colors flex items-center gap-1.5 shrink-0 ${pathname === sub.href ? 'text-brand-cyan font-bold underline' : 'text-brand-text-secondary hover:text-brand-text-primary'}`}
-                  >
-                    <span>{sub.icon}</span>
-                    <span>{sub.label}</span>
-                  </Link>
-                ))}
+                {isLearnPage ? (
+                  <>
+                    <span className="text-brand-yellow font-bold flex items-center gap-1.5 shrink-0">
+                      <span className="w-1.5 h-1.5 rounded-full bg-brand-yellow animate-pulse" />
+                      LEARN MENU:
+                    </span>
+                    {learnSubNavLinks.map((sub) => (
+                      <Link
+                        key={sub.href}
+                        href={sub.href}
+                        className={`transition-colors flex items-center gap-1.5 shrink-0 ${pathname === sub.href ? 'text-brand-yellow font-bold underline' : 'text-brand-text-secondary hover:text-brand-text-primary'}`}
+                      >
+                        <span>{sub.icon}</span>
+                        <span>{sub.label}</span>
+                      </Link>
+                    ))}
+                  </>
+                ) : (
+                  <>
+                    <span className="text-brand-purple font-bold flex items-center gap-1.5 shrink-0">
+                      <span className="w-1.5 h-1.5 rounded-full bg-brand-cyan animate-pulse" />
+                      MODULES:
+                    </span>
+                    {subNavLinks.map((sub) => (
+                      <Link
+                        key={sub.href}
+                        href={sub.href}
+                        className={`transition-colors flex items-center gap-1.5 shrink-0 ${pathname === sub.href ? 'text-brand-cyan font-bold underline' : 'text-brand-text-secondary hover:text-brand-text-primary'}`}
+                      >
+                        <span>{sub.icon}</span>
+                        <span>{sub.label}</span>
+                      </Link>
+                    ))}
+                  </>
+                )}
               </div>
 
-              {/* Right Side: Stack Language Selector Dropdown */}
+              {/* Right Side: Stack Language Selector Dropdown & Free Tier Click Button */}
               <div className="flex items-center gap-2 pl-4 border-l border-brand-border/40 shrink-0">
                 <span className="text-brand-purple font-bold flex items-center gap-1">
-                  ⚡ STACK:
+                  STACK:
                 </span>
-                <select 
+                <select
                   value={language}
                   onChange={(e) => setLanguage(e.target.value as StackLanguage)}
                   className="bg-brand-bg-dark border border-brand-border rounded-lg px-2.5 py-1 text-xs text-brand-cyan font-bold outline-none cursor-pointer hover:border-brand-purple transition-colors font-mono"
@@ -207,11 +272,13 @@ export default function Header() {
                   ))}
                 </select>
 
-                {isFreeMode && (
-                  <span className="text-[10px] font-bold text-brand-green bg-brand-green/10 border border-brand-green/30 px-2 py-0.5 rounded-md shrink-0 ml-2">
-                    🎁 Free
-                  </span>
-                )}
+                <button
+                  onClick={() => setIsFreeTierOpen(true)}
+                  className="text-[10px] font-bold text-brand-green bg-brand-green/10 border border-brand-green/30 px-2.5 py-1 rounded-md shrink-0 ml-2 hover:bg-brand-green/20 hover:scale-105 transition-all flex items-center gap-1 cursor-pointer"
+                  title="Click to view Free Learning & Visualizing Tier details"
+                >
+                  <span>Free Tier</span>
+                </button>
               </div>
             </div>
           </div>
@@ -222,27 +289,27 @@ export default function Header() {
           <div className="bg-brand-purple/10 border-t border-brand-purple/20 py-2 px-4 sm:px-6">
             <div className="max-w-[1700px] mx-auto flex items-center justify-between overflow-x-auto text-[11px] font-mono">
               <div className="flex items-center gap-6">
-                <Link 
-                  href="/" 
+                <Link
+                  href="/"
                   className="px-2.5 py-1 bg-brand-purple/20 border border-brand-purple/40 text-brand-purple hover:bg-brand-purple hover:text-white transition-colors rounded-lg font-bold flex items-center gap-1 shrink-0"
                 >
                   ← Back to Main Site
                 </Link>
                 <span className="text-brand-text-secondary font-bold shrink-0">ADMIN:</span>
                 <Link href="/admin?tab=overview" className="text-brand-text-secondary hover:text-brand-text-primary transition-colors shrink-0">
-                  📊 System Overview
+                  System Overview
                 </Link>
                 <Link href="/admin?tab=site_analytics" className="text-amber-400 font-bold hover:underline transition-colors shrink-0">
-                  🧠 AI Site Analytics
+                  AI Site Analytics
                 </Link>
                 <Link href="/admin?tab=plan_manager" className="text-brand-cyan font-bold hover:underline transition-colors shrink-0">
-                  ⚙️ Plan Manager
+                  Plan Manager
                 </Link>
                 <Link href="/admin?tab=applications" className="text-brand-text-secondary hover:text-brand-text-primary transition-colors shrink-0">
-                  📋 Applications
+                  Applications
                 </Link>
                 <Link href="/admin?tab=codes" className="text-brand-text-secondary hover:text-brand-text-primary transition-colors shrink-0">
-                  🔑 Code Generator
+                  Code Generator
                 </Link>
               </div>
             </div>
@@ -253,7 +320,7 @@ export default function Header() {
       {/* Mobile Navigation Menu */}
       <AnimatePresence>
         {isMenuOpen && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, height: 0, y: -10 }}
             animate={{ opacity: 1, height: "auto", y: 0 }}
             exit={{ opacity: 0, height: 0, y: -10 }}
@@ -264,7 +331,7 @@ export default function Header() {
               {/* Stack Language Mobile Selector */}
               <div className="flex items-center justify-between pb-3 border-b border-brand-border/40 font-mono text-xs">
                 <span className="text-brand-purple font-bold">⚡ Preferred Language:</span>
-                <select 
+                <select
                   value={language}
                   onChange={(e) => setLanguage(e.target.value as StackLanguage)}
                   className="bg-brand-bg-dark border border-brand-border rounded-lg px-2 py-1 text-xs text-brand-cyan font-bold outline-none"
@@ -277,9 +344,9 @@ export default function Header() {
 
               <div className="text-[10px] font-mono font-bold text-brand-purple uppercase tracking-widest mb-1">Main Menu</div>
               {mainNavLinks.map((link) => (
-                <Link 
+                <Link
                   key={link.href}
-                  href={link.href} 
+                  href={link.href}
                   onClick={closeMenu}
                   className={`text-sm font-semibold tracking-wide block transition-colors py-1.5 ${pathname === link.href ? 'text-brand-purple' : 'text-brand-text-secondary hover:text-brand-text-primary'}`}
                 >
@@ -287,31 +354,60 @@ export default function Header() {
                 </Link>
               ))}
 
-              <div className="text-[10px] font-mono font-bold text-brand-cyan uppercase tracking-widest pt-3 border-t border-brand-border/40">Visualizer Modules</div>
-              {subNavLinks.map((sub) => (
-                <Link 
-                  key={sub.href}
-                  href={sub.href}
-                  onClick={closeMenu}
-                  className="text-xs font-mono text-brand-text-secondary hover:text-brand-text-primary py-1 flex items-center gap-2"
-                >
-                  <span>{sub.icon}</span>
-                  <span>{sub.label}</span>
-                </Link>
-              ))}
+              {/* Mobile Submenu: Learn Menu on Learn pages, Visualizer Modules elsewhere */}
+              {isLearnPage ? (
+                <>
+                  <div className="text-[10px] font-mono font-bold text-brand-yellow uppercase tracking-widest pt-3 border-t border-brand-border/40">Learn Curriculum Menu</div>
+                  {learnSubNavLinks.map((sub) => (
+                    <Link
+                      key={sub.href}
+                      href={sub.href}
+                      onClick={closeMenu}
+                      className="text-xs font-mono text-brand-text-secondary hover:text-brand-text-primary py-1 flex items-center gap-2"
+                    >
+                      <span>{sub.icon}</span>
+                      <span>{sub.label}</span>
+                    </Link>
+                  ))}
+                </>
+              ) : (
+                <>
+                  <div className="text-[10px] font-mono font-bold text-brand-cyan uppercase tracking-widest pt-3 border-t border-brand-border/40">Visualizer Modules</div>
+                  {subNavLinks.map((sub) => (
+                    <Link
+                      key={sub.href}
+                      href={sub.href}
+                      onClick={closeMenu}
+                      className="text-xs font-mono text-brand-text-secondary hover:text-brand-text-primary py-1 flex items-center gap-2"
+                    >
+                      <span>{sub.icon}</span>
+                      <span>{sub.label}</span>
+                    </Link>
+                  ))}
+                </>
+              )}
+
+              {/* Free Tier Mobile Button */}
+              <button
+                onClick={() => { setIsFreeTierOpen(true); closeMenu(); }}
+                className="w-full text-left py-2 px-3 bg-brand-green/10 border border-brand-green/30 text-brand-green font-mono text-xs font-bold rounded-lg flex items-center justify-between mt-2"
+              >
+                <span>🎁 Free Learning & Visualizing Tier</span>
+                <span>Details →</span>
+              </button>
 
               {isLoggedIn ? (
                 <div className="pt-4 flex items-center justify-between border-t border-brand-border/40">
                   {isAdmin && (
-                    <Link 
-                      href="/admin" 
+                    <Link
+                      href="/admin"
                       onClick={closeMenu}
                       className="text-xs font-mono font-bold text-brand-purple uppercase"
                     >
                       ⚡ Admin Workspace
                     </Link>
                   )}
-                  <button 
+                  <button
                     onClick={() => { logout(); closeMenu(); }}
                     className="text-xs font-mono text-brand-rose"
                   >
@@ -319,7 +415,7 @@ export default function Header() {
                   </button>
                 </div>
               ) : (
-                <button 
+                <button
                   onClick={() => { setIsLoginOpen(true); closeMenu(); }}
                   className="text-sm font-semibold tracking-wide block transition-colors pt-3 text-brand-text-primary text-left border-t border-brand-border/40"
                 >
@@ -334,6 +430,7 @@ export default function Header() {
       {/* Modals */}
       <PlansModal isOpen={isPlansOpen} onClose={() => setIsPlansOpen(false)} />
       <LoginModal isOpen={isLoginOpen} onClose={() => setIsLoginOpen(false)} />
+      <FreeTierModal isOpen={isFreeTierOpen} onClose={() => setIsFreeTierOpen(false)} />
     </>
   );
 }

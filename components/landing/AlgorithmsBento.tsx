@@ -50,7 +50,12 @@ export default function AlgorithmsBento() {
         viewport={{ once: true, margin: "-100px" }}
         className="mb-12 max-w-3xl"
       >
-        <motion.h4 variants={textItemVariants} className="text-xs md:text-sm font-bold tracking-[0.2em] uppercase text-brand-text-secondary mb-4">Architecture Modules</motion.h4>
+        <div className="flex items-center gap-3 mb-4">
+          <motion.h4 variants={textItemVariants} className="text-xs md:text-sm font-mono font-bold tracking-[0.2em] uppercase text-brand-text-secondary">Architecture Modules</motion.h4>
+          <span className="px-2.5 py-0.5 rounded-full bg-brand-purple/10 border border-brand-purple/30 text-brand-purple text-[10px] font-mono font-bold tracking-wider uppercase">
+            7 DOMAINS
+          </span>
+        </div>
         <motion.h2 variants={textItemVariants} className="text-3xl md:text-5xl font-black font-serif tracking-tighter mb-4">Comprehensive <span className="italic text-brand-purple">Domains.</span></motion.h2>
         <motion.p variants={textItemVariants} className="text-lg md:text-xl text-brand-text-secondary font-medium font-serif font-light">
           A minimalist interface hiding a highly complex engine. Dive into precise implementations across 6 computational domains.

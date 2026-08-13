@@ -9,6 +9,8 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { PostHogProvider } from "@/components/PostHogProvider";
 import SiteAnalyticsWrapper from "@/components/SiteAnalyticsWrapper";
+import ScrollProgress from "@/components/ui/ScrollProgress";
+import CursorGlow from "@/components/ui/CursorGlow";
 
 /* ------------------------------------------
    VIEWPORT SETTINGS
@@ -190,8 +192,7 @@ const jsonLd = [
     sameAs: [
       "https://github.com/v500nm",
       "https://x.com/V350NM",
-      "https://adnan-mangaonkar.com",
-      "https://business.adnan-mangaonkar.com"
+      "https://adnan-mangaonkar.com"
     ],
   },
   // WebApplication schema
@@ -301,8 +302,7 @@ const jsonLd = [
       "https://www.linkedin.com/in/adnan-mangaonkar/",
       "https://github.com/v500nm",
       "https://x.com/V350NM",
-      "https://adnan-mangaonkar.com",
-      "https://business.adnan-mangaonkar.com"
+      "https://adnan-mangaonkar.com"
     ],
   },
   // BreadcrumbList schema — all major routes
@@ -639,6 +639,8 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
       <body className="flex flex-col min-h-screen">
+        <ScrollProgress />
+        <CursorGlow />
         <PostHogProvider>
           <LanguageProvider>
             <SiteAnalyticsWrapper>

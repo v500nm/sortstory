@@ -3,6 +3,8 @@ import Link from "next/link";
 import Script from "next/script";
 import { Metadata } from "next";
 import Header from "@/components/Header";
+import InitialMountLoader from "@/components/loaders/InitialMountLoader";
+import PressLoader from "@/components/loaders/PressLoader";
 
 export const metadata: Metadata = {
   title: "Press, Media & Publications | SortStory",
@@ -73,7 +75,7 @@ export default function PressPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-brand-bg-dark text-brand-text-primary py-12 px-4 sm:px-8 max-w-[1500px] mx-auto">
+    <>
       {/* Schema.org JSON-LD for Publications & Media Coverage */}
       <Script
         id="press-schema"
@@ -107,6 +109,9 @@ export default function PressPage() {
         }}
       />
       <main className="min-h-screen w-full bg-brand-bg-dark text-brand-text-primary font-sans relative flex flex-col overflow-x-clip selection:bg-brand-purple/30">
+        <InitialMountLoader>
+          <PressLoader />
+        </InitialMountLoader>
 
         {/* Background ambient lighting */}
         <div className="fixed inset-0 w-full h-full -z-50 pointer-events-none">
@@ -216,6 +221,6 @@ export default function PressPage() {
           </div>
         </div>
       </main>
-    </div>
+    </>
   );
 }

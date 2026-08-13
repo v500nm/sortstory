@@ -83,16 +83,16 @@ export default function ComparisonSection() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-50px" }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className="overflow-x-auto mb-12 rounded-xl border border-brand-border bg-brand-bg-card shadow-sm hidden md:block"
+        className="overflow-x-auto mb-12 rounded-2xl border border-brand-border-light bg-brand-surface-1 shadow-2xl hidden md:block"
       >
         <table className="w-full text-left border-collapse">
           <thead>
-            <tr className="bg-black/5 dark:bg-white/5 border-b border-brand-border text-brand-text-primary text-sm font-serif">
-              <th className="p-5 font-bold">Algorithm</th>
-              <th className="p-5 font-bold">Time (Avg)</th>
-              <th className="p-5 font-bold">Space (Worst)</th>
-              <th className="p-5 font-bold">Compares (N=1k)</th>
-              <th className="p-5 font-bold">Swaps (N=1k)</th>
+            <tr className="bg-brand-surface-2 border-b border-brand-border-light text-brand-text-primary text-xs font-mono font-bold tracking-wider uppercase">
+              <th className="p-5">Algorithm</th>
+              <th className="p-5">Time (Avg)</th>
+              <th className="p-5">Space (Worst)</th>
+              <th className="p-5">Compares (N=1k)</th>
+              <th className="p-5">Swaps (N=1k)</th>
             </tr>
           </thead>
           <tbody>
@@ -103,13 +103,16 @@ export default function ComparisonSection() {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
                 key={i} 
-                className="border-b border-brand-border/50 hover:bg-black/5 dark:hover:bg-white/5 transition-colors group"
+                className="border-b border-brand-border/40 hover:bg-brand-purple/5 transition-colors group cursor-pointer"
               >
-                <td className="p-5 font-bold font-serif text-brand-cyan">{stat.name}</td>
+                <td className="p-5 font-bold font-serif text-brand-cyan group-hover:text-brand-purple transition-colors flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-brand-cyan group-hover:scale-150 transition-transform" />
+                  {stat.name}
+                </td>
                 <td className="p-5 text-brand-text-secondary font-mono text-sm">{stat.time}</td>
                 <td className="p-5 text-brand-text-secondary font-mono text-sm">{stat.space}</td>
-                <td className="p-5 font-mono text-sm group-hover:text-brand-purple transition-colors">{stat.metricArray1k}</td>
-                <td className="p-5 font-mono text-sm group-hover:text-brand-purple transition-colors">{stat.metricSwaps1k}</td>
+                <td className="p-5 font-mono text-sm text-brand-text-primary group-hover:text-brand-purple transition-colors">{stat.metricArray1k}</td>
+                <td className="p-5 font-mono text-sm text-brand-text-primary group-hover:text-brand-purple transition-colors">{stat.metricSwaps1k}</td>
               </motion.tr>
             ))}
           </tbody>
