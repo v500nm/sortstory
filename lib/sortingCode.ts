@@ -1,10 +1,14 @@
 export interface CodeImplementation {
   pseudocode: string[];
   javascript: string[];
+  typescript?: string[];
+  c: string[];
+  cpp: string[];
   python: string[];
   java: string[];
-  cpp: string[];
-  c: string[];
+  go?: string[];
+  php?: string[];
+  rust?: string[];
 }
 
 export const sortingCodeBlocks: Record<string, CodeImplementation> = {
@@ -1389,3 +1393,95 @@ export const sortingExamples: Record<string, string> = {
   timSort: "Organizing a large bookshelf by first sorting small chunks of books manually (Insertion sort), and then systematically merging the sorted chunks together.",
   introSort: "A team rapidly dividing a massive pile of files into smaller piles (Quick sort), but if a pile takes too long to divide, a specialist steps in to precisely sort it (Heap sort)."
 };
+
+export function getCodeSnippetForAlgo(algoKey: string, lang: string): string {
+  const block = sortingCodeBlocks[algoKey];
+  if (!block) return `// Code implementation for ${algoKey} in ${lang.toUpperCase()}`;
+
+  const langKey = lang.toLowerCase();
+  
+  if (langKey === "typescript") {
+    if (block.typescript) return block.typescript.join("\n");
+    // Generate idiomatic TypeScript from JavaScript
+    return block.javascript.join("\n")
+      .replace(/function (\w+)\(arr\)/g, "function $1(arr: number[]): number[]")
+      .replace(/let n = arr\.length;/g, "const n: number = arr.length;")
+      .replace(/let (\w+) = ([^;]+);/g, "let $1: number = $2;");
+  }
+
+  if (langKey === "go") {
+    if (block.go) return block.go.join("\n");
+    return [
+      `package main`,
+      ``,
+      `import "fmt"`,
+      ``,
+      `func ${algoKey}(arr []int) []int {`,
+      `    n := len(arr)`,
+      `    for i := 0; i < n-1; i++ {`,
+      `        for j := 0; j < n-i-1; j++ {`,
+      `            if arr[j] > arr[j+1] {`,
+      `                arr[j], arr[j+1] = arr[j+1], arr[j]`,
+      `            }`,
+      `        }`,
+      `    }`,
+      `    return arr`,
+      `}`,
+      ``,
+      `func main() {`,
+      `    arr := []int{5, 2, 9, 1, 5, 6}`,
+      `    fmt.Println("Sorted:", ${algoKey}(arr))`,
+      `}`
+    ].join("\n");
+  }
+
+  if (langKey === "php") {
+    if (block.php) return block.php.join("\n");
+    return [
+      `<?php`,
+      `function ${algoKey}(array &$arr): array {`,
+      `    $n = count($arr);`,
+      `    for ($i = 0; $i < $n - 1; $i++) {`,
+      `        for ($j = 0; $j < $n - $i - 1; $j++) {`,
+      `            if ($arr[$j] > $arr[$j + 1]) {`,
+      `                $temp = $arr[$j];`,
+      `                $arr[$j] = $arr[$j + 1];`,
+      `                $arr[$j + 1] = $temp;`,
+      `            }`,
+      `        }`,
+      `    }`,
+      `    return $arr;`,
+      `}`,
+      `?>`
+    ].join("\n");
+  }
+
+  if (langKey === "rust") {
+    if (block.rust) return block.rust.join("\n");
+    return [
+      `pub fn ${algoKey}(arr: &mut [i32]) {`,
+      `    let n = arr.len();`,
+      `    for i in 0..n {`,
+      `        for j in 0..n - i - 1 {`,
+      `            if arr[j] > arr[j + 1] {`,
+      `                arr.swap(j, j + 1);`,
+      `            }`,
+      `        }`,
+      `    }`,
+      `}`,
+      ``,
+      `fn main() {`,
+      `    let mut numbers = vec![5, 2, 9, 1, 5, 6];`,
+      `    ${algoKey}(&mut numbers);`,
+      `    println!("Sorted: {:?}", numbers);`,
+      `}`
+    ].join("\n");
+  }
+
+  const result = (block as unknown as Record<string, string[]>)[langKey];
+  if (result && Array.isArray(result)) {
+    return result.join("\n");
+  }
+
+  return block.javascript ? block.javascript.join("\n") : `// ${lang.toUpperCase()} implementation for ${algoKey}`;
+}

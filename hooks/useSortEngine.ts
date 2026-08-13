@@ -53,6 +53,18 @@ export function useSortEngine(initialSize: number = 15) {
     setStatus("idle");
   }, []);
 
+  // ── Set custom array ──
+  const setCustomArray = useCallback((customArr: number[]) => {
+    const size = customArr.length;
+    arrayRef.current = [...customArr];
+    colorsRef.current = Array(size).fill("normal");
+    setArray([...customArr]);
+    setColors(Array(size).fill("normal"));
+    setMetrics({ comparisons: 0, swaps: 0, timeMs: 0 });
+    metricsRef.current = { comparisons: 0, swaps: 0, timeMs: 0 };
+    setStatus("idle");
+  }, []);
+
   // ── Generate random array on mount (client-side only to avoid hydration mismatch) ──
   useEffect(() => {
     if (!initializedRef.current) {
@@ -294,6 +306,7 @@ export function useSortEngine(initialSize: number = 15) {
     metrics,
     status,
     generateArray,
+    setCustomArray,
     run,
     pause,
     resume,

@@ -272,7 +272,7 @@ export default function Header() {
                 >
                   {fontMeta.map(l => (
                     <option key={l.id} value={l.id}>
-                      {l.icon} {l.name} ({l.extension})
+                      {l.name} ({l.extension})
                     </option>
                   ))}
                 </select>
@@ -345,14 +345,14 @@ export default function Header() {
                 <nav className="flex flex-col px-6 py-6 space-y-3">
                   {/* Stack Language Mobile Selector */}
                   <div className="flex items-center justify-between pb-3 border-b border-brand-border/40 font-mono text-xs">
-                    <span className="text-brand-purple font-bold">⚡ Preferred Language:</span>
+                    <span className="text-brand-purple font-bold">Preferred Language:</span>
                     <select
                       value={language}
                       onChange={(e) => setLanguage(e.target.value as StackLanguage)}
                       className="bg-brand-bg-dark border border-brand-border rounded-lg px-2 py-1 text-xs text-brand-cyan font-bold outline-none"
                     >
                       {fontMeta.map(l => (
-                        <option key={l.id} value={l.id}>{l.icon} {l.name}</option>
+                        <option key={l.id} value={l.id}>{l.name}</option>
                       ))}
                     </select>
                   </div>

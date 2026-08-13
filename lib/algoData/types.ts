@@ -11,10 +11,14 @@ export interface AlgorithmDetailsData {
   algorithmFlow: string[];
   codeSnippets: {
     javascript?: string;
+    typescript?: string;
+    c?: string;
+    cpp?: string;
     python?: string;
     java?: string;
-    cpp?: string;
-    c?: string;
+    go?: string;
+    php?: string;
+    rust?: string;
   };
   examples: {
     title: string;

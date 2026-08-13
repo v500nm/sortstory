@@ -2,23 +2,24 @@
 
 import React, { createContext, useContext, useState, useEffect } from "react";
 
-export type StackLanguage = "javascript" | "python" | "cpp" | "java" | "typescript" | "go" | "rust";
+export type StackLanguage = "javascript" | "typescript" | "c" | "cpp" | "python" | "java" | "go" | "php" | "rust";
 
 export interface LanguageMeta {
   id: StackLanguage;
   name: string;
   extension: string;
-  icon: string;
 }
 
 export const fontMeta: LanguageMeta[] = [
-  { id: "python", name: "Python", extension: ".py", icon: "🐍" },
-  { id: "javascript", name: "JavaScript", extension: ".js", icon: "🟨" },
-  { id: "cpp", name: "C++", extension: ".cpp", icon: "⚡" },
-  { id: "java", name: "Java", extension: ".java", icon: "☕" },
-  { id: "typescript", name: "TypeScript", extension: ".ts", icon: "🔷" },
-  { id: "go", name: "Go", extension: ".go", icon: "🐹" },
-  { id: "rust", name: "Rust", extension: ".rs", icon: "🦀" },
+  { id: "javascript", name: "JavaScript", extension: ".js" },
+  { id: "typescript", name: "TypeScript", extension: ".ts" },
+  { id: "c", name: "C", extension: ".c" },
+  { id: "cpp", name: "C++", extension: ".cpp" },
+  { id: "python", name: "Python", extension: ".py" },
+  { id: "java", name: "Java", extension: ".java" },
+  { id: "go", name: "Go", extension: ".go" },
+  { id: "php", name: "PHP", extension: ".php" },
+  { id: "rust", name: "Rust", extension: ".rs" },
 ];
 
 interface LanguageContextType {
@@ -38,7 +39,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     setIsMounted(true);
     const stored = localStorage.getItem(STORAGE_KEY) as StackLanguage;
-    if (stored && ["python", "javascript", "cpp", "java", "typescript", "go", "rust"].includes(stored)) {
+    if (stored && ["javascript", "typescript", "c", "cpp", "python", "java", "go", "php", "rust"].includes(stored)) {
       setLanguageState(stored);
     }
   }, []);

@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
-export type ProgrammingLanguage = 'python' | 'javascript' | 'java' | 'cpp' | 'c';
+export type ProgrammingLanguage = 'javascript' | 'typescript' | 'c' | 'cpp' | 'python' | 'java' | 'go' | 'php' | 'rust';
 
 interface LanguageContextType {
   language: ProgrammingLanguage;

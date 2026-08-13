@@ -97,3 +97,97 @@ void bubbleSort(int arr[], int n) {
     }
 }
 ```
+
+## TypeScript
+```typescript
+function bubbleSort(arr: number[]): number[] {
+  const n: number = arr.length;
+  for (let i = 0; i < n - 1; i++) {
+    let swapped: boolean = false;
+    for (let j = 0; j < n - i - 1; j++) {
+      if (arr[j] > arr[j + 1]) {
+        [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
+        swapped = true;
+      }
+    }
+    if (!swapped) break;
+  }
+  return arr;
+}
+```
+
+## Go
+```go
+package main
+
+import "fmt"
+
+func bubbleSort(arr []int) []int {
+    n := len(arr)
+    for i := 0; i < n-1; i++ {
+        swapped := false
+        for j := 0; j < n-i-1; j++ {
+            if arr[j] > arr[j+1] {
+                arr[j], arr[j+1] = arr[j+1], arr[j]
+                swapped = true
+            }
+        }
+        if !swapped {
+            break
+        }
+    }
+    return arr
+}
+
+func main() {
+    arr := []int{5, 2, 9, 1, 5, 6}
+    fmt.Println("Sorted:", bubbleSort(arr))
+}
+```
+
+## PHP
+```php
+<?php
+function bubbleSort(array &$arr): array {
+    $n = count($arr);
+    for ($i = 0; $i < $n - 1; $i++) {
+        $swapped = false;
+        for ($j = 0; $j < $n - $i - 1; $j++) {
+            if ($arr[$j] > $arr[$j + 1]) {
+                $temp = $arr[$j];
+                $arr[$j] = $arr[$j + 1];
+                $arr[$j + 1] = $temp;
+                $swapped = true;
+            }
+        }
+        if (!$swapped) break;
+    }
+    return $arr;
+}
+?>
+```
+
+## Rust
+```rust
+pub fn bubble_sort(arr: &mut [i32]) {
+    let n = arr.len();
+    for i in 0..n {
+        let mut swapped = false;
+        for j in 0..n - i - 1 {
+            if arr[j] > arr[j + 1] {
+                arr.swap(j, j + 1);
+                swapped = true;
+            }
+        }
+        if !swapped {
+            break;
+        }
+    }
+}
+
+fn main() {
+    let mut arr = vec![5, 2, 9, 1, 5, 6];
+    bubble_sort(&mut arr);
+    println!("Sorted: {:?}", arr);
+}
+```

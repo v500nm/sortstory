@@ -89,20 +89,29 @@ export default function LessonClient({ lessons, topic, algo }: Props) {
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 pb-4 border-b border-brand-border gap-4">
               <Breadcrumbs items={breadcrumbItems} className="max-w-full" />
               
-              <div className="flex items-center gap-2 bg-brand-bg-dark border border-brand-border p-1 rounded-lg shrink-0">
-                {languages.map(lang => (
-                  <button
-                    key={lang.id}
-                    onClick={() => setLanguage(lang.id)}
-                    className={`px-3 py-1.5 text-xs font-bold tracking-wide rounded-md transition-colors ${
-                      language === lang.id
-                        ? 'bg-brand-border text-brand-text-primary shadow-sm'
-                        : 'text-brand-text-secondary hover:text-brand-text-primary hover:bg-brand-bg-light'
-                    }`}
-                  >
-                    {lang.label}
-                  </button>
-                ))}
+              <div className="flex flex-wrap items-center gap-3 shrink-0">
+                <Link
+                  href={`/learn/${topic}/${algo}/code`}
+                  className="px-3.5 py-1.5 bg-gradient-to-r from-brand-purple to-brand-cyan text-white text-xs font-mono font-bold rounded-lg hover:scale-105 transition-transform shrink-0"
+                >
+                  View Code Page →
+                </Link>
+
+                <div className="flex items-center gap-1 bg-brand-bg-dark border border-brand-border p-1 rounded-lg shrink-0">
+                  {languages.map(lang => (
+                    <button
+                      key={lang.id}
+                      onClick={() => setLanguage(lang.id)}
+                      className={`px-3 py-1.5 text-xs font-bold tracking-wide rounded-md transition-colors ${
+                        language === lang.id
+                          ? 'bg-brand-border text-brand-text-primary shadow-sm'
+                          : 'text-brand-text-secondary hover:text-brand-text-primary hover:bg-brand-bg-light'
+                      }`}
+                    >
+                      {lang.label}
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
 

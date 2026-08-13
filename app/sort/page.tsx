@@ -54,6 +54,29 @@ export default function Sort() {
     engine.generateArray(arraySize);
   }, [arraySize, engine]);
 
+  const [presetDataset, setPresetDataset] = useState("random");
+
+  const handleSelectPreset = useCallback((preset: string) => {
+    setPresetDataset(preset);
+    if (preset === "random") {
+      engine.generateArray(arraySize);
+    } else if (preset === "nearlySorted") {
+      const arr = Array.from({ length: arraySize }, (_, i) => Math.floor((i + 1) * (90 / arraySize)) + 5);
+      if (arr.length > 3) {
+        const mid = Math.floor(arr.length / 2);
+        [arr[mid], arr[mid + 1]] = [arr[mid + 1], arr[mid]];
+      }
+      engine.setCustomArray(arr);
+    } else if (preset === "reverseSorted") {
+      const arr = Array.from({ length: arraySize }, (_, i) => Math.floor((arraySize - i) * (90 / arraySize)) + 5);
+      engine.setCustomArray(arr);
+    } else if (preset === "fewUnique") {
+      const uniqueVals = [15, 35, 65, 85];
+      const arr = Array.from({ length: arraySize }, () => uniqueVals[Math.floor(Math.random() * uniqueVals.length)]);
+      engine.setCustomArray(arr);
+    }
+  }, [arraySize, engine]);
+
   return (
     <main className="min-h-screen w-full bg-brand-bg-dark text-brand-text-primary font-sans relative flex flex-col">
       <InitialMountLoader>
@@ -88,6 +111,8 @@ export default function Sort() {
                 status={engine.status}
                 compareMode={compareMode}
                 setCompareMode={setCompareMode}
+                presetDataset={presetDataset}
+                onSelectPreset={handleSelectPreset}
               />
             </div>
 

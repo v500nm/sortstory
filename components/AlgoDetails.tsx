@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { sortingCodeBlocks, sortingExamples } from "@/lib/sortingCode";
+import { sortingCodeBlocks, sortingExamples, getCodeSnippetForAlgo } from "@/lib/sortingCode";
 import { allAlgoData } from "@/lib/algoData";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -8,23 +8,24 @@ interface AlgoDetailsProps {
   selectedAlgo: string;
 }
 
-type LanguageType = "javascript" | "python" | "java" | "cpp" | "c" | "typescript" | "go" | "rust";
+type LanguageType = "javascript" | "typescript" | "c" | "cpp" | "python" | "java" | "go" | "php" | "rust";
 
-const LANGUAGE_LABELS: Record<string, string> = {
-  javascript: "JAVASCRIPT",
-  python: "PYTHON",
-  java: "JAVA",
-  cpp: "C++",
+const LANGUAGE_LABELS: Record<LanguageType, string> = {
+  javascript: "JavaScript",
+  typescript: "TypeScript",
   c: "C",
-  typescript: "TYPESCRIPT",
-  go: "GO",
-  rust: "RUST",
+  cpp: "C++",
+  python: "Python",
+  java: "Java",
+  go: "Go",
+  php: "PHP",
+  rust: "Rust",
 };
 
 export default function AlgoDetails({ selectedAlgo }: AlgoDetailsProps) {
   const { language } = useLanguage();
   const [activeTab, setActiveTab] = useState<"complexity" | "flow" | "pseudocode" | "usecase">("complexity");
-  const [selectedLang, setSelectedLang] = useState<LanguageType>(language as any || "python");
+  const [selectedLang, setSelectedLang] = useState<LanguageType>((language as any) || "python");
 
   // Sync with global stack language preference
   useEffect(() => {
@@ -51,16 +52,11 @@ export default function AlgoDetails({ selectedAlgo }: AlgoDetailsProps) {
     examples = [{ title: "Scenario", description: sortingExamples[selectedAlgo], code: "" }];
   }
 
-  // Handle Code Blocks with safe double assertion
-  let codeSnippet = "";
-  const codeBlocksForAlgo = (sortingCodeBlocks[selectedAlgo] as unknown) as Record<string, string[]> | undefined;
-  if (codeBlocksForAlgo && codeBlocksForAlgo[selectedLang]) {
-    codeSnippet = codeBlocksForAlgo[selectedLang].join('\n');
-  } else if (isUnified && unifiedData.codeSnippets) {
+  // Handle Code Blocks with 9-language fallback resolution
+  let codeSnippet = getCodeSnippetForAlgo(selectedAlgo, selectedLang);
+  if ((!codeSnippet || codeSnippet.startsWith("// ")) && isUnified && unifiedData.codeSnippets) {
     const snippets = (unifiedData.codeSnippets as unknown) as Record<string, string>;
-    codeSnippet = snippets[selectedLang] || snippets["python"] || snippets["javascript"] || "// Code implementation in selected language.";
-  } else {
-    codeSnippet = `// ${selectedLang.toUpperCase()} implementation for ${name}`;
+    codeSnippet = snippets[selectedLang] || snippets["python"] || snippets["javascript"] || `// ${LANGUAGE_LABELS[selectedLang]} implementation for ${name}`;
   }
 
   const tcDisplay = typeof timeComplexity === "string" ? timeComplexity : "O(N log N)";
@@ -80,7 +76,7 @@ export default function AlgoDetails({ selectedAlgo }: AlgoDetailsProps) {
             </svg>
           </div>
           <h2 className="text-sm font-semibold tracking-wider text-brand-text-primary uppercase">
-            Algorithm Details ({LANGUAGE_LABELS[selectedLang] || selectedLang.toUpperCase()})
+            Algorithm Details ({LANGUAGE_LABELS[selectedLang]})
           </h2>
         </div>
 
@@ -113,7 +109,7 @@ export default function AlgoDetails({ selectedAlgo }: AlgoDetailsProps) {
                 : "text-brand-text-secondary hover:text-brand-text-primary"
             }`}
           >
-            CODE EXAMPLES ({selectedLang.toUpperCase()})
+            CODE EXAMPLES ({LANGUAGE_LABELS[selectedLang]})
           </button>
           <button
             onClick={() => setActiveTab("usecase")}
@@ -170,16 +166,16 @@ export default function AlgoDetails({ selectedAlgo }: AlgoDetailsProps) {
 
         {activeTab === "pseudocode" && (
           <div className="space-y-3">
-            <div className="flex items-center justify-between font-mono text-xs">
-              <span className="text-brand-text-secondary">Language Syntax: <strong className="text-brand-cyan uppercase">{selectedLang}</strong></span>
-              <div className="flex flex-wrap items-center gap-2">
-                {(["python", "javascript", "cpp", "java", "typescript", "go", "rust"] as LanguageType[]).map(lang => (
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between font-mono text-xs gap-3">
+              <span className="text-brand-text-secondary">Language Syntax: <strong className="text-brand-cyan font-bold">{LANGUAGE_LABELS[selectedLang]}</strong></span>
+              <div className="flex flex-wrap items-center gap-1.5">
+                {(["javascript", "typescript", "c", "cpp", "python", "java", "go", "php", "rust"] as LanguageType[]).map(lang => (
                   <button
                     key={lang}
                     onClick={() => setSelectedLang(lang)}
-                    className={`px-2 py-0.5 rounded text-[10px] font-mono uppercase ${selectedLang === lang ? 'bg-brand-purple text-white font-bold' : 'bg-brand-bg-dark text-brand-text-secondary hover:text-brand-text-primary'}`}
+                    className={`px-2.5 py-1 rounded text-[11px] font-mono font-semibold transition-colors ${selectedLang === lang ? 'bg-brand-purple text-white font-bold' : 'bg-brand-bg-dark text-brand-text-secondary hover:text-brand-text-primary border border-brand-border/60'}`}
                   >
-                    {lang}
+                    {LANGUAGE_LABELS[lang]}
                   </button>
                 ))}
               </div>

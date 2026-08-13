@@ -19,6 +19,8 @@ interface ControlsPanelProps {
   setCompareMode: (mode: boolean) => void;
   selectedAlgoB?: string;
   setSelectedAlgoB?: (algo: string) => void;
+  presetDataset?: string;
+  onSelectPreset?: (preset: string) => void;
 }
 
 export const algorithms = [
@@ -152,6 +154,8 @@ export default function ControlsPanel({
   setCompareMode,
   selectedAlgoB,
   setSelectedAlgoB,
+  presetDataset,
+  onSelectPreset,
 }: ControlsPanelProps) {
   const info = algorithmInfo[selectedAlgo] || algorithmInfo.bubbleSort;
   const isRunning = status === "running";
@@ -254,6 +258,27 @@ export default function ControlsPanel({
           <span className="text-xs text-brand-text-secondary">50</span>
         </div>
       </div>
+
+      {/* Demo Dataset Selector */}
+      {onSelectPreset && (
+        <div className="space-y-2">
+          <label className="text-sm text-brand-text-secondary font-medium" htmlFor="demo-dataset">
+            Demo Dataset Pattern
+          </label>
+          <select
+            id="demo-dataset"
+            value={presetDataset || "random"}
+            onChange={(e) => onSelectPreset(e.target.value)}
+            disabled={isBusy}
+            className="w-full bg-brand-bg-dark border border-brand-border rounded-lg py-2 px-3 text-xs text-brand-text-primary focus:ring-2 focus:ring-brand-purple/50 focus:border-brand-purple transition-all outline-none font-mono"
+          >
+            <option value="random">Random Distribution</option>
+            <option value="nearlySorted">Nearly Sorted Array</option>
+            <option value="reverseSorted">Reverse Sorted Array</option>
+            <option value="fewUnique">Few Unique / Duplicates</option>
+          </select>
+        </div>
+      )}
 
       {/* Speed Slider */}
       <div className="space-y-2">
