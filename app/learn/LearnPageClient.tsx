@@ -50,7 +50,7 @@ export default function LearnPageClient({ topics }: LearnPageClientProps) {
       >
         <Breadcrumbs
           items={[
-            { label: 'Home', href: '/', icon: '🏠' },
+            { label: 'Home', href: '/' },
             { label: 'Learn & Practice', active: true },
           ]}
           className="mb-3"
@@ -89,9 +89,9 @@ export default function LearnPageClient({ topics }: LearnPageClientProps) {
                   <motion.div key={algo} variants={cardVariants}>
                     <Link 
                       href={`/learn/${topic}/${algo}`}
-                      className="glass-card p-6 block hover:border-brand-purple/50 transition-all group hover:-translate-y-1 duration-200"
+                      className="glass-card p-6 block md:hover:border-brand-purple/50 transition-all group md:hover:-translate-y-1 duration-200"
                     >
-                      <h3 className="text-lg font-bold text-brand-text-primary mb-2 capitalize group-hover:text-brand-purple transition-colors">
+                      <h3 className="text-lg font-bold text-brand-text-primary mb-2 capitalize md:group-hover:text-brand-purple transition-colors">
                         {formatAlgoName(algo)}
                       </h3>
                       <p className="text-sm text-brand-text-secondary">

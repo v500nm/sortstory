@@ -53,14 +53,14 @@
 
 @layer base {
   :root.light {
-    --color-brand-bg-dark: #fafafa;
-    --color-brand-bg-medium: #f4f4f5;
-    --color-brand-bg-light: #e4e4e7;
-    --color-brand-bg-card: #ffffff;
+    --color-brand-bg-dark: #f4f4f5;
+    --color-brand-bg-medium: #e4e4e7;
+    --color-brand-bg-light: #d4d4d8;
+    --color-brand-bg-card: #fdfdfd;
 
-    --color-brand-surface-0: #fafafa;
-    --color-brand-surface-1: #ffffff;
-    --color-brand-surface-2: #ffffff;
+    --color-brand-surface-0: #f4f4f5;
+    --color-brand-surface-1: #fdfdfd;
+    --color-brand-surface-2: #fdfdfd;
 
     --color-brand-text-primary: #18181b;
     --color-brand-text-secondary: #52525b;

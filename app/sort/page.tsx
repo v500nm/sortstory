@@ -21,7 +21,7 @@ export default function Sort() {
   const [selectedAlgo, setSelectedAlgo] = useState("bubbleSort");
   const [selectedAlgoB, setSelectedAlgoB] = useState("selectionSort");
   const [arraySize, setArraySize] = useState(20);
-  const [speed, setSpeed] = useState(2);
+  const [speed, setSpeed] = useState(5);
   const [compareMode, setCompareMode] = useState(false);
 
   const engine = useSortEngine(arraySize);

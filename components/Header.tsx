@@ -33,25 +33,25 @@ export default function Header() {
 
   // Line 2 Floating Submenu Visualizer Module Links
   const subNavLinks = [
-    { href: "/sort", label: "Sorting", icon: "📊" },
-    { href: "/search", label: "Searching", icon: "🔍" },
-    { href: "/pathfinding", label: "Pathfinding", icon: "🗺️" },
-    { href: "/linked-lists", label: "Linked Lists", icon: "🔗" },
-    { href: "/trees", label: "Trees", icon: "🌲" },
-    { href: "/graphs", label: "Graphs", icon: "🕸️" },
-    { href: "/automata", label: "Automata & ML", icon: "🤖" },
+    { href: "/sort", label: "Sorting" },
+    { href: "/search", label: "Searching" },
+    { href: "/pathfinding", label: "Pathfinding" },
+    { href: "/linked-lists", label: "Linked Lists" },
+    { href: "/trees", label: "Trees" },
+    { href: "/graphs", label: "Graphs" },
+    { href: "/automata", label: "Automata & ML" },
   ];
 
   // Line 2 Floating Submenu Learn Links for Learn Pages
   const learnSubNavLinks = [
-    { href: "/learn", label: "Overview", icon: "📚" },
-    { href: "/learn#searching", label: "Searching", icon: "🔍" },
-    { href: "/learn#sorting", label: "Sorting", icon: "📊" },
-    { href: "/learn#linked-lists", label: "Linked Lists", icon: "🔗" },
-    { href: "/learn#trees", label: "Trees", icon: "🌲" },
-    { href: "/learn#graphs", label: "Graphs", icon: "🕸️" },
-    { href: "/learn#pathfinding", label: "Pathfinding", icon: "🗺️" },
-    { href: "/learn#automata", label: "Automata", icon: "🤖" },
+    { href: "/learn", label: "Overview" },
+    { href: "/learn#searching", label: "Searching" },
+    { href: "/learn#sorting", label: "Sorting" },
+    { href: "/learn#linked-lists", label: "Linked Lists" },
+    { href: "/learn#trees", label: "Trees" },
+    { href: "/learn#graphs", label: "Graphs" },
+    { href: "/learn#pathfinding", label: "Pathfinding" },
+    { href: "/learn#automata", label: "Automata" },
   ];
 
   // If siteMode is free_all, plans are down and not needed
@@ -217,9 +217,9 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Tier 2 Secondary Submenu Floating Line (Hidden on Landing Page `/`) */}
+        {/* Tier 2 Secondary Submenu Floating Line (Hidden on Landing Page `/` and hidden on mobile as it's in the hamburger) */}
         {showSecondLineSubmenu && (
-          <div className="bg-brand-bg-card/50 border-t border-brand-border/40 py-2 px-4 sm:px-6 overflow-x-auto scrollbar-none">
+          <div className="hidden lg:block bg-brand-bg-card/50 border-t border-brand-border/40 py-2 px-4 sm:px-6 overflow-x-auto scrollbar-none">
             <div className="max-w-[1700px] mx-auto flex items-center justify-between gap-6 text-xs font-mono">
               {/* Left Side: Contextual Submenu (LEARN MENU on Learn Pages vs MODULES on Visualizer Pages) */}
               <div className="flex items-center gap-6 shrink-0">
@@ -235,7 +235,6 @@ export default function Header() {
                         href={sub.href}
                         className={`transition-colors flex items-center gap-1.5 shrink-0 ${pathname === sub.href ? 'text-brand-yellow font-bold underline' : 'text-brand-text-secondary hover:text-brand-text-primary'}`}
                       >
-                        <span>{sub.icon}</span>
                         <span>{sub.label}</span>
                       </Link>
                     ))}
@@ -252,7 +251,6 @@ export default function Header() {
                         href={sub.href}
                         className={`transition-colors flex items-center gap-1.5 shrink-0 ${pathname === sub.href ? 'text-brand-cyan font-bold underline' : 'text-brand-text-secondary hover:text-brand-text-primary'}`}
                       >
-                        <span>{sub.icon}</span>
                         <span>{sub.label}</span>
                       </Link>
                     ))}
@@ -380,7 +378,6 @@ export default function Header() {
                           onClick={closeMenu}
                           className="text-xs font-mono text-brand-text-secondary hover:text-brand-text-primary py-1 flex items-center gap-2"
                         >
-                          <span>{sub.icon}</span>
                           <span>{sub.label}</span>
                         </Link>
                       ))}
@@ -395,7 +392,6 @@ export default function Header() {
                           onClick={closeMenu}
                           className="text-xs font-mono text-brand-text-secondary hover:text-brand-text-primary py-1 flex items-center gap-2"
                         >
-                          <span>{sub.icon}</span>
                           <span>{sub.label}</span>
                         </Link>
                       ))}

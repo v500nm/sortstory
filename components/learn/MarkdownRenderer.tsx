@@ -20,7 +20,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
           h1: ({ children }) => <h1 className="text-3xl font-bold text-brand-text-primary mb-4 mt-8">{children}</h1>,
           h2: ({ children }) => {
             const text = React.Children.toArray(children).join('').trim().toLowerCase();
-            const languages = ['javascript', 'python', 'java', 'cpp', 'c', 'c++'];
+            const languages = ['javascript', 'typescript', 'python', 'java', 'c', 'cpp', 'c++', 'go', 'php', 'rust'];
             const normalizedText = text === 'c++' ? 'cpp' : text;
             
             if (languages.includes(normalizedText)) {
@@ -50,18 +50,18 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
             // If it's a code block and has a language
             if (!inline && lang) {
               // Only render if the language matches the currently selected language OR if it's not one of our toggleable languages
-              const toggleableLanguages = ['python', 'javascript', 'java', 'cpp', 'c'];
+              const toggleableLanguages = ['javascript', 'typescript', 'python', 'java', 'c', 'cpp', 'c++', 'go', 'php', 'rust'];
               
-              if (toggleableLanguages.includes(lang) && lang !== language) {
+              if (toggleableLanguages.includes(lang) && lang !== language && lang !== (language === 'cpp' ? 'c++' : '')) {
                 return null;
               }
 
               return (
-                <div className="relative group my-6 border border-brand-border rounded-lg bg-[#070707] overflow-hidden">
+                <div className="relative group my-6 border border-brand-border rounded-lg bg-gray-50 dark:bg-[#070707] overflow-hidden">
                   <div className="absolute top-0 right-0 bg-brand-border/60 text-brand-text-secondary text-[10px] px-3 py-1 rounded-bl-lg font-mono uppercase tracking-wider">
                     {lang}
                   </div>
-                  <pre className="p-4 overflow-x-auto text-sm text-brand-text-secondary font-mono">
+                  <pre className="p-4 overflow-x-auto text-sm text-gray-800 dark:text-brand-text-secondary font-mono">
                     <code className={className} {...props}>
                       {children}
                     </code>

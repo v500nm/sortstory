@@ -4,40 +4,88 @@ order: 2
 type: lesson
 ---
 
-# Multi-Language Implementation
+# Code Implementations
 
-Below you can toggle the implementation of **Bogo Sort** in various programming languages.
+Here is the exact implementation of **Bogo Sort** in multiple programming languages.
 
-## Code
-
+## JavaScript
 ```javascript
-// JavaScript implementation of Bogo Sort
-function executeAlgorithm() {
-  console.log("Running Bogo Sort...");
+function bogoSort(arr) {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
 }
 ```
 
-```python
-# Python implementation of Bogo Sort
-def execute_algorithm():
-    print("Running Bogo Sort...")
+## TypeScript
+```typescript
+function bogoSort(arr: number[]): number[] {
+  while (!isSorted(arr)) {
+    shuffle(arr);
+  }
+  return arr;
+}
 ```
 
+## Python
+```python
+def bogo_sort(arr):
+    while not is_sorted(arr):
+        shuffle(arr)
+    return arr
+```
+
+## Java
 ```java
-// Java implementation of Bogo Sort
-public class Algorithm {
-    public static void executeAlgorithm() {
-        System.out.println("Running Bogo Sort...");
+public static void bogoSort(int[] arr) {
+    while (!isSorted(arr)) {
+        shuffle(arr);
     }
 }
 ```
 
+## C++
 ```cpp
-// C++ implementation of Bogo Sort
-#include <iostream>
-using namespace std;
+void bogoSort(int arr[], int n) {
+    while (!isSorted(arr, n)) {
+        shuffle(arr, n);
+    }
+}
+```
 
-void executeAlgorithm() {
-    cout << "Running Bogo Sort..." << endl;
+## C
+```c
+void bogoSort(int arr[], int n) {
+    while (!isSorted(arr, n)) {
+        shuffle(arr, n);
+    }
+}
+```
+
+## Go
+```go
+func bogoSort(arr []int) {
+    for !isSorted(arr) {
+        shuffle(arr)
+    }
+}
+```
+
+## PHP
+```php
+function bogoSort(array &$arr): void {
+    while (!isSorted($arr)) {
+        shuffleArray($arr);
+    }
+}
+```
+
+## Rust
+```rust
+fn bogo_sort(arr: &mut [i32]) {
+    while !is_sorted(arr) {
+        shuffle(arr);
+    }
 }
 ```

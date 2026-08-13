@@ -4,40 +4,148 @@ order: 2
 type: lesson
 ---
 
-# Multi-Language Implementation
+# Code Implementations
 
-Below you can toggle the implementation of **Gnome Sort** in various programming languages.
+Here is the exact implementation of **Gnome Sort** in multiple programming languages.
 
-## Code
-
+## JavaScript
 ```javascript
-// JavaScript implementation of Gnome Sort
-function executeAlgorithm() {
-  console.log("Running Gnome Sort...");
+function gnomeSort(arr) {
+  let n = arr.length;
+  let index = 0;
+  while (index < n) {
+    if (index === 0 || arr[index] >= arr[index - 1]) {
+      index++;
+    } else {
+      [arr[index], arr[index - 1]] = [arr[index - 1], arr[index]];
+      index--;
+    }
+  }
+  return arr;
 }
 ```
 
-```python
-# Python implementation of Gnome Sort
-def execute_algorithm():
-    print("Running Gnome Sort...")
+## TypeScript
+```typescript
+function gnomeSort(arr: number[]): number[] {
+  let n = arr.length;
+  let index = 0;
+  while (index < n) {
+    if (index === 0 || arr[index] >= arr[index - 1]) {
+      index++;
+    } else {
+      [arr[index], arr[index - 1]] = [arr[index - 1], arr[index]];
+      index--;
+    }
+  }
+  return arr;
+}
 ```
 
+## Python
+```python
+def gnome_sort(arr):
+    n = len(arr)
+    index = 0
+    while index < n:
+        if index == 0 or arr[index] >= arr[index - 1]:
+            index += 1
+        else:
+            arr[index], arr[index - 1] = arr[index - 1], arr[index]
+            index -= 1
+    return arr
+```
+
+## Java
 ```java
-// Java implementation of Gnome Sort
-public class Algorithm {
-    public static void executeAlgorithm() {
-        System.out.println("Running Gnome Sort...");
+public static void gnomeSort(int[] arr) {
+    int n = arr.length;
+    int index = 0;
+    while (index < n) {
+        if (index == 0 || arr[index] >= arr[index - 1]) {
+            index++;
+        } else {
+            int temp = arr[index]; arr[index] = arr[index - 1]; arr[index - 1] = temp;
+            index--;
+        }
     }
 }
 ```
 
+## C++
 ```cpp
-// C++ implementation of Gnome Sort
-#include <iostream>
-using namespace std;
+void gnomeSort(int arr[], int n) {
+    int index = 0;
+    while (index < n) {
+        if (index == 0 || arr[index] >= arr[index - 1]) {
+            index++;
+        } else {
+            std::swap(arr[index], arr[index - 1]);
+            index--;
+        }
+    }
+}
+```
 
-void executeAlgorithm() {
-    cout << "Running Gnome Sort..." << endl;
+## C
+```c
+void gnomeSort(int arr[], int n) {
+    int index = 0;
+    while (index < n) {
+        if (index == 0 || arr[index] >= arr[index - 1]) {
+            index++;
+        } else {
+            int temp = arr[index]; arr[index] = arr[index - 1]; arr[index - 1] = temp;
+            index--;
+        }
+    }
+}
+```
+
+## Go
+```go
+func gnomeSort(arr []int) {
+    n := len(arr)
+    index := 0
+    for index < n {
+        if index == 0 || arr[index] >= arr[index-1] {
+            index++
+        } else {
+            arr[index], arr[index-1] = arr[index-1], arr[index]
+            index--
+        }
+    }
+}
+```
+
+## PHP
+```php
+function gnomeSort(array &$arr): void {
+    $n = count($arr);
+    $index = 0;
+    while ($index < $n) {
+        if ($index == 0 || $arr[$index] >= $arr[$index - 1]) {
+            $index++;
+        } else {
+            $temp = $arr[$index]; $arr[$index] = $arr[$index - 1]; $arr[$index - 1] = $temp;
+            $index--;
+        }
+    }
+}
+```
+
+## Rust
+```rust
+fn gnome_sort(arr: &mut [i32]) {
+    let len = arr.len();
+    let mut index = 0;
+    while index < len {
+        if index == 0 || arr[index] >= arr[index - 1] {
+            index += 1;
+        } else {
+            arr.swap(index, index - 1);
+            index -= 1;
+        }
+    }
 }
 ```

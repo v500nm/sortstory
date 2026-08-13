@@ -9,9 +9,16 @@ function generateRandomArray(size: number): number[] {
 
 // ── Speed presets: maps slider value → delay in ms ──
 const SPEED_DELAYS: Record<number, number> = {
-  1: 10,   // Fast
-  2: 60,   // Medium
-  3: 150,  // Slow
+  1: 500,  // Slowest
+  2: 350,
+  3: 200,
+  4: 120,
+  5: 80,   // Medium
+  6: 50,
+  7: 30,
+  8: 15,
+  9: 5,
+  10: 1,   // Fastest
 };
 
 export function useSortEngine(initialSize: number = 15) {

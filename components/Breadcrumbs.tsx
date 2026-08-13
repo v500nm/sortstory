@@ -43,7 +43,6 @@ export default function Breadcrumbs({ items, className = "" }: BreadcrumbsProps)
                   }`}
                   aria-current={isLast ? "page" : undefined}
                 >
-                  {item.icon && <span>{item.icon}</span>}
                   <span className="truncate max-w-[150px] sm:max-w-none">
                     {item.label}
                   </span>
@@ -53,7 +52,6 @@ export default function Breadcrumbs({ items, className = "" }: BreadcrumbsProps)
                   href={item.href}
                   className="shrink-0 flex items-center gap-1 text-brand-text-secondary hover:text-brand-cyan transition-colors"
                 >
-                  {item.icon && <span>{item.icon}</span>}
                   <span className="truncate max-w-[130px] sm:max-w-none">
                     {item.label}
                   </span>

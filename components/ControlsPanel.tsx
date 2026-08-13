@@ -287,23 +287,23 @@ export default function ControlsPanel({
             Speed
           </label>
           <span className="text-xs font-mono bg-brand-bg-dark px-2 py-0.5 rounded border border-brand-border text-brand-text-primary">
-            {speed === 1 ? "Fast" : speed === 2 ? "Medium" : "Slow"}
+            {speed}
           </span>
         </div>
         <div className="relative">
           <input
             className="w-full range-slider"
             id="speed"
-            max="3"
+            max="10"
             min="1"
             type="range"
             value={speed}
             onChange={(e) => setSpeed(Number(e.target.value))}
           />
           <div className="flex justify-between text-xs text-brand-text-secondary mt-1 px-0.5">
-            <span>Fast</span>
-            <span>Medium</span>
             <span>Slow</span>
+            <span>Medium</span>
+            <span>Fast</span>
           </div>
         </div>
       </div>
