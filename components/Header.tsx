@@ -75,7 +75,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="border-b border-brand-border/60 bg-brand-bg-dark/80 backdrop-blur-xl sticky top-0 z-40 relative">
+      <header className="border-b border-brand-border/60 bg-brand-bg-dark/80 backdrop-blur-xl sticky top-0 z-[60] relative">
         {/* Shimmering gradient top-border accent */}
         <div className="gradient-line absolute top-0 left-0 right-0 z-50 opacity-80" />
 
@@ -200,7 +200,12 @@ export default function Header() {
               </button>
             )}
 
-            <button onClick={toggleMenu} className="p-2 text-brand-text-secondary hover:text-brand-accent">
+            <button
+              onClick={toggleMenu}
+              aria-expanded={isMenuOpen}
+              aria-label="Toggle navigation menu"
+              className="p-2 text-brand-text-secondary hover:text-brand-accent focus:outline-none rounded-lg border border-brand-border/40 active:scale-95 transition-transform"
+            >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 {isMenuOpen ? (
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -214,7 +219,7 @@ export default function Header() {
 
         {/* Tier 2 Secondary Submenu Floating Line (Hidden on Landing Page `/`) */}
         {showSecondLineSubmenu && (
-          <div className="bg-brand-bg-card/50 border-t border-brand-border/40 py-2 px-4 sm:px-6 overflow-x-auto">
+          <div className="bg-brand-bg-card/50 border-t border-brand-border/40 py-2 px-4 sm:px-6 overflow-x-auto scrollbar-none">
             <div className="max-w-[1700px] mx-auto flex items-center justify-between gap-6 text-xs font-mono">
               {/* Left Side: Contextual Submenu (LEARN MENU on Learn Pages vs MODULES on Visualizer Pages) */}
               <div className="flex items-center gap-6 shrink-0">
@@ -287,7 +292,7 @@ export default function Header() {
         {/* Secondary Admin Submenu Bar if Logged in as Admin */}
         {isAdmin && (
           <div className="bg-brand-purple/10 border-t border-brand-purple/20 py-2 px-4 sm:px-6">
-            <div className="max-w-[1700px] mx-auto flex items-center justify-between overflow-x-auto text-[11px] font-mono">
+            <div className="max-w-[1700px] mx-auto flex items-center justify-between overflow-x-auto text-[11px] font-mono scrollbar-none">
               <div className="flex items-center gap-6">
                 <Link
                   href="/"
@@ -315,117 +320,129 @@ export default function Header() {
             </div>
           </div>
         )}
-      </header>
 
-      {/* Mobile Navigation Menu */}
-      <AnimatePresence>
-        {isMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0, y: -10 }}
-            animate={{ opacity: 1, height: "auto", y: 0 }}
-            exit={{ opacity: 0, height: 0, y: -10 }}
-            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:hidden bg-brand-bg-dark/95 backdrop-blur-xl border-b border-brand-border absolute w-full left-0 top-full shadow-2xl overflow-hidden z-50"
-          >
-            <nav className="flex flex-col px-6 py-6 space-y-3">
-              {/* Stack Language Mobile Selector */}
-              <div className="flex items-center justify-between pb-3 border-b border-brand-border/40 font-mono text-xs">
-                <span className="text-brand-purple font-bold">⚡ Preferred Language:</span>
-                <select
-                  value={language}
-                  onChange={(e) => setLanguage(e.target.value as StackLanguage)}
-                  className="bg-brand-bg-dark border border-brand-border rounded-lg px-2 py-1 text-xs text-brand-cyan font-bold outline-none"
-                >
-                  {fontMeta.map(l => (
-                    <option key={l.id} value={l.id}>{l.icon} {l.name}</option>
-                  ))}
-                </select>
-              </div>
+        {/* Mobile Navigation Menu Dropdown */}
+        <AnimatePresence>
+          {isMenuOpen && (
+            <>
+              {/* Backdrop */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                onClick={closeMenu}
+                className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 lg:hidden"
+              />
 
-              <div className="text-[10px] font-mono font-bold text-brand-purple uppercase tracking-widest mb-1">Main Menu</div>
-              {mainNavLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={closeMenu}
-                  className={`text-sm font-semibold tracking-wide block transition-colors py-1.5 ${pathname === link.href ? 'text-brand-purple' : 'text-brand-text-secondary hover:text-brand-text-primary'}`}
-                >
-                  {link.label}
-                </Link>
-              ))}
-
-              {/* Mobile Submenu: Learn Menu on Learn pages, Visualizer Modules elsewhere */}
-              {isLearnPage ? (
-                <>
-                  <div className="text-[10px] font-mono font-bold text-brand-yellow uppercase tracking-widest pt-3 border-t border-brand-border/40">Learn Curriculum Menu</div>
-                  {learnSubNavLinks.map((sub) => (
-                    <Link
-                      key={sub.href}
-                      href={sub.href}
-                      onClick={closeMenu}
-                      className="text-xs font-mono text-brand-text-secondary hover:text-brand-text-primary py-1 flex items-center gap-2"
-                    >
-                      <span>{sub.icon}</span>
-                      <span>{sub.label}</span>
-                    </Link>
-                  ))}
-                </>
-              ) : (
-                <>
-                  <div className="text-[10px] font-mono font-bold text-brand-cyan uppercase tracking-widest pt-3 border-t border-brand-border/40">Visualizer Modules</div>
-                  {subNavLinks.map((sub) => (
-                    <Link
-                      key={sub.href}
-                      href={sub.href}
-                      onClick={closeMenu}
-                      className="text-xs font-mono text-brand-text-secondary hover:text-brand-text-primary py-1 flex items-center gap-2"
-                    >
-                      <span>{sub.icon}</span>
-                      <span>{sub.label}</span>
-                    </Link>
-                  ))}
-                </>
-              )}
-
-              {/* Free Tier Mobile Button */}
-              <button
-                onClick={() => { setIsFreeTierOpen(true); closeMenu(); }}
-                className="w-full text-left py-2 px-3 bg-brand-green/10 border border-brand-green/30 text-brand-green font-mono text-xs font-bold rounded-lg flex items-center justify-between mt-2"
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                className="lg:hidden bg-brand-bg-dark/95 backdrop-blur-2xl border-b border-brand-border absolute w-full left-0 top-full shadow-2xl z-50 max-h-[calc(100vh-80px)] overflow-y-auto"
               >
-                <span>🎁 Free Learning & Visualizing Tier</span>
-                <span>Details →</span>
-              </button>
-
-              {isLoggedIn ? (
-                <div className="pt-4 flex items-center justify-between border-t border-brand-border/40">
-                  {isAdmin && (
-                    <Link
-                      href="/admin"
-                      onClick={closeMenu}
-                      className="text-xs font-mono font-bold text-brand-purple uppercase"
+                <nav className="flex flex-col px-6 py-6 space-y-3">
+                  {/* Stack Language Mobile Selector */}
+                  <div className="flex items-center justify-between pb-3 border-b border-brand-border/40 font-mono text-xs">
+                    <span className="text-brand-purple font-bold">⚡ Preferred Language:</span>
+                    <select
+                      value={language}
+                      onChange={(e) => setLanguage(e.target.value as StackLanguage)}
+                      className="bg-brand-bg-dark border border-brand-border rounded-lg px-2 py-1 text-xs text-brand-cyan font-bold outline-none"
                     >
-                      ⚡ Admin Workspace
+                      {fontMeta.map(l => (
+                        <option key={l.id} value={l.id}>{l.icon} {l.name}</option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div className="text-[10px] font-mono font-bold text-brand-purple uppercase tracking-widest mb-1">Main Menu</div>
+                  {mainNavLinks.map((link) => (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      onClick={closeMenu}
+                      className={`text-sm font-semibold tracking-wide block transition-colors py-1.5 ${pathname === link.href ? 'text-brand-purple' : 'text-brand-text-secondary hover:text-brand-text-primary'}`}
+                    >
+                      {link.label}
                     </Link>
+                  ))}
+
+                  {/* Mobile Submenu: Learn Menu on Learn pages, Visualizer Modules elsewhere */}
+                  {isLearnPage ? (
+                    <>
+                      <div className="text-[10px] font-mono font-bold text-brand-yellow uppercase tracking-widest pt-3 border-t border-brand-border/40">Learn Curriculum Menu</div>
+                      {learnSubNavLinks.map((sub) => (
+                        <Link
+                          key={sub.href}
+                          href={sub.href}
+                          onClick={closeMenu}
+                          className="text-xs font-mono text-brand-text-secondary hover:text-brand-text-primary py-1 flex items-center gap-2"
+                        >
+                          <span>{sub.icon}</span>
+                          <span>{sub.label}</span>
+                        </Link>
+                      ))}
+                    </>
+                  ) : (
+                    <>
+                      <div className="text-[10px] font-mono font-bold text-brand-cyan uppercase tracking-widest pt-3 border-t border-brand-border/40">Visualizer Modules</div>
+                      {subNavLinks.map((sub) => (
+                        <Link
+                          key={sub.href}
+                          href={sub.href}
+                          onClick={closeMenu}
+                          className="text-xs font-mono text-brand-text-secondary hover:text-brand-text-primary py-1 flex items-center gap-2"
+                        >
+                          <span>{sub.icon}</span>
+                          <span>{sub.label}</span>
+                        </Link>
+                      ))}
+                    </>
                   )}
+
+                  {/* Free Tier Mobile Button */}
                   <button
-                    onClick={() => { logout(); closeMenu(); }}
-                    className="text-xs font-mono text-brand-rose"
+                    onClick={() => { setIsFreeTierOpen(true); closeMenu(); }}
+                    className="w-full text-left py-2 px-3 bg-brand-green/10 border border-brand-green/30 text-brand-green font-mono text-xs font-bold rounded-lg flex items-center justify-between mt-2"
                   >
-                    Sign Out
+                    <span>🎁 Free Learning & Visualizing Tier</span>
+                    <span>Details →</span>
                   </button>
-                </div>
-              ) : (
-                <button
-                  onClick={() => { setIsLoginOpen(true); closeMenu(); }}
-                  className="text-sm font-semibold tracking-wide block transition-colors pt-3 text-brand-text-primary text-left border-t border-brand-border/40"
-                >
-                  Log In
-                </button>
-              )}
-            </nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
+
+                  {isLoggedIn ? (
+                    <div className="pt-4 flex items-center justify-between border-t border-brand-border/40">
+                      {isAdmin && (
+                        <Link
+                          href="/admin"
+                          onClick={closeMenu}
+                          className="text-xs font-mono font-bold text-brand-purple uppercase"
+                        >
+                          ⚡ Admin Workspace
+                        </Link>
+                      )}
+                      <button
+                        onClick={() => { logout(); closeMenu(); }}
+                        className="text-xs font-mono text-brand-rose"
+                      >
+                        Sign Out
+                      </button>
+                    </div>
+                  ) : (
+                    <button
+                      onClick={() => { setIsLoginOpen(true); closeMenu(); }}
+                      className="text-sm font-semibold tracking-wide block transition-colors pt-3 text-brand-text-primary text-left border-t border-brand-border/40"
+                    >
+                      Log In
+                    </button>
+                  )}
+                </nav>
+              </motion.div>
+            </>
+          )}
+        </AnimatePresence>
+      </header>
 
       {/* Modals */}
       <PlansModal isOpen={isPlansOpen} onClose={() => setIsPlansOpen(false)} />

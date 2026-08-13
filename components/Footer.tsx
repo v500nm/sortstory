@@ -79,6 +79,12 @@ const connectLinks = [
 const decorativeBars = [15, 30, 20, 45, 35, 60, 40, 75, 50, 90, 65, 95, 55, 80, 45, 70, 30, 60, 25, 50, 15, 40, 10, 30, 45, 20, 65, 35, 80, 50, 95, 40, 70, 30];
 
 export default function Footer() {
+  const [openSection, setOpenSection] = useState<string | null>(null);
+
+  const toggleSection = (id: string) => {
+    setOpenSection(prev => (prev === id ? null : id));
+  };
+
   return (
     <footer className="w-full relative bg-transparent mt-auto z-40">
       {/* Smooth top fade to blend the content into the footer */}
@@ -132,7 +138,7 @@ export default function Footer() {
         {/* 2. Unified Premium Glass Card Container */}
         <motion.div
           variants={itemVariants}
-          className="bg-brand-bg-medium/30 backdrop-blur-md border border-brand-border/40 rounded-2xl p-8 sm:p-10 shadow-2xl relative overflow-hidden mb-12"
+          className="bg-brand-bg-medium/30 backdrop-blur-md border border-brand-border/40 rounded-2xl p-6 sm:p-10 shadow-2xl relative overflow-hidden mb-12"
         >
           {/* Subtle Sorting Array Accent at the top of the card */}
           <div className="absolute top-0 left-0 right-0 h-[3px] flex items-end opacity-20">
@@ -148,13 +154,21 @@ export default function Footer() {
             ))}
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 text-left">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-10 text-left">
             {/* Visualizers Column */}
-            <div className="col-span-1">
-              <h4 className="text-[11px] font-bold tracking-widest uppercase text-brand-text-secondary mb-5 pb-2 border-b border-brand-border/30">
-                Visualizers
-              </h4>
-              <ul className="space-y-3">
+            <div className="col-span-1 border-b sm:border-b-0 border-brand-border/30 pb-4 sm:pb-0">
+              <button
+                onClick={() => toggleSection("visualizers")}
+                className="w-full flex items-center justify-between sm:cursor-default text-[11px] font-bold tracking-widest uppercase text-brand-text-secondary mb-3 sm:mb-5 pb-1 sm:pb-2 sm:border-b sm:border-brand-border/30"
+              >
+                <span>Visualizers</span>
+                <span className="sm:hidden text-brand-cyan font-mono text-sm">
+                  {openSection === "visualizers" ? "−" : "+"}
+                </span>
+              </button>
+              <ul className={`space-y-3 transition-all duration-300 ${
+                openSection === "visualizers" ? "block" : "hidden sm:block"
+              }`}>
                 {visualizerLinks.map(link => (
                   <li key={link.href}>
                     <Link
@@ -169,11 +183,19 @@ export default function Footer() {
             </div>
 
             {/* Resources Column */}
-            <div className="col-span-1">
-              <h4 className="text-[11px] font-bold tracking-widest uppercase text-brand-text-secondary mb-5 pb-2 border-b border-brand-border/30">
-                Resources
-              </h4>
-              <ul className="space-y-3">
+            <div className="col-span-1 border-b sm:border-b-0 border-brand-border/30 pb-4 sm:pb-0">
+              <button
+                onClick={() => toggleSection("resources")}
+                className="w-full flex items-center justify-between sm:cursor-default text-[11px] font-bold tracking-widest uppercase text-brand-text-secondary mb-3 sm:mb-5 pb-1 sm:pb-2 sm:border-b sm:border-brand-border/30"
+              >
+                <span>Resources</span>
+                <span className="sm:hidden text-brand-cyan font-mono text-sm">
+                  {openSection === "resources" ? "−" : "+"}
+                </span>
+              </button>
+              <ul className={`space-y-3 transition-all duration-300 ${
+                openSection === "resources" ? "block" : "hidden sm:block"
+              }`}>
                 {resourceLinks.map(link => (
                   <li key={link.href}>
                     <Link
@@ -191,11 +213,19 @@ export default function Footer() {
             </div>
 
             {/* Featured On Column */}
-            <div className="col-span-1">
-              <h4 className="text-[11px] font-bold tracking-widest uppercase text-brand-text-secondary mb-5 pb-2 border-b border-brand-border/30">
-                Featured On
-              </h4>
-              <ul className="space-y-3">
+            <div className="col-span-1 border-b sm:border-b-0 border-brand-border/30 pb-4 sm:pb-0">
+              <button
+                onClick={() => toggleSection("featured")}
+                className="w-full flex items-center justify-between sm:cursor-default text-[11px] font-bold tracking-widest uppercase text-brand-text-secondary mb-3 sm:mb-5 pb-1 sm:pb-2 sm:border-b sm:border-brand-border/30"
+              >
+                <span>Featured On</span>
+                <span className="sm:hidden text-brand-cyan font-mono text-sm">
+                  {openSection === "featured" ? "−" : "+"}
+                </span>
+              </button>
+              <ul className={`space-y-3 transition-all duration-300 ${
+                openSection === "featured" ? "block" : "hidden sm:block"
+              }`}>
                 {mediaLinks.map(link => (
                   <li key={link.href}>
                     <a
@@ -216,10 +246,18 @@ export default function Footer() {
 
             {/* Connect Column */}
             <div className="col-span-1">
-              <h4 className="text-[11px] font-bold tracking-widest uppercase text-brand-text-secondary mb-5 pb-2 border-b border-brand-border/30">
-                Connect
-              </h4>
-              <ul className="space-y-3">
+              <button
+                onClick={() => toggleSection("connect")}
+                className="w-full flex items-center justify-between sm:cursor-default text-[11px] font-bold tracking-widest uppercase text-brand-text-secondary mb-3 sm:mb-5 pb-1 sm:pb-2 sm:border-b sm:border-brand-border/30"
+              >
+                <span>Connect</span>
+                <span className="sm:hidden text-brand-cyan font-mono text-sm">
+                  {openSection === "connect" ? "−" : "+"}
+                </span>
+              </button>
+              <ul className={`space-y-3 transition-all duration-300 ${
+                openSection === "connect" ? "block" : "hidden sm:block"
+              }`}>
                 {connectLinks.map(link => (
                   <li key={link.label}>
                     <a

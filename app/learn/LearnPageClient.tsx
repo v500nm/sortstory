@@ -8,6 +8,8 @@ import Header from '@/components/Header';
 import InitialMountLoader from '@/components/loaders/InitialMountLoader';
 import LearnLoader from '@/components/loaders/LearnLoader';
 
+import Breadcrumbs from '@/components/Breadcrumbs';
+
 interface LearnPageClientProps {
   topics: {
     topic: string;
@@ -46,13 +48,13 @@ export default function LearnPageClient({ topics }: LearnPageClientProps) {
         transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         className="mb-6 sm:mb-8 md:mb-12"
       >
-        <nav aria-label="Breadcrumb" className="mb-3 flex items-center gap-1.5 text-xs font-mono text-brand-text-secondary">
-          <Link href="/" className="hover:text-brand-purple transition-colors flex items-center gap-1">
-            <span>🏠</span> Home
-          </Link>
-          <span className="text-brand-border-light">/</span>
-          <span className="text-brand-purple font-bold">Learn & Practice</span>
-        </nav>
+        <Breadcrumbs
+          items={[
+            { label: 'Home', href: '/', icon: '🏠' },
+            { label: 'Learn & Practice', active: true },
+          ]}
+          className="mb-3"
+        />
         <h1 className="text-4xl font-black tracking-tight text-brand-text-primary mb-4">Learn & Practice</h1>
         <p className="text-brand-text-secondary text-lg max-w-2xl">
           Deep dive into data structures and algorithms. Toggle between languages, study step-by-step logic, and solidify your understanding with practice problems.
