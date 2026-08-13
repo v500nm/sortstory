@@ -77,6 +77,12 @@
     --color-brand-glow-rose: rgba(251, 113, 133, 0.06);
   }
 
+  html, body {
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100%;
+  }
+
   body {
     background-color: var(--color-brand-bg-dark);
     color: var(--color-brand-text-primary);

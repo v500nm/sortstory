@@ -1,10 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function AnalyticsBanner() {
+  const pathname = usePathname();
   const [isVisible, setIsVisible] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -30,22 +32,13 @@ export default function AnalyticsBanner() {
     };
   }, []);
 
-  // Lock page scroll while the mobile blocking overlay is up
-  useEffect(() => {
-    if (isMobile && isVisible) {
-      const prevOverflow = document.body.style.overflow;
-      document.body.style.overflow = "hidden";
-      return () => {
-        document.body.style.overflow = prevOverflow;
-      };
-    }
-  }, [isMobile, isVisible]);
-
   const handleDismiss = () => {
     localStorage.setItem("sortstory-analytics-dismissed", "true");
     setIsVisible(false);
   };
 
+  // Render on landing page ONLY ("/")
+  if (pathname !== "/") return null;
   if (!mounted) return null;
 
   const card = (
@@ -91,13 +84,13 @@ export default function AnalyticsBanner() {
     <AnimatePresence>
       {isVisible &&
         (isMobile ? (
-          // Mobile: full-screen blocking gate, shown before the user can touch site content
+          // Mobile: full-screen gate overlay on landing page, properly fitting 100% viewport width
           <motion.div
             key="mobile-gate"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] w-screen h-screen bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 box-border"
+            className="fixed inset-0 z-[100] w-full h-full bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 box-border overflow-hidden"
           >
             {card}
           </motion.div>
